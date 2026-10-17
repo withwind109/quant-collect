@@ -1,0 +1,15 @@
+// 跟随高手 v2 · 不含关注 —— 全部回测的基准 (没有事后挑选的关注名单); 模拟账户 ev21_base 按此运行 (v2.1 对照)
+{
+  id: "v2_base",
+  family: "v2",
+  name: "v2 · 近1日收益前10 (不含关注, 基准)",
+  description: "全体活跃高手近 1 日收益前 10, 名次加权镜像持仓, 次日开盘调仓",
+  bind_strategy_id: "expert_follow_v21:base",
+  universe: { data_env: "sim", source: "all_active", include_watchlist: false, expert_ids: null, max_idle_days: 60 },
+  screen: null,
+  rank: { days: 1, pick: { top_k: 10 } },
+  risk: null,
+  weighting: "rank",
+  execution: { engine: "mirror", exec: "t1_open", stock_cap: 0.20 },
+  models: null,
+}

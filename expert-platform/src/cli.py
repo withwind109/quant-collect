@@ -227,14 +227,17 @@ def strategy_health() -> None:
 
 
 @cli.command("ui")
-@click.option("--port", default=8501, show_default=True, help="Streamlit 端口")
-def ui(port: int) -> None:
-    """启动 Streamlit UI（社区高手 + 高手跟随策略）。"""
+@click.option("--port", default=8601, show_default=True, help="服务端口")
+@click.option("--host", default="127.0.0.1", show_default=True, help="监听地址")
+def ui(port: int, host: str) -> None:
+    """启动 Web 服务（FastAPI + 原生 HTML，社区高手 + 高手跟随策略）。"""
     import subprocess
     import sys
 
-    app = Path(__file__).resolve().parent / "ui" / "app.py"
-    subprocess.run([sys.executable, "-m", "streamlit", "run", str(app), "--server.port", str(port)], check=True)
+    root = Path(__file__).resolve().parent.parent
+    subprocess.run([sys.executable, "-m", "uvicorn", "web.app:app",
+                    "--host", host, "--port", str(port)],
+                   check=True, cwd=str(root))
 
 
 if __name__ == "__main__":  # pragma: no cover

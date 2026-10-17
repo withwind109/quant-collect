@@ -1,0 +1,28 @@
+/* 设计变量（参考源项目 xcq-platform static/css/tokens.css，浅色主题） */
+:root {
+  --c-primary: #1890ff;
+  --c-primary-d: #096dd9;
+  --c-primary-l: #e6f7ff;
+  --c-success: #52c41a;
+  --c-danger: #ff4d4f;
+  --c-warning: #faad14;
+  --c-purple: #722ed1;
+  /* A 股惯例：红涨绿跌 */
+  --c-up: #f5222d;
+  --c-down: #52c41a;
+  --c-text: #2c2c2e;
+  --c-text-2: #555;
+  --c-text-3: #999;
+  --c-bg: #f0f2f5;
+  --c-card: #fff;
+  --c-border: #e0e0e0;
+  --c-header: #1a1a2e;
+  --r-sm: 5px;
+  --r-md: 9px;
+  --r-lg: 12px;
+  --sh-sm: 0 1px 3px rgba(0,0,0,.08);
+  --sh-md: 0 2px 8px rgba(0,0,0,.10);
+  --sh-lg: 0 4px 16px rgba(0,0,0,.12);
+  --ts: .2s ease;
+  --font: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+}

@@ -2,12 +2,11 @@
 # 社区高手 & 高手跟随策略平台（expert-platform）— Python 依赖
 # =============================================================================
 # 安装方式:
-#   python3 -m venv .env
-#   source .env/bin/activate
-#   pip install -r requirements.txt
+#   ./start.sh                # 一键：venv + 依赖 + chromium + 启动（推荐）
+#   或手动: python3 -m venv .venv && source .venv/bin/activate && pip install -r requirements.txt
 #
 # 说明: 从 xcq-platform 的 requirements.txt 精简而来 —— 只保留本项目
-# (社区高手爬虫 + 高手跟随策略 + Streamlit UI) 实际用到的依赖;
+# (社区高手爬虫 + 高手跟随策略 + FastAPI/HTML Web 层) 实际用到的依赖;
 # torch / pyqlib / mlflow / redis / mongo 等重量级依赖不引入。
 # =============================================================================
 
@@ -35,8 +34,9 @@ akshare>=1.13
 # ── 策略配置（json5 策略文件）───────────────────────────────────────────────
 json5>=0.9.25
 
-# ── Web UI（Streamlit，主题参考 multi-factor-stock）─────────────────────────
-streamlit>=1.40
+# ── Web 服务（FastAPI + 原生 HTML 前端，参考源项目 xcq-platform dashboard）──
+fastapi>=0.110
+uvicorn[standard]>=0.29
 
 # ── 导出 ────────────────────────────────────────────────────────────────────
 openpyxl>=3.1.5

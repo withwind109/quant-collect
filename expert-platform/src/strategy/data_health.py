@@ -105,3 +105,16 @@ def env_ok(env: str, rules: Optional[Dict[str, Any]] = None, refresh: bool = Fal
     h = compute(refresh=refresh, rules=rules)
     x = h.get(env) or {}
     return {"ok": bool(x.get("ok")), "reason": x.get("reason") or "", "generated_at": h.get("generated_at")}
+
+
+if __name__ == "__main__":  # python -m strategy.data_health [--refresh]
+    import argparse
+
+    ap = argparse.ArgumentParser(description="跟随高手数据体检")
+    ap.add_argument("--refresh", action="store_true", help="强制重算（不用缓存）")
+    a = ap.parse_args()
+    h = compute(refresh=a.refresh)
+    for env in ("sim", "live"):
+        x = h.get(env) or {}
+        print(f"[{env}] ok={x.get('ok')} reason={x.get('reason') or x.get('source') or '-'} "
+              f"experts={x.get('n_experts')}")

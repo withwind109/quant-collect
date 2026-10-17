@@ -14,7 +14,7 @@
     {
       "source": "eastmoney",
       "capability": "组合高手操作明细：组合名 + 累计收益率 + 当日收益率 + 股票 + 成交价 + 仓位变化",
-      "experts": 968,
+      "experts": 943,
       "trades": 938,
       "buys": 703,
       "experts_with_buys": 703,
@@ -23,7 +23,7 @@
       "with_stock": 703,
       "with_return_rate": 703,
       "with_price": 703,
-      "live_experts": 30,
+      "live_experts": 5,
       "live_buys": 0,
       "sim_experts": 938,
       "sim_buys": 703

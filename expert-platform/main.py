@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""expert-platform CLI 入口（架构参考 multi-factor-stock 的 src/main.py）。
+"""expert-platform CLI 入口。
 
 用法:
     python main.py crawl --sources eastmoney,tonghuashun [--date auto] [--top 50]
@@ -10,8 +10,10 @@
     python main.py strategy list               # 策略文件 / 回测配置
     python main.py strategy run [--backtest unified_sim]
     python main.py strategy health             # 数据体检
-    python main.py ui [--port 8501]            # 启动 Streamlit
+    python main.py ui [--port 8601]            # 启动 Web 服务（FastAPI + 原生 HTML）
     python main.py prices --index 000300.SH    # 初始化行情价格库（回测前必须）
+
+也可以直接用 ./start.sh 一键安装依赖并启动服务。
 """
 
 from __future__ import annotations
