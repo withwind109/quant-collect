@@ -1,0 +1,31 @@
+{
+ "generated_at": "2026-10-16T19:06:16",
+ "sim": {
+  "source": "history_bulk (模拟盘组合调仓历史, 含调仓前后仓位)",
+  "n_portfolios": 5,
+  "updated_at": "2026-10-16T18:57:55",
+  "ok": false,
+  "reason": "模拟盘组合历史不足 500 个"
+ },
+ "live": {
+  "source": "expert_trades market_type=live (东财实盘 rtV3)",
+  "n_records": 0,
+  "n_labeled": 0,
+  "labeled_pct": 0.0,
+  "n_portfolios": 0,
+  "n_usable": 0,
+  "first_date": "",
+  "last_date": "",
+  "days_covered": 0,
+  "phantom_end": 0,
+  "rules": {
+   "min_usable_experts": 20,
+   "min_labeled_pct": 95,
+   "min_days": 60
+  },
+  "ok": false,
+  "reason": "可用组合 0 < 20；有原始仓位文字的记录 0.0% < 95%；可重建交易日 0 < 60",
+  "verify": null,
+  "portfolios": {}
+ }
+}

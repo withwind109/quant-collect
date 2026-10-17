@@ -1,0 +1,18 @@
+// 跟随高手 v3 · 长窗口分批 + 模型 —— 四规则通过者按窗口收益取前 X%, 逐笔跟单, 叠加买入/卖出/反向否决模型
+// 执行交给 scripts/expert_v3/run.py (训练 + 走步回测), 结果并入统一对比
+{
+  id: "v3_tiers",
+  family: "v3",
+  name: "v3 · 60日四规则分批 + 模型",
+  description: "收益>0/回撤≤20%/活跃/胜率≥55% 通过者按收益取前 5/10/20%, 直接跟单或叠加模型",
+  bind_strategy_id: null,
+  universe: { data_env: "sim", source: "all_active", include_watchlist: false, expert_ids: null, max_idle_days: 60 },
+  screen: { window: 60, min_ret: 0.0, max_mdd: 0.20, min_trades: 8, recent_days: 20, min_closed: 5, min_win: 0.55,
+            win_cost: 0.003, min_pool: 10 },
+  rank: null,
+  risk: null,
+  weighting: "equal",
+  execution: { engine: "v3_tiers", exec: "t1_open", stock_cap: 0.20 },
+  models: { pos_tiers: [0.05, 0.10, 0.20], neg_tiers: [0.05, 0.10, 0.20, 0.30, 0.40, 0.50, 1.0], label_h: 5,
+            accept_q: 0.60, veto_q: 0.80, ex_q: 0.80, min_train: 150, stop_loss: 0.08, max_hold: 20 },
+}

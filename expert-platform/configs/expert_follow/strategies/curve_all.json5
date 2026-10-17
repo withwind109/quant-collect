@@ -1,0 +1,19 @@
+// 跟随曲线稳定向上的高手 (2026-09-27 用户需求, 预注册见 docs/实盘模仿模型与曲线稳定跟随_20260927.md)
+// 每天收盘: 全体活跃高手里, 开户以来 PnL 曲线"稳定向右上" (最低累计≥−5% / log 净值趋势向上且 R²≥0.7 / 20 日分段≥2/3 为正)
+// 且近 10 日有调仓的人 → 全部等权镜像持仓, 次日开盘调仓。与画像页 ⭐ 硬条件同一口径 (scripts/expert_follow/curve.py)。
+{
+  id: "curve_all",
+  family: "curve",
+  name: "曲线稳定向上 · 全部等权",
+  description: "开户以来 PnL 曲线稳定向右上的活跃高手, 全部等权镜像持仓, 次日开盘调仓",
+  bind_strategy_id: null,
+  universe: { data_env: "sim", source: "all_active", include_watchlist: false, expert_ids: null, max_idle_days: 60 },
+  screen: null,
+  curve_screen: { min_cum_floor: -0.05, min_r2: 0.70, min_up_seg: 0.6667, seg: 20, min_days: 60, recent_days: 10, min_pool: 1 },
+  rank: { days: 1, pick: { top_pct: 1.0 } },
+  risk: null,
+  weighting: "equal",
+  execution: { engine: "mirror", exec: "t1_open", stock_cap: 0.20 },
+  models: null,
+  risk_controls: { stop_loss: null, take_profit: "default" },
+}

@@ -1,0 +1,18 @@
+// 曲线稳定跟随 · 模拟盘数据 (2026-09-27 预注册, 运行前写定: docs/实盘模仿模型与曲线稳定跟随_20260927.md)
+// 模拟盘净值从 2025-12-01 起; 曲线需满 60 日 → 回测期同统一回测 2026-03-05 起, 以 2026-06-15 分界。闸门 = 统一闸门 (不放宽)。
+{
+  id: "curve_sim",
+  name: "曲线稳定跟随 · 模拟盘数据",
+  data_env: "sim",
+  period: { start: "2026-03-05", end: "latest", split: "2026-06-15" },
+  capital: 1000000,
+  baseline: "v2_base",
+  strategies: [ { ref: "curve_all" } ],
+  null: { seeds: 20, q: 0.80 },
+  gate: {
+    alpha_t_gt: 0.0, beat_null_own: true, beat_null_multi: true, alpha_gain_vs_baseline_pp: 1.0,
+    halves_gain_pp: 0.0, mdd_not_worse: true, min_buys: 60, alpha_gain_vs_unscreened_pp: 1.0,
+    beat_random_exclusion: true,
+  },
+  display: { top_n: 10 },
+}

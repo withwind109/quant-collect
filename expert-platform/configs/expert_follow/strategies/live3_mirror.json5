@@ -1,0 +1,16 @@
+// 关注的 3 位实盘高手 · 镜像持仓 (2026-09-25 用户决策: 开模拟账户累积前向证据)
+// 数据 = 东财实盘 rtV3 流水 (比例 = 成交金额/组合总资产; 每笔卖出按清仓重建持仓, 见 pit_nav.normalize_live); 3 人等权, 次日开盘调仓
+{
+  id: "live3_mirror",
+  family: "v1",
+  name: "关注3位实盘高手 · 镜像持仓",
+  description: "凡人炒股 / 狐狸大王呀 / 大道可寻 等权镜像实盘持仓",
+  bind_strategy_id: null,
+  universe: { data_env: "live", source: "expert_ids", expert_ids: ["900407488", "900457430", "900461598"], max_idle_days: 60 },
+  screen: null,
+  rank: { days: 1, pick: { all: true } },
+  risk: null,
+  weighting: "equal",
+  execution: { engine: "mirror", exec: "t1_open", stock_cap: 0.20 },
+  models: null,
+}

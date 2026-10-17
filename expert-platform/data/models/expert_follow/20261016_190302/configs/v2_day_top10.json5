@@ -1,0 +1,16 @@
+// 跟随高手 v2 (线上版) —— 关注列表 ∪ 全体活跃高手近 1 日收益前 10, 名次线性加权, 镜像持仓, 次日开盘调仓
+// 模拟账户 expert_follow_v2 按此运行 (2026-09-25 起)。关注名单是事后挑选的, 回测含选择偏差。
+{
+  id: "v2_day_top10",
+  family: "v2",
+  name: "v2 · 关注 + 近1日收益前10",
+  description: "关注列表 ∪ 近 1 日收益前 10 (PIT 逐日重建净值排名), 名次加权镜像持仓",
+  bind_strategy_id: "expert_follow:v2",
+  universe: { data_env: "sim", source: "all_active", include_watchlist: true, expert_ids: null, max_idle_days: 60 },
+  screen: null,
+  rank: { days: 1, pick: { top_k: 10 } },
+  risk: null,
+  weighting: "rank",
+  execution: { engine: "mirror", exec: "t1_open", stock_cap: 0.20 },
+  models: null,
+}

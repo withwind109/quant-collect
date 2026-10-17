@@ -1,0 +1,30 @@
+// 统一回测 · 实盘数据 · 第4阶段 (2026-09-29 用户决策: 每个跟随策略都要有专门针对实盘的版本)
+// 预注册见 docs/跟随策略实盘版_第4阶段_预注册_20260929.md —— 运行前写定, 闸门与以往统一回测相同, 不放宽。
+// 实盘可用组合已从 64 扩到 ~200 (09-26 扩量), 实盘净值 2024-07 起, 回测期取 2025-01 起 (留出 60 日窗口)。
+// 已知局限: 组合名单 = 2026-09 各榜单与关注并集 (幸存者), 回测越长偏差越大; 仓位是分档原文换算, 重建误差大。
+{
+  id: "unified_live_p4",
+  name: "统一回测 · 实盘数据 · 第4阶段 (全部跟随策略实盘版)",
+  data_env: "live",
+  period: { start: "2025-01-02", end: "latest", split: "2025-11-14" },
+  capital: 1000000,
+  baseline: "v2_base",
+  strategies: [
+    { ref: "v1_signal" },            // 跟随 v1 实盘版 (关注列表里的实盘高手, 信号跟随)
+    { ref: "live3_mirror" },         // 跟随 v1 实盘版 (关注的实盘高手, 镜像持仓; 模拟账户 ev_live3 已在跑)
+    { ref: "v2_base" },
+    { ref: "v2_day_top10" },
+    { ref: "v2_1_r3_60" },
+    { ref: "curve_all" },
+    { ref: "v3_1_screen_rank" },
+    { ref: "v3_tiers" },
+  ],
+  null: { seeds: 20, q: 0.80 },
+  gate: {
+    alpha_t_gt: 0.0, beat_null_own: true, beat_null_multi: true, alpha_gain_vs_baseline_pp: 1.0,
+    halves_gain_pp: 0.0, mdd_not_worse: true, min_buys: 60, alpha_gain_vs_unscreened_pp: 1.0,
+    beat_random_exclusion: true,
+  },
+  display: { top_n: 10 },
+  data_health: { min_usable_experts: 20, min_labeled_pct: 95, min_days: 60 },
+}

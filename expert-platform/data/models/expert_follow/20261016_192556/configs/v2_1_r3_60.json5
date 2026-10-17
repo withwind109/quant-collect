@@ -1,0 +1,16 @@
+// 跟随高手 v2.1 · 剔除开户 < 60 交易日 —— 在 v2 基准名单上做短周期风控, 被剔除者由下一名递补 (始终 10 人)
+// 模拟账户 ev21_r3_60 按此运行 (前向观察, 回测闸门未过)。risk 可选: max_day_ret / max_top_w / min_age
+{
+  id: "v2_1_r3_60",
+  family: "v2.1",
+  name: "v2.1 · 剔除开户<60日",
+  description: "v2 基准名单剔除首笔交易距今 < 60 个交易日的组合, 下一名递补",
+  bind_strategy_id: "expert_follow_v21:R3_60",
+  universe: { data_env: "sim", source: "all_active", include_watchlist: false, expert_ids: null, max_idle_days: 60 },
+  screen: null,
+  rank: { days: 1, pick: { top_k: 10 } },
+  risk: { min_age: 60 },
+  weighting: "rank",
+  execution: { engine: "mirror", exec: "t1_open", stock_cap: 0.20 },
+  models: null,
+}

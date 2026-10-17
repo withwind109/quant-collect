@@ -1,0 +1,15 @@
+// 跟随高手 v1 · 镜像持仓 —— v1 回测口径 (docs/跟随高手策略_README.md): 关注高手等权分资金, 照抄其持仓, 次日开盘调仓
+{
+  id: "v1_mirror",
+  family: "v1",
+  name: "v1 · 关注高手镜像持仓",
+  description: "关注列表高手等权, 目标仓位 = Σ 资金权重 × 高手仓位 (单票 ≤ 20%)",
+  bind_strategy_id: null,
+  universe: { data_env: "sim", source: "watchlist", expert_ids: null, max_idle_days: 60 },
+  screen: null,
+  rank: { days: 1, pick: { all: true } },
+  risk: null,
+  weighting: "equal",
+  execution: { engine: "mirror", exec: "t1_open", stock_cap: 0.20 },
+  models: null,
+}

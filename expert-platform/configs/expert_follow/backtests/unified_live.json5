@@ -1,0 +1,27 @@
+// 统一回测 (实盘数据) —— 数据体检通过后才允许运行 (2026-09-25 用户决策: 修好之前实盘回测一律标"数据不可用")
+{
+  id: "unified_live",
+  name: "统一回测 · 实盘数据",
+  data_env: "live",
+  period: { start: "2026-03-05", end: "latest", split: "2026-06-15" },
+  capital: 1000000,
+  baseline: "v2_base",
+  // 实盘关注名单 = 这 3 位, 所以 v1_mirror 与 live3_mirror 相同, 只保留 live3_mirror (模拟账户 ev_live3 绑定它)。
+  // v3/v3.1 不测: 可用实盘组合只有 60 多个, 质量筛选池到不了 min_pool=10, 方案没有交易。
+  strategies: [
+    { ref: "live3_mirror" },
+    { ref: "v2_day_top10" },
+    { ref: "v2_1_r3_60", sweep: { variants: [
+        { name: "R3_20", set: { risk: { min_age: 20 } } },
+        { name: "R3_60", set: { risk: { min_age: 60 } } },
+    ] } },
+  ],
+  null: { seeds: 20, q: 0.80 },
+  gate: {
+    alpha_t_gt: 0.0, beat_null_own: true, beat_null_multi: true, alpha_gain_vs_baseline_pp: 1.0,
+    halves_gain_pp: 0.0, mdd_not_worse: true, min_buys: 60, alpha_gain_vs_unscreened_pp: 1.0,
+    beat_random_exclusion: true,
+  },
+  display: { top_n: 10 },
+  data_health: { min_usable_experts: 20, min_labeled_pct: 95, min_days: 60 },
+}

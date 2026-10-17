@@ -1,0 +1,17 @@
+// 跟随高手 v3.1 · 长窗口质量筛选 + 短窗口排名 —— 筛选 (回撤/活跃/胜率, 可选收益>0) 决定"谁有资格", 近 N 日收益决定"跟谁"
+// 统一回测期从 2026-03-05 起, 筛选窗口用 60 日 (120 日要到 6 月才有第一个合格池)
+{
+  id: "v3_1_screen_rank",
+  family: "v3.1",
+  name: "v3.1 · 60日筛选 + 近1日排名前10",
+  description: "60 日窗口 回撤≤20%/活跃/胜率≥55% 的合格池, 按近 N 日收益取前 K, 名次加权镜像持仓",
+  bind_strategy_id: null,
+  universe: { data_env: "sim", source: "all_active", include_watchlist: false, expert_ids: null, max_idle_days: 60 },
+  screen: { window: 60, min_ret: 0.0, max_mdd: 0.20, min_trades: 8, recent_days: 20, min_closed: 5, min_win: 0.55,
+            win_cost: 0.003, min_pool: 10 },
+  rank: { days: 1, pick: { top_k: 10 } },
+  risk: null,
+  weighting: "rank",
+  execution: { engine: "mirror", exec: "t1_open", stock_cap: 0.20 },
+  models: null,
+}

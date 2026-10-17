@@ -1,0 +1,32 @@
+# ── Python ──
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+
+# ── 本项目运行环境（venv 放在 .env/，与 multi-factor-stock 习惯一致）──
+# 注意: .gitignore 不支持行尾注释，规则必须独占一行
+
+# ── 敏感配置（cookie 等，绝不入库）──
+.env
+
+# ── 日志 ──
+logs/
+*.log
+
+# ── 数据: SQLite 主库随 git 提交（轻量、可 diff）；大件缓存不入库 ──
+# akshare 行情缓存（可重新拉取）
+data/prices/
+# 批量高手历史（体积大，可重新回补）
+data/history_bulk/
+data/*.db-wal
+data/*.db-shm
+
+# ── 爬取日产出的 JSON/CSV 体积小，默认提交（按需可在下面忽略）──
+# data/2026-*/
+
+# ── 系统垃圾 ──
+.DS_Store
+.idea/
+.vscode/

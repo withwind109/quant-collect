@@ -1,0 +1,20 @@
+// 跟随高手 v1 · 信号跟随 —— 与模拟账户 expert_follow_v1 的实际执行口径一致 (2026-09-24 上线)
+// 关注高手近 5 个交易日买入过的股票 (按最新买入排序取前 10), 等权占槽 (最多 8 只), 止损 8% / 20 日时间平仓。
+// 注意: 模拟盘还有"移动止盈", 回测未模拟 (engine 说明见 scripts/expert_follow/engine.py)。
+{
+  id: "v1_signal",
+  family: "v1",
+  name: "v1 · 关注高手近5日买入信号",
+  description: "关注列表高手近 5 个交易日的买入信号, 等权占槽, 止损/时间平仓",
+  bind_strategy_id: "expert_follow:v1",          // 已运行的模拟账户 expert_follow_v1 (前向证据自 2026-09-24 累积)
+  universe: { data_env: "sim", source: "watchlist", expert_ids: null, max_idle_days: 60 },
+  screen: null,
+  rank: null,
+  risk: null,
+  weighting: "equal",
+  execution: {
+    engine: "signal", exec: "t1_open",
+    signal: { lookback_days: 5, top_n: 10, max_positions: 8, stop_loss: 0.08, max_hold: 20 },
+  },
+  models: null,
+}

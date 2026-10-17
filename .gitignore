@@ -1,0 +1,14 @@
+# ── 本地工作记忆（不纳入版本管理）──
+.workbuddy/
+
+# ── Python ──
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+
+# ── 系统垃圾 ──
+.DS_Store
+.idea/
+.vscode/

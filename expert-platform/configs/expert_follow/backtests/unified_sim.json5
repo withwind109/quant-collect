@@ -1,0 +1,45 @@
+// 统一回测 (模拟盘数据) —— 2026-09-25 用户决策: 所有版本同一回测期、同一套闸门 (取以往三套闸门的并集, 不放宽)
+// 运行: venv/bin/python -m scripts.expert_follow.runner --backtest unified_sim
+{
+  id: "unified_sim",
+  name: "统一回测 · 模拟盘数据",
+  data_env: "sim",
+  period: { start: "2026-03-05", end: "latest", split: "2026-06-15" },   // split = 前后两半分界 (后半从该日起)
+  capital: 1000000,
+  baseline: "v2_base",
+  strategies: [
+    { ref: "v1_mirror" },
+    { ref: "v1_signal" },
+    { ref: "v2_day_top10" },
+    { ref: "v2_1_r3_60", sweep: { variants: [
+        { name: "R1_10", set: { risk: { max_day_ret: 0.10 } } },
+        { name: "R1_15", set: { risk: { max_day_ret: 0.15 } } },
+        { name: "R2_80", set: { risk: { max_top_w: 0.80 } } },
+        { name: "R2_95", set: { risk: { max_top_w: 0.95 } } },
+        { name: "R3_20", set: { risk: { min_age: 20 } } },
+        { name: "R3_60", set: { risk: { min_age: 60 } } },
+        { name: "ALL",   set: { risk: { max_day_ret: 0.10, max_top_w: 0.80, min_age: 20 } } },
+    ] } },
+    { ref: "v3_1_screen_rank", sweep: { grid: {
+        "screen.min_ret": [0.0, null],
+        "rank.days": [1, 3, 5, 10, 20, 30, 60],
+        "rank.pick": [{ top_k: 10 }, { top_pct: 0.05 }, { top_pct: 0.10 }, { top_pct: 0.20 }],
+    } } },
+    // [2026-10-16 迁移注记] v3_tiers 依赖模型训练流水线 (expert_imitation/LightGBM), 尚未迁移到
+    // 本项目, 暂时停用; 其余策略 (mirror/signal 引擎) 全部可用。启用前需先迁移 v3_run。
+    { ref: "v3_tiers", enabled: false },
+  ],
+  null: { seeds: 20, q: 0.80 },
+  gate: {
+    alpha_t_gt: 0.0,                   // α t > 0
+    beat_null_own: true,               // 总收益 ≥ 自身随机对照 80 分位 (从同一合格池随机抽同样人数)
+    beat_null_multi: true,             // 总收益 ≥ 多重比较修正 80 分位 (每个种子取全部方案随机对照的最大值)
+    alpha_gain_vs_baseline_pp: 1.0,    // α 比基准高 ≥ 1pp
+    halves_gain_pp: 0.0,               // 前后两半 α 增益都 ≥ 0
+    mdd_not_worse: true,               // 最大回撤不比基准差
+    min_buys: 60,                      // 买入 ≥ 60 笔
+    alpha_gain_vs_unscreened_pp: 1.0,  // 有质量筛选的方案: α 比"同人数不筛选"高 ≥ 1pp
+    beat_random_exclusion: true,       // 有风控剔除的方案: α 增益 ≥ "随机剔除同样多人"增益的 80 分位
+  },
+  display: { top_n: 10 },              // 页面默认只显示 基准 + 通过闸门 + 未通过里最好的 10 个, 其余归档
+}

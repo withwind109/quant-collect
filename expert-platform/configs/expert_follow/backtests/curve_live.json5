@@ -1,0 +1,19 @@
+// 曲线稳定跟随 · 实盘数据 (2026-09-27 预注册, 运行前写定: docs/实盘模仿模型与曲线稳定跟随_20260927.md)
+// 实盘净值从 2024-07-01 重放; 曲线需满 60 日 → 回测 2025-03-03 起, 前后两半以 2026-01-05 分界。闸门 = 统一闸门 (不放宽)。
+{
+  id: "curve_live",
+  name: "曲线稳定跟随 · 实盘数据",
+  data_env: "live",
+  period: { start: "2025-03-03", end: "latest", split: "2026-01-05" },
+  capital: 1000000,
+  baseline: "v2_base",
+  strategies: [ { ref: "curve_all" } ],
+  null: { seeds: 20, q: 0.80 },
+  gate: {
+    alpha_t_gt: 0.0, beat_null_own: true, beat_null_multi: true, alpha_gain_vs_baseline_pp: 1.0,
+    halves_gain_pp: 0.0, mdd_not_worse: true, min_buys: 60, alpha_gain_vs_unscreened_pp: 1.0,
+    beat_random_exclusion: true,
+  },
+  display: { top_n: 10 },
+  data_health: { min_usable_experts: 20, min_labeled_pct: 95, min_days: 60 },
+}
