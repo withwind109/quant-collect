@@ -365,31 +365,35 @@ class LoginSession:
 
     @staticmethod
     def _extract_tokens(ctx, captured: List[Dict[str, Any]]) -> Dict[str, str]:
-        """优先取监听到的 rtV3 四元组；否则用 passport2 cookie 兜底映射
-        （ct→ctToken, ut→utToken, pi→userId, sid→deviceId；xcq 已实测 rtV3 认证通过）。"""
+        """优先取监听到的 rtV3 四元组；缺失字段用 passport2 cookie 兜底补齐
+        （ct→ctToken, ut→utToken, pi→userId, sid→deviceId；xcq 已实测 rtV3 认证通过）。
+
+        [2026-10-19 修] 监听到的 H5 请求常常只带 ctToken/utToken/userId 而无 deviceId，
+        之前满足三个必需键就提前 return，跳过 cookie 兜底 → deviceId 恒为空，
+        rtV3 返回 30001「用户暂未授权」（关注关系绑定 userId+deviceId）。
+        现在 cookie 兜底始终执行，只补缺失字段、不覆盖已捕获值。"""
         tokens: Dict[str, str] = {}
         for item in captured:                      # 后到的覆盖
             for k, v in item.items():
                 if k in ("ctToken", "ct_token"):
-                    tokens["ctToken"] = v
+                    tokens.setdefault("ctToken", v)
                 elif k in ("utToken", "ut_token"):
-                    tokens["utToken"] = v
+                    tokens.setdefault("utToken", v)
                 elif k in ("userId", "user_id"):
-                    tokens["userId"] = v
+                    tokens.setdefault("userId", v)
                 elif k in ("deviceId", "device_id"):
-                    tokens["deviceId"] = v
-        if set(REQUIRED_TOKEN_KEYS) <= tokens.keys():
-            return tokens
+                    tokens.setdefault("deviceId", v)
         try:
             cookies = {c["name"]: c["value"] for c in ctx.cookies()}
-            if cookies.get("ct"):
+            if not tokens.get("ctToken") and cookies.get("ct"):
                 tokens["ctToken"] = cookies["ct"]
-            if cookies.get("ut"):
+            if not tokens.get("utToken") and cookies.get("ut"):
                 tokens["utToken"] = cookies["ut"]
-            pi = (cookies.get("pi") or "").split("%")[0].split(";")[0]
-            if pi:
-                tokens["userId"] = pi
-            if cookies.get("sid"):
+            if not tokens.get("userId"):
+                pi = (cookies.get("pi") or "").split("%")[0].split(";")[0]
+                if pi:
+                    tokens["userId"] = pi
+            if not tokens.get("deviceId") and cookies.get("sid"):
                 tokens["deviceId"] = cookies["sid"]
         except Exception:
             pass
