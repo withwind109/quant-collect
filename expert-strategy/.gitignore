@@ -34,3 +34,6 @@ data/eval/price_miss.json
 .DS_Store
 .idea/
 .vscode/
+
+# 评估运行快照（每次 evaluate 生成，属临时产物）
+data/eval/
