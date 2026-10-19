@@ -135,6 +135,7 @@ class EastmoneySource(BaseSource):
         self,
         http: HttpClient,
         rank_type: str = "10005",
+        rank_types: list[str] | None = None,
         tiger_time_period: int = 1,
         max_records: int = DETAIL_MAX_TOTAL,
         cookie: str = "",
@@ -148,6 +149,9 @@ class EastmoneySource(BaseSource):
     ) -> None:
         super().__init__(http)
         self.rank_type = rank_type
+        # 多榜合并抓取 [2026-10-19]: 默认 日榜(10005, 当日收益) + 总榜(10004, 累计收益)。
+        # rtV1 的 rateForApp 语义跟随 rankType —— 日榜只有日收益, 累计收益必须靠总榜补。
+        self.rank_types = [str(x) for x in (rank_types or [rank_type, "10004"])]
         self.tiger_time_period = tiger_time_period
         self.max_records = max_records
         # [2026-10-16] 登录态 Cookie（.env EASTMONEY_COOKIE / config.yaml eastmoney.cookie）。
@@ -186,59 +190,80 @@ class EastmoneySource(BaseSource):
 
     # ── 1. 实盘选手榜 ─────────────────────────────────────
     def hot_experts(self, limit: int = 50) -> list[Expert]:
-        label = RANK_TYPES.get(self.rank_type, self.rank_type)
-        experts: list[Expert] = []
-        rec_idx, page_size = 0, min(20, max(limit, 1))
-        while len(experts) < limit:
-            data = self.http.get_json(
-                LIVE_RANK_URL,
-                params={
-                    "type": "rt_get_rank",
-                    "rankType": self.rank_type,
-                    "recIdx": rec_idx,
-                    "recCnt": page_size,
-                    "rankid": 0,
-                    "appVer": "9001000",
-                },
-                headers=self._headers(),
-            )
-            items = (data or {}).get("data") or []
-            if not items:
-                break
-            for it in items:
-                # ⚠️ rtV1 的 rateForApp 语义取决于 rankType：rankType=10005（日榜）时
-                # rateTitle="日收益"，是**当日**收益率而非累计收益率，不能混入「累计收益率」列。
-                # 累计收益率以 spo_superior_detail 的 zsyl（总收益）为准。
-                title = str(it.get("rateTitle") or "")
-                rate = to_float(it.get("rateForApp"))
-                is_daily = "日" in title
-                experts.append(
-                    Expert(
-                        source=self.name,
-                        channel="东财实盘组合榜",
-                        expert_id=str(it.get("zjzh", "")),
-                        name=str(it.get("zhuheName", "")),
-                        owner=str(it.get("uidNick", "")),
-                        rank_label=f"东财实盘{label}",
-                        followers=to_int(it.get("concernCnt")),
-                        return_rate=None if is_daily else rate,
-                        market_type=MARKET_LIVE,  # rtV1 即实盘榜 [2026-09-23 打标]
-                        extra={
-                            "userid": it.get("userid"),
-                            "labels": [it.get(f"label{i}") for i in (1, 2, 3) if it.get(f"label{i}")],
-                            "rate_title": title,
-                            "rate_value": rate,
-                            "daily_gain": rate if is_daily else None,
-                        },
-                    )
+        """多榜合并抓取（self.rank_types，默认 日榜+总榜）。
+
+        ⚠️ rtV1 的 rateForApp 语义取决于 rankType，同一字段在不同榜含义不同：
+          * 总榜(10004) rateTitle="总收益"   → 累计收益率，进 return_rate
+          * 日榜(10005) rateTitle="日收益"   → 当日收益率，进 extra.daily_gain
+          * 其他榜（周/月/年/250日）        → 原样存 extra.board_rates
+        合并规则：同一组合以先出现的榜（日榜）为基本信息源，收益字段按榜语义覆盖。
+        """
+        by_id: dict[str, Expert] = {}
+        for rt in self.rank_types:
+            label = RANK_TYPES.get(rt, rt)
+            experts: list[Expert] = []
+            rec_idx, page_size = 0, min(20, max(limit, 1))
+            while len(experts) < limit:
+                data = self.http.get_json(
+                    LIVE_RANK_URL,
+                    params={
+                        "type": "rt_get_rank",
+                        "rankType": rt,
+                        "recIdx": rec_idx,
+                        "recCnt": page_size,
+                        "rankid": 0,
+                        "appVer": "9001000",
+                    },
+                    headers=self._headers(),
                 )
-                if len(experts) >= limit:
+                items = (data or {}).get("data") or []
+                if not items:
                     break
-            if len(items) < page_size:
-                break
-            rec_idx += len(items)
-        logger.info(f"[东财] 实盘榜({label}) 选手 {len(experts)} 位")
-        return experts
+                for it in items:
+                    title = str(it.get("rateTitle") or "")
+                    rate = to_float(it.get("rateForApp"))
+                    experts.append(
+                        Expert(
+                            source=self.name,
+                            channel="东财实盘组合榜",
+                            expert_id=str(it.get("zjzh", "")),
+                            name=str(it.get("zhuheName", "")),
+                            owner=str(it.get("uidNick", "")),
+                            rank_label=f"东财实盘{label}",
+                            followers=to_int(it.get("concernCnt")),
+                            return_rate=rate if "总" in title else None,
+                            market_type=MARKET_LIVE,  # rtV1 即实盘榜 [2026-09-23 打标]
+                            extra={
+                                "userid": it.get("userid"),
+                                "labels": [it.get(f"label{i}") for i in (1, 2, 3) if it.get(f"label{i}")],
+                                "rate_title": title,
+                                "rate_value": rate,
+                                "daily_gain": rate if title == "日收益" else None,
+                                "board_rates": {title: rate} if title else {},
+                            },
+                        )
+                    )
+                    if len(experts) >= limit:
+                        break
+                if len(items) < page_size:
+                    break
+                rec_idx += len(items)
+            logger.info(f"[东财] 实盘榜({label}) 选手 {len(experts)} 位")
+            # 合并进 by_id：同组合以先出现榜为基，收益字段按语义补
+            for e in experts:
+                old = by_id.get(e.expert_id)
+                if old is None:
+                    by_id[e.expert_id] = e
+                    continue
+                if e.return_rate is not None:
+                    old.return_rate = e.return_rate
+                if e.extra.get("daily_gain") is not None:
+                    old.extra["daily_gain"] = e.extra["daily_gain"]
+                old.extra.setdefault("board_rates", {}).update(e.extra.get("board_rates") or {})
+                for k in ("labels",):
+                    if e.extra.get(k) and not old.extra.get(k):
+                        old.extra[k] = e.extra[k]
+        return list(by_id.values())
 
     # ── 2. 当日买入明细 ───────────────────────────────────
     def trades(self, experts: list[Expert], trade_date: date) -> list[TradeRecord]:

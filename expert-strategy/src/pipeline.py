@@ -140,6 +140,7 @@ def _build_eastmoney(fetcher, settings: dict, em_cfg: dict | None = None):
     return EastmoneySource(
         fetcher,
         rank_type=str(em_cfg.get("rank_type", "10005")),
+        rank_types=em_cfg.get("rank_types") or None,  # 默认 [日榜, 总榜]: 日榜给当日收益, 总榜补累计收益
         tiger_time_period=int(em_cfg.get("tiger_time_period", 1)),
         max_records=int(em_cfg.get("max_records", 400)),
         cookie=em_cfg.get("cookie", "") or "",
