@@ -23,8 +23,6 @@
     { s: 'xueqiu', ok: false },
     { s: 'alipay', ok: false }
   ];
-  var LOG_JOBS = [['crawl', '爬取'], ['expert_eval', '能力评估']];
-
   /* ═══════════ 渠道 tab（仅东财可点，其余置灰） ═══════════ */
 
   function channelTabs() {
@@ -259,28 +257,6 @@
 
   /* 东财账户中心已独立为 accounts.js（右上角「🏦 账户中心」入口） */
 
-  /* 任务状态 + 日志（能力评估用；爬取日志保留可选，便于查看历史后台任务） */
-  function bindJobs(root) {
-    EP.jobPanel(root.querySelector('#ee-jobs'), '/api/expert-crawl/status',
-      ['expert_eval'], ['能力评估']);
-    // 日志：可按任务切换
-    var sel = '<div class="row" style="margin-top:8px"><div class="field"><label>任务日志</label><select class="select" id="ee-log-job">' +
-      LOG_JOBS.map(function (j) { return '<option value="' + j[0] + '">' + j[1] + '</option>'; }).join('') +
-      '</select></div></div>';
-    root.querySelector('#ee-jobs').insertAdjacentHTML('afterend', sel);
-    var logBox = root.querySelector('#ee-log');
-    function loadLog() {
-      var job = root.querySelector('#ee-log-job').value;
-      EP.api('/api/expert-crawl/log?job=' + job).then(function (d) {
-        logBox.innerHTML = d.log_tail
-          ? '<div class="job done"><div class="log">' + EP.fmt.esc(d.log_tail) + '</div></div>'
-          : '<div class="job idle">暂无日志</div>';
-      });
-    }
-    root.querySelector('#ee-log-job').onchange = loadLog;
-    loadLog();
-  }
-
   /* ═══════════ ③ 高手能力评估（仅实盘 rtV3 流水）═══════════ */
 
   function evalPanel() {
@@ -296,7 +272,8 @@
       '<input type="checkbox" id="ee-sample-only" checked> 只看样本充足</label></div>' +
       '<div class="field"><label>&nbsp;</label><button class="btn primary" id="ee-run">▶ 开始评估</button>' +
       '<button class="btn" id="ee-refresh" style="margin-left:6px">刷新结果</button></div>' +
-      '</div><div id="ee-stale"></div><div id="ee-summary"></div><div id="ee-table"></div><div id="ee-jobs"></div><div id="ee-log"></div></div>';
+      '</div><div id="ee-stale"></div><div id="ee-progress"></div><div id="ee-summary"></div>' +
+      '<div id="ee-filter-hint"></div><div id="ee-table"></div></div>';
   }
 
   function num0(v) { return EP.fmt.num(v, 0); }
@@ -384,10 +361,25 @@
     if (!t || !S.eval) return;
     var min = parseInt(S.minSells, 10) || 1;
     var hasWatch = Object.keys(S.wl).some(function (id) { return S.wl[id] && S.wl[id].__mt === 'live'; });
-    t.setRows(S.eval.rows.filter(function (r) {
-      var watchOk = !S.watchOnly || !hasWatch || (S.wl[r.expert_id] && S.wl[r.expert_id].__mt === 'live');
+    var filtered = S.eval.rows.filter(function (r) {
+      var watchOk = !S.watchOnly || !hasWatch || (S.wl[r.expert_id] && S.wl[r.expert_id] && S.wl[r.expert_id].__mt === 'live');
       return watchOk && (!S.sampleOnly || r.sample_ok) && (r.n_sell || 0) >= min;
-    }));
+    });
+    t.setRows(filtered);
+    /* 过滤把结果全藏起来时给出原因提示，避免"完成后表格无内容"的困惑 */
+    var hint = document.querySelector('#ee-filter-hint');
+    if (hint) {
+      if (!filtered.length && S.eval.rows.length) {
+        var why = [];
+        if (S.watchOnly) why.push('只看关注');
+        if (S.sampleOnly) why.push('只看样本充足（覆盖天数/卖出笔数达门槛）');
+        why.push('卖出 ≥ ' + min + ' 笔');
+        hint.innerHTML = '<div class="hint" style="margin-top:6px">⚠️ 共 ' + S.eval.rows.length +
+          ' 条评估结果，但被当前筛选（' + why.join(' + ') + '）全部隐藏——取消上方勾选或降低卖出笔数门槛即可看到。</div>';
+      } else {
+        hint.innerHTML = '';
+      }
+    }
   }
 
   function renderEval(root, d) {
@@ -612,19 +604,31 @@
         method: 'POST',
         body: { min_sells: parseInt(S.minSells, 10) || 3, min_days: 20 }
       }).then(function () {
-        EP.toast('评估已启动（后台运行，完成后自动刷新）');
-        bindJobs(root);
+        EP.toast('评估已启动（完成后自动刷新）');
+        /* 进度：转圈 + 已耗时秒数，每秒更新；完成后显示耗时并自动刷新结果 */
+        var el = root.querySelector('#ee-progress'), t0 = Date.now(), secs = 0;
+        function prog(html) { if (el) el.innerHTML = html; }
+        var tick = setInterval(function () {
+          secs = Math.round((Date.now() - t0) / 1000);
+          prog('<div class="hint" style="margin-top:8px"><span class="spin">⏳</span> 评估进行中… 已运行 <b>' +
+            secs + '</b> 秒（逐高手镜像回测，通常十几秒内完成）</div>');
+        }, 1000);
         var timer = setInterval(function () {
           EP.api('/api/expert-crawl/status').then(function (d) {
-            if (d.expert_eval && d.expert_eval.state !== 'running') {
-              clearInterval(timer);
-              btn.disabled = false;
-              if (d.expert_eval.state === 'error') { EP.toast('评估失败，看任务日志', 'error'); return; }
-              loadEval(root);
-              EP.toast('评估完成');
+            var st = d.expert_eval && d.expert_eval.state;
+            if (!st || st === 'running') return;
+            clearInterval(timer); clearInterval(tick);
+            btn.disabled = false;
+            if (st === 'error') {
+              prog('<div style="color:var(--c-danger);margin-top:8px">❌ 评估失败（服务端日志见 logs/，请重试）</div>');
+              EP.toast('评估失败', 'error'); return;
             }
-          });
-        }, 3000);
+            var cost = Math.round((Date.now() - t0) / 1000);
+            prog('<div class="hint" style="margin-top:8px">✅ 评估完成，耗时 ' + cost + ' 秒</div>');
+            loadEval(root);
+            EP.toast('评估完成');
+          }).catch(function () {});
+        }, 2000);
       }).catch(function (e) { EP.toast(e.message, 'error'); btn.disabled = false; });
     };
     root.querySelector('#ee-refresh').onclick = function () { loadEval(root); };
@@ -644,7 +648,6 @@
     loadLiveExperts(root);           // 榜单持久化在本地，进页面直接渲染
     bindWatchCard(root);
     bindEval(root);
-    bindJobs(root);
     loadWatch(root);
     loadEval(root);
   };
