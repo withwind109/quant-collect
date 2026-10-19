@@ -66,6 +66,14 @@ def _rec(r: dict) -> Dict[str, Any]:
     }
 
 
+def _shift_days(day: str, days: int) -> str:
+    """YYYY-MM-DD ± N 自然日（K 线窗口缓冲用）；解析失败原样返回。"""
+    try:
+        return (_date.fromisoformat(day) + timedelta(days=days)).isoformat()
+    except (TypeError, ValueError):
+        return day
+
+
 def load_expert_signals(env: str = "live", start: str = "", end: str = "") -> Dict[str, Dict[str, Any]]:
     """{expert_id: {name, source, market_type, records:[...], health:{...}}}（按日期/时间有序）。
 
@@ -125,11 +133,15 @@ def _normalized_histories(start: str = "", end: str = "", expert_id: str = ""):
 # ── 单高手镜像回测（口径同 follow_backtest.run_backtest 的单专家子账户） ──────
 
 def simulate_expert(recs: List[Dict[str, Any]], kidx: Dict[str, Dict[str, Dict[str, Any]]],
-                    all_dates: List[str], capital: float = DEFAULT_CAPITAL
+                    all_dates: List[str], capital: float = DEFAULT_CAPITAL,
+                    seeds: Dict[str, float] | None = None
                     ) -> Tuple[List[Dict[str, Any]], List[Dict[str, Any]], float, int]:
     """返回 (nav_daily, trades, fees_total, skipped_limitup)。
 
-    nav_daily: [{date, nav}]，从该高手首笔信号日（含）起；trades 含 buy/sell/buy_skipped。
+    nav_daily: [{date, nav}]，从该高手首笔信号日起、到最后一条信号的 T+1 执行日止；
+    trades 含 buy/sell/buy_skipped。
+    seeds: 起点回填持仓 {code: 起始权重}（normalize_live 账本里"记录起点之前就持有"的股票，
+    按起点前收盘价建仓），与账本口径一致——否则这些仓位的卖出信号在镜像里无仓可卖。
     """
     targets: Dict[str, Dict[str, Tuple[float, str, str]]] = defaultdict(dict)
     for r in recs:
@@ -144,7 +156,15 @@ def simulate_expert(recs: List[Dict[str, Any]], kidx: Dict[str, Dict[str, Dict[s
         targets[d][c] = (w, r.get("stock_name") or c, r.get("trade_time") or "")
     if not targets:
         return [], [], 0.0, 0
-    dates = [d for d in all_dates if d >= min(targets)]
+    first_sig, last_sig = min(targets), max(targets)
+
+    # [2026-10-19 修] 评估窗口截止 = 最后一条信号的 T+1 执行日。
+    # 原实现 dates 只到 K 线末尾（= 最后信号日），最后一条信号的执行日必然被截掉——
+    # 最后一笔调仓永远不执行（股友Qz1LRU 的 10-12 买国力电子就是这样丢的）。
+    dates = [d for d in all_dates if first_sig <= d]
+    i_last = bisect.bisect_right(all_dates, last_sig)
+    if i_last < len(all_dates):
+        dates = [d for d in dates if d <= all_dates[i_last]]
     if not dates:
         return [], [], 0.0, 0
 
@@ -159,6 +179,21 @@ def simulate_expert(recs: List[Dict[str, Any]], kidx: Dict[str, Dict[str, Dict[s
 
     cash = float(capital)
     positions: Dict[str, Dict[str, float]] = {}
+    # [2026-10-19 修] 起点回填仓初始化（与 normalize_live 账本同口径）：
+    # 按首笔信号前一交易日的收盘价建仓，否则"卖出未见买入"的起点仓位卖不出去
+    if seeds:
+        pre = [d for d in all_dates if d < first_sig]
+        seed_day = pre[-1] if pre else None
+        for code, wt in seeds.items():
+            k = kidx.get(code, {}).get(seed_day) if seed_day else None
+            close = (k or {}).get("close")
+            if not close or wt <= 0:
+                continue
+            qty = round(wt * capital / close / 100) * 100
+            if qty <= 0:
+                continue
+            positions[code] = {"qty": float(qty), "cost": float(close)}
+            cash -= qty * close
     trades: List[Dict[str, Any]] = []
     nav_daily: List[Dict[str, Any]] = []
     fees_total = 0.0
@@ -205,7 +240,12 @@ def simulate_expert(recs: List[Dict[str, Any]], kidx: Dict[str, Dict[str, Dict[s
                 px = k["open"] * (1 + FB.SLIPPAGE)
                 qty = math.floor(buy_val / px / 100) * 100
                 if qty <= 0:
-                    continue
+                    # [2026-10-19 修] 高价股整手约束：目标金额不足一手时，现金够就至少买一手
+                    # （真实跟单一手起步，仓位略微超出目标；此前直接丢弃——罗博特科 618 元/手
+                    #   6.18 万 > 6% 目标 6 万，整条买入信号就这样蒸发了）
+                    if px * 100 > cash or buy_val < 1000:
+                        continue
+                    qty = 100
                 gross = qty * px
                 fee = max(gross * FB.COMMISSION, FB.MIN_FEE)
                 if gross + fee > cash:
@@ -444,7 +484,10 @@ def evaluate(env: str = "live", start: str = "", end: str = "",
     codes = sorted({r["stock_code"] for h in histories.values() for r in h["records"]})
     dmin = min(r["trade_date"] for h in histories.values() for r in h["records"])
     dmax = max(r["trade_date"] for h in histories.values() for r in h["records"])
-    p_start, p_end = start or dmin, end or dmax
+    # K 线窗口前后各留 14 天缓冲：前缓冲供起点回填仓取"首信号前一交易日"收盘价，
+    # 后缓冲保证最后一条信号的 T+1 执行日落在窗口内（否则最后一笔调仓永远不执行）
+    p_start = _shift_days(start or dmin, -14)
+    p_end = _shift_days(end or dmax, 14)
     kidx = _kline_for(codes, p_start, p_end)
     all_dates = sorted({d for m in kidx.values() for d in m})
     try:
@@ -457,7 +500,9 @@ def evaluate(env: str = "live", start: str = "", end: str = "",
 
     rows: List[Dict[str, Any]] = []
     for eid, h in histories.items():
-        nav_daily, trades, fees, skipped = simulate_expert(h["records"], kidx, all_dates, capital)
+        nav_daily, trades, fees, skipped = simulate_expert(
+            h["records"], kidx, all_dates, capital,
+            seeds=(h.get("health") or {}).get("seed_map"))
         m = compute_metrics(nav_daily, trades, bench)
         if m is None:
             continue
@@ -494,7 +539,8 @@ def evaluate(env: str = "live", start: str = "", end: str = "",
             "n_experts": len(rows),
             "n_sample_ok": sum(1 for r in rows if r["sample_ok"]),
             "n_codes": len(codes), "n_codes_with_price": len(kidx),
-            "data_range": [dmin, dmax], "trading_days": len(all_dates),
+            "data_range": [dmin, dmax],
+            "trading_days": len([d for d in all_dates if dmin <= d <= dmax]),
             "bench_code": BENCH_CODE, "bench_available": bool(bench),
             "n_skipped": len(skip_list), "skipped": skip_list,
             "msg": "" if rows else "有信号但算不出指标：可能是标的行情缺失、数据不足或全部是港股/无行情代码",
@@ -543,7 +589,8 @@ def expert_detail(expert_id: str, env: str = "live", start: str = "", end: str =
         return {"ok": False, "msg": "该高手没有可评估的调仓记录"}
     codes = sorted({r["stock_code"] for r in recs})
     dmin, dmax = recs[0]["trade_date"], recs[-1]["trade_date"]
-    kidx = _kline_for(codes, start or dmin, end or dmax)
+    # 与 evaluate 同口径：前后各留 14 天缓冲（起点回填仓取价 + 最后信号的 T+1 执行日）
+    kidx = _kline_for(codes, _shift_days(start or dmin, -14), _shift_days(end or dmax, 14))
     all_dates = sorted({d for m in kidx.values() for d in m})
     if not all_dates:
         return {"ok": False, "msg": "本地没有相关标的行情（先跑 prices 补齐）"}
@@ -551,7 +598,9 @@ def expert_detail(expert_id: str, env: str = "live", start: str = "", end: str =
         bench = P.index_closes(BENCH_CODE, dmin, dmax)
     except Exception:  # noqa: BLE001
         bench = {}
-    nav_daily, trades, fees, skipped = simulate_expert(recs, kidx, all_dates, capital)
+    nav_daily, trades, fees, skipped = simulate_expert(
+        recs, kidx, all_dates, capital,
+        seeds=(h.get("health") or {}).get("seed_map"))
     m = compute_metrics(nav_daily, trades, bench)
     if m is None:
         return {"ok": False, "msg": "信号太少，算不出指标"}

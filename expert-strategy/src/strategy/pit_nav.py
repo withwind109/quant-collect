@@ -190,6 +190,9 @@ def normalize_live(hist: Dict[str, Dict[str, Any]], px: "PriceCtx") -> Tuple[Dic
             cash = 1.0 - sum(val.values())
             info["seeded"] = len(seeds)
             info["seeded_weight"] = round(1.0 - cash, 3)
+            # [2026-10-19 修] 透出起点回填明细 {code: 起始权重(组合净值=1 计)}，
+            # 供镜像回测 simulate_expert 初始化同样的起点持仓（否则这些仓位的卖出在镜像里无仓可卖、被静默丢弃）
+            info["seed_map"] = {px.codes[j]: round(val[j], 4) for j in seeds}
         has_qty = all(r.get("volume") for r in tail)
         cur_t = None
         norm: List[Dict[str, Any]] = []
