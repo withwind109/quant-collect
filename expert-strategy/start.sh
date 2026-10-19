@@ -84,8 +84,23 @@ if [ "${1:-}" = "--install" ]; then
   exit 0
 fi
 
-# ── 5. 启动服务 ────────────────────────────────────────────────────────────
+# ── 5. 停掉占用端口的旧进程（重复运行 start.sh 时自动重启） ─────────────────
+PIDS="$(lsof -ti tcp:"$PORT" 2>/dev/null || true)"
+if [ -n "$PIDS" ]; then
+  log "端口 ${PORT} 被占用（PID: $(echo "$PIDS" | tr '\n' ' ')），先关闭旧进程…"
+  # 先 TERM 优雅退出，2s 后仍存活再 KILL
+  kill $PIDS 2>/dev/null || true
+  sleep 2
+  PIDS="$(lsof -ti tcp:"$PORT" 2>/dev/null || true)"
+  if [ -n "$PIDS" ]; then
+    kill -9 $PIDS 2>/dev/null || true
+    sleep 1
+  fi
+  log "旧进程已关闭"
+fi
+
+# ── 6. 启动服务 ────────────────────────────────────────────────────────────
 log "启动 Web 服务 → http://127.0.0.1:${PORT}"
-log "  社区高手     #/experts"
+log "  高手评估     #/experts"
 log "  高手跟随策略 #/expert-strategy"
 exec env -u PYTHONPATH "$VENV_PY" -m uvicorn web.app:app --host 127.0.0.1 --port "$PORT"
