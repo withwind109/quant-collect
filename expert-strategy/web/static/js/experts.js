@@ -354,6 +354,7 @@
   function evalPanel() {
     return '<div class="card"><h3>③ 高手能力评估 <span class="hint" style="font-weight:400">（数据环境：实盘 rtV3 流水 · 模拟盘通道已下线）</span></h3>' +
       '<div class="card-sub">逐高手镜像回测（= 无脑跟他的单）：T+1 开盘 ±0.2% 滑点、佣金万 0.8（最低 5 元）、卖出印花税 0.05%、涨停拦截、噪音过滤。窗口从该高手首笔信号日起。按综合评分（夏普/索提诺/Calmar/胜率 分位秩平均）排序——分高且样本充足的，就是值得跟的人。</div>' +
+      '<div class="card-sub">⚠️ <b>口径说明</b>：rtV3 只返回最近 40 条调仓（约覆盖 1 个月），本表评估的就是这个窗口；东财 APP 显示的总收益/近1年/近一月是组合成立以来的累计口径，包含窗口外的收益与持仓，<b>与本表不可直接对比</b>。本表衡量的是「T+1 跟单能吃到的那部分」——日内抢帽子型高手（如财神咒）的日内价差跟不到，镜像收益显著低于 APP 展示属正常现象。</div>' +
       '<div class="row">' +
       '<div class="field"><label>最少卖出笔数</label><select class="select" id="ee-min-sells">' +
       [1, 3, 5, 10, 20].map(function (n) { return '<option value="' + n + '"' + (n === 3 ? ' selected' : '') + '>' + n + '</option>'; }).join('') +
@@ -415,6 +416,12 @@
     { key: 'win_rate_pct', label: '胜率%', num: true, fmt: function (v) { return v == null ? '—' : v.toFixed(1) + '%'; } },
     { key: 'profit_factor', label: '盈亏比', num: true, fmt: f2 },
     { key: 'n_sell', label: '卖出', num: true, fmt: num0 },
+    { key: 'first_date', label: '评估窗口', fmt: function (v, r) {
+      if (!v) return '—';
+      var sameYear = String(v).slice(0, 4) === String(r.last_date || '').slice(0, 4);
+      var a = sameYear ? String(v).slice(5) : String(v), b = String(r.last_date || '').slice(5);
+      return '<span class="hint" style="font-size:12px" title="' + EP.fmt.esc(v + ' ~ ' + r.last_date) + '">' +
+        EP.fmt.esc(a + ' ~ ' + b) + '</span>'; } },
     { key: 'trading_days', label: '覆盖天数', num: true, fmt: num0 },
     { key: 'sample_ok', label: '样本', fmt: function (v) { return v ? EP.badge('充足', 'green') : EP.badge('不足', 'gray'); } },
     { key: 'expert_id', label: '数据新鲜度', fmt: freshCell },
