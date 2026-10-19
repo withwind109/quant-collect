@@ -1,6 +1,6 @@
 {
- "run_id": "20261019_165038",
- "generated_at": "2026-10-19T16:50:39",
+ "run_id": "20261019_170344",
+ "generated_at": "2026-10-19T17:03:47",
  "params": {
   "env": "live",
   "start": "",
@@ -12,15 +12,17 @@
  "meta": {
   "n_experts": 1,
   "n_sample_ok": 0,
-  "n_codes": 17,
+  "n_codes": 12,
   "n_codes_with_price": 12,
   "data_range": [
    "2026-09-09",
-   "2026-10-13"
+   "2026-10-12"
   ],
-  "trading_days": 19,
+  "trading_days": 18,
   "bench_code": "000300.SH",
   "bench_available": true,
+  "n_skipped": 0,
+  "skipped": [],
   "msg": ""
  },
  "bench": {
@@ -41,8 +43,7 @@
   "2026-09-30": 4357.62,
   "2026-10-08": 4310.28,
   "2026-10-09": 4317.26,
-  "2026-10-12": 4287.98,
-  "2026-10-13": 4275.68
+  "2026-10-12": 4287.98
  },
  "rows": [
   {
@@ -52,29 +53,39 @@
    "market_type": "live",
    "sample_ok": false,
    "score": null,
-   "total_return_pct": -11.09,
-   "annualized_pct": -71.7,
-   "sharpe": -7.72,
-   "sortino": -7.42,
-   "max_drawdown_pct": 13.16,
-   "calmar": -5.45,
-   "win_rate_pct": null,
-   "profit_factor": null,
-   "avg_win_pct": null,
-   "avg_loss_pct": null,
-   "excess_pct": -4.6,
+   "total_return_pct": -3.94,
+   "annualized_pct": -35.9,
+   "sharpe": -8.39,
+   "sortino": -7.67,
+   "max_drawdown_pct": 3.94,
+   "calmar": -9.11,
+   "win_rate_pct": 14.3,
+   "profit_factor": 0.08,
+   "avg_win_pct": 3.3,
+   "avg_loss_pct": -3.86,
+   "excess_pct": 2.28,
    "alpha_pct": null,
    "beta": null,
    "alpha_t": null,
-   "n_buy": 13,
-   "n_sell": 0,
-   "trading_days": 19,
-   "calendar_days": 34,
-   "final_nav": 889077.56,
+   "n_buy": 9,
+   "n_sell": 7,
+   "trading_days": 18,
+   "calendar_days": 33,
+   "final_nav": 960588.53,
    "first_date": "2026-09-09",
-   "last_date": "2026-10-13",
-   "fees": 801.97,
+   "last_date": "2026-10-12",
+   "fees": 1486.5,
    "skipped_limitup": 0,
+   "data_health": {
+    "usable": true,
+    "reason": "可用 (近似): 卖出未见买入 30%, 起点持仓已回填 3 只",
+    "n_records": 40,
+    "n_labeled": 40,
+    "n_used": 23,
+    "phantom_end": 0,
+    "seeded": 3,
+    "gap_days": []
+   },
    "rank": 1
   }
  ]

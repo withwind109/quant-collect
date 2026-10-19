@@ -157,15 +157,16 @@ def _persist_live_trades(records, fetched_at: str = "", trigger: str = "manual")
     import uuid
     fetched_at = fetched_at or datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     n = 0
-    eids: set = set()
+    per: dict = {}
+    per_new: dict = {}
     for r in records:
-        eids.add(r.expert_id)
         td = r.trade_date or ""
         if not td:
             continue
+        per[r.expert_id] = per.get(r.expert_id, 0) + 1
         sig = DB._sig(td, r.source, r.expert_id, r.stock_code, r.action, r.trade_time,
                       r.price, r.weight_before, r.weight_after)
-        n += DB.qexec(
+        row_n = DB.qexec(
             "INSERT OR IGNORE INTO crawl_trade (trade_date, source, asset_type, channel, expert_id, "
             "expert_name, owner, stock_code, stock_name, market, action, price, volume, amount, "
             "weight_before, weight_after, weight_label, return_rate, day_return_rate, trade_time, "
@@ -174,10 +175,12 @@ def _persist_live_trades(records, fetched_at: str = "", trigger: str = "manual")
              r.stock_code, r.stock_name, r.market, r.action, r.price, r.volume, r.amount,
              r.weight_before, r.weight_after, r.weight_label, r.return_rate, r.day_return_rate,
              r.trade_time, DB._j(r.raw), "live", sig, fetched_at))
-    for eid in eids:
+        n += row_n
+        per_new[r.expert_id] = per_new.get(r.expert_id, 0) + row_n
+    for eid, cnt in per.items():   # [2026-10-19 修] n_total/n_new 原来用的是全部组合的合计，应按组合分别记
         DB.qexec("INSERT OR REPLACE INTO xcq_fetch_log (id, expert_id, market_type, fetched_at, "
                  "n_total, n_new, trigger) VALUES (?,?,?,?,?,?,?)",
-                 (uuid.uuid4().hex, eid, "live", fetched_at, len(records), n, trigger))
+                 (uuid.uuid4().hex, eid, "live", fetched_at, cnt, per_new.get(eid, 0), trigger))
     return n
 
 
@@ -469,7 +472,8 @@ async def live_experts_refresh(body: BoardRefreshBody) -> Dict[str, Any]:
                 extra = json.loads(row.get("extra_json") or "{}")
             except (TypeError, ValueError):
                 extra = {}
-            extra.update(extra_new)
+            # [2026-10-19 修] 只覆盖有值的键：总榜刷新时 daily_gain=None 会把日榜已写入的当日收益抹掉
+            extra.update({k: v for k, v in extra_new.items() if v is not None})
             # 总榜才覆盖累计收益；日榜只补当日收益，不动已有累计口径
             sets = ["name=?", "owner=?", "followers=?", "extra_json=?", "fetched_at=?"]
             args: list = [e.name, e.owner, e.followers or 0,

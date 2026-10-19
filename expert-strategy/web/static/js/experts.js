@@ -85,8 +85,8 @@
         box.innerHTML = '<div class="empty">本地暂无实盘榜数据——点「⬇ 加载最新」从东财拉取</div>';
         return;
       }
-      root.querySelector('#eb-meta').textContent = '数据日期 ' + d.latest_date +
-        (d.fetched_at ? ' · 榜单拉取于 ' + d.fetched_at : '');
+      root.querySelector('#eb-meta').textContent = '榜单取数日 ' + d.latest_date +
+        (d.fetched_at ? ' · 拉取于 ' + d.fetched_at : '');
       var rows = d.rows.map(function (r, i) { r.rank = i + 1; return r; });
       EP.table(box, rows, [
         { key: 'rank', label: '#', num: true, fmt: num0 },
@@ -296,7 +296,7 @@
       '<input type="checkbox" id="ee-sample-only" checked> 只看样本充足</label></div>' +
       '<div class="field"><label>&nbsp;</label><button class="btn primary" id="ee-run">▶ 开始评估</button>' +
       '<button class="btn" id="ee-refresh" style="margin-left:6px">刷新结果</button></div>' +
-      '</div><div id="ee-summary"></div><div id="ee-table"></div><div id="ee-jobs"></div><div id="ee-log"></div></div>';
+      '</div><div id="ee-stale"></div><div id="ee-summary"></div><div id="ee-table"></div><div id="ee-jobs"></div><div id="ee-log"></div></div>';
   }
 
   function num0(v) { return EP.fmt.num(v, 0); }
@@ -362,6 +362,23 @@
     ]);
   }
 
+  /* 调仓数据比评估快照新 → 提示重算（评估结果是静态快照，不会自动跟着更新） */
+  function updateStaleHint(root) {
+    var el = root.querySelector('#ee-stale');
+    if (!el) return;
+    el.innerHTML = '';
+    if (!S.eval || !S.eval.generated_at) return;
+    var gen = String(S.eval.generated_at).replace('T', ' ').slice(0, 19);
+    var newer = Object.keys(S.fresh).some(function (id) {
+      var f = S.fresh[id];
+      return f && f.fetched_at && String(f.fetched_at).replace('T', ' ').slice(0, 19) > gen;
+    });
+    if (newer) {
+      el.innerHTML = '<div class="hint" style="color:var(--c-danger);margin-bottom:6px">' +
+        '关注组合有新拉取的调仓数据尚未计入评估（评估是静态快照）——请点「▶ 开始评估」重算。</div>';
+    }
+  }
+
   function applyFilters() {
     var t = EP._tables['ee-table'];
     if (!t || !S.eval) return;
@@ -384,9 +401,20 @@
     var envNote = (d.params && d.params.env !== S.env)
       ? '<div class="hint" style="margin-bottom:6px">当前展示的是 <b>' + EP.fmt.esc(d.params.env) +
         '</b> 环境的结果（门槛：卖出≥' + d.params.min_sells + '、覆盖≥' + d.params.min_days + ' 天）</div>' : '';
-    sum.innerHTML = envNote + evalSummary(d);
+    var m = d.meta || {};
+    var skipNote = '';
+    if (m.n_skipped > 0) {
+      var sk = (m.skipped || []).slice(0, 4).map(function (x) {
+        return EP.fmt.esc(x.name) + '（' + EP.fmt.esc(x.reason) + '）';
+      }).join('；');
+      if ((m.skipped || []).length > 4) sk += ' 等';
+      skipNote = '<div class="hint" style="margin-top:6px">另有 <b>' + m.n_skipped + '</b> 位组合未参与评估：' +
+        sk + '。常见原因：rtV3 只有最近 40 条（卖出早于数据起点 → 起点持仓不明），或平台隐私隐藏。</div>';
+    }
+    sum.innerHTML = envNote + evalSummary(d) + skipNote;
     EP.table(box, d.rows, EVAL_COLS, { height: 520, pageSize: 50, sortKey: 'rank', sortDir: 1 });
     applyFilters();
+    updateStaleHint(root);
     renderWatchlist(root);
   }
 
@@ -415,6 +443,7 @@
       (d.rows || []).forEach(function (r) { S.fresh[r.expert_id] = r; });
       applyFilters();   // setRows 会整表重渲染，新鲜度列随之刷新
       renderWatchTable(root);
+      updateStaleHint(root);
     }).catch(function () {});
   }
 
@@ -492,11 +521,16 @@
     EP.api('/api/expert-crawl/evaluation/detail?expert_id=' + encodeURIComponent(expertId) +
            '&env=' + encodeURIComponent(S.env)).then(function (d) {
       var m = d.metrics;
+      var health = d.data_health || {};
+      var hNote = health.reason
+        ? '<div class="hint" style="margin-top:4px">数据体检：' + EP.fmt.esc(health.reason) +
+          '（原始 ' + (health.n_records || 0) + ' 条 → 可用 ' + (health.n_used || 0) + ' 条，卖出后幽灵仓位 ' +
+          (health.phantom_end || 0) + '）</div>' : '';
       drawer.innerHTML =
         '<div style="display:flex;justify-content:space-between;align-items:flex-start">' +
         '<div><h3 style="font-size:16px">' + EP.fmt.esc(d.name || d.expert_id) + '</h3>' +
         '<div class="hint">' + EP.fmt.esc(d.expert_id) + ' · ' + EP.fmt.esc(SRC_LABELS[d.source] || d.source || '—') +
-        ' · ' + (d.env === 'live' ? '实盘' : '模拟盘') + '</div></div>' +
+        ' · ' + (d.env === 'live' ? '实盘' : '模拟盘') + '</div>' + hNote + '</div>' +
         '<div><button class="btn sm primary" id="ed-watch">' + (S.wl[d.expert_id] ? '✓ 已关注' : '＋ 关注') + '</button> ' +
         '<button class="btn sm" id="ed-close">关闭</button></div></div>' +
         '<div id="ed-kv" style="margin-top:10px"></div>' +

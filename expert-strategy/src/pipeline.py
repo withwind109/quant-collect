@@ -187,7 +187,7 @@ def build_expert_buys(buys: list[TradeRecord], expert_map: dict) -> list[dict]:
                 "expert_name": (exp.name if exp else "") or first.expert_name or (exp.owner if exp else ""),
                 "owner": (exp.owner if exp else "") or first.owner,
                 "rank_label": (exp.rank_label if exp else "") or "当日活跃组合",
-                "market_type": (exp.market_type if exp else "") or first.market_type or "sim",
+                "market_type": (exp.market_type if exp else "") or first.market_type or "live",
                 "return_rate": (exp.return_rate if exp else None) if (exp and exp.return_rate is not None) else first.return_rate,
                 "day_return_rate": first.day_return_rate
                 if first.day_return_rate is not None

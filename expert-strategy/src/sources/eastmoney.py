@@ -410,7 +410,14 @@ def _normalize_date(value) -> str:
 
 
 def _parse_ratio_cn(value) -> float | None:
-    """解析 rtV3 的中文仓位描述: '3成'→30, '9成以上'→90, '1成以下'→10, '半成'→5。"""
+    """rtV3 positionRatio → 数值档位（百分比形式的**成交金额/组合总资产**，不是调仓后仓位）。
+
+    '3成'→30, '9成以上'→90, '1成以下'→10, '半成'→5。
+    ⚠️ 语义（源项目用 19 个带成交量组合核对）：买卖都是「成交金额 / 组合总资产」按成向下取整；
+    '1成' 的卖出有 57% 是整只清仓。因此这里存进 crawl_trade.weight_after 的数值**不能**直接
+    当目标仓位用于评估，必须先用 strategy/pit_nav.normalize_live 做现金+持仓记账重放
+    （买入金额=档位中点×总资产、每笔卖出按清仓），还原真实调仓前后仓位。
+    """
     text = str(value or "").strip()
     if not text:
         return None
