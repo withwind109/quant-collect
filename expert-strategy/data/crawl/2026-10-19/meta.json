@@ -1,32 +1,24 @@
 {
   "trade_date": "2026-10-19",
-  "date_mode": "auto",
-  "date_votes": [
-    {
-      "date": "2026-10-19",
-      "sources": [
-        "eastmoney"
-      ],
-      "activity": 300
-    }
-  ],
+  "date_mode": "fixed",
+  "date_votes": [],
   "coverage": [
     {
       "source": "eastmoney",
-      "capability": "组合高手操作明细：组合名 + 累计收益率 + 当日收益率 + 股票 + 成交价 + 仓位变化",
-      "experts": 841,
-      "trades": 791,
-      "buys": 581,
-      "experts_with_buys": 581,
-      "stocks": 307,
-      "with_expert_name": 581,
-      "with_stock": 581,
-      "with_return_rate": 581,
-      "with_price": 581,
-      "live_experts": 50,
+      "capability": "实盘组合榜(rtV1 日榜+总榜) + 关注组合调仓明细(rtV3, 需 APP 令牌)",
+      "experts": 10,
+      "trades": 0,
+      "buys": 0,
+      "experts_with_buys": 0,
+      "stocks": 0,
+      "with_expert_name": 0,
+      "with_stock": 0,
+      "with_return_rate": 0,
+      "with_price": 0,
+      "live_experts": 10,
       "live_buys": 0,
-      "sim_experts": 791,
-      "sim_buys": 581
+      "sim_experts": 0,
+      "sim_buys": 0
     }
   ]
 }

@@ -1,51 +1,30 @@
-"""东方财富：社区实盘/模拟组合高手榜 + 当日买入明细。
+"""东方财富：实盘组合高手榜 + 关注组合调仓明细（rtV1 / rtV3 / srtV1）。
 
-接口（2026-09 实测，除 rtV3 外均匿名可用）：
-  1. 高手操作明细（含成交时间/买卖方向/成交价/调仓前后仓位/组合名/收益率，精确到分钟）
-     GET https://simqry2.eastmoney.com/qry_tzzh_v2
-         ?type=spo_superior_detail&rankType=30001&recIdx=1&recCnt=100&plat=2&ver=web20
-     ⚠️ recIdx 从 **1** 起（传 0 返回 HTTP 500）；totalCnt 上限 1000，即只保留最近 1000 笔操作。
-     返回字段（实测 2026-09-12）：
-         cjsj        "09-11 15:00"  成交时间（月-日 时:分，**不含年份**）
-         zjzh        组合账号（同一组合的稳定 ID）
-         zuheName    组合名称（= 操作者身份标识）
-         userid      用户 ID
-         stkCode/stkName/mktCode  股票代码 / 名称 / 市场（1=沪 0=深 2=北）
-         mmbz        买卖方向（"买入" / "卖出"）
-         price       成交价
-         holdPosBef/holdPosAft    调仓前/后仓位(%)
-         zsyl        该组合**累计收益率(%)**      -> return_rate
-         syl_dr      该组合**当日收益率(%)**      -> day_return_rate
-         rank/superiorTypeString   榜位 / 榜单类型（"总收益"）
-  2. 组合买入热度榜（站点自带聚合，按多少高手买入排序，**无高手身份**）
-     GET 同上 ?type=spo_rank_tiger&rankType=30001&timePeriod=1&recIdx=1&recCnt=50
-     rankType: 30001=买入榜, 30002=卖出榜；timePeriod: 1=当日
-  3. 实盘组合选手榜
+⚠️ 2026-10-19 起模拟盘通道整体下线（simqry2.eastmoney.com 的 spo_* 系列接口
+   ——全站操作流水 / 买入热度榜 / 组合调仓历史 / 组合基础信息——已全部删除），
+   本模块只保留**实盘**数据链路，杜绝任何逻辑再爬到模拟盘数据。
+
+接口（2026-10 实测）：
+  1. 实盘组合选手榜（匿名可用）
      GET https://emdcspzhapi.dfcfs.cn/rtV1
          ?type=rt_get_rank&rankType=10005&recIdx=0&recCnt=20&rankid=0&appVer=9001000
-  4. 实盘组合调仓明细（可选，需 APP 会话令牌 + SM4 签名）
+     rankType: 10005=日榜(当日收益) 10004=总榜(累计收益) 10000/10001/10003=周/月/年榜
+  2. 实盘组合调仓明细（需 APP 会话令牌 + SM4 签名，仅对关注者开放）
      POST https://spzhapi.dfcfs.cn/rtV3  method=CombinationRelocatePositionHandler
+  3. 东财账号关注关系（需 APP 令牌）
+     查已关注 rtV3 FollowCombinationQueryHandler / 关注·取消 srtV1 GET rt_add_concern·rt_cancel_concern
 
-数据视角说明：
-  * `spo_superior_detail` 是**全站高手操作流水**（按时间倒序），单日可达 800+ 笔买入，
-    覆盖数百个组合与数百只股票 —— 这是「谁（组合名）+ 收益率 + 买了哪只股票」的权威来源。
-  * `spo_rank_tiger` 只给「哪只股票被多少高手买入」的聚合数字，**拿不到名单**，
-    仅作热度交叉验证，不应作为主视图（这是旧版页面「只知道股票不知道谁买」的原因）。
-
-认证方式（2026-10-16 迁移版）：
-  * 不再使用扫码登录。东财各接口（spo_* / rtV1）匿名即可抓取；配置登录态 Cookie
-    （config.yaml 的 eastmoney.cookie 或 .env 的 EASTMONEY_COOKIE）后随请求带上，
-    可降低被 WAF 拦截的概率、提高限额。
-  * rtV3 实盘调仓明细仍需 APP 会话令牌（ctToken/utToken/userId + SM4 签名），
-    独立版默认不接入（无扫码登录态）；实盘组合走「网站榜单」即可。
-  * 多渠道扩展: 新数据源只需继承 BaseSource 并在 pipeline.build_sources 注册。
+认证方式：
+  * rtV1 榜单匿名即可抓取；配置登录态 Cookie（config.yaml eastmoney.cookie 或
+    .env EASTMONEY_COOKIE）后随请求带上，可降低被 WAF 拦截的概率。
+  * rtV3/srtV1 需要 APP 会话令牌（ctToken/utToken/userId），由「账户中心」
+    扫码登录后写入 broker_accounts，pipeline 自动注入。
 """
 from __future__ import annotations
 
 import hashlib
 import json
 import random
-import re
 import string
 import time
 from datetime import date, datetime
@@ -57,13 +36,11 @@ from core.models import (
     ACTION_BUY,
     ACTION_SELL,
     Expert,
-    StockAggregate,
     TradeRecord,
 )
-from core.utils import MARKET_LIVE, MARKET_SIM, normalize_symbol, to_float, to_int
+from core.utils import MARKET_LIVE, normalize_symbol, to_float, to_int
 from .base import BaseSource
 
-SIM_URL = "https://simqry2.eastmoney.com/qry_tzzh_v2"
 LIVE_RANK_URL = "https://emdcspzhapi.dfcfs.cn/rtV1"
 SPZH_URL = "https://spzhapi.dfcfs.cn/rtV3"
 #: 关注/取消关注走 srtV1 GET（xcq-platform 2026-09-30 验证可用；deviceId 可空）
@@ -80,41 +57,10 @@ RANK_TYPES = {
     "10004": "总榜",
 }
 
-#: 高手操作明细单页条数（接口实测上限 100）
-DETAIL_PAGE_SIZE = 100
-#: 接口最多保留的记录数（totalCnt 恒为 1000）
-DETAIL_MAX_TOTAL = 1000
-
 #: mktCode -> 市场
 _MKT_CODE = {"1": "SH", "0": "SZ", "2": "BJ"}
 
-#: "09-11 15:00" 形态的成交时间
-_CJSJ_RE = re.compile(r"^(\d{2})-(\d{2})\s+(\d{2}):(\d{2})")
-
 SM4_KEY = bytes.fromhex("e4dd41fd138867c3665492702fe277eb")
-
-
-def parse_cjsj(cjsj: str, today: date | None = None) -> tuple[date, str] | None:
-    """把东财的 `"09-11 15:00"`（**不含年份**）解析为 (date, "YYYY-MM-DD HH:MM")。
-
-    年份推断：先用 today 的年份，若结果比 today 晚 90 天以上，判定为上一年的记录
-    （接口按时间倒序返回，遇到跨年时会同时出现 12-31 与 01-02）。
-    """
-    m = _CJSJ_RE.match((cjsj or "").strip())
-    if not m:
-        return None
-    today = today or date.today()
-    mm, dd, hh, mi = (int(x) for x in m.groups())
-    try:
-        day = date(today.year, mm, dd)
-    except ValueError:
-        return None
-    if (day - today).days > 90:
-        try:
-            day = date(today.year - 1, mm, dd)
-        except ValueError:
-            return None
-    return day, f"{day.isoformat()} {hh:02d}:{mi:02d}"
 
 
 def _normalize_action(mmbz: str) -> str:
@@ -129,15 +75,12 @@ def _normalize_action(mmbz: str) -> str:
 
 class EastmoneySource(BaseSource):
     name = "eastmoney"
-    supports_stock_rank = True
 
     def __init__(
         self,
         http: HttpClient,
         rank_type: str = "10005",
         rank_types: list[str] | None = None,
-        tiger_time_period: int = 1,
-        max_records: int = DETAIL_MAX_TOTAL,
         cookie: str = "",
         spzh_ct_token: str = "",
         spzh_ut_token: str = "",
@@ -152,8 +95,6 @@ class EastmoneySource(BaseSource):
         # 多榜合并抓取 [2026-10-19]: 默认 日榜(10005, 当日收益) + 总榜(10004, 累计收益)。
         # rtV1 的 rateForApp 语义跟随 rankType —— 日榜只有日收益, 累计收益必须靠总榜补。
         self.rank_types = [str(x) for x in (rank_types or [rank_type, "10004"])]
-        self.tiger_time_period = tiger_time_period
-        self.max_records = max_records
         # [2026-10-16] 登录态 Cookie（.env EASTMONEY_COOKIE / config.yaml eastmoney.cookie）。
         # 东财接口匿名可用，带 Cookie 只是降低 WAF 拦截概率；失效不影响匿名接口。
         self.cookie = cookie or ""
@@ -170,8 +111,6 @@ class EastmoneySource(BaseSource):
                    name=str(x.get("name") or ""))
             for x in (spzh_follow or []) if x.get("expert_id")
         ]
-        #: 操作明细分页缓存：resolve_trade_date 与 trades 共用，避免重复请求首页
-        self._detail_cache: dict[int, list] = {}
 
     @property
     def has_spzh_token(self) -> bool:
@@ -265,252 +204,19 @@ class EastmoneySource(BaseSource):
                         old.extra[k] = e.extra[k]
         return list(by_id.values())
 
-    # ── 2. 当日买入明细 ───────────────────────────────────
+    # ── 2. 当日买入明细（仅实盘 rtV3，2026-10-19 模拟盘通道已删除）──
     def trades(self, experts: list[Expert], trade_date: date) -> list[TradeRecord]:
         target = trade_date.strftime("%Y-%m-%d")
-        records = self._superior_trades(target)
+        records: list[TradeRecord] = []
         if self.has_spzh_token:
-            # [2026-09-28 修] rtV3 只对本账户关注的组合开放。以前 = 榜单 50 人 + 关注组合排在后面, 且只查前 50 个 →
-            # 关注组合永远被截掉; 榜单组合 (没关注) 第一个返回失败就 break → 盘中实盘记录恒为 0。
-            # 现在只查关注组合 (榜单组合查了也拿不到), 关注组合按 expert_id 用榜单上的完整信息
+            # [2026-09-28 修] rtV3 只对本账户关注的组合开放——只查关注组合，
+            # 榜单组合（没关注）查了也拿不到；关注组合按 expert_id 用榜单上的完整信息。
             by_id = {e.expert_id: e for e in experts}
             follow = [by_id.get(e.expert_id, e) for e in self.spzh_follow]
             records.extend(self._spzh_trades(follow, target))
+        else:
+            logger.warning("[东财] 无 APP 令牌，跳过 rtV3 实盘调仓明细——请到账户中心扫码登录")
         return records
-
-    def candidate_dates(self) -> dict[date, int]:
-        """扫描操作明细前几页，统计各成交日的记录数（记录按时间倒序）。"""
-        today = date.today()
-        hist: dict[date, int] = {}
-        for rec_idx in (1, 2, 3):
-            items = self._detail_page(rec_idx)
-            if not items:
-                break
-            for it in items:
-                parsed = parse_cjsj(str(it.get("cjsj") or ""), today)
-                if parsed:
-                    hist[parsed[0]] = hist.get(parsed[0], 0) + 1
-            if len(items) < DETAIL_PAGE_SIZE:
-                break
-        return hist
-
-    def _detail_page(self, rec_idx: int) -> list:
-        """取操作明细第 rec_idx 页（1-based），带实例级缓存。"""
-        if rec_idx in self._detail_cache:
-            return self._detail_cache[rec_idx]
-        data = self.http.get_json(
-            SIM_URL,
-            params={
-                "type": "spo_superior_detail",
-                "rankType": "30001",
-                "recIdx": rec_idx,
-                "recCnt": DETAIL_PAGE_SIZE,
-                "plat": 2,
-                "ver": "web20",
-            },
-            headers=self._headers(),
-        )
-        items = (data or {}).get("data") or []
-        if items:
-            self._detail_cache[rec_idx] = items
-        return items
-
-    def _superior_trades(self, target_date: str) -> list[TradeRecord]:
-        """高手操作明细：逐页拉取全站操作流水，筛出 target_date 的成交。
-
-        记录按时间倒序，一旦出现早于目标日的记录即可收尾（同一页内可能混有两日数据，
-        故收尾标记在整页处理完后才生效）。
-        """
-        out: list[TradeRecord] = []
-        rec_idx = 1
-        today = date.today()
-        pages = 0
-        while len(out) < self.max_records and pages < DETAIL_MAX_TOTAL // DETAIL_PAGE_SIZE:
-            items = self._detail_page(rec_idx)
-            if not items:
-                break
-            pages += 1
-            passed_target = False
-            for it in items:
-                parsed = parse_cjsj(str(it.get("cjsj") or ""), today)
-                if parsed is None:
-                    continue
-                day, stamp = parsed
-                ds = day.isoformat()
-                if ds < target_date:
-                    passed_target = True
-                    continue
-                if ds != target_date:
-                    continue
-                code = str(it.get("stkCode", ""))
-                mkt = str(it.get("mktCode", ""))
-                out.append(
-                    TradeRecord(
-                        source=self.name,
-                        channel="东财组合高手操作",
-                        expert_id=str(it.get("zjzh", "")),
-                        expert_name=str(it.get("zuheName", "")),
-                        owner=str(it.get("zuheName", "")),
-                        stock_code=code,
-                        stock_name=str(it.get("stkName", "")),
-                        market=_MKT_CODE.get(mkt) or (normalize_symbol(code)[1] or ""),
-                        action=_normalize_action(it.get("mmbz")),
-                        price=to_float(it.get("price")),
-                        weight_before=to_float(it.get("holdPosBef")),
-                        weight_after=to_float(it.get("holdPosAft")),
-                        return_rate=to_float(it.get("zsyl")),
-                        day_return_rate=to_float(it.get("syl_dr")),
-                        trade_time=stamp,
-                        trade_date=ds,
-                        market_type=MARKET_SIM,  # spo_* 全站流水即模拟盘 [2026-09-23 打标]
-                        raw=it,
-                    )
-                )
-            if passed_target or len(items) < DETAIL_PAGE_SIZE:
-                break
-            rec_idx += 1
-        logger.info(
-            f"[东财] 当日({target_date})高手操作明细 {len(out)} 条"
-            f"（扫描 {pages} 页 / {pages * DETAIL_PAGE_SIZE} 条流水）"
-        )
-        return out
-
-    # ── 3. 站点自带聚合买入榜（无高手身份）────────────────────
-    def hot_buy_stocks(self, limit: int = 50) -> list[StockAggregate]:
-        """站点自带的「股票买入热度榜」：只有股票 + 买入高手数，**不含名单**。
-
-        仅作热度交叉验证；主视图请使用 `trades()` 产出的「组合名 + 收益率 + 股票」明细。
-        """
-        data = self.http.get_json(
-            SIM_URL,
-            params={
-                "type": "spo_rank_tiger",
-                "rankType": 30001,
-                "timePeriod": self.tiger_time_period,
-                "recIdx": 1,
-                "recCnt": limit,
-                "plat": 2,
-                "ver": "web20",
-            },
-            headers=self._headers(),
-        )
-        items = (data or {}).get("data") or []
-        today = datetime.now().strftime("%Y-%m-%d")
-        return [
-            StockAggregate(
-                stock_code=str(it.get("stkCode", "")),
-                stock_name=str(it.get("stkName", "")),
-                buy_experts=to_int(it.get("zuheBuyIn")),
-                buy_records=to_int(it.get("zuheBuyIn")),
-                sources=["eastmoney:股票买入热度榜"],
-                avg_price=to_float(it.get("avgBuyPrice")),
-                latest_time=today,
-                note="站点全量聚合口径，不含买入高手名单",
-            )
-            for it in items
-        ]
-
-    # ── 4.5 单组合调仓全历史（2026-09-23 实测匿名可用，方案 P1）──
-    def portfolio_history(
-        self, zjzh: str, since: str = "", max_pages: int = 100
-    ) -> list[TradeRecord]:
-        """翻页拉取单个**模拟盘**组合的全部调仓记录。
-
-        接口 ``spo_hldchg_detail``（web 版组合详情页同款）：
-          GET simqry2.../qry_tzzh_v2?type=spo_hldchg_detail&plat=2&ver=web20&zjzh=...&recIdx=N&recCnt=100
-        返回字段：cjsj(完整 "2026-09-23 15:00") / cjjg(成交价) / mmbz("买"/"卖" 单字) /
-        stkCode / stkName / fullcode / holdPosBef / holdPosAft。响应带 totalCnt 总数。
-
-        ⚠️ zjzh 必须是模拟盘组合号（1000… 长号）；实盘组合号（9 开头短号）会报
-        "组合号错误"——实盘明细只能走 rtV3（需 APP 令牌）。
-        since: "YYYY-MM-DD"，遇到早于该日的记录即停止翻页；空 = 拉到接口尽头。
-        max_pages: 翻页上限兜底（100 页 × 100 条 = 1 万条，覆盖绝大多数组合全历史）。
-        """
-        out: list[TradeRecord] = []
-        page_size = 100
-        page = 1  # ⚠️ recIdx 是「页码」而非记录偏移（实测 recCnt=3 时 recIdx=201 返回第 603 条附近的记录）
-        total_cnt: int | None = None
-        pages_fetched = 0
-        while page <= max_pages:
-            data = self.http.get_json(
-                SIM_URL,
-                params={
-                    "type": "spo_hldchg_detail",
-                    "plat": 2,
-                    "ver": "web20",
-                    "zjzh": zjzh,
-                    "recIdx": page,
-                    "recCnt": page_size,
-                },
-                headers=self._headers(),
-            )
-            items = (data or {}).get("data") or []
-            if total_cnt is None:
-                try:
-                    total_cnt = int((data or {}).get("totalCnt") or 0)
-                except (TypeError, ValueError):
-                    total_cnt = None
-            if not items:
-                break
-            pages_fetched += 1
-            stop = False
-            for it in items:
-                cjsj = str(it.get("cjsj") or "")  # "2026-09-23 15:00" 完整含年份
-                day = cjsj[:10]
-                if since and day and day < since:
-                    stop = True
-                    continue
-                code = str(it.get("stkCode", ""))
-                out.append(
-                    TradeRecord(
-                        source=self.name,
-                        channel="东财组合调仓历史",
-                        expert_id=zjzh,
-                        expert_name="",  # 本接口不带组合名，由调用方用组合基础信息补
-                        owner="",
-                        stock_code=code,
-                        stock_name=str(it.get("stkName", "")),
-                        market=_MKT_CODE.get(str(it.get("mktCode", ""))) or (normalize_symbol(code)[1] or ""),
-                        action=_normalize_action(it.get("mmbz")),
-                        price=to_float(it.get("cjjg") or it.get("cjjg2")),
-                        weight_before=to_float(it.get("holdPosBef")),
-                        weight_after=to_float(it.get("holdPosAft")),
-                        trade_time=cjsj,
-                        trade_date=day,
-                        market_type=MARKET_SIM,  # spo_* 网关仅覆盖模拟盘组合
-                        raw=it,
-                    )
-                )
-            if stop or len(items) < page_size:
-                break
-            page += 1
-        logger.info(
-            f"[东财] 组合 {zjzh} 调仓历史 {len(out)} 条"
-            f"（接口 totalCnt={total_cnt}，抓取 {pages_fetched} 页）"
-        )
-        return out
-
-    def portfolio_basic(self, zjzh: str) -> dict:
-        """组合基础信息（名称/管理人/累计收益等），spo_zuhe_detail_basic。
-
-        匿名可用（实测 2026-09-23，仅限模拟盘组合号）；失败返回 {} 不阻塞主流程。
-        """
-        try:
-            data = self.http.get_json(
-                SIM_URL,
-                params={
-                    "type": "spo_zuhe_detail_basic",
-                    "plat": 2,
-                    "ver": "web20",
-                    "zjzh": zjzh,
-                },
-                headers=self._headers(),
-            )
-            items = (data or {}).get("data") or []
-            return items[0] if isinstance(items, list) and items else (items or {})
-        except Exception as exc:
-            logger.warning(f"[东财] 组合基础信息获取失败 {zjzh}：{exc}")
-            return {}
 
     # ── 4.6 东财账号关注关系（关注列表 / 关注 / 取消关注，需 APP 令牌）──
     #

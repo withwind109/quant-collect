@@ -1,21 +1,20 @@
-"""高手评估页 API（原「社区高手」页重构：分渠道数据爬取 + 高手能力评估）。
+"""高手评估页 API（仅东财实盘链路——模拟盘爬取通道已于 2026-10-19 整体删除）。
 
 GET  /api/expert-crawl/dates               可用交易日
-GET  /api/expert-crawl/channels            分渠道数据状态（各源凭证/最新日/条数）
-GET  /api/expert-crawl/status              任务状态（crawl/history/bulk_history/expert_eval/…）
+GET  /api/expert-crawl/channels            渠道数据状态（凭证/最新日/条数）
+GET  /api/expert-crawl/status              任务状态（crawl/expert_eval/backtest/…）
 GET  /api/expert-crawl/log                 任务日志尾部
-POST /api/expert-crawl/run                 触发爬取（子进程，东财 Cookie 认证）
-POST /api/expert-crawl/history             单组合调仓历史回补
-POST /api/expert-crawl/bulk-history        批量回补（强制 curl 轻量后端）
-GET  /api/expert-crawl/history-file        单组合已回补的历史记录
+POST /api/expert-crawl/run                 触发爬取（子进程，东财实盘 rtV1+rtV3）
+GET  /api/expert-crawl/live-experts        实盘高手榜（本地 crawl_expert live 前50）
+POST /api/expert-crawl/live-experts/refresh 手动刷新榜单（直拉东财 rtV1 单榜落库）
 GET  /api/expert-crawl/watchlist           关注列表（本地，market_type=live 与东财同步）
 POST /api/expert-crawl/watchlist           加关注（live=代你在东财账号关注）
 DELETE /api/expert-crawl/watchlist/{id}    取消关注（live=同步取消东财关注）
 POST /api/expert-crawl/watchlist/sync      同步东财账号已关注名单到本地
 POST /api/expert-crawl/watchlist/fetch-detail  拉取关注组合最近调仓明细（rtV3→crawl_trade）
-GET  /api/expert-crawl/sources             数据源选项（前端 chips）
+GET  /api/expert-crawl/sources             数据源选项
 GET  /api/expert-crawl/evaluation          最新一次能力评估结果（rows+meta+bench）
-POST /api/expert-crawl/evaluation/run      触发能力评估（后台子进程）
+POST /api/expert-crawl/evaluation/run      触发能力评估（后台子进程，仅实盘）
 GET  /api/expert-crawl/evaluation/detail   单高手明细（净值曲线+成交+指标，现算）
 """
 
@@ -27,17 +26,16 @@ from typing import Any, Dict, List
 from fastapi import APIRouter, HTTPException, Query
 from pydantic import BaseModel
 
-from paths import CRAWL_DATA_DIR, DATA_DIR, DB_PATH
+from paths import CRAWL_DATA_DIR, DB_PATH
 from web import jobs
 
 router = APIRouter(prefix="/api/expert-crawl", tags=["expert-crawl"])
 
-SOURCE_CHOICES = ["eastmoney", "tonghuashun", "xueqiu", "alipay"]
-SOURCE_LABELS = {"eastmoney": "东财", "xueqiu": "雪球",
-                 "tonghuashun": "同花顺", "alipay": "支付宝"}
+SOURCE_CHOICES = ["eastmoney"]
+SOURCE_LABELS = {"eastmoney": "东财"}
 
 #: 全部后台任务名（状态文件 logs/job_<name>.json）；策略页的回测/净值更新/体检也走这套
-_JOB_NAMES = ("crawl", "history", "bulk_history", "expert_eval", "backtest", "paper_update", "health")
+_JOB_NAMES = ("crawl", "expert_eval", "backtest", "paper_update", "health")
 
 
 # ── 数据读取 ─────────────────────────────────────────────────────────────────
@@ -84,10 +82,7 @@ async def channels() -> Dict[str, Any]:
     try:
         from settings import DEFAULT_CONFIG, load_settings
         s = load_settings(DEFAULT_CONFIG)
-        cred = {"eastmoney": "cookie" if s["eastmoney"].get("cookie") else "none",
-                "xueqiu": "cookie" if s["xueqiu"].get("cookie") else "none",
-                "tonghuashun": "cookie" if s["tonghuashun"].get("cookie") else "none",
-                "alipay": "endpoint" if s["alipay"].get("rank_url") else "none"}
+        cred = {"eastmoney": "cookie" if s["eastmoney"].get("cookie") else "none"}
     except Exception:  # noqa: BLE001  设置读取失败不阻塞页面
         pass
 
@@ -111,12 +106,12 @@ async def channels() -> Dict[str, Any]:
 
 @router.get("/status")
 async def status() -> Dict[str, Any]:
-    """全部后台任务状态（crawl/history/bulk_history/expert_eval/backtest/paper_update/health）。"""
+    """全部后台任务状态（crawl/expert_eval/backtest/paper_update/health）。"""
     return {name: jobs.job_view(name, include_log=False) for name in _JOB_NAMES}
 
 
 @router.get("/log")
-async def log(job: str = Query("crawl", pattern="^(crawl|history|bulk_history|expert_eval|backtest|paper_update|health)$")) -> Dict[str, Any]:
+async def log(job: str = Query("crawl", pattern="^(crawl|expert_eval|backtest|paper_update|health)$")) -> Dict[str, Any]:
     return {"job": job, "log_tail": jobs.read_log_tail(job)}
 
 
@@ -139,63 +134,6 @@ async def run(body: RunBody) -> Dict[str, Any]:
     except jobs.JobBusy as exc:
         raise HTTPException(409, str(exc)) from exc
     return {"ok": True, "msg": "爬取已启动", "args": names}
-
-
-class HistoryBody(BaseModel):
-    zjzh: str
-    since: str = ""
-
-
-@router.post("/history")
-async def history(body: HistoryBody) -> Dict[str, Any]:
-    zjzh = body.zjzh.strip()
-    if not zjzh:
-        raise HTTPException(400, "请输入组合号")
-    argv = ["-m", "cli", "history", "--zjzh", zjzh]
-    if body.since.strip():
-        argv += ["--since", body.since.strip()]
-    try:
-        jobs.start_job("history", argv)
-    except jobs.JobBusy as exc:
-        raise HTTPException(409, str(exc)) from exc
-    return {"ok": True, "msg": "回补已启动", "zjzh": zjzh}
-
-
-class BulkBody(BaseModel):
-    limit: int = 0
-    since: str = "2025-12-01"
-
-
-@router.post("/bulk-history")
-async def bulk_history(body: BulkBody) -> Dict[str, Any]:
-    argv = ["-m", "cli", "bulk-history", "--limit", str(body.limit), "--since", body.since]
-    try:
-        jobs.start_job("bulk_history", argv)
-    except jobs.JobBusy as exc:
-        raise HTTPException(409, str(exc)) from exc
-    return {"ok": True, "msg": "批量回补已启动", "limit": body.limit}
-
-
-@router.get("/history-file")
-async def history_file(zjzh: str = Query("")) -> Dict[str, Any]:
-    if not zjzh.strip():
-        raise HTTPException(400, "缺少组合号")
-    fp = DATA_DIR / "history" / f"{zjzh.strip()}.json"
-    if not fp.exists():
-        return {"zjzh": zjzh, "exists": False, "records": []}
-    try:
-        d = json.loads(fp.read_text(encoding="utf-8"))
-    except (OSError, ValueError):
-        return {"zjzh": zjzh, "exists": False, "records": []}
-    recs = d.get("records") or []
-    return {"zjzh": zjzh, "exists": True, "name": d.get("name") or zjzh,
-            "fetched_at": d.get("fetched_at"), "n": len(recs),
-            "records": [{"trade_date": r.get("trade_date"),
-                         "trade_time": (r.get("trade_time") or "")[-8:],
-                         "stock_code": r.get("stock_code"), "stock_name": r.get("stock_name") or "",
-                         "action": r.get("action"), "price": r.get("price"),
-                         "weight_before": r.get("weight_before"),
-                         "weight_after": r.get("weight_after")} for r in recs[:500]]}
 
 
 # ── 关注管理（与东财账号关注关系双向同步） ───────────────────────────────────
@@ -554,7 +492,6 @@ async def live_experts_refresh(body: BoardRefreshBody) -> Dict[str, Any]:
 # ── 高手能力评估 ─────────────────────────────────────────────────────────────
 
 class EvalBody(BaseModel):
-    env: str = "sim"
     start: str = ""
     end: str = ""
     min_sells: int = 3
@@ -577,8 +514,8 @@ async def evaluation() -> Dict[str, Any]:
 
 @router.post("/evaluation/run")
 async def evaluation_run(body: EvalBody) -> Dict[str, Any]:
-    env = body.env if body.env in ("sim", "live") else "sim"
-    argv = ["-m", "strategy.expert_eval", "--env", env,
+    """触发能力评估——仅实盘（模拟盘通道已删除，env 参数一并移除）。"""
+    argv = ["-m", "strategy.expert_eval",
             "--min-sells", str(max(1, body.min_sells)), "--min-days", str(max(1, body.min_days))]
     if body.start.strip():
         argv += ["--start", body.start.strip()]
@@ -588,15 +525,15 @@ async def evaluation_run(body: EvalBody) -> Dict[str, Any]:
         jobs.start_job("expert_eval", argv)
     except jobs.JobBusy as exc:
         raise HTTPException(409, str(exc)) from exc
-    return {"ok": True, "msg": "评估已启动", "env": env}
+    return {"ok": True, "msg": "评估已启动", "env": "live"}
 
 
 @router.get("/evaluation/detail")
-async def evaluation_detail(expert_id: str = Query(""), env: str = Query("sim")) -> Dict[str, Any]:
+async def evaluation_detail(expert_id: str = Query(""), env: str = Query("live")) -> Dict[str, Any]:
     if not expert_id.strip():
         raise HTTPException(400, "缺少高手ID")
     from strategy import expert_eval as EE
-    d = EE.expert_detail(expert_id.strip(), env=env if env in ("sim", "live") else "sim")
+    d = EE.expert_detail(expert_id.strip(), env="live")
     if not d.get("ok"):
         raise HTTPException(404, d.get("msg") or "无法评估该高手")
     return d

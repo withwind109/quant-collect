@@ -1,0 +1,81 @@
+{
+ "run_id": "20261019_161215",
+ "generated_at": "2026-10-19T16:12:15",
+ "params": {
+  "env": "live",
+  "start": "",
+  "end": "",
+  "min_sells": 3,
+  "min_days": 20,
+  "capital": 1000000.0
+ },
+ "meta": {
+  "n_experts": 1,
+  "n_sample_ok": 0,
+  "n_codes": 17,
+  "n_codes_with_price": 12,
+  "data_range": [
+   "2026-09-09",
+   "2026-10-13"
+  ],
+  "trading_days": 19,
+  "bench_code": "000300.SH",
+  "bench_available": true,
+  "msg": ""
+ },
+ "bench": {
+  "2026-09-09": 4572.6,
+  "2026-09-10": 4548.39,
+  "2026-09-11": 4510.15,
+  "2026-09-14": 4480.08,
+  "2026-09-15": 4450.04,
+  "2026-09-16": 4480.27,
+  "2026-09-17": 4460.16,
+  "2026-09-18": 4507.39,
+  "2026-09-21": 4539.56,
+  "2026-09-22": 4544.59,
+  "2026-09-23": 4517.28,
+  "2026-09-24": 4439.14,
+  "2026-09-28": 4340.76,
+  "2026-09-29": 4345.21,
+  "2026-09-30": 4357.62,
+  "2026-10-08": 4310.28,
+  "2026-10-09": 4317.26,
+  "2026-10-12": 4287.98,
+  "2026-10-13": 4275.68
+ },
+ "rows": [
+  {
+   "expert_id": "900018468",
+   "name": "股友Qz1LRU",
+   "source": "eastmoney",
+   "market_type": "live",
+   "sample_ok": false,
+   "score": null,
+   "total_return_pct": -11.09,
+   "annualized_pct": -71.7,
+   "sharpe": -7.72,
+   "sortino": -7.42,
+   "max_drawdown_pct": 13.16,
+   "calmar": -5.45,
+   "win_rate_pct": null,
+   "profit_factor": null,
+   "avg_win_pct": null,
+   "avg_loss_pct": null,
+   "excess_pct": -4.6,
+   "alpha_pct": null,
+   "beta": null,
+   "alpha_t": null,
+   "n_buy": 13,
+   "n_sell": 0,
+   "trading_days": 19,
+   "calendar_days": 34,
+   "final_nav": 889077.56,
+   "first_date": "2026-09-09",
+   "last_date": "2026-10-13",
+   "fees": 801.97,
+   "skipped_limitup": 0,
+   "rank": 1
+  }
+ ]
+}

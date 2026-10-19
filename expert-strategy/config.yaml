@@ -1,6 +1,7 @@
 # =============================================================================
-# expert-platform · 采集参数配置（敏感凭据请放 .env，不要写在这里）
-# 迁移自 xcq-platform/experts_crawl（2026-10-16）
+# expert-strategy · 采集参数配置（敏感凭据请放 .env，不要写在这里）
+# 2026-10-19 起仅保留东财实盘链路——模拟盘渠道（东财 spo_* / 雪球 / 同花顺）
+# 已整体删除，任何链路都不会再爬到模拟盘数据。
 # =============================================================================
 
 http:
@@ -8,46 +9,23 @@ http:
   timeout: 20
   proxy: ""              # 需要代理时填写，如 http://127.0.0.1:7890（或用 .env HTTP_PROXY）
 
-# ── 东方财富（主数据源, Cookie 认证）────────────────────────────────────────
+# ── 东方财富（唯一数据源，仅实盘）──────────────────────────────────────────
 eastmoney:
-  # 登录态 Cookie（.env 的 EASTMONEY_COOKIE 会覆盖这里）。
-  # 不再使用扫码登录: 浏览器登录后复制完整 Cookie 字符串即可。
+  # 登录态 Cookie（.env 的 EASTMONEY_COOKIE 会覆盖这里）。匿名也可抓 rtV1 榜单，
+  # 带 Cookie 只是降低 WAF 拦截概率；rtV3 实盘调仓明细走账户中心 APP 令牌。
   cookie: ""
   rank_type: "10005"     # 实盘主榜：10005日榜 / 10000周榜 / 10001月榜 / 10003年榜 / 10004总榜
   rank_types: ["10005", "10004"]  # 多榜合并：日榜给当日收益，总榜补累计收益（rateForApp 语义跟榜走）
-  tiger_time_period: 1   # 组合买入热度榜周期：1=当日
-  max_records: 1000      # 高手操作明细最多保留条数（接口 totalCnt 上限 1000）
   # 实盘组合常驻扫描名单（rtV3 只对本账户关注的组合开放；令牌来自账户中心）。
   # 与关注列表（watchlist live 条目）合并去重后逐个拉取实盘调仓明细。
   spzh_follow:
     - expert_id: "900407488"
       name: "凡人炒股"
 
-# ── 雪球（可选）─────────────────────────────────────────────────────────────
-xueqiu:
-  category: 14           # 14 = 热门组合榜（实测唯一可用分类，totalCount 恒为 100 / maxPage=5）
-  max_pages: 5           # 拉取页数：每页 20 个组合，5 页 = 全部 100 个组合
-  # 只对「updated_at 落在目标交易日」的组合请求调仓历史，避免 100 × N 次无效请求
-  cookie: ""             # 建议用 .env 的 XUEQIU_COOKIE 覆盖
-
-# ── 同花顺（可选）───────────────────────────────────────────────────────────
-tonghuashun:
-  # 同花顺模拟炒股：A股高手模拟盘（持仓+买卖+收益率排行），数据服务端渲染 HTML
-  # 鉴权：同花顺 WAF 需 hexin-v 令牌（可从登录 Cookie 的 v= 字段取）；未登录仅能试榜单，交易明细需登录态
-  cookie: ""          # 建议用 .env 的 THS_COOKIE 覆盖（浏览器登录 moni.10jqka.com.cn 后复制完整 Cookie）
-  hexin_v: ""         # 建议用 .env 的 THS_HEXIN_V 覆盖（Cookie 中 v= 的值）
-
-# ── 支付宝（可选, 抓包就绪骨架）────────────────────────────────────────────
-alipay:
-  rank_url: ""        # 实盘高手榜 JSON 接口（含收益率/粉丝等）
-  trade_url: ""       # 单个高手持仓/申购明细 JSON 接口（留 {uid} 占位符）
-  cookie: ""          # 建议用 .env 的 ALIPAY_COOKIE 覆盖
-
-# ── 无头浏览器抓取后端（Playwright/Chromium 拟人化反爬，2026-10-16 启用）──────
+# ── 无头浏览器抓取后端（Playwright/Chromium 拟人化反爬）──────────────────────
 # enabled=true 时优先用浏览器拟人化抓取，失败自动回退 curl_cffi。
 # 首次使用需: pip install playwright && python -m playwright install chromium
 # headless=false 可调试（需桌面环境）。
-# 注意: history/bulk_history 批量回补不受此项影响（强制 curl 轻量后端）。
 browser:
   enabled: true
   headless: true

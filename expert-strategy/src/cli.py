@@ -6,12 +6,12 @@ from pathlib import Path
 
 import click
 
-from paths import CRAWL_DATA_DIR, DATA_DIR
+from paths import CRAWL_DATA_DIR
 from pipeline import build_sources, run
 from settings import DEFAULT_CONFIG, load_settings, sqlite_path
 
-SOURCE_CHOICES = ["xueqiu", "eastmoney", "tonghuashun", "alipay"]
-DEFAULT_SOURCES = "eastmoney,tonghuashun"
+SOURCE_CHOICES = ["eastmoney"]
+DEFAULT_SOURCES = "eastmoney"
 
 
 def _parse_date(value: str) -> date | None:
@@ -56,56 +56,17 @@ def crawl(sources: str, date_str: str, top: int, out_dir: str | None, fmt: str |
 @cli.command()
 @click.option("--config", "config_path", default=None, help="配置文件路径")
 def check(config_path: str | None) -> None:
-    """自检：凭据状态与各源接口连通性。"""
+    """自检：凭据状态与东财实盘接口连通性。"""
     settings = load_settings(Path(config_path) if config_path else DEFAULT_CONFIG)
     click.echo("── 凭据状态 ──")
     click.echo(f"  东财登录 Cookie: {'已配置' if settings['eastmoney'].get('cookie') else '未配置（匿名抓取, 可能被 WAF 拦截）'}")
-    click.echo(f"  雪球登录 Cookie: {'已配置' if settings['xueqiu'].get('cookie') else '未配置（调仓明细不可用）'}")
-    click.echo(
-        "  同花顺登录: "
-        + ("已配置" if settings["tonghuashun"].get("cookie") else "未配置（榜单可试匿名，交易明细需登录）")
-    )
-    click.echo(
-        "  支付宝实盘端点: "
-        + ("已配置" if settings["alipay"].get("rank_url") else "未配置（需用户提供抓包端点，详见 alipay 源注释）")
-    )
+    click.echo(f"  东财 APP 令牌: {'已配置' if (settings['eastmoney'].get('spzh_ct_token') and settings['eastmoney'].get('spzh_ut_token')) else '未配置（账户中心扫码后自动注入）'}")
 
     click.echo("── 接口连通性 ──")
     clients = build_sources(settings)
     for name in SOURCE_CHOICES:
         ok, msg = clients[name].healthcheck()
         click.echo(f"  [{'OK' if ok else 'FAIL'}] {name}: {msg}")
-
-
-@cli.command()
-@click.option("--zjzh", required=True, help="模拟盘组合号（1000… 长号）")
-@click.option("--since", default="", help="只回补该日（含）之后的记录 YYYY-MM-DD；空=全历史")
-@click.option("--out", "out_dir", default=None, help="输出目录，默认取配置 output.dir")
-@click.option("--config", "config_path", default=None, help="配置文件路径")
-def history(zjzh: str, since: str, out_dir: str | None, config_path: str | None) -> None:
-    """回补单个高手的全部历史调仓（写入 data/history/<zjzh>.json）。"""
-    from history import run_history
-
-    settings = load_settings(Path(config_path) if config_path else DEFAULT_CONFIG)
-    out_path = Path(out_dir) if out_dir else DATA_DIR
-    summary = run_history(settings, zjzh.strip(), since=since.strip(), out_dir=out_path)
-    click.echo("── 历史回补摘要 ──")
-    for key, value in summary.items():
-        click.echo(f"  {key}: {value}")
-
-
-@cli.command("bulk-history")
-@click.option("--since", default="2025-12-01", show_default=True, help="回补起点 YYYY-MM-DD")
-@click.option("--limit", type=int, default=0, help="只跑前 N 个(调试)")
-@click.option("--max-fail", type=int, default=25, help="连续失败这么多次就停(疑似限流)")
-@click.option("--incremental", is_flag=True, help="已有文件只补最近几天")
-@click.option("--config", "config_path", default=None, help="配置文件路径")
-def bulk_history(since: str, limit: int, max_fail: int, incremental: bool, config_path: str | None) -> None:
-    """批量回补高手组合调仓历史（data/history_bulk/，供跟随策略回测使用）。"""
-    from bulk_history import main as _main
-
-    _main(since=since, limit=limit, max_fail=max_fail, incremental=incremental,
-          config_path=Path(config_path) if config_path else None)
 
 
 @cli.command("prices")
@@ -227,16 +188,15 @@ def strategy_health() -> None:
 
 
 @cli.command("expert-eval")
-@click.option("--env", default="sim", show_default=True, help="sim=模拟盘流水+批量回补；live=实盘 rtV3 流水")
 @click.option("--start", default="", help="评估起点 YYYY-MM-DD，空=数据最早日")
 @click.option("--end", default="", help="评估截止 YYYY-MM-DD，空=数据最晚日")
 @click.option("--min-sells", type=int, default=3, show_default=True, help="样本充足的卖出笔数门槛")
 @click.option("--min-days", type=int, default=20, show_default=True, help="样本充足的覆盖交易日门槛")
-def expert_eval(env: str, start: str, end: str, min_sells: int, min_days: int) -> None:
-    """高手能力评估：逐高手镜像回测（夏普/索提诺/最大回撤/年化/胜率…），结果写 data/eval/。"""
+def expert_eval(start: str, end: str, min_sells: int, min_days: int) -> None:
+    """高手能力评估（仅实盘 rtV3 流水）：逐高手镜像回测，结果写 data/eval/。"""
     from strategy import expert_eval as EE
 
-    out = EE.evaluate(env=env, start=start, end=end, min_sells=min_sells, min_days=min_days)
+    out = EE.evaluate(env="live", start=start, end=end, min_sells=min_sells, min_days=min_days)
     meta = out["meta"]
     click.echo(f"run_id={out['run_id']} 入榜 {meta.get('n_experts')} 位，样本充足 {meta.get('n_sample_ok')} 位")
     for r in out["rows"][:10]:

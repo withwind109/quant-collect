@@ -1,27 +1,27 @@
-/* 高手评估页（#/experts）—— 2026-10-19 重构：分渠道数据爬取 + 高手能力评估。
-   替代原「按日期浏览」视图（高手买入/高手榜/成交明细/个股聚合/热度榜/信号 6 个子 tab 已删除）。
-   能力评估口径见 src/strategy/expert_eval.py（与 follow_backtest 同一套交易成本）。 */
+/* 高手评估页（#/experts）—— 2026-10-19 重构：渠道tab + 实盘高手榜(手动加载) +
+   关注列表 + 高手能力评估 + 分渠道爬取。仅实盘链路（模拟盘爬取通道已整体删除，
+   评估数据环境固定 live）。能力评估口径见 src/strategy/expert_eval.py。 */
 (function () {
   'use strict';
   var EP = window.EP;
   var S = {
     channel: 'eastmoney',  // 当前渠道 tab（其余渠道暂未接入）
     sources: ['eastmoney'],
-    env: 'sim',
+    env: 'live',           // 评估数据环境：仅实盘（模拟盘通道已删除）
     minSells: 3,
     sampleOnly: true,
     eval: null,        // 最新一次评估结果（/evaluation）
     wl: {},            // expert_id -> {name,note,created_at,__mt}
     chart: null        // 明细抽屉的 ECharts 实例
   };
-  var SRC_LABELS = { eastmoney: '东财', tonghuashun: '同花顺', xueqiu: '雪球', alipay: '支付宝' };
+  var SRC_LABELS = { eastmoney: '东财' };
   var CHANNELS = [
     { s: 'eastmoney', ok: true },
     { s: 'tonghuashun', ok: false },
     { s: 'xueqiu', ok: false },
     { s: 'alipay', ok: false }
   ];
-  var LOG_JOBS = [['crawl', '爬取'], ['bulk_history', '批量回补'], ['expert_eval', '能力评估'], ['history', '单组合回补']];
+  var LOG_JOBS = [['crawl', '爬取'], ['expert_eval', '能力评估']];
 
   /* ═══════════ 渠道 tab（仅东财可点，其余置灰） ═══════════ */
 
@@ -190,29 +190,15 @@
   }
 
   function crawlPanel() {
-    return '<div class="card"><h3>④ 分渠道数据爬取 <span class="hint" style="font-weight:400">（当前渠道：' + SRC_LABELS[S.channel] + '）</span></h3>' +
-      '<div class="card-sub">按渠道抓取高手操作流水（请求经无头浏览器通道发出），数据落本地 SQLite（data/experts.db）。' +
-      '东财<b>实盘</b>明细需要登录态——请先到右上角<a href="#/accounts" onclick="EP.go(\'accounts\');return false" style="font-weight:600">🏦 账户中心</a>扫码登录。</div>' +
+    return '<div class="card"><h3>④ 分渠道数据爬取 <span class="hint" style="font-weight:400">（当前渠道：' + SRC_LABELS[S.channel] + ' · 仅实盘）</span></h3>' +
+      '<div class="card-sub">按渠道抓取高手榜单与调仓流水（请求经无头浏览器通道发出），数据落本地 SQLite（data/experts.db）。' +
+      '<b>实盘</b>调仓明细需要登录态——请先到右上角<a href="#/accounts" onclick="EP.go(\'accounts\');return false" style="font-weight:600">🏦 账户中心</a>扫码登录（rtV3 仅对关注者开放）。</div>' +
       '<div class="card-grid" id="ec-channels"></div>' +
       '<div class="row" style="margin-top:12px">' +
       '<div class="field"><label>交易日（空=自动推断）</label><input class="input" id="ec-date" placeholder="YYYY-MM-DD" style="min-width:130px"></div>' +
       '<div class="field"><label>每榜数量</label><input class="input num" id="ec-top" value="50" style="min-width:90px"></div>' +
       '<div class="field"><label>&nbsp;</label><button class="btn primary" id="ec-run">▶ 开始爬取</button></div>' +
       '</div><div id="ec-jobs"></div><div id="ec-log"></div></div>';
-  }
-
-  function backfillPanel() {
-    return '<div class="card"><h3>⑤ 调仓历史回补 <span class="hint" style="font-weight:400">（能力评估的数据基础：单日流水只能看最近一天，回补才能算夏普/回撤）</span></h3>' +
-      '<div class="row">' +
-      '<div class="field"><label>模拟盘组合号（1000… 长号）</label><input class="input" id="eh-zjzh" placeholder="1000…" style="min-width:220px"></div>' +
-      '<div class="field"><label>起始日（空=全部）</label><input class="input" id="eh-since" placeholder="YYYY-MM-DD" style="min-width:130px"></div>' +
-      '<div class="field"><label>&nbsp;</label><button class="btn" id="eh-run">回补</button>' +
-      '<button class="btn" id="eh-view" style="margin-left:6px">查看已回补记录</button></div>' +
-      '</div><div id="eh-result"></div>' +
-      '<div class="row" style="margin-top:10px">' +
-      '<div class="field"><label>批量回补：只跑前 N 个（0=全部）</label><input class="input num" id="eh-limit" value="20" style="min-width:90px"></div>' +
-      '<div class="field"><label>&nbsp;</label><button class="btn" id="eh-bulk">批量回补</button></div>' +
-      '<span class="hint" id="eh-bulk-count"></span></div></div>';
   }
 
   /* ── ② 关注列表（东财实盘，与东财账号关注关系双向同步）── */
@@ -336,7 +322,7 @@
 
   function bindJobs(root) {
     EP.jobPanel(root.querySelector('#ec-jobs'), '/api/expert-crawl/status',
-      ['crawl', 'bulk_history', 'expert_eval'], ['爬取', '批量回补', '能力评估']);
+      ['crawl', 'expert_eval'], ['爬取', '能力评估']);
     // 日志：可按任务切换
     var sel = '<div class="row" style="margin-top:8px"><div class="field"><label>任务日志</label><select class="select" id="ec-log-job">' +
       LOG_JOBS.map(function (j) { return '<option value="' + j[0] + '">' + j[1] + '</option>'; }).join('') +
@@ -355,56 +341,12 @@
     loadLog();
   }
 
-  function bindBackfill(root) {
-    root.querySelector('#eh-run').onclick = function () {
-      var z = root.querySelector('#eh-zjzh').value.trim();
-      if (!z) { EP.toast('请输入组合号', 'error'); return; }
-      EP.api('/api/expert-crawl/history', { method: 'POST',
-        body: { zjzh: z, since: root.querySelector('#eh-since').value.trim() } })
-        .then(function () { EP.toast('回补已启动'); bindJobs(root); })
-        .catch(function (e) { EP.toast(e.message, 'error'); });
-    };
-    root.querySelector('#eh-view').onclick = function () {
-      var z = root.querySelector('#eh-zjzh').value.trim();
-      if (!z) { EP.toast('请输入组合号', 'error'); return; }
-      var box = root.querySelector('#eh-result');
-      box.innerHTML = '<div class="hint">加载中…</div>';
-      EP.api('/api/expert-crawl/history-file?zjzh=' + encodeURIComponent(z)).then(function (d) {
-        if (!d.exists || !d.records.length) { box.innerHTML = '<div class="hint">（尚未回补或无记录）</div>'; return; }
-        box.innerHTML = '<div class="hint">' + EP.fmt.esc(d.name || z) + ' · ' + d.n + ' 条 · 回补于 ' +
-          EP.fmt.ts(d.fetched_at) + '</div><div id="eh-table"></div>';
-        EP.table(box.querySelector('#eh-table'), d.records, [
-          { key: 'trade_date', label: '日期' },
-          { key: 'trade_time', label: '时间' },
-          { key: 'stock_code', label: '股票' },
-          { key: 'stock_name', label: '股票名' },
-          { key: 'action', label: '方向', fmt: function (v) {
-            return v === 'buy' ? '<span class="up">买入</span>' : (v === 'sell' ? '<span class="down">卖出</span>' : EP.fmt.esc(v)); } },
-          { key: 'price', label: '价格', num: true, fmt: function (v) { return EP.fmt.num(v); } },
-          { key: 'weight_before', label: '持仓前%', num: true, fmt: function (v) { return EP.fmt.num(v); } },
-          { key: 'weight_after', label: '持仓后%', num: true, fmt: function (v) { return EP.fmt.num(v); } }
-        ], { height: 300 });
-      }).catch(function (e) { box.innerHTML = '<div class="hint">' + EP.fmt.esc(e.message) + '</div>'; });
-    };
-    root.querySelector('#eh-bulk').onclick = function () {
-      EP.api('/api/expert-crawl/bulk-history', { method: 'POST',
-        body: { limit: parseInt(root.querySelector('#eh-limit').value, 10) || 0 } })
-        .then(function () { EP.toast('批量回补已启动'); bindJobs(root); })
-        .catch(function (e) { EP.toast(e.message, 'error'); });
-    };
-    EP.api('/api/system/info').then(function (d) {
-      root.querySelector('#eh-bulk-count').textContent = '当前已有 ' + d.bulk_files + ' 个组合文件';
-    });
-  }
-
-  /* ═══════════ ② 高手能力评估 ═══════════ */
+  /* ═══════════ ③ 高手能力评估（仅实盘 rtV3 流水）═══════════ */
 
   function evalPanel() {
-    return '<div class="card"><h3>③ 高手能力评估</h3>' +
+    return '<div class="card"><h3>③ 高手能力评估 <span class="hint" style="font-weight:400">（数据环境：实盘 rtV3 流水 · 模拟盘通道已下线）</span></h3>' +
       '<div class="card-sub">逐高手镜像回测（= 无脑跟他的单）：T+1 开盘 ±0.2% 滑点、佣金万 0.8（最低 5 元）、卖出印花税 0.05%、涨停拦截、噪音过滤。窗口从该高手首笔信号日起。按综合评分（夏普/索提诺/Calmar/胜率 分位秩平均）排序——分高且样本充足的，就是值得跟的人。</div>' +
       '<div class="row">' +
-      '<div class="field"><label>数据环境</label><select class="select" id="ee-env">' +
-      '<option value="sim">模拟盘（流水+回补）</option><option value="live">实盘（rtV3 流水）</option></select></div>' +
       '<div class="field"><label>最少卖出笔数</label><select class="select" id="ee-min-sells">' +
       [1, 3, 5, 10, 20].map(function (n) { return '<option value="' + n + '"' + (n === 3 ? ' selected' : '') + '>' + n + '</option>'; }).join('') +
       '</select></div>' +
@@ -641,12 +583,11 @@
     });
     root.querySelector('#ee-run').onclick = function () {
       var btn = this; btn.disabled = true;
-      S.env = root.querySelector('#ee-env').value;
       S.minSells = root.querySelector('#ee-min-sells').value;
       S.sampleOnly = root.querySelector('#ee-sample-only').checked;
       EP.api('/api/expert-crawl/evaluation/run', {
         method: 'POST',
-        body: { env: S.env, min_sells: parseInt(S.minSells, 10) || 3, min_days: 20 }
+        body: { min_sells: parseInt(S.minSells, 10) || 3, min_days: 20 }
       }).then(function () {
         EP.toast('评估已启动（后台运行，完成后自动刷新）');
         bindJobs(root);
@@ -666,17 +607,17 @@
     root.querySelector('#ee-refresh').onclick = function () { loadEval(root); };
     root.querySelector('#ee-min-sells').onchange = function () { S.minSells = this.value; applyFilters(); };
     root.querySelector('#ee-sample-only').onchange = function () { S.sampleOnly = this.checked; applyFilters(); };
-    root.querySelector('#ee-env').onchange = function () { S.env = this.value; };
   }
 
   EP.loadExperts = function (root) {
-    /* 2026-10-19 二次重构：渠道tab → ①实盘高手榜(手动加载) → ②关注列表 → ③能力评估 → ④爬取 ⑤回补 */
-    root.innerHTML = channelTabs() + boardPanel() + watchPanel() + evalPanel() + crawlPanel() + backfillPanel();
+    /* 2026-10-19 二次重构：渠道tab → ①实盘高手榜(手动加载) → ②关注列表 → ③能力评估 → ④爬取；
+       模拟盘通道（含历史回补）已删除，页面仅剩实盘链路。 */
+    root.innerHTML = channelTabs() + boardPanel() + watchPanel() + evalPanel() + crawlPanel();
     bindChannelTabs(root);
     bindLiveExperts(root);           // 榜单不自动加载，等用户点「⬇ 加载最新」
     bindWatchCard(root);
     bindEval(root);
-    bindCrawl(root); bindJobs(root); bindBackfill(root);
+    bindCrawl(root); bindJobs(root);
     loadChannels(root);
     loadWatch(root);
     loadEval(root);

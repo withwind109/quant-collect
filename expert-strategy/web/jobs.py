@@ -19,7 +19,7 @@ from typing import Any, Dict, List
 from paths import LOG_DIR, PROJECT_ROOT
 
 #: 任务名 → 状态文件（logs/job_<name>.json）与日志（logs/job_<name>.log）
-#: crawl / history / bulk_history / backtest / paper_update / db_sync / health
+#: crawl / expert_eval / backtest / paper_update / db_sync / health
 _SHIM_MARK = "WorkBuddy.app"
 
 

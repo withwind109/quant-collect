@@ -13,9 +13,7 @@
   * 窗口从该高手首笔信号日起（跟单体验：之前没单可跟，净值持平无意义）
   * 期末按最后交易日收盘结算；展示基准沪深300（000300.SH），alpha 对中证500 回归
 
-数据来源：
-  * sim  ：crawl_trade（每日爬取流水累积，market_type<>'live'）∪ data/history_bulk/*.json
-           （批量回补全史；按 (日期,股票,方向,价,时间) 去重，bulk 优先保留全量权重上下文）
+数据来源（2026-10-19 起仅实盘——模拟盘爬取通道已整体删除）：
   * live ：expert_trades 视图（crawl_trade 的 market_type='live' 投影，rtV3 实盘流水）
 
 样本门槛：卖出笔数 < --min-sells 或覆盖交易日 < --min-days 的专家仍算指标，
@@ -23,7 +21,7 @@
 
 产出：data/eval/expert_eval_<run_id>.json + data/eval/latest.json（Web API 直接读 latest）。
 用法：
-  python -m strategy.expert_eval [--env sim|live] [--start 2025-12-01] [--end 2026-10-16]
+  python -m strategy.expert_eval [--start 2025-12-01] [--end 2026-10-16]
                                  [--min-sells 3] [--min-days 20] [--top-detail 50]
 """
 from __future__ import annotations
@@ -38,7 +36,7 @@ from datetime import datetime, timedelta
 from typing import Any, Dict, List, Optional, Tuple
 
 from core.logger import logger, setup_logging
-from paths import DB_PATH, DATA_DIR, HISTORY_BULK_DIR
+from paths import DB_PATH, DATA_DIR
 
 # ── 交易口径：与 follow_backtest 单一事实源 ─────────────────────────────────
 from strategy import follow_backtest as FB
@@ -68,66 +66,32 @@ def _rec(r: dict) -> Dict[str, Any]:
     }
 
 
-def load_expert_signals(env: str = "sim", start: str = "", end: str = "") -> Dict[str, Dict[str, Any]]:
-    """{expert_id: {name, source, market_type, records:[...]}}（按 expert_id, trade_date, trade_time 有序）。"""
+def load_expert_signals(env: str = "live", start: str = "", end: str = "") -> Dict[str, Dict[str, Any]]:
+    """{expert_id: {name, source, market_type, records:[...]}}（按 expert_id, trade_date, trade_time 有序）。
+
+    2026-10-19 起仅支持 live（rtV3 实盘流水）；传 sim 会抛 ValueError——
+    模拟盘爬取通道已整体删除，从入口杜绝任何逻辑再碰模拟盘数据。
+    """
     from core import db as DB
 
+    if env != "live":
+        raise ValueError(f"expert_eval 仅支持 env='live'（模拟盘通道已删除），收到：{env!r}")
     DB.ensure_schema(DB_PATH)
     DB.ensure_strategy_schema(DB_PATH)
     out: Dict[str, Dict[str, Any]] = {}
 
-    if env == "live":
-        rows = DB.q("""SELECT expert_id, expert_name, trade_date, trade_time, stock_code, stock_name,
-                              action, price, weight_after
-                       FROM expert_trades
-                       WHERE stock_code<>'' AND stock_code IS NOT NULL AND weight_after IS NOT NULL
-                       ORDER BY expert_id, trade_date, trade_time""")
-        for r in rows or []:
-            eid = str(r.get("expert_id") or "")
-            if not eid:
-                continue
-            rec = out.setdefault(eid, {"name": r.get("expert_name") or eid, "source": "eastmoney",
-                                       "market_type": "live", "records": []})
-            rec["records"].append(_rec(r))
-    else:
-        rows = DB.q("""SELECT expert_id, expert_name, source, trade_date, trade_time, stock_code, stock_name,
-                              action, price, weight_after
-                       FROM crawl_trade
-                       WHERE COALESCE(market_type,'sim') <> 'live' AND stock_code<>''
-                         AND stock_code IS NOT NULL AND weight_after IS NOT NULL
-                       ORDER BY expert_id, trade_date, trade_time""")
-        for r in rows or []:
-            eid = str(r.get("expert_id") or "")
-            if not eid:
-                continue
-            rec = out.setdefault(eid, {"name": r.get("expert_name") or eid,
-                                       "source": r.get("source") or "eastmoney",
-                                       "market_type": "sim", "records": []})
-            rec["records"].append(_rec(r))
-        # 批量回补全史并入（去重；bulk 记录带完整权重上下文，同键不重复加）
-        for fp in sorted(HISTORY_BULK_DIR.glob("*.json")):
-            try:
-                d = json.loads(fp.read_text(encoding="utf-8"))
-            except (OSError, ValueError):
-                continue
-            eid = str(d.get("zjzh") or fp.stem)
-            rec = out.setdefault(eid, {"name": d.get("name") or eid, "source": "eastmoney",
-                                       "market_type": "sim", "records": []})
-            if d.get("name"):
-                rec["name"] = d["name"]
-            seen = {(r["trade_date"], r["stock_code"], r["action"], r["price"], r["trade_time"])
-                    for r in rec["records"]}
-            for r in d.get("records") or []:
-                if not r.get("trade_date") or not r.get("stock_code"):
-                    continue
-                one = _rec(r)
-                key = (one["trade_date"], one["stock_code"], one["action"], one["price"], one["trade_time"])
-                if key in seen:
-                    continue
-                seen.add(key)
-                rec["records"].append(one)
-        for rec in out.values():
-            rec["records"].sort(key=lambda r: (r["trade_date"], r["trade_time"]))
+    rows = DB.q("""SELECT expert_id, expert_name, trade_date, trade_time, stock_code, stock_name,
+                          action, price, weight_after
+                   FROM expert_trades
+                   WHERE stock_code<>'' AND stock_code IS NOT NULL AND weight_after IS NOT NULL
+                   ORDER BY expert_id, trade_date, trade_time""")
+    for r in rows or []:
+        eid = str(r.get("expert_id") or "")
+        if not eid:
+            continue
+        rec = out.setdefault(eid, {"name": r.get("expert_name") or eid, "source": "eastmoney",
+                                   "market_type": "live", "records": []})
+        rec["records"].append(_rec(r))
 
     if start or end:
         for eid in list(out):
@@ -431,10 +395,10 @@ def _save_price_miss(codes: List[str]) -> None:
         logger.warning(f"[expert-eval] 写跳过缓存失败: {exc}")
 
 
-def evaluate(env: str = "sim", start: str = "", end: str = "",
+def evaluate(env: str = "live", start: str = "", end: str = "",
              min_sells: int = DEFAULT_MIN_SELLS, min_days: int = DEFAULT_MIN_DAYS,
              capital: float = DEFAULT_CAPITAL) -> Dict[str, Any]:
-    """全量评估并写 data/eval/latest.json（+ 带 run_id 的历次文件）。"""
+    """全量评估并写 data/eval/latest.json（+ 带 run_id 的历次文件）。仅实盘。"""
     run_id = datetime.now().strftime("%Y%m%d_%H%M%S")
     histories = load_expert_signals(env, start, end)
     params = {"env": env, "start": start, "end": end, "min_sells": min_sells,
@@ -516,48 +480,23 @@ def _write(out: Dict[str, Any]) -> None:
 
 # ── 单高手明细（详情视图按需现算，与批量同口径） ─────────────────────────────
 
-def expert_detail(expert_id: str, env: str = "sim", start: str = "", end: str = "",
+def expert_detail(expert_id: str, env: str = "live", start: str = "", end: str = "",
                   capital: float = DEFAULT_CAPITAL) -> Dict[str, Any]:
-    """单个高手的净值曲线 + 成交明细 + 指标（供详情抽屉/曲线图）。"""
+    """单个高手的净值曲线 + 成交明细 + 指标（供详情抽屉/曲线图）。仅实盘。"""
     from core import db as DB
 
+    if env != "live":
+        raise ValueError(f"expert_eval 仅支持 env='live'（模拟盘通道已删除），收到：{env!r}")
     DB.ensure_schema(DB_PATH)
     DB.ensure_strategy_schema(DB_PATH)
-    if env == "live":
-        rows = DB.q("""SELECT expert_id, expert_name, trade_date, trade_time, stock_code, stock_name,
-                               action, price, weight_after
-                        FROM expert_trades
-                        WHERE expert_id=%s AND stock_code<>'' AND weight_after IS NOT NULL
-                        ORDER BY trade_date, trade_time""", (str(expert_id),))
-    else:
-        rows = DB.q("""SELECT expert_id, expert_name, source, trade_date, trade_time, stock_code, stock_name,
-                               action, price, weight_after
-                        FROM crawl_trade
-                        WHERE expert_id=%s AND COALESCE(market_type,'sim')<>'live'
-                          AND stock_code<>'' AND weight_after IS NOT NULL
-                        ORDER BY trade_date, trade_time""", (str(expert_id),))
+    rows = DB.q("""SELECT expert_id, expert_name, trade_date, trade_time, stock_code, stock_name,
+                           action, price, weight_after
+                    FROM expert_trades
+                    WHERE expert_id=%s AND stock_code<>'' AND weight_after IS NOT NULL
+                    ORDER BY trade_date, trade_time""", (str(expert_id),))
     recs = [_rec(r) for r in rows or []]
-    # 并入批量回补全史（与批量评估同口径去重）
-    fp = HISTORY_BULK_DIR / f"{expert_id}.json"
     name = (rows[0].get("expert_name") if rows else "") or expert_id
-    source = (rows[0].get("source") if rows else "") or "eastmoney"
-    if env != "live" and fp.exists():
-        try:
-            d = json.loads(fp.read_text(encoding="utf-8"))
-            name = d.get("name") or name
-            seen = {(r["trade_date"], r["stock_code"], r["action"], r["price"], r["trade_time"])
-                    for r in recs}
-            for r in d.get("records") or []:
-                if not r.get("trade_date") or not r.get("stock_code"):
-                    continue
-                one = _rec(r)
-                key = (one["trade_date"], one["stock_code"], one["action"], one["price"], one["trade_time"])
-                if key not in seen:
-                    seen.add(key)
-                    recs.append(one)
-            recs.sort(key=lambda r: (r["trade_date"], r["trade_time"]))
-        except (OSError, ValueError):
-            pass
+    source = "eastmoney"
     if start or end:
         recs = [r for r in recs
                 if (not start or r["trade_date"] >= start) and (not end or r["trade_date"] <= end)]
@@ -589,9 +528,7 @@ def expert_detail(expert_id: str, env: str = "sim", start: str = "", end: str = 
 # ── CLI ──────────────────────────────────────────────────────────────────────
 
 def main() -> None:
-    ap = argparse.ArgumentParser(description="高手能力评估（逐高手镜像回测）")
-    ap.add_argument("--env", default="sim", choices=["sim", "live"],
-                    help="sim=模拟盘流水+批量回补；live=实盘 rtV3 流水")
+    ap = argparse.ArgumentParser(description="高手能力评估（逐高手镜像回测，仅实盘）")
     ap.add_argument("--start", default="", help="评估起点 YYYY-MM-DD，空=数据最早日")
     ap.add_argument("--end", default="", help="评估截止 YYYY-MM-DD，空=数据最晚日")
     ap.add_argument("--min-sells", type=int, default=DEFAULT_MIN_SELLS,
@@ -601,7 +538,7 @@ def main() -> None:
     ap.add_argument("--capital", type=float, default=DEFAULT_CAPITAL)
     args = ap.parse_args()
     setup_logging()
-    out = evaluate(env=args.env, start=args.start, end=args.end,
+    out = evaluate(env="live", start=args.start, end=args.end,
                    min_sells=args.min_sells, min_days=args.min_days, capital=args.capital)
     meta = out["meta"]
     print(json.dumps({"run_id": out["run_id"], "meta": meta,

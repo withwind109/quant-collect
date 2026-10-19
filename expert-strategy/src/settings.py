@@ -10,18 +10,14 @@ from dotenv import load_dotenv
 ROOT = Path(__file__).resolve().parent.parent
 DEFAULT_CONFIG = ROOT / "config.yaml"
 
-#: 无 config.yaml 时使用的内置默认值（与仓库中的 config.yaml 保持一致）
+#: 无 config.yaml 时使用的内置默认值（与仓库中的 config.yaml 保持一致）。
+#: 2026-10-19 起仅保留东财实盘配置——模拟盘渠道（东财 spo_* / 雪球 / 同花顺）已删除。
 FALLBACK_SETTINGS: dict = {
     "http": {"min_interval": 0.8, "timeout": 20, "proxy": ""},
-    "xueqiu": {"category": 14, "max_pages": 5, "cookie": ""},
     "eastmoney": {
         "cookie": "",
         "rank_type": "10005",
-        "tiger_time_period": 1,
-        "max_records": 1000,
     },
-    "tonghuashun": {"cookie": "", "hexin_v": ""},
-    "alipay": {"rank_url": "", "trade_url": "", "cookie": ""},
     # 无头浏览器抓取后端（Playwright/Chromium）。enabled=true 时优先用浏览器拟人化抓取，
     # 失败自动回退 curl_cffi。headless=false 可调试（需桌面环境）。
     "browser": {
@@ -52,19 +48,8 @@ def load_settings(config_path: Path | None = None) -> dict:
             current.setdefault(key, value)
 
     # 敏感凭据走环境变量，不落配置文件
-    # [2026-10-16] 东财改为 Cookie 认证（不再扫码登录）
     if os.getenv("EASTMONEY_COOKIE"):
         settings["eastmoney"]["cookie"] = os.getenv("EASTMONEY_COOKIE")
-    if os.getenv("XUEQIU_COOKIE"):
-        settings["xueqiu"]["cookie"] = os.getenv("XUEQIU_COOKIE")
-    if os.getenv("THS_COOKIE"):
-        settings["tonghuashun"]["cookie"] = os.getenv("THS_COOKIE")
-    if os.getenv("THS_HEXIN_V"):
-        settings["tonghuashun"]["hexin_v"] = os.getenv("THS_HEXIN_V")
-    for key in ("rank_url", "trade_url", "cookie"):
-        value = os.getenv(f"ALIPAY_{key.upper()}")
-        if value:
-            settings["alipay"][key] = value
     if os.getenv("HTTP_PROXY"):
         settings["http"]["proxy"] = os.getenv("HTTP_PROXY")
 

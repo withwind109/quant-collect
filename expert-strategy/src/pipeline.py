@@ -21,17 +21,13 @@ from paths import CRAWL_DATA_DIR
 from core.models import BUY_ACTIONS, Expert, StockAggregate, TradeRecord
 from core.storage import AGG_COLUMNS, EXPERT_BUY_COLUMNS, EXPERT_COLUMNS, TRADE_COLUMNS, write_csv, write_excel, write_json
 from settings import sqlite_path
-from sources.alipay import AlipaySource
 from sources.base import BaseSource
-from sources.tonghuashun import TonghuashunSource
-from sources.xueqiu import XueqiuSource
 
-#: 各数据源「能拿到什么」的固定说明，随覆盖度一起落盘，供前端做可用性提示
+#: 各数据源「能拿到什么」的固定说明，随覆盖度一起落盘，供前端做可用性提示。
+#: 2026-10-19 起模拟盘通道（东财 spo_* / 同花顺模拟炒股 / 雪球虚拟组合）整体删除，
+#: 仅保留东财实盘链路（rtV1 榜单 + rtV3 关注组合调仓）。
 SOURCE_CAPABILITY = {
-    "eastmoney": "组合高手操作明细：组合名 + 累计收益率 + 当日收益率 + 股票 + 成交价 + 仓位变化",
-    "xueqiu": "热门组合调仓：组合名 + 累计收益率 + 股票 + 仓位变化（需 XUEQIU_COOKIE）",
-    "tonghuashun": "模拟炒股百强榜（收益率）+ 高手买卖动态；逐笔股票代码需登录且「追踪」该高手后才公开",
-    "alipay": "蚂蚁财富实盘榜：需自行抓包提供端点",
+    "eastmoney": "实盘组合榜(rtV1 日榜+总榜) + 关注组合调仓明细(rtV3, 需 APP 令牌)",
 }
 
 
@@ -64,23 +60,11 @@ def aggregate_buys(trades: list[TradeRecord]) -> list[StockAggregate]:
 
 
 def _collect_cookies(settings: dict) -> list[tuple[str, str]]:
-    """汇总各源登录 Cookie（domain, cookie_str），供浏览器上下文预置会话。
-
-    [2026-10-16] 新增东财 Cookie（.eastmoney.com）。
-    """
+    """东财登录 Cookie（domain, cookie_str），供浏览器上下文预置会话。"""
     out: list[tuple[str, str]] = []
     em = settings.get("eastmoney", {}).get("cookie")
     if em:
         out.append((".eastmoney.com", em))
-    xq = settings.get("xueqiu", {}).get("cookie")
-    if xq:
-        out.append((".xueqiu.com", xq))
-    ths = settings.get("tonghuashun", {}).get("cookie")
-    if ths:
-        out.append((".10jqka.com.cn", ths))
-    ali = settings.get("alipay", {}).get("cookie")
-    if ali:
-        out.append((".alipay.com", ali))
     return out
 
 
@@ -116,11 +100,7 @@ def _build_fetcher(settings: dict, force_http: bool = False):
 
 
 def _build_eastmoney(fetcher, settings: dict, em_cfg: dict | None = None):
-    """构造东财数据源（build_sources 与 history/bulk_history 共用，参数只此一处维护）。
-
-    em_cfg: build_sources 里已合并关注列表（config ∪ 本地关注表）后的东财配置；
-    传 None 时从 settings 重新读取（history/bulk_history 场景，不需要关注合并）。
-    """
+    """构造东财数据源（唯一数据源，build_sources 专用）。"""
     from sources.eastmoney import EastmoneySource
 
     em_cfg = dict(em_cfg if em_cfg is not None else settings.get("eastmoney", {}))
@@ -141,8 +121,6 @@ def _build_eastmoney(fetcher, settings: dict, em_cfg: dict | None = None):
         fetcher,
         rank_type=str(em_cfg.get("rank_type", "10005")),
         rank_types=em_cfg.get("rank_types") or None,  # 默认 [日榜, 总榜]: 日榜给当日收益, 总榜补累计收益
-        tiger_time_period=int(em_cfg.get("tiger_time_period", 1)),
-        max_records=int(em_cfg.get("max_records", 400)),
         cookie=em_cfg.get("cookie", "") or "",
         spzh_ct_token=em_cfg.get("spzh_ct_token", "") or "",
         spzh_ut_token=em_cfg.get("spzh_ut_token", "") or "",
@@ -157,19 +135,11 @@ def _build_eastmoney(fetcher, settings: dict, em_cfg: dict | None = None):
 def build_sources(settings: dict, force_http: bool = False) -> dict[str, BaseSource]:
     """按配置构建数据源客户端（共享同一个抓取后端：浏览器或 curl_cffi）。
 
-    多渠道扩展: 新数据源在 src/sources/ 下继承 BaseSource 实现三个方法，
-    在这里注册一行即可（CLI --sources 与页面筛选自动生效）。
-
-    force_http=True 时强制走 curl_cffi 轻量后端（跳过浏览器）—— 用于
-    history/bulk_history 这类批量回补任务：组合数 × 翻页数远超日常爬取的
-    请求量，浏览器限速（默认 1.2s/请求）下跑不完；且 spo_hldchg_detail 是
-    匿名接口，无 WAF 挑战。
+    2026-10-19 起仅东财实盘一源：模拟盘相关源（东财 spo_*、同花顺模拟炒股、
+    雪球虚拟组合）已整体删除，避免任何链路再爬到模拟盘数据。
     """
     fetcher = _build_fetcher(settings, force_http=force_http)
     em_cfg = settings.get("eastmoney", {})
-    xq_cfg = settings.get("xueqiu", {})
-    ths_cfg = settings.get("tonghuashun", {})
-    ali_cfg = settings.get("alipay", {})
     # 关注实盘组合常驻扫描 [2026-09-25]: config.yaml spzh_follow ∪ DB关注列表
     # (watchlist 中 market_type='live' 的条目, 由 UI 关注操作 / 东财关注同步维护)
     # 合并去重, expert_id 为准。
@@ -185,26 +155,7 @@ def build_sources(settings: dict, force_http: bool = False) -> dict[str, BaseSou
     except Exception as _wl_e:
         logger.warning(f"[pipeline] 本地关注列表读取失败, 退回 config.yaml 静态列表: {_wl_e}")
     em_cfg["spzh_follow"] = _follow
-    return {
-        "xueqiu": XueqiuSource(
-            fetcher,
-            cookie=xq_cfg.get("cookie") or None,
-            category=int(xq_cfg.get("category", 14)),
-            max_pages=int(xq_cfg.get("max_pages", 5)),
-        ),
-        "eastmoney": _build_eastmoney(fetcher, settings, em_cfg),
-        "tonghuashun": TonghuashunSource(
-            fetcher,
-            cookie=ths_cfg.get("cookie") or None,
-            hexin_v=ths_cfg.get("hexin_v") or None,
-        ),
-        "alipay": AlipaySource(
-            fetcher,
-            rank_url=ali_cfg.get("rank_url") or None,
-            trade_url=ali_cfg.get("trade_url") or None,
-            cookie=ali_cfg.get("cookie") or None,
-        ),
-    }
+    return {"eastmoney": _build_eastmoney(fetcher, settings, em_cfg)}
 
 
 def build_expert_buys(buys: list[TradeRecord], expert_map: dict) -> list[dict]:
@@ -265,8 +216,6 @@ def build_expert_buys(buys: list[TradeRecord], expert_map: dict) -> list[dict]:
 
 def _collect_active_experts(trades: list[TradeRecord]) -> list[Expert]:
     """从当日操作明细提取『当日活跃高手』并补齐收益率，使其进入盈利排行榜、与买入自洽。
-
-    东财高手操作明细(spo_superior_detail)自带 zsyl（累计收益率）与 syl_dr（当日收益率），
     与 rtV1 实盘榜是不同 ID 体系，故不依赖 hot_experts 的榜单，直接用操作记录本身聚合。
     """
     seen: dict[tuple[str, str], Expert] = {}
@@ -397,8 +346,6 @@ def run(
             experts = client.hot_experts(limit=top)
             all_experts.extend(experts)
             all_trades.extend(client.trades(experts, trade_date))
-            if client.supports_stock_rank:
-                stock_rank.extend(client.hot_buy_stocks(limit=top))
         except Exception as exc:
             logger.error(f"[{name}] 采集失败：{exc}")
         try:
@@ -470,12 +417,12 @@ def run(
         write_json(out_dir / "meta.json", meta)
         written += ["experts.json", "trades.json", "buys.json", "buy_aggregated.json",
                     "expert_buys.json", "meta.json"]
-        if signals:
-            write_json(out_dir / "signals.json", signals)
-            written.append("signals.json")
-        if stock_rank:
-            write_json(out_dir / "stock_rank.json", [a.model_dump() for a in stock_rank])
-            written.append("stock_rank.json")
+        # signals/stock_rank 现已无来源（模拟盘渠道删除后恒为空）——仍然无条件覆写，
+        # 避免旧交易日目录里残留的模拟盘文件被 write_day 反复重放入库。
+        write_json(out_dir / "signals.json", signals)
+        written.append("signals.json")
+        write_json(out_dir / "stock_rank.json", [a.model_dump() for a in stock_rank])
+        written.append("stock_rank.json")
     if "csv" in formats:
         write_csv(out_dir / "trades.csv", all_trades, TRADE_COLUMNS)
         write_csv(out_dir / "buys.csv", buys, TRADE_COLUMNS)
@@ -508,9 +455,8 @@ def run(
                 )
         write_csv(out_dir / "expert_buys.csv", flat, EXPERT_BUY_COLUMNS)
         written += ["trades.csv", "buys.csv", "buy_aggregated.csv", "experts.csv", "expert_buys.csv"]
-        if stock_rank:
-            write_csv(out_dir / "stock_rank.csv", stock_rank, AGG_COLUMNS)
-            written.append("stock_rank.csv")
+        write_csv(out_dir / "stock_rank.csv", stock_rank, AGG_COLUMNS)
+        written.append("stock_rank.csv")
     if "xlsx" in formats:
         write_excel(out_dir / "report.xlsx", all_trades, all_experts, aggregated)
         written.append("report.xlsx")

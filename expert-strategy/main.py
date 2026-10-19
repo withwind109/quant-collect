@@ -2,7 +2,7 @@
 """expert-platform CLI 入口。
 
 用法:
-    python main.py crawl --sources eastmoney,tonghuashun [--date auto] [--top 50]
+    python main.py crawl --sources eastmoney [--date auto] [--top 50]
     python main.py check                       # 凭据与接口连通性自检
     python main.py history --zjzh 1000xxxx     # 单组合调仓历史回补
     python main.py bulk-history [--limit 20]   # 批量回补（跟随策略数据基础）
