@@ -63,6 +63,87 @@
       '<span class="hint" id="eh-bulk-count"></span></div></div>';
   }
 
+  /* ── ② 关注列表（东财实盘，与东财账号关注关系双向同步）── */
+
+  function watchPanel() {
+    return '<div class="card"><h3>①½ 关注列表 <span class="hint" style="font-weight:400">（东财实盘 · rtV3 调仓明细仅对关注者开放）</span></h3>' +
+      '<div class="card-sub">流程：爬榜单 → 在获取的高手里点「关注」→ 这里「拉取调仓明细」入库 → 实盘环境评估即可用。' +
+      'live 关注会在<b>东财账号上代为关注</b>该组合（取消时同步取消）；也可以「同步东财关注」把 APP 里已关注的组合拉回来。</div>' +
+      '<div class="row" style="margin-top:10px">' +
+      '<button class="btn" id="ew-sync">↻ 同步东财关注</button>' +
+      '<button class="btn primary" id="ew-fetch" style="margin-left:6px">▶ 拉取全部关注调仓</button>' +
+      '<span class="hint" id="ew-meta" style="margin-left:8px"></span></div>' +
+      '<div id="ew-table" style="margin-top:10px"></div>' +
+      '<div id="ew-result" style="margin-top:10px"></div></div>';
+  }
+
+  function renderWatchTable(root) {
+    var el = root.querySelector('#ew-table');
+    if (!el) return;
+    var live = Object.keys(S.wl).filter(function (id) { return S.wl[id] && S.wl[id].__mt === 'live'; });
+    if (!live.length) {
+      el.innerHTML = '<div class="hint">关注列表为空——在下方评估表/明细抽屉里点「＋ 关注」（实盘环境），或「同步东财关注」</div>';
+      return;
+    }
+    var rows = live.map(function (id) {
+      var w = S.wl[id];
+      return { expert_id: id, name: w.name || id, note: w.note || '', created_at: w.created_at || '' };
+    });
+    EP.table(el, rows, [
+      { key: 'name', label: '组合', fmt: function (v, r) { return '<b>' + EP.fmt.esc(v) + '</b>'; } },
+      { key: 'expert_id', label: '组合号' },
+      { key: 'note', label: '来源', fmt: function (v) { return EP.fmt.esc(v || '—'); } },
+      { key: 'created_at', label: '关注时间', fmt: function (v) { return EP.fmt.ts(v); } },
+      { key: 'expert_id', label: '操作', html: function (v) {
+        return '<button class="btn sm" data-ew-fetch="' + EP.fmt.esc(v) + '">拉取调仓明细</button> ' +
+          '<button class="btn sm" data-ew-unwatch="' + EP.fmt.esc(v) + '" style="color:var(--c-danger)">取消关注</button>'; } }
+    ], { height: 260, pageSize: 20 });
+  }
+
+  function fetchLiveDetail(root, expertId) {
+    var box = root.querySelector('#ew-result');
+    box.innerHTML = '<div class="hint">拉取 rtV3 调仓明细中…（每个组合最近 40 条）</div>';
+    EP.api('/api/expert-crawl/watchlist/fetch-detail', { method: 'POST',
+      body: { expert_id: expertId || '' } }).then(function (d) {
+      if (!d.rows || !d.rows.length) { box.innerHTML = '<div class="hint">没有拉到调仓记录（今日无调仓或组合异常）</div>'; return; }
+      box.innerHTML = '<div class="hint">本次拉取 <b>' + d.total + '</b> 条（新入库 ' + d.n + ' 条，重复自动去重）</div><div id="ew-dtable"></div>';
+      EP.table(box.querySelector('#ew-dtable'), d.rows, [
+        { key: 'expert_name', label: '组合' },
+        { key: 'trade_date', label: '日期' },
+        { key: 'trade_time', label: '时间', fmt: function (v) { return EP.fmt.esc((v || '').slice(-8)); } },
+        { key: 'stock_code', label: '代码' },
+        { key: 'stock_name', label: '名称' },
+        { key: 'action', label: '方向', fmt: function (v) {
+          return v === 'buy' ? '<span class="up">买入</span>' : (v === 'sell' ? '<span class="down">卖出</span>' : EP.fmt.esc(v)); } },
+        { key: 'price', label: '价格', num: true, fmt: function (v) { return EP.fmt.num(v); } },
+        { key: 'weight_label', label: '仓位', fmt: function (v) { return EP.fmt.esc(v || '—'); } }
+      ], { height: 300, pageSize: 50 });
+    }).catch(function (e) { box.innerHTML = '<div class="hint">' + EP.fmt.esc(e.message) + '</div>'; });
+  }
+
+  function bindWatchCard(root) {
+    root.querySelector('#ew-sync').onclick = function () {
+      var btn = this; btn.disabled = true;
+      EP.api('/api/expert-crawl/watchlist/sync', { method: 'POST' }).then(function (d) {
+        EP.toast('东财已关注 ' + d.em_total + ' 个，本次新增 ' + d.added + ' 个');
+        loadWatch(root);
+      }).catch(function (e) { EP.toast(e.message, 'error'); })
+        .finally(function () { btn.disabled = false; });
+    };
+    root.querySelector('#ew-fetch').onclick = function () {
+      if (!Object.keys(S.wl).some(function (id) { return S.wl[id] && S.wl[id].__mt === 'live'; })) {
+        EP.toast('关注列表里还没有实盘组合', 'error'); return;
+      }
+      fetchLiveDetail(root, '');
+    };
+    // 行内按钮用事件委托（表格重渲染后仍有效）
+    root.querySelector('#ew-table').addEventListener('click', function (e) {
+      var f = e.target.closest('[data-ew-fetch]'), u = e.target.closest('[data-ew-unwatch]');
+      if (f) { fetchLiveDetail(root, f.dataset.ewFetch); }
+      else if (u) { toggleWatch(u.dataset.ewUnwatch, root); }
+    });
+  }
+
   /* 东财账户中心已独立为 accounts.js（右上角「🏦 账户中心」入口） */
 
   function loadChannels(root) {
@@ -267,8 +348,12 @@
   function loadWatch(root) {
     return EP.api('/api/expert-crawl/watchlist').then(function (d) {
       S.wl = {};
-      (d.rows || []).forEach(function (r) { S.wl[r.expert_id] = r.name || ''; });
+      (d.rows || []).forEach(function (r) {
+        S.wl[r.expert_id] = { name: r.name || '', note: r.note || '',
+                              created_at: r.created_at || '', __mt: r.market_type === 'live' ? 'live' : 'sim' };
+      });
       renderWatchlist(root);
+      renderWatchTable(root);
     }).catch(function () {});
   }
 
@@ -278,7 +363,9 @@
     var ids = Object.keys(S.wl);
     if (!ids.length) { el.innerHTML = '<div class="hint">关注列表为空——在评估表里点「＋ 关注」</div>'; return; }
     el.innerHTML = ids.map(function (id) {
-      return '<span class="chip on" style="margin:0 6px 6px 0">' + EP.fmt.esc(S.wl[id] || id) +
+      var w = S.wl[id];
+      return '<span class="chip on" style="margin:0 6px 6px 0">' + EP.fmt.esc(w.name || id) +
+        (w.__mt === 'live' ? ' <span style="color:var(--c-danger);font-weight:600">实盘</span>' : '') +
         ' <b style="margin-left:4px">' + EP.fmt.esc(id) + '</b>' +
         ' <a href="javascript:void(0)" data-unwatch="' + EP.fmt.esc(id) + '" style="margin-left:6px;color:var(--c-danger);text-decoration:none">✕</a></span>';
     }).join('');
@@ -289,13 +376,16 @@
 
   function toggleWatch(expertId, root) {
     var watched = !!S.wl[expertId];
+    var mt = S.env === 'live' ? 'live' : 'sim';
     var row = (S.eval && S.eval.rows || []).filter(function (r) { return r.expert_id === expertId; })[0];
     var req = watched
-      ? EP.api('/api/expert-crawl/watchlist/' + encodeURIComponent(expertId), { method: 'DELETE' })
+      ? EP.api('/api/expert-crawl/watchlist/' + encodeURIComponent(expertId) + '?market_type=' + mt, { method: 'DELETE' })
       : EP.api('/api/expert-crawl/watchlist', { method: 'POST',
-          body: { expert_id: expertId, name: (row || {}).name || '' } });
-    req.then(function () {
-      if (watched) delete S.wl[expertId]; else S.wl[expertId] = (row || {}).name || '';
+          body: { expert_id: expertId, name: (row || {}).name || '', market_type: mt } });
+    req.then(function (d) {
+      if (d && d.em && d.em.msg) { EP.toast(d.em.msg, d.em.ok ? 'ok' : 'error'); }
+      if (watched) delete S.wl[expertId];
+      else S.wl[expertId] = { name: (row || {}).name || '', note: '', created_at: '', __mt: mt };
       EP.toast(watched ? '已取消关注' : '已关注');
       loadWatch(root);
       // 表格里的按钮文案同步
@@ -435,9 +525,10 @@
   }
 
   EP.loadExperts = function (root) {
-    root.innerHTML = crawlPanel() + backfillPanel() + evalPanel();
+    root.innerHTML = crawlPanel() + watchPanel() + backfillPanel() + evalPanel();
     loadChannels(root);
     bindCrawl(root); bindJobs(root); bindBackfill(root);
+    bindWatchCard(root);
     bindEval(root);
     loadWatch(root);
     loadEval(root);

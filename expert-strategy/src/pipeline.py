@@ -115,11 +115,15 @@ def _build_fetcher(settings: dict, force_http: bool = False):
     )
 
 
-def _build_eastmoney(fetcher, settings: dict):
-    """构造东财数据源（build_sources 与 history/bulk_history 共用，参数只此一处维护）。"""
+def _build_eastmoney(fetcher, settings: dict, em_cfg: dict | None = None):
+    """构造东财数据源（build_sources 与 history/bulk_history 共用，参数只此一处维护）。
+
+    em_cfg: build_sources 里已合并关注列表（config ∪ 本地关注表）后的东财配置；
+    传 None 时从 settings 重新读取（history/bulk_history 场景，不需要关注合并）。
+    """
     from sources.eastmoney import EastmoneySource
 
-    em_cfg = dict(settings.get("eastmoney", {}))
+    em_cfg = dict(em_cfg if em_cfg is not None else settings.get("eastmoney", {}))
     # 实盘 rtV3 令牌优先级（对齐 xcq-platform pipeline 2026-09-25 账户中心方案）:
     # 登录态账户(broker_accounts 表) > config/env。config/env 三要素没配全时才尝试
     # 从账户中心取, 取不到则保持空值(实盘明细自动跳过, 模拟盘不受影响)。
@@ -166,20 +170,19 @@ def build_sources(settings: dict, force_http: bool = False) -> dict[str, BaseSou
     ths_cfg = settings.get("tonghuashun", {})
     ali_cfg = settings.get("alipay", {})
     # 关注实盘组合常驻扫描 [2026-09-25]: config.yaml spzh_follow ∪ DB关注列表
-    # (watchlist 中 source=eastmoney & market_type=live 的条目, 由 UI 关注操作维护)
+    # (watchlist 中 market_type='live' 的条目, 由 UI 关注操作 / 东财关注同步维护)
     # 合并去重, expert_id 为准。
     _follow = [dict(x) for x in (em_cfg.get("spzh_follow") or [])
                if isinstance(x, dict) and x.get("expert_id")]
     try:
-        from .strategy.watchlist import list_watchlist
-        _wl_rows = list_watchlist(source="eastmoney", market_type="live")
+        from .strategy.watchlist import list_watch
         _seen = {str(x.get("expert_id")) for x in _follow}
-        for _r in _wl_rows or []:
+        for _r in list_watch("live") or []:
             if str(_r.get("expert_id")) not in _seen:
-                _follow.append({"expert_id": str(_r["expert_id"]),
+                _follow.append({"expert_id": str(_r.get("expert_id")),
                                 "name": str(_r.get("name") or "")})
-    except Exception:
-        pass  # watchlist 不可用时退回 config.yaml 静态列表
+    except Exception as _wl_e:
+        logger.warning(f"[pipeline] 本地关注列表读取失败, 退回 config.yaml 静态列表: {_wl_e}")
     em_cfg["spzh_follow"] = _follow
     return {
         "xueqiu": XueqiuSource(
@@ -188,7 +191,7 @@ def build_sources(settings: dict, force_http: bool = False) -> dict[str, BaseSou
             category=int(xq_cfg.get("category", 14)),
             max_pages=int(xq_cfg.get("max_pages", 5)),
         ),
-        "eastmoney": _build_eastmoney(fetcher, settings),
+        "eastmoney": _build_eastmoney(fetcher, settings, em_cfg),
         "tonghuashun": TonghuashunSource(
             fetcher,
             cookie=ths_cfg.get("cookie") or None,

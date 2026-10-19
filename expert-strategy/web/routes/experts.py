@@ -8,9 +8,11 @@ POST /api/expert-crawl/run                 触发爬取（子进程，东财 Coo
 POST /api/expert-crawl/history             单组合调仓历史回补
 POST /api/expert-crawl/bulk-history        批量回补（强制 curl 轻量后端）
 GET  /api/expert-crawl/history-file        单组合已回补的历史记录
-GET  /api/expert-crawl/watchlist           关注列表
-POST /api/expert-crawl/watchlist           加关注
-DELETE /api/expert-crawl/watchlist/{expert_id}  取消关注
+GET  /api/expert-crawl/watchlist           关注列表（本地，market_type=live 与东财同步）
+POST /api/expert-crawl/watchlist           加关注（live=代你在东财账号关注）
+DELETE /api/expert-crawl/watchlist/{id}    取消关注（live=同步取消东财关注）
+POST /api/expert-crawl/watchlist/sync      同步东财账号已关注名单到本地
+POST /api/expert-crawl/watchlist/fetch-detail  拉取关注组合最近调仓明细（rtV3→crawl_trade）
 GET  /api/expert-crawl/sources             数据源选项（前端 chips）
 GET  /api/expert-crawl/evaluation          最新一次能力评估结果（rows+meta+bench）
 POST /api/expert-crawl/evaluation/run      触发能力评估（后台子进程）
@@ -196,19 +198,109 @@ async def history_file(zjzh: str = Query("")) -> Dict[str, Any]:
                          "weight_after": r.get("weight_after")} for r in recs[:500]]}
 
 
-# ── 关注管理（评估结果一键关注） ─────────────────────────────────────────────
+# ── 关注管理（与东财账号关注关系双向同步） ───────────────────────────────────
+#
+# 流程：爬榜单 → 在获取的高手里点「关注」→（live 组合代你在东财账号关注，rtV3
+# 明细仅对关注者开放）→ 关注列表里「拉取调仓明细」入库 crawl_trade(live) →
+# 能力评估(live 环境)即可用；也可「同步东财关注」把东财账号已有关注拉回来。
+
+
+def _em_source(require_token: bool = True):
+    """构造带登录态令牌的东财数据源（关注操作 / rtV3 明细共用）。"""
+    from core.broker_account import active_tokens
+    tp = active_tokens("eastmoney") or {}
+    if require_token and not (tp.get("ctToken") and tp.get("utToken") and tp.get("userId")):
+        raise HTTPException(400, "东财未登录——请先到右上角「🏦 账户中心」扫码登录")
+    from core.http import HttpClient
+    from sources.eastmoney import EastmoneySource
+    cookie = ""
+    try:
+        from settings import DEFAULT_CONFIG, load_settings
+        cookie = load_settings(DEFAULT_CONFIG)["eastmoney"].get("cookie") or ""
+    except Exception:  # noqa: BLE001
+        pass
+    return EastmoneySource(
+        HttpClient(min_interval=0.8),
+        cookie=cookie,
+        spzh_ct_token=tp.get("ctToken") or "",
+        spzh_ut_token=tp.get("utToken") or "",
+        spzh_user_id=tp.get("userId") or "",
+        spzh_device_id=tp.get("deviceId") or "",
+    )
+
+
+def _combo_names(eids: List[str]) -> Dict[str, str]:
+    """缺名组合的名称补全：config spzh_follow 静态名单 → rtV3 CombinationInfoHandler。"""
+    out: Dict[str, str] = {}
+    if not eids:
+        return out
+    try:
+        from settings import DEFAULT_CONFIG, load_settings
+        for x in load_settings(DEFAULT_CONFIG)["eastmoney"].get("spzh_follow") or []:
+            if str(x.get("expert_id") or "") in eids and x.get("name"):
+                out[str(x["expert_id"])] = str(x["name"])
+    except Exception:  # noqa: BLE001
+        pass
+    missing = [e for e in eids if e not in out]
+    if missing:
+        try:
+            src = _em_source()
+            for eid in missing:
+                info = src.combination_info(eid)
+                if info.get("zuheName"):
+                    out[eid] = str(info["zuheName"])
+        except Exception:  # noqa: BLE001  未登录/接口隐藏都只影响名字展示
+            pass
+    return out
+
+
+def _watch_rows(market_type: str = "live") -> List[Dict[str, Any]]:
+    """关注列表行（本地 DB 为准，名称用 config/东财组合信息补全）。"""
+    from strategy import watchlist as W
+    rows = [{"expert_id": r["expert_id"], "name": r.get("name") or "",
+             "note": r.get("note") or "", "created_at": r.get("created_at") or "",
+             "market_type": market_type}
+            for r in W.list_watch(market_type)]
+    missing = [r["expert_id"] for r in rows if not r["name"]]
+    if missing:
+        names = _combo_names(missing)
+        for r in rows:
+            if not r["name"] and names.get(r["expert_id"]):
+                r["name"] = names[r["expert_id"]]
+    return rows
+
+
+def _persist_live_trades(records) -> int:
+    """rtV3 明细落库 crawl_trade（market_type=live，按 row_sig 幂等去重）。"""
+    from core import db as DB
+    n = 0
+    for r in records:
+        td = r.trade_date or ""
+        if not td:
+            continue
+        sig = DB._sig(td, r.source, r.expert_id, r.stock_code, r.action, r.trade_time,
+                      r.price, r.weight_before, r.weight_after)
+        n += DB.qexec(
+            "INSERT OR IGNORE INTO crawl_trade (trade_date, source, asset_type, channel, expert_id, "
+            "expert_name, owner, stock_code, stock_name, market, action, price, volume, amount, "
+            "weight_before, weight_after, weight_label, return_rate, day_return_rate, trade_time, "
+            "raw_json, market_type, row_sig) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
+            (td, r.source, r.asset_type, r.channel, r.expert_id, r.expert_name, r.owner,
+             r.stock_code, r.stock_name, r.market, r.action, r.price, r.volume, r.amount,
+             r.weight_before, r.weight_after, r.weight_label, r.return_rate, r.day_return_rate,
+             r.trade_time, DB._j(r.raw), "live", sig))
+    return n
+
 
 @router.get("/watchlist")
 async def watchlist() -> Dict[str, Any]:
-    from strategy import watchlist as W
-    rows = W.list_watch("sim")
-    return {"rows": [{"expert_id": r["expert_id"], "name": r.get("name") or "",
-                      "created_at": r.get("created_at") or ""} for r in rows]}
+    return {"rows": _watch_rows("live") + _watch_rows("sim")}
 
 
 class WatchBody(BaseModel):
     expert_id: str
     name: str = ""
+    market_type: str = "sim"   # live=同步关注东财组合（rtV3 明细仅对关注者开放）
 
 
 @router.post("/watchlist")
@@ -217,15 +309,91 @@ async def watch_add(body: WatchBody) -> Dict[str, Any]:
     eid = body.expert_id.strip()
     if not eid:
         raise HTTPException(400, "缺少高手ID")
-    W.add(eid, body.name.strip())
-    return {"ok": True, "expert_id": eid}
+    mt = "live" if body.market_type == "live" else "sim"
+    em = {"ok": True, "msg": ""}
+    if mt == "live":
+        try:
+            ok = _em_source().follow(eid)
+            em = {"ok": ok, "msg": "已同步关注东财组合" if ok else "东财关注失败（可能达关注上限或登录态失效）"}
+        except HTTPException:
+            em = {"ok": False, "msg": "东财未登录，仅记录本地关注"}
+        except Exception as exc:  # noqa: BLE001
+            em = {"ok": False, "msg": f"东财关注失败: {exc}"}
+    W.add(eid, body.name.strip(), market_type=mt,
+          note="东财同步" if mt == "live" else "")
+    return {"ok": True, "expert_id": eid, "market_type": mt, "em": em}
 
 
 @router.delete("/watchlist/{expert_id}")
-async def watch_remove(expert_id: str) -> Dict[str, Any]:
+async def watch_remove(expert_id: str, market_type: str = Query("sim")) -> Dict[str, Any]:
     from strategy import watchlist as W
-    W.remove(expert_id)
-    return {"ok": True, "expert_id": expert_id}
+    eid = expert_id.strip()
+    mt = "live" if market_type == "live" else "sim"
+    em = {"ok": True, "msg": ""}
+    if mt == "live":
+        try:
+            ok = _em_source().unfollow(eid)
+            em = {"ok": ok, "msg": "已在东财账号取消关注" if ok else "东财取消关注失败（本地已移除）"}
+        except Exception as exc:  # noqa: BLE001
+            em = {"ok": False, "msg": f"东财取消关注失败: {exc}（本地已移除）"}
+    W.remove(eid, market_type=mt)
+    return {"ok": True, "expert_id": eid, "em": em}
+
+
+@router.post("/watchlist/sync")
+async def watch_sync() -> Dict[str, Any]:
+    """以东财账号为准同步关注列表：拉 FollowCombinationQueryHandler 的关注名单，
+    合并进本地 watchlist（market_type=live）。"""
+    src = _em_source()
+    ids = src.followed_ids()
+    from strategy import watchlist as W
+    existing = {r["expert_id"] for r in W.list_watch("live")}
+    added = 0
+    # 名字补全：新增的 + 已有但缺名的（config 静态名单 → 东财组合信息接口）
+    need_name = [c for c in ids if c not in existing]
+    from core.db import qexec
+    for r in W.list_watch("live"):
+        if not (r.get("name") or "").strip() and r["expert_id"] not in need_name:
+            need_name.append(r["expert_id"])
+    names = _combo_names(need_name)
+    for cid in ids:
+        if cid not in existing:
+            W.add(cid, names.get(cid, ""), market_type="live", note="东财同步")
+            added += 1
+    for cid, nm in names.items():   # 缺名的老条目也回填
+        qexec("UPDATE xcq_expert_watchlist SET name=? WHERE expert_id=? AND market_type='live'",
+              (nm, cid))
+    return {"ok": True, "em_total": len(ids), "added": added, "rows": _watch_rows("live")}
+
+
+class FetchDetailBody(BaseModel):
+    expert_id: str = ""   # 空 = 拉取全部关注组合
+
+
+@router.post("/watchlist/fetch-detail")
+async def watch_fetch_detail(body: FetchDetailBody) -> Dict[str, Any]:
+    """拉取关注组合的最近调仓明细（rtV3，最近 40 条/组合），入库 crawl_trade(live)。"""
+    wl = _watch_rows("live")
+    if body.expert_id.strip():
+        eids = [body.expert_id.strip()]
+    else:
+        eids = [r["expert_id"] for r in wl]
+    if not eids:
+        return {"ok": True, "msg": "关注列表为空", "n": 0, "rows": []}
+    src = _em_source()
+    from core.models import Expert
+    experts = [Expert(source="eastmoney", expert_id=eid,
+                      name=next((r["name"] for r in wl if r["expert_id"] == eid), eid))
+               for eid in eids]
+    records = src._spzh_trades(experts, target_date="")  # 不按日过滤 = 最近 40 条全量
+    n = _persist_live_trades(records)
+    rows = [{"expert_id": r.expert_id, "expert_name": r.expert_name,
+             "trade_date": r.trade_date, "trade_time": r.trade_time,
+             "stock_code": r.stock_code, "stock_name": r.stock_name,
+             "action": r.action, "price": r.price,
+             "weight_after": r.weight_after, "weight_label": r.weight_label or ""}
+            for r in records]
+    return {"ok": True, "n": n, "total": len(rows), "rows": rows}
 
 
 @router.get("/sources")

@@ -66,6 +66,9 @@ from .base import BaseSource
 SIM_URL = "https://simqry2.eastmoney.com/qry_tzzh_v2"
 LIVE_RANK_URL = "https://emdcspzhapi.dfcfs.cn/rtV1"
 SPZH_URL = "https://spzhapi.dfcfs.cn/rtV3"
+#: 关注/取消关注走 srtV1 GET（xcq-platform 2026-09-30 验证可用；deviceId 可空）
+SRTV1_URL = "https://spzhapi.dfcfs.cn/srtV1"
+SRTV1_APP_VER = "11002002"
 REFERER_PC = "https://group.eastmoney.com/"
 
 #: 实盘榜 rankType
@@ -483,6 +486,60 @@ class EastmoneySource(BaseSource):
         except Exception as exc:
             logger.warning(f"[东财] 组合基础信息获取失败 {zjzh}：{exc}")
             return {}
+
+    # ── 4.6 东财账号关注关系（关注列表 / 关注 / 取消关注，需 APP 令牌）──
+    #
+    # rtV3 调仓明细只对本账户「已关注」的组合开放（30001=未关注），因此页面上的
+    # 「关注」不只是本地收藏，而是真的在东财账号上代为关注（与 xcq-platform
+    # watchlist.em_ensure_follow 同一套接口，2026-09-30 实测可用）：
+    #   * 查已关注：rtV3 POST FollowCombinationQueryHandler → data.followCidList
+    #   * 关注    ：srtV1 GET  type=rt_add_concern    &zh={组合号}
+    #   * 取消    ：srtV1 GET  type=rt_cancel_concern &zh={组合号}
+    # srtV1 返回 {"result":"0"} 即成功；令牌只需要 ctToken/utToken/userId 三要素。
+    def followed_ids(self) -> list[str]:
+        """东财账号当前已关注的实盘组合号列表。"""
+        resp = self._spzh_call("FollowCombinationQueryHandler", {}) or {}
+        return [str(x) for x in ((resp.get("data") or {}).get("followCidList") or [])]
+
+    def follow(self, cid: str) -> bool:
+        """在东财账号关注一个实盘组合。"""
+        return self._srtv1("rt_add_concern", cid)
+
+    def unfollow(self, cid: str) -> bool:
+        """在东财账号取消关注一个实盘组合。"""
+        return self._srtv1("rt_cancel_concern", cid)
+
+    def combination_info(self, cid: str) -> dict:
+        """组合基础信息（zuheName/uidNick/concernCnt/summary…）。
+
+        rtV3 CombinationInfoHandler，2026-10-19 实测：关注组合多数可查；
+        设置了隐私的组合返回 code=9062「该组合已隐藏」（失败返回 {} 不抛）。
+        """
+        try:
+            resp = self._spzh_call("CombinationInfoHandler", {"combinationId": str(cid)}) or {}
+            if resp.get("code") == 0:
+                return resp.get("data") or {}
+            logger.warning(f"[东财] 组合信息 {cid}: {resp.get('message')}")
+        except Exception as exc:  # noqa: BLE001
+            logger.warning(f"[东财] 组合信息请求失败 {cid}: {exc}")
+        return {}
+
+    def _srtv1(self, action: str, cid: str) -> bool:
+        if not self.has_spzh_token:
+            raise RuntimeError("东财未登录（缺 APP 令牌），无法操作关注——请先到账户中心扫码")
+        # srtV1 是 GET 接口，不能走 rtV3 的 POST 信封；与 rtV3 同样用独立 curl 后端
+        if getattr(self, "_srtv1_http", None) is None:
+            from core.http import HttpClient
+            self._srtv1_http = HttpClient(min_interval=0.8)
+        data = self._srtv1_http.get_json(
+            SRTV1_URL,
+            params={"type": action, "ctToken": self.ct_token, "utToken": self.ut_token,
+                    "userId": self.user_id, "appVer": SRTV1_APP_VER, "zh": str(cid)},
+        ) or {}
+        ok = str(data.get("result")) == "0"
+        if not ok:
+            logger.warning(f"[东财] srtV1 {action} {cid} 失败: {data}")
+        return ok
 
     # ── 5. 实盘组合调仓（可选，需 APP 令牌）──────────────────
     def _spzh_trades(self, experts: list[Expert], target_date: str) -> list[TradeRecord]:
