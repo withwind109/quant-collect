@@ -488,6 +488,69 @@ async def live_experts(board: str = Query("total"), limit: int = Query(50, le=20
     return {"ok": True, "latest_date": latest, "rows": rows}
 
 
+class BoardRefreshBody(BaseModel):
+    board: str = "total"   # total=总榜(10004,累计收益) / day=日榜(10005,当日收益)
+    limit: int = 100
+
+
+@router.post("/live-experts/refresh")
+async def live_experts_refresh(body: BoardRefreshBody) -> Dict[str, Any]:
+    """手动拉取最新东财 rtV1 榜单（单榜）并落库（今日 upsert），供「加载最新」按钮调用。
+
+    与整页爬取（/run，含流水+rtV3）不同：本端点只刷新高手榜名册，轻量快速，
+    前端按榜分两步调用以展示进度。
+    """
+    board_type = {"total": "10004", "day": "10005"}.get(body.board)
+    if not board_type:
+        raise HTTPException(400, "board 仅支持 total/day")
+    limit = max(20, min(int(body.limit or 100), 200))
+    from core.http import HttpClient
+    from sources.eastmoney import EastmoneySource
+    src = EastmoneySource(HttpClient(min_interval=0.3), rank_types=[board_type])
+    experts = src.hot_experts(limit=limit)
+    if not experts:
+        raise HTTPException(502, "东财榜单拉取为空（接口可能变更或被限流）")
+
+    from datetime import date as _d
+    from core.db import qone, qexec
+    _db()
+    today = _d.today().isoformat()
+    updated = inserted = 0
+    for e in experts:
+        extra_new = dict(e.extra or {})
+        row = qone("SELECT extra_json, return_rate FROM crawl_expert "
+                   "WHERE trade_date=? AND expert_id=? AND market_type='live'",
+                   (today, e.expert_id))
+        if row:
+            try:
+                extra = json.loads(row.get("extra_json") or "{}")
+            except (TypeError, ValueError):
+                extra = {}
+            extra.update(extra_new)
+            # 总榜才覆盖累计收益；日榜只补当日收益，不动已有累计口径
+            sets = ["name=?", "owner=?", "followers=?", "extra_json=?"]
+            args: list = [e.name, e.owner, e.followers or 0,
+                          json.dumps(extra, ensure_ascii=False)]
+            if e.return_rate is not None:
+                sets.append("return_rate=?")
+                args.append(e.return_rate)
+            args += [today, e.expert_id]
+            qexec(f"UPDATE crawl_expert SET {', '.join(sets)} "
+                  "WHERE trade_date=? AND expert_id=? AND market_type='live'", tuple(args))
+            updated += 1
+        else:
+            qexec("""INSERT INTO crawl_expert
+                 (trade_date, source, asset_type, channel, expert_id, name, owner, rank_label,
+                  followers, return_rate, total_return, extra_json, market_type)
+                 VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)""",
+              (today, e.source, e.asset_type, e.channel, e.expert_id, e.name, e.owner,
+               e.rank_label, e.followers or 0, e.return_rate, None,
+               json.dumps(extra_new, ensure_ascii=False), e.market_type))
+            inserted += 1
+    return {"ok": True, "board": body.board, "fetched": len(experts),
+            "updated": updated, "inserted": inserted}
+
+
 # ── 高手能力评估 ─────────────────────────────────────────────────────────────
 
 class EvalBody(BaseModel):

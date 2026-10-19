@@ -5,30 +5,60 @@
   'use strict';
   var EP = window.EP;
   var S = {
-    sources: ['eastmoney', 'tonghuashun'],
+    channel: 'eastmoney',  // 当前渠道 tab（其余渠道暂未接入）
+    sources: ['eastmoney'],
     env: 'sim',
     minSells: 3,
     sampleOnly: true,
     eval: null,        // 最新一次评估结果（/evaluation）
-    wl: {},            // expert_id -> name（关注列表）
+    wl: {},            // expert_id -> {name,note,created_at,__mt}
     chart: null        // 明细抽屉的 ECharts 实例
   };
   var SRC_LABELS = { eastmoney: '东财', tonghuashun: '同花顺', xueqiu: '雪球', alipay: '支付宝' };
+  var CHANNELS = [
+    { s: 'eastmoney', ok: true },
+    { s: 'tonghuashun', ok: false },
+    { s: 'xueqiu', ok: false },
+    { s: 'alipay', ok: false }
+  ];
   var LOG_JOBS = [['crawl', '爬取'], ['bulk_history', '批量回补'], ['expert_eval', '能力评估'], ['history', '单组合回补']];
 
-  /* ═══════════ ① 实盘高手榜（爬取结果：累计收益 + 最近操作 + 活跃度）═══════════ */
+  /* ═══════════ 渠道 tab（仅东财可点，其余置灰） ═══════════ */
+
+  function channelTabs() {
+    return '<div class="card" style="padding:12px 16px"><div class="row" style="align-items:center;gap:0;margin:0">' +
+      '<span class="hint" style="margin-right:12px">数据渠道</span>' +
+      CHANNELS.map(function (t) {
+        if (t.ok) return '<span class="chip on" style="font-size:14px;padding:6px 20px;font-weight:600">' + SRC_LABELS[t.s] + '</span>';
+        return '<span class="chip" data-ch="' + t.s + '" title="暂未接入，敬请期待" style="opacity:.4;cursor:not-allowed">' + SRC_LABELS[t.s] + '</span>';
+      }).join('') +
+      '<span class="hint" style="margin-left:12px">其余渠道爬虫规划中——tab 先占位，点击无效</span></div></div>';
+  }
+
+  function bindChannelTabs(root) {
+    root.querySelectorAll('[data-ch]').forEach(function (c) {
+      c.onclick = function () { EP.toast(SRC_LABELS[c.dataset.ch] + ' 渠道暂未接入', 'error'); };
+    });
+  }
+
+  /* ═══════════ ① 实盘高手榜（手动加载 · 累计收益 + 最近操作 + 活跃度）═══════════ */
 
   function boardPanel() {
-    return '<div class="card"><h3>① 实盘高手榜 <span class="hint" style="font-weight:400">（最新爬取 · 前50 · 来源：东财 rtV1 日榜+总榜合并）</span></h3>' +
+    return '<div class="card"><h3>① 实盘高手榜 <span class="hint" style="font-weight:400">（东财 rtV1 日榜+总榜合并 · 前50 · 手动加载）</span></h3>' +
       '<div class="card-sub">累计收益来自<b>总榜</b>口径。最近操作来自本地实盘流水（rtV3）——只有<b>已关注</b>的组合才有明细，' +
       '未关注组合显示「无明细」不代表不活跃；判断活跃度请以关注后拉到的调仓为准。</div>' +
       '<div class="row" style="margin-top:10px">' +
+      '<div class="field"><label>&nbsp;</label><button class="btn primary" id="eb-load">⬇ 加载最新</button></div>' +
+      '<div class="field"><label>&nbsp;</label><button class="btn" id="eb-refresh">↻ 从本地刷新</button></div>' +
       '<div class="field"><label>榜单</label><div id="eb-chips">' +
       '<span class="chip on" data-board="total">总榜（累计收益）</span>' +
       '<span class="chip" data-board="day">日榜（当日收益）</span></div></div>' +
-      '<div class="field"><label>&nbsp;</label><button class="btn" id="eb-refresh">↻ 刷新</button></div>' +
       '<span class="hint" id="eb-meta" style="margin-left:8px;align-self:flex-end"></span></div>' +
-      '<div id="eb-table" style="margin-top:10px"></div></div>';
+      '<div id="eb-progress" style="display:none;margin-top:8px">' +
+      '<div style="background:var(--c-border);border-radius:6px;height:8px;overflow:hidden">' +
+      '<div id="eb-bar" style="height:100%;width:0;background:var(--c-primary);transition:width .3s"></div></div>' +
+      '<div class="hint" id="eb-progress-text" style="margin-top:4px"></div></div>' +
+      '<div id="eb-table" style="margin-top:10px"><div class="empty">点击「⬇ 加载最新」从东财实时拉取榜单，或「↻ 从本地刷新」查看已爬取数据</div></div></div>';
   }
 
   function opSummary(r) {
@@ -50,7 +80,7 @@
     EP.api('/api/expert-crawl/live-experts?board=' + board + '&limit=50').then(function (d) {
       if (!d.rows || !d.rows.length) {
         root.querySelector('#eb-meta').textContent = '';
-        box.innerHTML = '<div class="hint">暂无实盘榜数据——先在②里点「开始爬取」（含东财渠道）</div>';
+        box.innerHTML = '<div class="empty">本地暂无实盘榜数据——点「⬇ 加载最新」从东财拉取</div>';
         return;
       }
       root.querySelector('#eb-meta').textContent = '数据日期 ' + d.latest_date;
@@ -80,6 +110,47 @@
     }).catch(function (e) { box.innerHTML = '<div class="hint">' + EP.fmt.esc(e.message) + '</div>'; });
   }
 
+  function setProgress(root, pct, text) {
+    var box = root.querySelector('#eb-progress');
+    if (!box) return;
+    box.style.display = text ? 'block' : 'none';
+    root.querySelector('#eb-bar').style.width = pct + '%';
+    root.querySelector('#eb-progress-text').textContent = text || '';
+  }
+
+  /* 手动加载最新：分两步直拉东财（日榜→总榜），每步上报进度 */
+  function loadLatest(root) {
+    var btn = root.querySelector('#eb-load');
+    if (btn.disabled) return;
+    btn.disabled = true;
+    var steps = [{ board: 'day', label: '拉取日榜' }, { board: 'total', label: '拉取总榜' }];
+    var i = 0;
+    setProgress(root, 4, '连接东财 rtV1…');
+    (function next() {
+      if (i >= steps.length) {
+        setProgress(root, 100, '完成，已更新本地榜单');
+        EP.toast('榜单已更新');
+        loadLiveExperts(root);
+        setTimeout(function () { setProgress(root, 0, ''); }, 1500);
+        btn.disabled = false;
+        return;
+      }
+      var st = steps[i];
+      setProgress(root, Math.round(i / steps.length * 100), st.label + '…');
+      EP.api('/api/expert-crawl/live-experts/refresh', {
+        method: 'POST', body: { board: st.board, limit: 100 }
+      }).then(function (d) {
+        setProgress(root, Math.round((i + 1) / steps.length * 100),
+          st.label + '：获取 ' + d.fetched + ' 位（更新 ' + d.updated + ' · 新增 ' + d.inserted + '）');
+        i++; next();
+      }).catch(function (e) {
+        setProgress(root, 0, '');
+        btn.disabled = false;
+        EP.toast(e.message, 'error');
+      });
+    })();
+  }
+
   function bindLiveExperts(root) {
     root.querySelectorAll('#eb-chips .chip').forEach(function (c) {
       c.onclick = function () {
@@ -89,6 +160,7 @@
         loadLiveExperts(root);
       };
     });
+    root.querySelector('#eb-load').onclick = function () { loadLatest(root); };
     root.querySelector('#eb-refresh').onclick = function () { loadLiveExperts(root); };
     root.querySelector('#eb-table').addEventListener('click', function (e) {
       var w = e.target.closest('[data-eb-watch]'), f = e.target.closest('[data-eb-fetch]');
@@ -118,16 +190,11 @@
   }
 
   function crawlPanel() {
-    return '<div class="card"><h3>② 分渠道数据爬取</h3>' +
-      '<div class="card-sub">按渠道抓取高手操作流水（请求经无头浏览器通道发出）。各渠道独立统计、独立开关，数据落本地 SQLite（data/experts.db）。' +
+    return '<div class="card"><h3>④ 分渠道数据爬取 <span class="hint" style="font-weight:400">（当前渠道：' + SRC_LABELS[S.channel] + '）</span></h3>' +
+      '<div class="card-sub">按渠道抓取高手操作流水（请求经无头浏览器通道发出），数据落本地 SQLite（data/experts.db）。' +
       '东财<b>实盘</b>明细需要登录态——请先到右上角<a href="#/accounts" onclick="EP.go(\'accounts\');return false" style="font-weight:600">🏦 账户中心</a>扫码登录。</div>' +
       '<div class="card-grid" id="ec-channels"></div>' +
       '<div class="row" style="margin-top:12px">' +
-      '<div class="field"><label>数据源（多选）</label><div id="ec-src-chips">' +
-      ['eastmoney', 'tonghuashun', 'xueqiu', 'alipay'].map(function (s) {
-        var on = S.sources.indexOf(s) >= 0;
-        return '<span class="chip' + (on ? ' on' : '') + '" data-src="' + s + '">' + SRC_LABELS[s] + '</span>';
-      }).join('') + '</div></div>' +
       '<div class="field"><label>交易日（空=自动推断）</label><input class="input" id="ec-date" placeholder="YYYY-MM-DD" style="min-width:130px"></div>' +
       '<div class="field"><label>每榜数量</label><input class="input num" id="ec-top" value="50" style="min-width:90px"></div>' +
       '<div class="field"><label>&nbsp;</label><button class="btn primary" id="ec-run">▶ 开始爬取</button></div>' +
@@ -135,7 +202,7 @@
   }
 
   function backfillPanel() {
-    return '<div class="card"><h3>调仓历史回补 <span class="hint" style="font-weight:400">（能力评估的数据基础：单日流水只能看最近一天，回补才能算夏普/回撤）</span></h3>' +
+    return '<div class="card"><h3>⑤ 调仓历史回补 <span class="hint" style="font-weight:400">（能力评估的数据基础：单日流水只能看最近一天，回补才能算夏普/回撤）</span></h3>' +
       '<div class="row">' +
       '<div class="field"><label>模拟盘组合号（1000… 长号）</label><input class="input" id="eh-zjzh" placeholder="1000…" style="min-width:220px"></div>' +
       '<div class="field"><label>起始日（空=全部）</label><input class="input" id="eh-since" placeholder="YYYY-MM-DD" style="min-width:130px"></div>' +
@@ -151,7 +218,7 @@
   /* ── ② 关注列表（东财实盘，与东财账号关注关系双向同步）── */
 
   function watchPanel() {
-    return '<div class="card"><h3>③ 关注列表 <span class="hint" style="font-weight:400">（东财实盘 · rtV3 调仓明细仅对关注者开放）</span></h3>' +
+    return '<div class="card"><h3>② 关注列表 <span class="hint" style="font-weight:400">（东财实盘 · rtV3 调仓明细仅对关注者开放）</span></h3>' +
       '<div class="card-sub">流程：爬榜单 → 在获取的高手里点「关注」→ 这里「拉取调仓明细」入库 → 实盘环境评估即可用。' +
       'live 关注会在<b>东财账号上代为关注</b>该组合（取消时同步取消）；也可以「同步东财关注」把 APP 里已关注的组合拉回来。</div>' +
       '<div class="row" style="margin-top:10px">' +
@@ -234,22 +301,16 @@
   function loadChannels(root) {
     EP.api('/api/expert-crawl/channels').then(function (d) {
       root.querySelector('#ec-channels').innerHTML =
-        (d.channels || []).map(channelCards).join('');
+        (d.channels || []).filter(function (ch) { return ch.source === S.channel; })
+          .map(channelCards).join('');
     }).catch(function (e) { EP.toast(e.message, 'error'); });
   }
 
   function bindCrawl(root) {
-    root.querySelectorAll('#ec-src-chips .chip').forEach(function (c) {
-      c.onclick = function () {
-        var s = c.dataset.src, i = S.sources.indexOf(s);
-        if (i >= 0) S.sources.splice(i, 1); else S.sources.push(s);
-        c.classList.toggle('on');
-      };
-    });
     function doRun(btn, root2) {
       EP.api('/api/expert-crawl/run', {
         method: 'POST',
-        body: { sources: S.sources, top: parseInt(root2.querySelector('#ec-top').value, 10) || 50,
+        body: { sources: [S.channel], top: parseInt(root2.querySelector('#ec-top').value, 10) || 50,
                 date: root2.querySelector('#ec-date').value.trim() }
       }).then(function () {
         EP.toast('爬取已启动');
@@ -267,7 +328,6 @@
     }
 
     root.querySelector('#ec-run').onclick = function () {
-      if (!S.sources.length) { EP.toast('至少选一个数据源', 'error'); return; }
       var btn = this; btn.disabled = true;
       /* 登录态不再拦截：模拟盘爬取不依赖登录；实盘明细请先在「账户中心」扫码 */
       doRun(btn, root);
@@ -340,7 +400,7 @@
   /* ═══════════ ② 高手能力评估 ═══════════ */
 
   function evalPanel() {
-    return '<div class="card"><h3>④ 高手能力评估</h3>' +
+    return '<div class="card"><h3>③ 高手能力评估</h3>' +
       '<div class="card-sub">逐高手镜像回测（= 无脑跟他的单）：T+1 开盘 ±0.2% 滑点、佣金万 0.8（最低 5 元）、卖出印花税 0.05%、涨停拦截、噪音过滤。窗口从该高手首笔信号日起。按综合评分（夏普/索提诺/Calmar/胜率 分位秩平均）排序——分高且样本充足的，就是值得跟的人。</div>' +
       '<div class="row">' +
       '<div class="field"><label>数据环境</label><select class="select" id="ee-env">' +
@@ -352,8 +412,7 @@
       '<input type="checkbox" id="ee-sample-only" checked> 只看样本充足</label></div>' +
       '<div class="field"><label>&nbsp;</label><button class="btn primary" id="ee-run">▶ 开始评估</button>' +
       '<button class="btn" id="ee-refresh" style="margin-left:6px">刷新结果</button></div>' +
-      '</div><div id="ee-summary"></div><div id="ee-table"></div>' +
-      '<div style="margin-top:12px"><h3 style="font-size:14px;margin-bottom:8px">关注列表 <span class="hint" style="font-weight:400">（v1 镜像策略的跟随来源）</span></h3><div id="ee-wl"></div></div></div>';
+      '</div><div id="ee-summary"></div><div id="ee-table"></div></div>';
   }
 
   function num0(v) { return EP.fmt.num(v, 0); }
@@ -611,13 +670,14 @@
   }
 
   EP.loadExperts = function (root) {
-    root.innerHTML = boardPanel() + crawlPanel() + watchPanel() + backfillPanel() + evalPanel();
-    loadLiveExperts(root);
-    loadChannels(root);
-    bindLiveExperts(root);
-    bindCrawl(root); bindJobs(root); bindBackfill(root);
+    /* 2026-10-19 二次重构：渠道tab → ①实盘高手榜(手动加载) → ②关注列表 → ③能力评估 → ④爬取 ⑤回补 */
+    root.innerHTML = channelTabs() + boardPanel() + watchPanel() + evalPanel() + crawlPanel() + backfillPanel();
+    bindChannelTabs(root);
+    bindLiveExperts(root);           // 榜单不自动加载，等用户点「⬇ 加载最新」
     bindWatchCard(root);
     bindEval(root);
+    bindCrawl(root); bindJobs(root); bindBackfill(root);
+    loadChannels(root);
     loadWatch(root);
     loadEval(root);
   };
