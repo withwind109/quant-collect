@@ -3,29 +3,74 @@
     "stock_code": "600825",
     "asset_type": "stock",
     "stock_name": "新华传媒",
-    "buy_experts": 18,
-    "buy_records": 18,
+    "buy_experts": 78,
+    "buy_records": 78,
     "sources": [
       "eastmoney:东财组合高手操作"
     ],
-    "avg_price": 14.656,
+    "avg_price": 14.632,
     "amount": null,
-    "latest_time": "2026-10-19 09:43",
+    "latest_time": "2026-10-19 10:12",
     "net_amount": null,
     "note": ""
   },
   {
-    "stock_code": "000099",
+    "stock_code": "002343",
     "asset_type": "stock",
-    "stock_name": "中信海直",
-    "buy_experts": 8,
-    "buy_records": 8,
+    "stock_name": "慈文传媒",
+    "buy_experts": 36,
+    "buy_records": 36,
     "sources": [
       "eastmoney:东财组合高手操作"
     ],
-    "avg_price": 15.745,
+    "avg_price": 9.142,
     "amount": null,
-    "latest_time": "2026-10-19 09:38",
+    "latest_time": "2026-10-19 10:01",
+    "net_amount": null,
+    "note": ""
+  },
+  {
+    "stock_code": "002242",
+    "asset_type": "stock",
+    "stock_name": "九阳股份",
+    "buy_experts": 20,
+    "buy_records": 20,
+    "sources": [
+      "eastmoney:东财组合高手操作"
+    ],
+    "avg_price": 17.857,
+    "amount": null,
+    "latest_time": "2026-10-19 09:49",
+    "net_amount": null,
+    "note": ""
+  },
+  {
+    "stock_code": "000530",
+    "asset_type": "stock",
+    "stock_name": "冰山冷热",
+    "buy_experts": 20,
+    "buy_records": 20,
+    "sources": [
+      "eastmoney:东财组合高手操作"
+    ],
+    "avg_price": 7.442,
+    "amount": null,
+    "latest_time": "2026-10-19 10:17",
+    "net_amount": null,
+    "note": ""
+  },
+  {
+    "stock_code": "601811",
+    "asset_type": "stock",
+    "stock_name": "新华文轩",
+    "buy_experts": 17,
+    "buy_records": 17,
+    "sources": [
+      "eastmoney:东财组合高手操作"
+    ],
+    "avg_price": 25.598,
+    "amount": null,
+    "latest_time": "2026-10-19 10:18",
     "net_amount": null,
     "note": ""
   },
@@ -33,14 +78,29 @@
     "stock_code": "300411",
     "asset_type": "stock",
     "stock_name": "金盾股份",
-    "buy_experts": 8,
-    "buy_records": 8,
+    "buy_experts": 10,
+    "buy_records": 10,
     "sources": [
       "eastmoney:东财组合高手操作"
     ],
-    "avg_price": 10.71,
+    "avg_price": 10.649,
     "amount": null,
-    "latest_time": "2026-10-19 09:37",
+    "latest_time": "2026-10-19 09:53",
+    "net_amount": null,
+    "note": ""
+  },
+  {
+    "stock_code": "301190",
+    "asset_type": "stock",
+    "stock_name": "善水科技",
+    "buy_experts": 9,
+    "buy_records": 9,
+    "sources": [
+      "eastmoney:东财组合高手操作"
+    ],
+    "avg_price": 50.369,
+    "amount": null,
+    "latest_time": "2026-10-19 10:14",
     "net_amount": null,
     "note": ""
   },
@@ -48,29 +108,44 @@
     "stock_code": "600241",
     "asset_type": "stock",
     "stock_name": "时代万恒",
+    "buy_experts": 8,
+    "buy_records": 8,
+    "sources": [
+      "eastmoney:东财组合高手操作"
+    ],
+    "avg_price": 13.117,
+    "amount": null,
+    "latest_time": "2026-10-19 09:54",
+    "net_amount": null,
+    "note": ""
+  },
+  {
+    "stock_code": "300006",
+    "asset_type": "stock",
+    "stock_name": "莱美药业",
+    "buy_experts": 7,
+    "buy_records": 7,
+    "sources": [
+      "eastmoney:东财组合高手操作"
+    ],
+    "avg_price": 9.13,
+    "amount": null,
+    "latest_time": "2026-10-19 10:18",
+    "net_amount": null,
+    "note": ""
+  },
+  {
+    "stock_code": "603533",
+    "asset_type": "stock",
+    "stock_name": "掌阅科技",
     "buy_experts": 6,
     "buy_records": 6,
     "sources": [
       "eastmoney:东财组合高手操作"
     ],
-    "avg_price": 13.618,
+    "avg_price": 28.012,
     "amount": null,
-    "latest_time": "2026-10-19 09:41",
-    "net_amount": null,
-    "note": ""
-  },
-  {
-    "stock_code": "002510",
-    "asset_type": "stock",
-    "stock_name": "天汽模",
-    "buy_experts": 5,
-    "buy_records": 5,
-    "sources": [
-      "eastmoney:东财组合高手操作"
-    ],
-    "avg_price": 6.172,
-    "amount": null,
-    "latest_time": "2026-10-19 09:35",
+    "latest_time": "2026-10-19 10:01",
     "net_amount": null,
     "note": ""
   },
@@ -78,44 +153,29 @@
     "stock_code": "002917",
     "asset_type": "stock",
     "stock_name": "金奥博",
+    "buy_experts": 6,
+    "buy_records": 6,
+    "sources": [
+      "eastmoney:东财组合高手操作"
+    ],
+    "avg_price": 12.288,
+    "amount": null,
+    "latest_time": "2026-10-19 09:50",
+    "net_amount": null,
+    "note": ""
+  },
+  {
+    "stock_code": "301666",
+    "asset_type": "stock",
+    "stock_name": "大普微-UW",
     "buy_experts": 5,
     "buy_records": 5,
     "sources": [
       "eastmoney:东财组合高手操作"
     ],
-    "avg_price": 12.11,
+    "avg_price": 303.478,
     "amount": null,
-    "latest_time": "2026-10-19 09:25",
-    "net_amount": null,
-    "note": ""
-  },
-  {
-    "stock_code": "601606",
-    "asset_type": "stock",
-    "stock_name": "长城军工",
-    "buy_experts": 5,
-    "buy_records": 5,
-    "sources": [
-      "eastmoney:东财组合高手操作"
-    ],
-    "avg_price": 33.364,
-    "amount": null,
-    "latest_time": "2026-10-19 09:37",
-    "net_amount": null,
-    "note": ""
-  },
-  {
-    "stock_code": "002889",
-    "asset_type": "stock",
-    "stock_name": "东方嘉盛",
-    "buy_experts": 4,
-    "buy_records": 4,
-    "sources": [
-      "eastmoney:东财组合高手操作"
-    ],
-    "avg_price": 14.658,
-    "amount": null,
-    "latest_time": "2026-10-19 09:39",
+    "latest_time": "2026-10-19 09:51",
     "net_amount": null,
     "note": ""
   },
@@ -123,29 +183,134 @@
     "stock_code": "688825",
     "asset_type": "stock",
     "stock_name": "长鑫科技",
-    "buy_experts": 3,
-    "buy_records": 3,
+    "buy_experts": 4,
+    "buy_records": 4,
     "sources": [
       "eastmoney:东财组合高手操作"
     ],
-    "avg_price": 41.78,
+    "avg_price": 41.95,
     "amount": null,
-    "latest_time": "2026-10-19 09:36",
+    "latest_time": "2026-10-19 10:12",
     "net_amount": null,
     "note": ""
   },
   {
-    "stock_code": "600418",
+    "stock_code": "300107",
     "asset_type": "stock",
-    "stock_name": "江淮汽车",
-    "buy_experts": 3,
-    "buy_records": 3,
+    "stock_name": "建新股份",
+    "buy_experts": 4,
+    "buy_records": 4,
     "sources": [
       "eastmoney:东财组合高手操作"
     ],
-    "avg_price": 23.273,
+    "avg_price": 8.07,
     "amount": null,
-    "latest_time": "2026-10-19 09:43",
+    "latest_time": "2026-10-19 10:20",
+    "net_amount": null,
+    "note": ""
+  },
+  {
+    "stock_code": "920690",
+    "asset_type": "stock",
+    "stock_name": "捷众科技",
+    "buy_experts": 4,
+    "buy_records": 4,
+    "sources": [
+      "eastmoney:东财组合高手操作"
+    ],
+    "avg_price": 19.95,
+    "amount": null,
+    "latest_time": "2026-10-19 09:30",
+    "net_amount": null,
+    "note": ""
+  },
+  {
+    "stock_code": "002510",
+    "asset_type": "stock",
+    "stock_name": "天汽模",
+    "buy_experts": 4,
+    "buy_records": 4,
+    "sources": [
+      "eastmoney:东财组合高手操作"
+    ],
+    "avg_price": 6.138,
+    "amount": null,
+    "latest_time": "2026-10-19 09:30",
+    "net_amount": null,
+    "note": ""
+  },
+  {
+    "stock_code": "601606",
+    "asset_type": "stock",
+    "stock_name": "长城军工",
+    "buy_experts": 4,
+    "buy_records": 4,
+    "sources": [
+      "eastmoney:东财组合高手操作"
+    ],
+    "avg_price": 33.602,
+    "amount": null,
+    "latest_time": "2026-10-19 10:03",
+    "net_amount": null,
+    "note": ""
+  },
+  {
+    "stock_code": "000099",
+    "asset_type": "stock",
+    "stock_name": "中信海直",
+    "buy_experts": 4,
+    "buy_records": 4,
+    "sources": [
+      "eastmoney:东财组合高手操作"
+    ],
+    "avg_price": 15.543,
+    "amount": null,
+    "latest_time": "2026-10-19 09:38",
+    "net_amount": null,
+    "note": ""
+  },
+  {
+    "stock_code": "605058",
+    "asset_type": "stock",
+    "stock_name": "澳弘电子",
+    "buy_experts": 4,
+    "buy_records": 4,
+    "sources": [
+      "eastmoney:东财组合高手操作"
+    ],
+    "avg_price": 67.96,
+    "amount": null,
+    "latest_time": "2026-10-19 09:55",
+    "net_amount": null,
+    "note": ""
+  },
+  {
+    "stock_code": "001318",
+    "asset_type": "stock",
+    "stock_name": "阳光乳业",
+    "buy_experts": 4,
+    "buy_records": 4,
+    "sources": [
+      "eastmoney:东财组合高手操作"
+    ],
+    "avg_price": 15.178,
+    "amount": null,
+    "latest_time": "2026-10-19 10:18",
+    "net_amount": null,
+    "note": ""
+  },
+  {
+    "stock_code": "605577",
+    "asset_type": "stock",
+    "stock_name": "龙版传媒",
+    "buy_experts": 4,
+    "buy_records": 4,
+    "sources": [
+      "eastmoney:东财组合高手操作"
+    ],
+    "avg_price": 15.377,
+    "amount": null,
+    "latest_time": "2026-10-19 09:58",
     "net_amount": null,
     "note": ""
   },
@@ -165,17 +330,62 @@
     "note": ""
   },
   {
-    "stock_code": "300006",
+    "stock_code": "603999",
     "asset_type": "stock",
-    "stock_name": "莱美药业",
+    "stock_name": "读者传媒",
     "buy_experts": 3,
     "buy_records": 3,
     "sources": [
       "eastmoney:东财组合高手操作"
     ],
-    "avg_price": 9.56,
+    "avg_price": 7.637,
     "amount": null,
-    "latest_time": "2026-10-19 09:31",
+    "latest_time": "2026-10-19 10:04",
+    "net_amount": null,
+    "note": ""
+  },
+  {
+    "stock_code": "002889",
+    "asset_type": "stock",
+    "stock_name": "东方嘉盛",
+    "buy_experts": 3,
+    "buy_records": 3,
+    "sources": [
+      "eastmoney:东财组合高手操作"
+    ],
+    "avg_price": 14.077,
+    "amount": null,
+    "latest_time": "2026-10-19 09:54",
+    "net_amount": null,
+    "note": ""
+  },
+  {
+    "stock_code": "002058",
+    "asset_type": "stock",
+    "stock_name": "紫竹高科",
+    "buy_experts": 3,
+    "buy_records": 3,
+    "sources": [
+      "eastmoney:东财组合高手操作"
+    ],
+    "avg_price": 22.297,
+    "amount": null,
+    "latest_time": "2026-10-19 10:16",
+    "net_amount": null,
+    "note": ""
+  },
+  {
+    "stock_code": "301052",
+    "asset_type": "stock",
+    "stock_name": "果麦文化",
+    "buy_experts": 3,
+    "buy_records": 3,
+    "sources": [
+      "eastmoney:东财组合高手操作"
+    ],
+    "avg_price": 35.57,
+    "amount": null,
+    "latest_time": "2026-10-19 10:19",
     "net_amount": null,
     "note": ""
   },
@@ -195,32 +405,122 @@
     "note": ""
   },
   {
-    "stock_code": "002639",
+    "stock_code": "600869",
     "asset_type": "stock",
-    "stock_name": "雪人集团",
+    "stock_name": "远东股份",
     "buy_experts": 3,
     "buy_records": 3,
     "sources": [
       "eastmoney:东财组合高手操作"
     ],
-    "avg_price": 14.88,
+    "avg_price": 18.78,
     "amount": null,
-    "latest_time": "2026-10-19 09:35",
+    "latest_time": "2026-10-19 09:55",
     "net_amount": null,
     "note": ""
   },
   {
-    "stock_code": "301569",
+    "stock_code": "600703",
     "asset_type": "stock",
-    "stock_name": "C联亚",
-    "buy_experts": 3,
-    "buy_records": 3,
+    "stock_name": "三安光电",
+    "buy_experts": 2,
+    "buy_records": 2,
     "sources": [
       "eastmoney:东财组合高手操作"
     ],
-    "avg_price": 24.427,
+    "avg_price": 9.73,
     "amount": null,
-    "latest_time": "2026-10-19 09:40",
+    "latest_time": "2026-10-19 10:15",
+    "net_amount": null,
+    "note": ""
+  },
+  {
+    "stock_code": "300433",
+    "asset_type": "stock",
+    "stock_name": "蓝思科技",
+    "buy_experts": 2,
+    "buy_records": 2,
+    "sources": [
+      "eastmoney:东财组合高手操作"
+    ],
+    "avg_price": 24.895,
+    "amount": null,
+    "latest_time": "2026-10-19 10:14",
+    "net_amount": null,
+    "note": ""
+  },
+  {
+    "stock_code": "300852",
+    "asset_type": "stock",
+    "stock_name": "四会富仕",
+    "buy_experts": 2,
+    "buy_records": 2,
+    "sources": [
+      "eastmoney:东财组合高手操作"
+    ],
+    "avg_price": 73.055,
+    "amount": null,
+    "latest_time": "2026-10-19 09:53",
+    "net_amount": null,
+    "note": ""
+  },
+  {
+    "stock_code": "002696",
+    "asset_type": "stock",
+    "stock_name": "百洋股份",
+    "buy_experts": 2,
+    "buy_records": 2,
+    "sources": [
+      "eastmoney:东财组合高手操作"
+    ],
+    "avg_price": 9.415,
+    "amount": null,
+    "latest_time": "2026-10-19 09:53",
+    "net_amount": null,
+    "note": ""
+  },
+  {
+    "stock_code": "600418",
+    "asset_type": "stock",
+    "stock_name": "江淮汽车",
+    "buy_experts": 2,
+    "buy_records": 2,
+    "sources": [
+      "eastmoney:东财组合高手操作"
+    ],
+    "avg_price": 23.115,
+    "amount": null,
+    "latest_time": "2026-10-19 10:20",
+    "net_amount": null,
+    "note": ""
+  },
+  {
+    "stock_code": "300456",
+    "asset_type": "stock",
+    "stock_name": "赛微电子",
+    "buy_experts": 2,
+    "buy_records": 2,
+    "sources": [
+      "eastmoney:东财组合高手操作"
+    ],
+    "avg_price": 28.365,
+    "amount": null,
+    "latest_time": "2026-10-19 10:11",
+    "net_amount": null,
+    "note": ""
+  },
+  {
+    "stock_code": "300530",
+    "asset_type": "stock",
+    "stock_name": "领湃科技",
+    "buy_experts": 2,
+    "buy_records": 2,
+    "sources": [
+      "eastmoney:东财组合高手操作"
+    ],
+    "avg_price": 29.205,
+    "amount": null,
+    "latest_time": "2026-10-19 10:11",
     "net_amount": null,
     "note": ""
   },
@@ -240,21 +540,6 @@
     "note": ""
   },
   {
-    "stock_code": "600812",
-    "asset_type": "stock",
-    "stock_name": "华北制药",
-    "buy_experts": 2,
-    "buy_records": 2,
-    "sources": [
-      "eastmoney:东财组合高手操作"
-    ],
-    "avg_price": 6.11,
-    "amount": null,
-    "latest_time": "2026-10-19 09:37",
-    "net_amount": null,
-    "note": ""
-  },
-  {
     "stock_code": "001696",
     "asset_type": "stock",
     "stock_name": "宗申动力",
@@ -263,39 +548,69 @@
     "sources": [
       "eastmoney:东财组合高手操作"
     ],
-    "avg_price": 16.8,
+    "avg_price": 16.435,
     "amount": null,
-    "latest_time": "2026-10-19 09:37",
+    "latest_time": "2026-10-19 10:11",
     "net_amount": null,
     "note": ""
   },
   {
-    "stock_code": "300852",
+    "stock_code": "301569",
     "asset_type": "stock",
-    "stock_name": "四会富仕",
+    "stock_name": "C联亚",
     "buy_experts": 2,
     "buy_records": 2,
     "sources": [
       "eastmoney:东财组合高手操作"
     ],
-    "avg_price": 74.055,
+    "avg_price": 23.2,
     "amount": null,
-    "latest_time": "2026-10-19 09:40",
+    "latest_time": "2026-10-19 10:11",
     "net_amount": null,
     "note": ""
   },
   {
-    "stock_code": "300107",
+    "stock_code": "000710",
     "asset_type": "stock",
-    "stock_name": "建新股份",
+    "stock_name": "贝瑞基因",
     "buy_experts": 2,
     "buy_records": 2,
     "sources": [
       "eastmoney:东财组合高手操作"
     ],
-    "avg_price": 8.145,
+    "avg_price": 10.235,
     "amount": null,
-    "latest_time": "2026-10-19 09:33",
+    "latest_time": "2026-10-19 09:50",
+    "net_amount": null,
+    "note": ""
+  },
+  {
+    "stock_code": "301041",
+    "asset_type": "stock",
+    "stock_name": "金百泽",
+    "buy_experts": 2,
+    "buy_records": 2,
+    "sources": [
+      "eastmoney:东财组合高手操作"
+    ],
+    "avg_price": 35.15,
+    "amount": null,
+    "latest_time": "2026-10-19 09:58",
+    "net_amount": null,
+    "note": ""
+  },
+  {
+    "stock_code": "600199",
+    "asset_type": "stock",
+    "stock_name": "金种子酒",
+    "buy_experts": 2,
+    "buy_records": 2,
+    "sources": [
+      "eastmoney:东财组合高手操作"
+    ],
+    "avg_price": 7.88,
+    "amount": null,
+    "latest_time": "2026-10-19 10:12",
     "net_amount": null,
     "note": ""
   },
@@ -308,84 +623,204 @@
     "sources": [
       "eastmoney:东财组合高手操作"
     ],
-    "avg_price": 31.175,
+    "avg_price": 31.035,
     "amount": null,
-    "latest_time": "2026-10-19 09:43",
+    "latest_time": "2026-10-19 09:41",
     "net_amount": null,
     "note": ""
   },
   {
-    "stock_code": "002058",
+    "stock_code": "600435",
     "asset_type": "stock",
-    "stock_name": "紫竹高科",
+    "stock_name": "北方导航",
     "buy_experts": 2,
     "buy_records": 2,
     "sources": [
       "eastmoney:东财组合高手操作"
     ],
-    "avg_price": 22.38,
+    "avg_price": 12.47,
     "amount": null,
-    "latest_time": "2026-10-19 09:37",
+    "latest_time": "2026-10-19 10:17",
     "net_amount": null,
     "note": ""
   },
   {
-    "stock_code": "600664",
+    "stock_code": "002639",
     "asset_type": "stock",
-    "stock_name": "哈药股份",
+    "stock_name": "雪人集团",
     "buy_experts": 2,
     "buy_records": 2,
     "sources": [
       "eastmoney:东财组合高手操作"
     ],
-    "avg_price": 6.07,
+    "avg_price": 14.845,
     "amount": null,
-    "latest_time": "2026-10-19 09:37",
+    "latest_time": "2026-10-19 09:47",
     "net_amount": null,
     "note": ""
   },
   {
-    "stock_code": "300347",
+    "stock_code": "600252",
     "asset_type": "stock",
-    "stock_name": "泰格医药",
-    "buy_experts": 1,
-    "buy_records": 1,
+    "stock_name": "中恒集团",
+    "buy_experts": 2,
+    "buy_records": 2,
     "sources": [
       "eastmoney:东财组合高手操作"
     ],
-    "avg_price": 49.34,
+    "avg_price": 2.31,
     "amount": null,
-    "latest_time": "2026-10-19 09:36",
+    "latest_time": "2026-10-19 10:15",
     "net_amount": null,
     "note": ""
   },
   {
-    "stock_code": "600703",
+    "stock_code": "603598",
     "asset_type": "stock",
-    "stock_name": "三安光电",
-    "buy_experts": 1,
-    "buy_records": 1,
+    "stock_name": "引力传媒",
+    "buy_experts": 2,
+    "buy_records": 2,
     "sources": [
       "eastmoney:东财组合高手操作"
     ],
-    "avg_price": 9.85,
+    "avg_price": 18.785,
     "amount": null,
     "latest_time": "2026-10-19 09:31",
     "net_amount": null,
     "note": ""
   },
   {
-    "stock_code": "002547",
+    "stock_code": "603200",
     "asset_type": "stock",
-    "stock_name": "*ST春兴",
+    "stock_name": "上海洗霸",
+    "buy_experts": 2,
+    "buy_records": 2,
+    "sources": [
+      "eastmoney:东财组合高手操作"
+    ],
+    "avg_price": 54.945,
+    "amount": null,
+    "latest_time": "2026-10-19 10:07",
+    "net_amount": null,
+    "note": ""
+  },
+  {
+    "stock_code": "002291",
+    "asset_type": "stock",
+    "stock_name": "遥望科技",
+    "buy_experts": 2,
+    "buy_records": 2,
+    "sources": [
+      "eastmoney:东财组合高手操作"
+    ],
+    "avg_price": 6.075,
+    "amount": null,
+    "latest_time": "2026-10-19 10:20",
+    "net_amount": null,
+    "note": ""
+  },
+  {
+    "stock_code": "000576",
+    "asset_type": "stock",
+    "stock_name": "甘化科工",
+    "buy_experts": 2,
+    "buy_records": 2,
+    "sources": [
+      "eastmoney:东财组合高手操作"
+    ],
+    "avg_price": 9.37,
+    "amount": null,
+    "latest_time": "2026-10-19 09:49",
+    "net_amount": null,
+    "note": ""
+  },
+  {
+    "stock_code": "603096",
+    "asset_type": "stock",
+    "stock_name": "新经典",
+    "buy_experts": 2,
+    "buy_records": 2,
+    "sources": [
+      "eastmoney:东财组合高手操作"
+    ],
+    "avg_price": 18.92,
+    "amount": null,
+    "latest_time": "2026-10-19 10:01",
+    "net_amount": null,
+    "note": ""
+  },
+  {
+    "stock_code": "000792",
+    "asset_type": "stock",
+    "stock_name": "盐湖股份",
     "buy_experts": 1,
     "buy_records": 1,
     "sources": [
       "eastmoney:东财组合高手操作"
     ],
-    "avg_price": 2.24,
+    "avg_price": 23.1,
     "amount": null,
-    "latest_time": "2026-10-19 09:39",
+    "latest_time": "2026-10-19 10:00",
+    "net_amount": null,
+    "note": ""
+  },
+  {
+    "stock_code": "603456",
+    "asset_type": "stock",
+    "stock_name": "九洲药业",
+    "buy_experts": 1,
+    "buy_records": 1,
+    "sources": [
+      "eastmoney:东财组合高手操作"
+    ],
+    "avg_price": 15.93,
+    "amount": null,
+    "latest_time": "2026-10-19 10:20",
+    "net_amount": null,
+    "note": ""
+  },
+  {
+    "stock_code": "600519",
+    "asset_type": "stock",
+    "stock_name": "贵州茅台",
+    "buy_experts": 1,
+    "buy_records": 1,
+    "sources": [
+      "eastmoney:东财组合高手操作"
+    ],
+    "avg_price": 1339.0,
+    "amount": null,
+    "latest_time": "2026-10-19 09:36",
+    "net_amount": null,
+    "note": ""
+  },
+  {
+    "stock_code": "603656",
+    "asset_type": "stock",
+    "stock_name": "泰禾智能",
+    "buy_experts": 1,
+    "buy_records": 1,
+    "sources": [
+      "eastmoney:东财组合高手操作"
+    ],
+    "avg_price": 17.9,
+    "amount": null,
+    "latest_time": "2026-10-19 10:13",
+    "net_amount": null,
+    "note": ""
+  },
+  {
+    "stock_code": "002487",
+    "asset_type": "stock",
+    "stock_name": "大金重工",
+    "buy_experts": 1,
+    "buy_records": 1,
+    "sources": [
+      "eastmoney:东财组合高手操作"
+    ],
+    "avg_price": 33.8,
+    "amount": null,
+    "latest_time": "2026-10-19 09:58",
     "net_amount": null,
     "note": ""
   },
@@ -420,6 +855,36 @@
     "note": ""
   },
   {
+    "stock_code": "920161",
+    "asset_type": "stock",
+    "stock_name": "龙辰科技",
+    "buy_experts": 1,
+    "buy_records": 1,
+    "sources": [
+      "eastmoney:东财组合高手操作"
+    ],
+    "avg_price": 15.91,
+    "amount": null,
+    "latest_time": "2026-10-19 09:53",
+    "net_amount": null,
+    "note": ""
+  },
+  {
+    "stock_code": "300632",
+    "asset_type": "stock",
+    "stock_name": "光莆股份",
+    "buy_experts": 1,
+    "buy_records": 1,
+    "sources": [
+      "eastmoney:东财组合高手操作"
+    ],
+    "avg_price": 14.01,
+    "amount": null,
+    "latest_time": "2026-10-19 10:16",
+    "net_amount": null,
+    "note": ""
+  },
+  {
     "stock_code": "000909",
     "asset_type": "stock",
     "stock_name": "*ST数源",
@@ -435,17 +900,17 @@
     "note": ""
   },
   {
-    "stock_code": "603305",
+    "stock_code": "000919",
     "asset_type": "stock",
-    "stock_name": "旭升集团",
+    "stock_name": "金陵药业",
     "buy_experts": 1,
     "buy_records": 1,
     "sources": [
       "eastmoney:东财组合高手操作"
     ],
-    "avg_price": 10.55,
+    "avg_price": 6.3,
     "amount": null,
-    "latest_time": "2026-10-19 09:33",
+    "latest_time": "2026-10-19 10:10",
     "net_amount": null,
     "note": ""
   },
@@ -461,6 +926,21 @@
     "avg_price": 17.01,
     "amount": null,
     "latest_time": "2026-10-19 09:25",
+    "net_amount": null,
+    "note": ""
+  },
+  {
+    "stock_code": "688836",
+    "asset_type": "stock",
+    "stock_name": "宇树科技-W",
+    "buy_experts": 1,
+    "buy_records": 1,
+    "sources": [
+      "eastmoney:东财组合高手操作"
+    ],
+    "avg_price": 458.59,
+    "amount": null,
+    "latest_time": "2026-10-19 09:44",
     "net_amount": null,
     "note": ""
   },
@@ -495,6 +975,51 @@
     "note": ""
   },
   {
+    "stock_code": "002015",
+    "asset_type": "stock",
+    "stock_name": "协鑫能科",
+    "buy_experts": 1,
+    "buy_records": 1,
+    "sources": [
+      "eastmoney:东财组合高手操作"
+    ],
+    "avg_price": 13.63,
+    "amount": null,
+    "latest_time": "2026-10-19 10:04",
+    "net_amount": null,
+    "note": ""
+  },
+  {
+    "stock_code": "688766",
+    "asset_type": "stock",
+    "stock_name": "普冉股份",
+    "buy_experts": 1,
+    "buy_records": 1,
+    "sources": [
+      "eastmoney:东财组合高手操作"
+    ],
+    "avg_price": 277.97,
+    "amount": null,
+    "latest_time": "2026-10-19 10:00",
+    "net_amount": null,
+    "note": ""
+  },
+  {
+    "stock_code": "600522",
+    "asset_type": "stock",
+    "stock_name": "中天科技",
+    "buy_experts": 1,
+    "buy_records": 1,
+    "sources": [
+      "eastmoney:东财组合高手操作"
+    ],
+    "avg_price": 26.75,
+    "amount": null,
+    "latest_time": "2026-10-19 09:49",
+    "net_amount": null,
+    "note": ""
+  },
+  {
     "stock_code": "600975",
     "asset_type": "stock",
     "stock_name": "新五丰",
@@ -525,6 +1050,21 @@
     "note": ""
   },
   {
+    "stock_code": "301110",
+    "asset_type": "stock",
+    "stock_name": "青木科技",
+    "buy_experts": 1,
+    "buy_records": 1,
+    "sources": [
+      "eastmoney:东财组合高手操作"
+    ],
+    "avg_price": 36.02,
+    "amount": null,
+    "latest_time": "2026-10-19 10:09",
+    "net_amount": null,
+    "note": ""
+  },
+  {
     "stock_code": "603721",
     "asset_type": "stock",
     "stock_name": "中广天择",
@@ -540,32 +1080,62 @@
     "note": ""
   },
   {
-    "stock_code": "688837",
+    "stock_code": "300684",
     "asset_type": "stock",
-    "stock_name": "信诺维",
+    "stock_name": "中石科技",
     "buy_experts": 1,
     "buy_records": 1,
     "sources": [
       "eastmoney:东财组合高手操作"
     ],
-    "avg_price": 42.75,
+    "avg_price": 75.3,
     "amount": null,
-    "latest_time": "2026-10-19 09:37",
+    "latest_time": "2026-10-19 09:58",
     "net_amount": null,
     "note": ""
   },
   {
-    "stock_code": "159516",
+    "stock_code": "301150",
     "asset_type": "stock",
-    "stock_name": "半导体设备ETF国泰",
+    "stock_name": "中一科技",
     "buy_experts": 1,
     "buy_records": 1,
     "sources": [
       "eastmoney:东财组合高手操作"
     ],
-    "avg_price": 0.58,
+    "avg_price": 31.76,
     "amount": null,
-    "latest_time": "2026-10-19 09:39",
+    "latest_time": "2026-10-19 10:16",
+    "net_amount": null,
+    "note": ""
+  },
+  {
+    "stock_code": "603188",
+    "asset_type": "stock",
+    "stock_name": "亚邦股份",
+    "buy_experts": 1,
+    "buy_records": 1,
+    "sources": [
+      "eastmoney:东财组合高手操作"
+    ],
+    "avg_price": 5.32,
+    "amount": null,
+    "latest_time": "2026-10-19 10:05",
+    "net_amount": null,
+    "note": ""
+  },
+  {
+    "stock_code": "515050",
+    "asset_type": "stock",
+    "stock_name": "通信ETF华夏",
+    "buy_experts": 1,
+    "buy_records": 1,
+    "sources": [
+      "eastmoney:东财组合高手操作"
+    ],
+    "avg_price": 0.792,
+    "amount": null,
+    "latest_time": "2026-10-19 09:55",
     "net_amount": null,
     "note": ""
   },
@@ -581,6 +1151,36 @@
     "avg_price": 46.5,
     "amount": null,
     "latest_time": "2026-10-19 09:37",
+    "net_amount": null,
+    "note": ""
+  },
+  {
+    "stock_code": "688499",
+    "asset_type": "stock",
+    "stock_name": "利元亨",
+    "buy_experts": 1,
+    "buy_records": 1,
+    "sources": [
+      "eastmoney:东财组合高手操作"
+    ],
+    "avg_price": 43.63,
+    "amount": null,
+    "latest_time": "2026-10-19 09:53",
+    "net_amount": null,
+    "note": ""
+  },
+  {
+    "stock_code": "301302",
+    "asset_type": "stock",
+    "stock_name": "华如科技",
+    "buy_experts": 1,
+    "buy_records": 1,
+    "sources": [
+      "eastmoney:东财组合高手操作"
+    ],
+    "avg_price": 21.79,
+    "amount": null,
+    "latest_time": "2026-10-19 09:58",
     "net_amount": null,
     "note": ""
   },
@@ -630,6 +1230,66 @@
     "note": ""
   },
   {
+    "stock_code": "603766",
+    "asset_type": "stock",
+    "stock_name": "隆鑫通用",
+    "buy_experts": 1,
+    "buy_records": 1,
+    "sources": [
+      "eastmoney:东财组合高手操作"
+    ],
+    "avg_price": 15.03,
+    "amount": null,
+    "latest_time": "2026-10-19 09:55",
+    "net_amount": null,
+    "note": ""
+  },
+  {
+    "stock_code": "000635",
+    "asset_type": "stock",
+    "stock_name": "英 力 特",
+    "buy_experts": 1,
+    "buy_records": 1,
+    "sources": [
+      "eastmoney:东财组合高手操作"
+    ],
+    "avg_price": 8.25,
+    "amount": null,
+    "latest_time": "2026-10-19 10:08",
+    "net_amount": null,
+    "note": ""
+  },
+  {
+    "stock_code": "002893",
+    "asset_type": "stock",
+    "stock_name": "京能热力",
+    "buy_experts": 1,
+    "buy_records": 1,
+    "sources": [
+      "eastmoney:东财组合高手操作"
+    ],
+    "avg_price": 10.8,
+    "amount": null,
+    "latest_time": "2026-10-19 09:39",
+    "net_amount": null,
+    "note": ""
+  },
+  {
+    "stock_code": "002115",
+    "asset_type": "stock",
+    "stock_name": "三维通信",
+    "buy_experts": 1,
+    "buy_records": 1,
+    "sources": [
+      "eastmoney:东财组合高手操作"
+    ],
+    "avg_price": 9.54,
+    "amount": null,
+    "latest_time": "2026-10-19 09:40",
+    "net_amount": null,
+    "note": ""
+  },
+  {
     "stock_code": "301071",
     "asset_type": "stock",
     "stock_name": "力量钻石",
@@ -641,6 +1301,21 @@
     "avg_price": 49.09,
     "amount": null,
     "latest_time": "2026-10-19 09:38",
+    "net_amount": null,
+    "note": ""
+  },
+  {
+    "stock_code": "688400",
+    "asset_type": "stock",
+    "stock_name": "凌云光",
+    "buy_experts": 1,
+    "buy_records": 1,
+    "sources": [
+      "eastmoney:东财组合高手操作"
+    ],
+    "avg_price": 35.22,
+    "amount": null,
+    "latest_time": "2026-10-19 10:03",
     "net_amount": null,
     "note": ""
   },
@@ -660,6 +1335,21 @@
     "note": ""
   },
   {
+    "stock_code": "300300",
+    "asset_type": "stock",
+    "stock_name": "海峡创新",
+    "buy_experts": 1,
+    "buy_records": 1,
+    "sources": [
+      "eastmoney:东财组合高手操作"
+    ],
+    "avg_price": 11.38,
+    "amount": null,
+    "latest_time": "2026-10-19 09:52",
+    "net_amount": null,
+    "note": ""
+  },
+  {
     "stock_code": "000510",
     "asset_type": "stock",
     "stock_name": "新金路",
@@ -675,17 +1365,32 @@
     "note": ""
   },
   {
-    "stock_code": "920111",
+    "stock_code": "301699",
     "asset_type": "stock",
-    "stock_name": "聚星科技",
+    "stock_name": "洛轴股份",
     "buy_experts": 1,
     "buy_records": 1,
     "sources": [
       "eastmoney:东财组合高手操作"
     ],
-    "avg_price": 23.59,
+    "avg_price": 26.93,
     "amount": null,
-    "latest_time": "2026-10-19 09:40",
+    "latest_time": "2026-10-19 10:16",
+    "net_amount": null,
+    "note": ""
+  },
+  {
+    "stock_code": "300821",
+    "asset_type": "stock",
+    "stock_name": "东岳硅材",
+    "buy_experts": 1,
+    "buy_records": 1,
+    "sources": [
+      "eastmoney:东财组合高手操作"
+    ],
+    "avg_price": 16.87,
+    "amount": null,
+    "latest_time": "2026-10-19 10:09",
     "net_amount": null,
     "note": ""
   },
@@ -705,32 +1410,107 @@
     "note": ""
   },
   {
-    "stock_code": "002589",
+    "stock_code": "000993",
     "asset_type": "stock",
-    "stock_name": "瑞康医药",
+    "stock_name": "闽东电力",
     "buy_experts": 1,
     "buy_records": 1,
     "sources": [
       "eastmoney:东财组合高手操作"
     ],
-    "avg_price": 3.0,
+    "avg_price": 16.38,
     "amount": null,
-    "latest_time": "2026-10-19 09:38",
+    "latest_time": "2026-10-19 09:57",
     "net_amount": null,
     "note": ""
   },
   {
-    "stock_code": "300725",
+    "stock_code": "920111",
     "asset_type": "stock",
-    "stock_name": "药石科技",
+    "stock_name": "聚星科技",
     "buy_experts": 1,
     "buy_records": 1,
     "sources": [
       "eastmoney:东财组合高手操作"
     ],
-    "avg_price": 43.37,
+    "avg_price": 23.59,
+    "amount": null,
+    "latest_time": "2026-10-19 09:40",
+    "net_amount": null,
+    "note": ""
+  },
+  {
+    "stock_code": "600108",
+    "asset_type": "stock",
+    "stock_name": "亚盛集团",
+    "buy_experts": 1,
+    "buy_records": 1,
+    "sources": [
+      "eastmoney:东财组合高手操作"
+    ],
+    "avg_price": 3.48,
+    "amount": null,
+    "latest_time": "2026-10-19 10:01",
+    "net_amount": null,
+    "note": ""
+  },
+  {
+    "stock_code": "300802",
+    "asset_type": "stock",
+    "stock_name": "矩子科技",
+    "buy_experts": 1,
+    "buy_records": 1,
+    "sources": [
+      "eastmoney:东财组合高手操作"
+    ],
+    "avg_price": 19.18,
+    "amount": null,
+    "latest_time": "2026-10-19 10:00",
+    "net_amount": null,
+    "note": ""
+  },
+  {
+    "stock_code": "600812",
+    "asset_type": "stock",
+    "stock_name": "华北制药",
+    "buy_experts": 1,
+    "buy_records": 1,
+    "sources": [
+      "eastmoney:东财组合高手操作"
+    ],
+    "avg_price": 6.19,
+    "amount": null,
+    "latest_time": "2026-10-19 09:31",
+    "net_amount": null,
+    "note": ""
+  },
+  {
+    "stock_code": "513050",
+    "asset_type": "stock",
+    "stock_name": "中概互联网ETF易方达",
+    "buy_experts": 1,
+    "buy_records": 1,
+    "sources": [
+      "eastmoney:东财组合高手操作"
+    ],
+    "avg_price": 1.007,
     "amount": null,
     "latest_time": "2026-10-19 09:36",
+    "net_amount": null,
+    "note": ""
+  },
+  {
+    "stock_code": "600153",
+    "asset_type": "stock",
+    "stock_name": "建发股份",
+    "buy_experts": 1,
+    "buy_records": 1,
+    "sources": [
+      "eastmoney:东财组合高手操作"
+    ],
+    "avg_price": 8.81,
+    "amount": null,
+    "latest_time": "2026-10-19 09:44",
     "net_amount": null,
     "note": ""
   },
@@ -750,17 +1530,47 @@
     "note": ""
   },
   {
-    "stock_code": "000710",
+    "stock_code": "600436",
     "asset_type": "stock",
-    "stock_name": "贝瑞基因",
+    "stock_name": "片仔癀",
     "buy_experts": 1,
     "buy_records": 1,
     "sources": [
       "eastmoney:东财组合高手操作"
     ],
-    "avg_price": 10.35,
+    "avg_price": 125.79,
     "amount": null,
-    "latest_time": "2026-10-19 09:40",
+    "latest_time": "2026-10-19 10:12",
+    "net_amount": null,
+    "note": ""
+  },
+  {
+    "stock_code": "000725",
+    "asset_type": "stock",
+    "stock_name": "京东方Ａ",
+    "buy_experts": 1,
+    "buy_records": 1,
+    "sources": [
+      "eastmoney:东财组合高手操作"
+    ],
+    "avg_price": 5.0,
+    "amount": null,
+    "latest_time": "2026-10-19 10:01",
+    "net_amount": null,
+    "note": ""
+  },
+  {
+    "stock_code": "301081",
+    "asset_type": "stock",
+    "stock_name": "严牌股份",
+    "buy_experts": 1,
+    "buy_records": 1,
+    "sources": [
+      "eastmoney:东财组合高手操作"
+    ],
+    "avg_price": 18.36,
+    "amount": null,
+    "latest_time": "2026-10-19 09:55",
     "net_amount": null,
     "note": ""
   },
@@ -780,32 +1590,17 @@
     "note": ""
   },
   {
-    "stock_code": "000892",
+    "stock_code": "002860",
     "asset_type": "stock",
-    "stock_name": "欢瑞世纪",
+    "stock_name": "星帅尔",
     "buy_experts": 1,
     "buy_records": 1,
     "sources": [
       "eastmoney:东财组合高手操作"
     ],
-    "avg_price": 4.74,
+    "avg_price": 16.37,
     "amount": null,
-    "latest_time": "2026-10-19 09:30",
-    "net_amount": null,
-    "note": ""
-  },
-  {
-    "stock_code": "603533",
-    "asset_type": "stock",
-    "stock_name": "掌阅科技",
-    "buy_experts": 1,
-    "buy_records": 1,
-    "sources": [
-      "eastmoney:东财组合高手操作"
-    ],
-    "avg_price": 27.29,
-    "amount": null,
-    "latest_time": "2026-10-19 09:33",
+    "latest_time": "2026-10-19 10:03",
     "net_amount": null,
     "note": ""
   },
@@ -818,24 +1613,54 @@
     "sources": [
       "eastmoney:东财组合高手操作"
     ],
-    "avg_price": 7.82,
+    "avg_price": 7.9,
     "amount": null,
-    "latest_time": "2026-10-19 09:38",
+    "latest_time": "2026-10-19 09:46",
     "net_amount": null,
     "note": ""
   },
   {
-    "stock_code": "600536",
+    "stock_code": "300862",
     "asset_type": "stock",
-    "stock_name": "中国软件",
+    "stock_name": "蓝盾光电",
     "buy_experts": 1,
     "buy_records": 1,
     "sources": [
       "eastmoney:东财组合高手操作"
     ],
-    "avg_price": 30.76,
+    "avg_price": 34.99,
     "amount": null,
-    "latest_time": "2026-10-19 09:42",
+    "latest_time": "2026-10-19 09:55",
+    "net_amount": null,
+    "note": ""
+  },
+  {
+    "stock_code": "000858",
+    "asset_type": "stock",
+    "stock_name": "五 粮 液",
+    "buy_experts": 1,
+    "buy_records": 1,
+    "sources": [
+      "eastmoney:东财组合高手操作"
+    ],
+    "avg_price": 72.84,
+    "amount": null,
+    "latest_time": "2026-10-19 09:56",
+    "net_amount": null,
+    "note": ""
+  },
+  {
+    "stock_code": "300589",
+    "asset_type": "stock",
+    "stock_name": "江龙船艇",
+    "buy_experts": 1,
+    "buy_records": 1,
+    "sources": [
+      "eastmoney:东财组合高手操作"
+    ],
+    "avg_price": 14.33,
+    "amount": null,
+    "latest_time": "2026-10-19 09:51",
     "net_amount": null,
     "note": ""
   },
@@ -855,32 +1680,32 @@
     "note": ""
   },
   {
-    "stock_code": "515880",
+    "stock_code": "002745",
     "asset_type": "stock",
-    "stock_name": "通信ETF国泰",
+    "stock_name": "木林森",
     "buy_experts": 1,
     "buy_records": 1,
     "sources": [
       "eastmoney:东财组合高手操作"
     ],
-    "avg_price": 0.52,
+    "avg_price": 10.33,
     "amount": null,
-    "latest_time": "2026-10-19 09:38",
+    "latest_time": "2026-10-19 09:45",
     "net_amount": null,
     "note": ""
   },
   {
-    "stock_code": "300179",
+    "stock_code": "600281",
     "asset_type": "stock",
-    "stock_name": "四方达",
+    "stock_name": "华阳新材",
     "buy_experts": 1,
     "buy_records": 1,
     "sources": [
       "eastmoney:东财组合高手操作"
     ],
-    "avg_price": 30.68,
+    "avg_price": 5.08,
     "amount": null,
-    "latest_time": "2026-10-19 09:37",
+    "latest_time": "2026-10-19 09:25",
     "net_amount": null,
     "note": ""
   },
@@ -915,6 +1740,21 @@
     "note": ""
   },
   {
+    "stock_code": "300179",
+    "asset_type": "stock",
+    "stock_name": "四方达",
+    "buy_experts": 1,
+    "buy_records": 1,
+    "sources": [
+      "eastmoney:东财组合高手操作"
+    ],
+    "avg_price": 29.57,
+    "amount": null,
+    "latest_time": "2026-10-19 10:11",
+    "net_amount": null,
+    "note": ""
+  },
+  {
     "stock_code": "002730",
     "asset_type": "stock",
     "stock_name": "电光科技",
@@ -930,92 +1770,137 @@
     "note": ""
   },
   {
-    "stock_code": "600281",
+    "stock_code": "603980",
     "asset_type": "stock",
-    "stock_name": "华阳新材",
+    "stock_name": "吉华集团",
     "buy_experts": 1,
     "buy_records": 1,
     "sources": [
       "eastmoney:东财组合高手操作"
     ],
-    "avg_price": 5.08,
+    "avg_price": 9.72,
     "amount": null,
-    "latest_time": "2026-10-19 09:25",
+    "latest_time": "2026-10-19 09:57",
     "net_amount": null,
     "note": ""
   },
   {
-    "stock_code": "603155",
+    "stock_code": "300016",
     "asset_type": "stock",
-    "stock_name": "新亚强",
+    "stock_name": "北陆药业",
     "buy_experts": 1,
     "buy_records": 1,
     "sources": [
       "eastmoney:东财组合高手操作"
     ],
-    "avg_price": 15.01,
+    "avg_price": 7.82,
     "amount": null,
-    "latest_time": "2026-10-19 09:31",
+    "latest_time": "2026-10-19 09:57",
     "net_amount": null,
     "note": ""
   },
   {
-    "stock_code": "605318",
+    "stock_code": "000995",
     "asset_type": "stock",
-    "stock_name": "法狮龙",
+    "stock_name": "皇台酒业",
     "buy_experts": 1,
     "buy_records": 1,
     "sources": [
       "eastmoney:东财组合高手操作"
     ],
-    "avg_price": 68.27,
+    "avg_price": 14.46,
     "amount": null,
-    "latest_time": "2026-10-19 09:40",
+    "latest_time": "2026-10-19 09:39",
     "net_amount": null,
     "note": ""
   },
   {
-    "stock_code": "002242",
+    "stock_code": "600958",
     "asset_type": "stock",
-    "stock_name": "九阳股份",
+    "stock_name": "东方证券",
     "buy_experts": 1,
     "buy_records": 1,
     "sources": [
       "eastmoney:东财组合高手操作"
     ],
-    "avg_price": 17.03,
+    "avg_price": 8.69,
     "amount": null,
-    "latest_time": "2026-10-19 09:33",
+    "latest_time": "2026-10-19 09:50",
     "net_amount": null,
     "note": ""
   },
   {
-    "stock_code": "001318",
+    "stock_code": "603105",
     "asset_type": "stock",
-    "stock_name": "阳光乳业",
+    "stock_name": "芯能科技",
     "buy_experts": 1,
     "buy_records": 1,
     "sources": [
       "eastmoney:东财组合高手操作"
     ],
-    "avg_price": 14.15,
+    "avg_price": 10.23,
     "amount": null,
-    "latest_time": "2026-10-19 09:34",
+    "latest_time": "2026-10-19 09:45",
     "net_amount": null,
     "note": ""
   },
   {
-    "stock_code": "688238",
+    "stock_code": "300968",
     "asset_type": "stock",
-    "stock_name": "和元生物",
+    "stock_name": "格林精密",
     "buy_experts": 1,
     "buy_records": 1,
     "sources": [
       "eastmoney:东财组合高手操作"
     ],
-    "avg_price": 6.79,
+    "avg_price": 8.87,
     "amount": null,
-    "latest_time": "2026-10-19 09:34",
+    "latest_time": "2026-10-19 09:46",
+    "net_amount": null,
+    "note": ""
+  },
+  {
+    "stock_code": "601083",
+    "asset_type": "stock",
+    "stock_name": "锦江航运",
+    "buy_experts": 1,
+    "buy_records": 1,
+    "sources": [
+      "eastmoney:东财组合高手操作"
+    ],
+    "avg_price": 13.7,
+    "amount": null,
+    "latest_time": "2026-10-19 10:05",
+    "net_amount": null,
+    "note": ""
+  },
+  {
+    "stock_code": "002195",
+    "asset_type": "stock",
+    "stock_name": "岩山科技",
+    "buy_experts": 1,
+    "buy_records": 1,
+    "sources": [
+      "eastmoney:东财组合高手操作"
+    ],
+    "avg_price": 5.71,
+    "amount": null,
+    "latest_time": "2026-10-19 10:07",
+    "net_amount": null,
+    "note": ""
+  },
+  {
+    "stock_code": "301132",
+    "asset_type": "stock",
+    "stock_name": "满坤科技",
+    "buy_experts": 1,
+    "buy_records": 1,
+    "sources": [
+      "eastmoney:东财组合高手操作"
+    ],
+    "avg_price": 67.86,
+    "amount": null,
+    "latest_time": "2026-10-19 09:51",
     "net_amount": null,
     "note": ""
   },
@@ -1035,32 +1920,47 @@
     "note": ""
   },
   {
-    "stock_code": "113692",
+    "stock_code": "301282",
     "asset_type": "stock",
-    "stock_name": "保隆转债",
+    "stock_name": "金禄电子",
     "buy_experts": 1,
     "buy_records": 1,
     "sources": [
       "eastmoney:东财组合高手操作"
     ],
-    "avg_price": 133.999,
+    "avg_price": 41.97,
     "amount": null,
-    "latest_time": "2026-10-19 09:30",
+    "latest_time": "2026-10-19 10:17",
     "net_amount": null,
     "note": ""
   },
   {
-    "stock_code": "301132",
+    "stock_code": "920196",
     "asset_type": "stock",
-    "stock_name": "满坤科技",
+    "stock_name": "南方乳业",
     "buy_experts": 1,
     "buy_records": 1,
     "sources": [
       "eastmoney:东财组合高手操作"
     ],
-    "avg_price": 68.91,
+    "avg_price": 17.95,
     "amount": null,
-    "latest_time": "2026-10-19 09:38",
+    "latest_time": "2026-10-19 09:59",
+    "net_amount": null,
+    "note": ""
+  },
+  {
+    "stock_code": "002081",
+    "asset_type": "stock",
+    "stock_name": "金 螳 螂",
+    "buy_experts": 1,
+    "buy_records": 1,
+    "sources": [
+      "eastmoney:东财组合高手操作"
+    ],
+    "avg_price": 4.16,
+    "amount": null,
+    "latest_time": "2026-10-19 09:53",
     "net_amount": null,
     "note": ""
   },
@@ -1080,32 +1980,47 @@
     "note": ""
   },
   {
-    "stock_code": "301699",
+    "stock_code": "002103",
     "asset_type": "stock",
-    "stock_name": "洛轴股份",
+    "stock_name": "广博股份",
     "buy_experts": 1,
     "buy_records": 1,
     "sources": [
       "eastmoney:东财组合高手操作"
     ],
-    "avg_price": 27.07,
+    "avg_price": 7.28,
     "amount": null,
-    "latest_time": "2026-10-19 09:39",
+    "latest_time": "2026-10-19 09:43",
     "net_amount": null,
     "note": ""
   },
   {
-    "stock_code": "300579",
+    "stock_code": "002490",
     "asset_type": "stock",
-    "stock_name": "数字认证",
+    "stock_name": "山东墨龙",
     "buy_experts": 1,
     "buy_records": 1,
     "sources": [
       "eastmoney:东财组合高手操作"
     ],
-    "avg_price": 24.93,
+    "avg_price": 7.21,
     "amount": null,
-    "latest_time": "2026-10-19 09:34",
+    "latest_time": "2026-10-19 09:45",
+    "net_amount": null,
+    "note": ""
+  },
+  {
+    "stock_code": "601016",
+    "asset_type": "stock",
+    "stock_name": "节能风电",
+    "buy_experts": 1,
+    "buy_records": 1,
+    "sources": [
+      "eastmoney:东财组合高手操作"
+    ],
+    "avg_price": 3.06,
+    "amount": null,
+    "latest_time": "2026-10-19 09:46",
     "net_amount": null,
     "note": ""
   },
@@ -1125,66 +2040,6 @@
     "note": ""
   },
   {
-    "stock_code": "002343",
-    "asset_type": "stock",
-    "stock_name": "慈文传媒",
-    "buy_experts": 1,
-    "buy_records": 1,
-    "sources": [
-      "eastmoney:东财组合高手操作"
-    ],
-    "avg_price": 8.81,
-    "amount": null,
-    "latest_time": "2026-10-19 09:25",
-    "net_amount": null,
-    "note": ""
-  },
-  {
-    "stock_code": "002696",
-    "asset_type": "stock",
-    "stock_name": "百洋股份",
-    "buy_experts": 1,
-    "buy_records": 1,
-    "sources": [
-      "eastmoney:东财组合高手操作"
-    ],
-    "avg_price": 9.0,
-    "amount": null,
-    "latest_time": "2026-10-19 09:30",
-    "net_amount": null,
-    "note": ""
-  },
-  {
-    "stock_code": "001266",
-    "asset_type": "stock",
-    "stock_name": "宏英智能",
-    "buy_experts": 1,
-    "buy_records": 1,
-    "sources": [
-      "eastmoney:东财组合高手操作"
-    ],
-    "avg_price": 38.85,
-    "amount": null,
-    "latest_time": "2026-10-19 09:38",
-    "net_amount": null,
-    "note": ""
-  },
-  {
-    "stock_code": "300581",
-    "asset_type": "stock",
-    "stock_name": "晨曦航空",
-    "buy_experts": 1,
-    "buy_records": 1,
-    "sources": [
-      "eastmoney:东财组合高手操作"
-    ],
-    "avg_price": 12.02,
-    "amount": null,
-    "latest_time": "2026-10-19 09:32",
-    "net_amount": null,
-    "note": ""
-  },
-  {
     "stock_code": "002674",
     "asset_type": "stock",
     "stock_name": "兴业科技",
@@ -1200,17 +2055,32 @@
     "note": ""
   },
   {
-    "stock_code": "000957",
+    "stock_code": "301487",
     "asset_type": "stock",
-    "stock_name": "中通客车",
+    "stock_name": "盟固利",
     "buy_experts": 1,
     "buy_records": 1,
     "sources": [
       "eastmoney:东财组合高手操作"
     ],
-    "avg_price": 9.4,
+    "avg_price": 18.34,
     "amount": null,
-    "latest_time": "2026-10-19 09:30",
+    "latest_time": "2026-10-19 09:25",
+    "net_amount": null,
+    "note": ""
+  },
+  {
+    "stock_code": "600693",
+    "asset_type": "stock",
+    "stock_name": "东百集团",
+    "buy_experts": 1,
+    "buy_records": 1,
+    "sources": [
+      "eastmoney:东财组合高手操作"
+    ],
+    "avg_price": 9.08,
+    "amount": null,
+    "latest_time": "2026-10-19 09:52",
     "net_amount": null,
     "note": ""
   },
@@ -1230,45 +2100,75 @@
     "note": ""
   },
   {
-    "stock_code": "603598",
+    "stock_code": "001266",
     "asset_type": "stock",
-    "stock_name": "引力传媒",
+    "stock_name": "宏英智能",
     "buy_experts": 1,
     "buy_records": 1,
     "sources": [
       "eastmoney:东财组合高手操作"
     ],
-    "avg_price": 18.58,
+    "avg_price": 38.85,
     "amount": null,
-    "latest_time": "2026-10-19 09:31",
+    "latest_time": "2026-10-19 09:38",
     "net_amount": null,
     "note": ""
   },
   {
-    "stock_code": "300111",
+    "stock_code": "603936",
     "asset_type": "stock",
-    "stock_name": "向日葵",
+    "stock_name": "博敏电子",
     "buy_experts": 1,
     "buy_records": 1,
     "sources": [
       "eastmoney:东财组合高手操作"
     ],
-    "avg_price": 3.74,
+    "avg_price": 15.33,
+    "amount": null,
+    "latest_time": "2026-10-19 10:06",
+    "net_amount": null,
+    "note": ""
+  },
+  {
+    "stock_code": "000957",
+    "asset_type": "stock",
+    "stock_name": "中通客车",
+    "buy_experts": 1,
+    "buy_records": 1,
+    "sources": [
+      "eastmoney:东财组合高手操作"
+    ],
+    "avg_price": 9.4,
     "amount": null,
     "latest_time": "2026-10-19 09:30",
     "net_amount": null,
     "note": ""
   },
   {
-    "stock_code": "002422",
+    "stock_code": "603655",
     "asset_type": "stock",
-    "stock_name": "科伦药业",
+    "stock_name": "朗博科技",
     "buy_experts": 1,
     "buy_records": 1,
     "sources": [
       "eastmoney:东财组合高手操作"
     ],
-    "avg_price": 40.73,
+    "avg_price": 25.71,
+    "amount": null,
+    "latest_time": "2026-10-19 10:15",
+    "net_amount": null,
+    "note": ""
+  },
+  {
+    "stock_code": "300581",
+    "asset_type": "stock",
+    "stock_name": "晨曦航空",
+    "buy_experts": 1,
+    "buy_records": 1,
+    "sources": [
+      "eastmoney:东财组合高手操作"
+    ],
+    "avg_price": 12.02,
     "amount": null,
     "latest_time": "2026-10-19 09:32",
     "net_amount": null,
@@ -1290,17 +2190,77 @@
     "note": ""
   },
   {
-    "stock_code": "002623",
+    "stock_code": "300111",
     "asset_type": "stock",
-    "stock_name": "亚玛顿",
+    "stock_name": "向日葵",
     "buy_experts": 1,
     "buy_records": 1,
     "sources": [
       "eastmoney:东财组合高手操作"
     ],
-    "avg_price": 18.4,
+    "avg_price": 3.74,
     "amount": null,
-    "latest_time": "2026-10-19 09:38",
+    "latest_time": "2026-10-19 09:30",
+    "net_amount": null,
+    "note": ""
+  },
+  {
+    "stock_code": "301357",
+    "asset_type": "stock",
+    "stock_name": "北方长龙",
+    "buy_experts": 1,
+    "buy_records": 1,
+    "sources": [
+      "eastmoney:东财组合高手操作"
+    ],
+    "avg_price": 103.39,
+    "amount": null,
+    "latest_time": "2026-10-19 10:03",
+    "net_amount": null,
+    "note": ""
+  },
+  {
+    "stock_code": "123118",
+    "asset_type": "stock",
+    "stock_name": "惠城转债",
+    "buy_experts": 1,
+    "buy_records": 1,
+    "sources": [
+      "eastmoney:东财组合高手操作"
+    ],
+    "avg_price": 647.06,
+    "amount": null,
+    "latest_time": "2026-10-19 10:16",
+    "net_amount": null,
+    "note": ""
+  },
+  {
+    "stock_code": "301591",
+    "asset_type": "stock",
+    "stock_name": "肯特股份",
+    "buy_experts": 1,
+    "buy_records": 1,
+    "sources": [
+      "eastmoney:东财组合高手操作"
+    ],
+    "avg_price": 39.8,
+    "amount": null,
+    "latest_time": "2026-10-19 09:31",
+    "net_amount": null,
+    "note": ""
+  },
+  {
+    "stock_code": "603773",
+    "asset_type": "stock",
+    "stock_name": "沃格光电",
+    "buy_experts": 1,
+    "buy_records": 1,
+    "sources": [
+      "eastmoney:东财组合高手操作"
+    ],
+    "avg_price": 68.6,
+    "amount": null,
+    "latest_time": "2026-10-19 09:47",
     "net_amount": null,
     "note": ""
   },
@@ -1316,21 +2276,6 @@
     "avg_price": 1015.21,
     "amount": null,
     "latest_time": "2026-10-19 09:37",
-    "net_amount": null,
-    "note": ""
-  },
-  {
-    "stock_code": "301282",
-    "asset_type": "stock",
-    "stock_name": "金禄电子",
-    "buy_experts": 1,
-    "buy_records": 1,
-    "sources": [
-      "eastmoney:东财组合高手操作"
-    ],
-    "avg_price": 43.62,
-    "amount": null,
-    "latest_time": "2026-10-19 09:41",
     "net_amount": null,
     "note": ""
   },
@@ -1365,21 +2310,6 @@
     "note": ""
   },
   {
-    "stock_code": "601811",
-    "asset_type": "stock",
-    "stock_name": "新华文轩",
-    "buy_experts": 1,
-    "buy_records": 1,
-    "sources": [
-      "eastmoney:东财组合高手操作"
-    ],
-    "avg_price": 25.33,
-    "amount": null,
-    "latest_time": "2026-10-19 09:30",
-    "net_amount": null,
-    "note": ""
-  },
-  {
     "stock_code": "001211",
     "asset_type": "stock",
     "stock_name": "双枪科技",
@@ -1391,6 +2321,36 @@
     "avg_price": 27.26,
     "amount": null,
     "latest_time": "2026-10-19 09:34",
+    "net_amount": null,
+    "note": ""
+  },
+  {
+    "stock_code": "002878",
+    "asset_type": "stock",
+    "stock_name": "元隆雅图",
+    "buy_experts": 1,
+    "buy_records": 1,
+    "sources": [
+      "eastmoney:东财组合高手操作"
+    ],
+    "avg_price": 14.02,
+    "amount": null,
+    "latest_time": "2026-10-19 09:52",
+    "net_amount": null,
+    "note": ""
+  },
+  {
+    "stock_code": "601658",
+    "asset_type": "stock",
+    "stock_name": "邮储银行",
+    "buy_experts": 1,
+    "buy_records": 1,
+    "sources": [
+      "eastmoney:东财组合高手操作"
+    ],
+    "avg_price": 5.61,
+    "amount": null,
+    "latest_time": "2026-10-19 10:17",
     "net_amount": null,
     "note": ""
   },
@@ -1410,6 +2370,51 @@
     "note": ""
   },
   {
+    "stock_code": "688808",
+    "asset_type": "stock",
+    "stock_name": "联讯仪器",
+    "buy_experts": 1,
+    "buy_records": 1,
+    "sources": [
+      "eastmoney:东财组合高手操作"
+    ],
+    "avg_price": 1133.1,
+    "amount": null,
+    "latest_time": "2026-10-19 09:55",
+    "net_amount": null,
+    "note": ""
+  },
+  {
+    "stock_code": "603927",
+    "asset_type": "stock",
+    "stock_name": "中科软",
+    "buy_experts": 1,
+    "buy_records": 1,
+    "sources": [
+      "eastmoney:东财组合高手操作"
+    ],
+    "avg_price": 14.33,
+    "amount": null,
+    "latest_time": "2026-10-19 09:57",
+    "net_amount": null,
+    "note": ""
+  },
+  {
+    "stock_code": "000410",
+    "asset_type": "stock",
+    "stock_name": "沈阳机床",
+    "buy_experts": 1,
+    "buy_records": 1,
+    "sources": [
+      "eastmoney:东财组合高手操作"
+    ],
+    "avg_price": 4.81,
+    "amount": null,
+    "latest_time": "2026-10-19 09:51",
+    "net_amount": null,
+    "note": ""
+  },
+  {
     "stock_code": "600853",
     "asset_type": "stock",
     "stock_name": "龙建股份",
@@ -1421,6 +2426,21 @@
     "avg_price": 3.74,
     "amount": null,
     "latest_time": "2026-10-19 09:33",
+    "net_amount": null,
+    "note": ""
+  },
+  {
+    "stock_code": "002614",
+    "asset_type": "stock",
+    "stock_name": "奥佳华",
+    "buy_experts": 1,
+    "buy_records": 1,
+    "sources": [
+      "eastmoney:东财组合高手操作"
+    ],
+    "avg_price": 7.92,
+    "amount": null,
+    "latest_time": "2026-10-19 10:12",
     "net_amount": null,
     "note": ""
   },
@@ -1440,21 +2460,6 @@
     "note": ""
   },
   {
-    "stock_code": "002291",
-    "asset_type": "stock",
-    "stock_name": "遥望科技",
-    "buy_experts": 1,
-    "buy_records": 1,
-    "sources": [
-      "eastmoney:东财组合高手操作"
-    ],
-    "avg_price": 6.16,
-    "amount": null,
-    "latest_time": "2026-10-19 09:36",
-    "net_amount": null,
-    "note": ""
-  },
-  {
     "stock_code": "920006",
     "asset_type": "stock",
     "stock_name": "晟楠科技",
@@ -1470,17 +2475,32 @@
     "note": ""
   },
   {
-    "stock_code": "600792",
+    "stock_code": "000503",
     "asset_type": "stock",
-    "stock_name": "云煤能源",
+    "stock_name": "国新健康",
     "buy_experts": 1,
     "buy_records": 1,
     "sources": [
       "eastmoney:东财组合高手操作"
     ],
-    "avg_price": 4.5,
+    "avg_price": 8.32,
     "amount": null,
-    "latest_time": "2026-10-19 09:36",
+    "latest_time": "2026-10-19 10:20",
+    "net_amount": null,
+    "note": ""
+  },
+  {
+    "stock_code": "600602",
+    "asset_type": "stock",
+    "stock_name": "云赛智联",
+    "buy_experts": 1,
+    "buy_records": 1,
+    "sources": [
+      "eastmoney:东财组合高手操作"
+    ],
+    "avg_price": 15.54,
+    "amount": null,
+    "latest_time": "2026-10-19 10:06",
     "net_amount": null,
     "note": ""
   },
@@ -1500,6 +2520,51 @@
     "note": ""
   },
   {
+    "stock_code": "002395",
+    "asset_type": "stock",
+    "stock_name": "双象股份",
+    "buy_experts": 1,
+    "buy_records": 1,
+    "sources": [
+      "eastmoney:东财组合高手操作"
+    ],
+    "avg_price": 14.41,
+    "amount": null,
+    "latest_time": "2026-10-19 10:11",
+    "net_amount": null,
+    "note": ""
+  },
+  {
+    "stock_code": "000887",
+    "asset_type": "stock",
+    "stock_name": "中鼎股份",
+    "buy_experts": 1,
+    "buy_records": 1,
+    "sources": [
+      "eastmoney:东财组合高手操作"
+    ],
+    "avg_price": 17.12,
+    "amount": null,
+    "latest_time": "2026-10-19 09:25",
+    "net_amount": null,
+    "note": ""
+  },
+  {
+    "stock_code": "600487",
+    "asset_type": "stock",
+    "stock_name": "亨通光电",
+    "buy_experts": 1,
+    "buy_records": 1,
+    "sources": [
+      "eastmoney:东财组合高手操作"
+    ],
+    "avg_price": 47.82,
+    "amount": null,
+    "latest_time": "2026-10-19 09:49",
+    "net_amount": null,
+    "note": ""
+  },
+  {
     "stock_code": "300418",
     "asset_type": "stock",
     "stock_name": "昆仑万维",
@@ -1515,77 +2580,17 @@
     "note": ""
   },
   {
-    "stock_code": "000592",
+    "stock_code": "000823",
     "asset_type": "stock",
-    "stock_name": "平潭发展",
+    "stock_name": "超声电子",
     "buy_experts": 1,
     "buy_records": 1,
     "sources": [
       "eastmoney:东财组合高手操作"
     ],
-    "avg_price": 7.32,
+    "avg_price": 24.26,
     "amount": null,
-    "latest_time": "2026-10-19 09:43",
-    "net_amount": null,
-    "note": ""
-  },
-  {
-    "stock_code": "002860",
-    "asset_type": "stock",
-    "stock_name": "星帅尔",
-    "buy_experts": 1,
-    "buy_records": 1,
-    "sources": [
-      "eastmoney:东财组合高手操作"
-    ],
-    "avg_price": 16.96,
-    "amount": null,
-    "latest_time": "2026-10-19 09:40",
-    "net_amount": null,
-    "note": ""
-  },
-  {
-    "stock_code": "605058",
-    "asset_type": "stock",
-    "stock_name": "澳弘电子",
-    "buy_experts": 1,
-    "buy_records": 1,
-    "sources": [
-      "eastmoney:东财组合高手操作"
-    ],
-    "avg_price": 68.18,
-    "amount": null,
-    "latest_time": "2026-10-19 09:42",
-    "net_amount": null,
-    "note": ""
-  },
-  {
-    "stock_code": "301041",
-    "asset_type": "stock",
-    "stock_name": "金百泽",
-    "buy_experts": 1,
-    "buy_records": 1,
-    "sources": [
-      "eastmoney:东财组合高手操作"
-    ],
-    "avg_price": 35.9,
-    "amount": null,
-    "latest_time": "2026-10-19 09:35",
-    "net_amount": null,
-    "note": ""
-  },
-  {
-    "stock_code": "300050",
-    "asset_type": "stock",
-    "stock_name": "世纪鼎利",
-    "buy_experts": 1,
-    "buy_records": 1,
-    "sources": [
-      "eastmoney:东财组合高手操作"
-    ],
-    "avg_price": 6.49,
-    "amount": null,
-    "latest_time": "2026-10-19 09:43",
+    "latest_time": "2026-10-19 09:50",
     "net_amount": null,
     "note": ""
   },
@@ -1598,9 +2603,39 @@
     "sources": [
       "eastmoney:东财组合高手操作"
     ],
-    "avg_price": 1.354,
+    "avg_price": 1.348,
     "amount": null,
-    "latest_time": "2026-10-19 09:34",
+    "latest_time": "2026-10-19 09:51",
+    "net_amount": null,
+    "note": ""
+  },
+  {
+    "stock_code": "600879",
+    "asset_type": "stock",
+    "stock_name": "航天电子",
+    "buy_experts": 1,
+    "buy_records": 1,
+    "sources": [
+      "eastmoney:东财组合高手操作"
+    ],
+    "avg_price": 12.6,
+    "amount": null,
+    "latest_time": "2026-10-19 09:53",
+    "net_amount": null,
+    "note": ""
+  },
+  {
+    "stock_code": "600032",
+    "asset_type": "stock",
+    "stock_name": "浙江新能",
+    "buy_experts": 1,
+    "buy_records": 1,
+    "sources": [
+      "eastmoney:东财组合高手操作"
+    ],
+    "avg_price": 7.29,
+    "amount": null,
+    "latest_time": "2026-10-19 09:59",
     "net_amount": null,
     "note": ""
   },
@@ -1620,62 +2655,17 @@
     "note": ""
   },
   {
-    "stock_code": "600668",
+    "stock_code": "301230",
     "asset_type": "stock",
-    "stock_name": "尖峰集团",
+    "stock_name": "泓博医药",
     "buy_experts": 1,
     "buy_records": 1,
     "sources": [
       "eastmoney:东财组合高手操作"
     ],
-    "avg_price": 8.47,
+    "avg_price": 35.17,
     "amount": null,
-    "latest_time": "2026-10-19 09:30",
-    "net_amount": null,
-    "note": ""
-  },
-  {
-    "stock_code": "301655",
-    "asset_type": "stock",
-    "stock_name": "绿控传动",
-    "buy_experts": 1,
-    "buy_records": 1,
-    "sources": [
-      "eastmoney:东财组合高手操作"
-    ],
-    "avg_price": 20.73,
-    "amount": null,
-    "latest_time": "2026-10-19 09:37",
-    "net_amount": null,
-    "note": ""
-  },
-  {
-    "stock_code": "002747",
-    "asset_type": "stock",
-    "stock_name": "埃斯顿",
-    "buy_experts": 1,
-    "buy_records": 1,
-    "sources": [
-      "eastmoney:东财组合高手操作"
-    ],
-    "avg_price": 24.07,
-    "amount": null,
-    "latest_time": "2026-10-19 09:40",
-    "net_amount": null,
-    "note": ""
-  },
-  {
-    "stock_code": "688048",
-    "asset_type": "stock",
-    "stock_name": "长光华芯",
-    "buy_experts": 1,
-    "buy_records": 1,
-    "sources": [
-      "eastmoney:东财组合高手操作"
-    ],
-    "avg_price": 181.46,
-    "amount": null,
-    "latest_time": "2026-10-19 09:41",
+    "latest_time": "2026-10-19 10:06",
     "net_amount": null,
     "note": ""
   },
@@ -1695,32 +2685,92 @@
     "note": ""
   },
   {
-    "stock_code": "000530",
+    "stock_code": "002640",
     "asset_type": "stock",
-    "stock_name": "冰山冷热",
+    "stock_name": "跨境通",
     "buy_experts": 1,
     "buy_records": 1,
     "sources": [
       "eastmoney:东财组合高手操作"
     ],
-    "avg_price": 7.92,
+    "avg_price": 3.94,
     "amount": null,
-    "latest_time": "2026-10-19 09:43",
+    "latest_time": "2026-10-19 09:50",
     "net_amount": null,
     "note": ""
   },
   {
-    "stock_code": "000002",
+    "stock_code": "600066",
     "asset_type": "stock",
-    "stock_name": "万  科Ａ",
+    "stock_name": "宇通客车",
     "buy_experts": 1,
     "buy_records": 1,
     "sources": [
       "eastmoney:东财组合高手操作"
     ],
-    "avg_price": 3.6,
+    "avg_price": 28.72,
     "amount": null,
-    "latest_time": "2026-10-19 09:34",
+    "latest_time": "2026-10-19 09:37",
+    "net_amount": null,
+    "note": ""
+  },
+  {
+    "stock_code": "603693",
+    "asset_type": "stock",
+    "stock_name": "江苏新能",
+    "buy_experts": 1,
+    "buy_records": 1,
+    "sources": [
+      "eastmoney:东财组合高手操作"
+    ],
+    "avg_price": 12.95,
+    "amount": null,
+    "latest_time": "2026-10-19 09:55",
+    "net_amount": null,
+    "note": ""
+  },
+  {
+    "stock_code": "300182",
+    "asset_type": "stock",
+    "stock_name": "捷成股份",
+    "buy_experts": 1,
+    "buy_records": 1,
+    "sources": [
+      "eastmoney:东财组合高手操作"
+    ],
+    "avg_price": 5.79,
+    "amount": null,
+    "latest_time": "2026-10-19 10:12",
+    "net_amount": null,
+    "note": ""
+  },
+  {
+    "stock_code": "600831",
+    "asset_type": "stock",
+    "stock_name": "广电网络",
+    "buy_experts": 1,
+    "buy_records": 1,
+    "sources": [
+      "eastmoney:东财组合高手操作"
+    ],
+    "avg_price": 3.5,
+    "amount": null,
+    "latest_time": "2026-10-19 10:13",
+    "net_amount": null,
+    "note": ""
+  },
+  {
+    "stock_code": "688543",
+    "asset_type": "stock",
+    "stock_name": "国科军工",
+    "buy_experts": 1,
+    "buy_records": 1,
+    "sources": [
+      "eastmoney:东财组合高手操作"
+    ],
+    "avg_price": 44.8,
+    "amount": null,
+    "latest_time": "2026-10-19 09:30",
     "net_amount": null,
     "note": ""
   },
@@ -1733,24 +2783,54 @@
     "sources": [
       "eastmoney:东财组合高手操作"
     ],
-    "avg_price": 29.06,
+    "avg_price": 28.56,
     "amount": null,
-    "latest_time": "2026-10-19 09:37",
+    "latest_time": "2026-10-19 10:04",
     "net_amount": null,
     "note": ""
   },
   {
-    "stock_code": "300964",
+    "stock_code": "920627",
     "asset_type": "stock",
-    "stock_name": "本川智能",
+    "stock_name": "力王股份",
     "buy_experts": 1,
     "buy_records": 1,
     "sources": [
       "eastmoney:东财组合高手操作"
     ],
-    "avg_price": 69.3,
+    "avg_price": 18.55,
     "amount": null,
-    "latest_time": "2026-10-19 09:36",
+    "latest_time": "2026-10-19 09:33",
+    "net_amount": null,
+    "note": ""
+  },
+  {
+    "stock_code": "601086",
+    "asset_type": "stock",
+    "stock_name": "国芳集团",
+    "buy_experts": 1,
+    "buy_records": 1,
+    "sources": [
+      "eastmoney:东财组合高手操作"
+    ],
+    "avg_price": 11.47,
+    "amount": null,
+    "latest_time": "2026-10-19 10:12",
+    "net_amount": null,
+    "note": ""
+  },
+  {
+    "stock_code": "300364",
+    "asset_type": "stock",
+    "stock_name": "中文在线",
+    "buy_experts": 1,
+    "buy_records": 1,
+    "sources": [
+      "eastmoney:东财组合高手操作"
+    ],
+    "avg_price": 23.66,
+    "amount": null,
+    "latest_time": "2026-10-19 09:37",
     "net_amount": null,
     "note": ""
   },
@@ -1770,77 +2850,17 @@
     "note": ""
   },
   {
-    "stock_code": "300911",
+    "stock_code": "601288",
     "asset_type": "stock",
-    "stock_name": "亿田智能",
+    "stock_name": "农业银行",
     "buy_experts": 1,
     "buy_records": 1,
     "sources": [
       "eastmoney:东财组合高手操作"
     ],
-    "avg_price": 28.71,
+    "avg_price": 7.36,
     "amount": null,
-    "latest_time": "2026-10-19 09:40",
-    "net_amount": null,
-    "note": ""
-  },
-  {
-    "stock_code": "002640",
-    "asset_type": "stock",
-    "stock_name": "跨境通",
-    "buy_experts": 1,
-    "buy_records": 1,
-    "sources": [
-      "eastmoney:东财组合高手操作"
-    ],
-    "avg_price": 3.93,
-    "amount": null,
-    "latest_time": "2026-10-19 09:43",
-    "net_amount": null,
-    "note": ""
-  },
-  {
-    "stock_code": "300706",
-    "asset_type": "stock",
-    "stock_name": "阿石创",
-    "buy_experts": 1,
-    "buy_records": 1,
-    "sources": [
-      "eastmoney:东财组合高手操作"
-    ],
-    "avg_price": 38.22,
-    "amount": null,
-    "latest_time": "2026-10-19 09:38",
-    "net_amount": null,
-    "note": ""
-  },
-  {
-    "stock_code": "301520",
-    "asset_type": "stock",
-    "stock_name": "万邦医药",
-    "buy_experts": 1,
-    "buy_records": 1,
-    "sources": [
-      "eastmoney:东财组合高手操作"
-    ],
-    "avg_price": 59.88,
-    "amount": null,
-    "latest_time": "2026-10-19 09:25",
-    "net_amount": null,
-    "note": ""
-  },
-  {
-    "stock_code": "301230",
-    "asset_type": "stock",
-    "stock_name": "泓博医药",
-    "buy_experts": 1,
-    "buy_records": 1,
-    "sources": [
-      "eastmoney:东财组合高手操作"
-    ],
-    "avg_price": 38.29,
-    "amount": null,
-    "latest_time": "2026-10-19 09:42",
+    "latest_time": "2026-10-19 10:01",
     "net_amount": null,
     "note": ""
   }

@@ -35,11 +35,7 @@
   function crawlPanel() {
     return '<div class="card"><h3>① 分渠道数据爬取</h3>' +
       '<div class="card-sub">按渠道抓取高手操作流水（请求经无头浏览器通道发出）。各渠道独立统计、独立开关，数据落本地 SQLite（data/experts.db）。' +
-      '东财<b>实盘</b>明细需要登录态（页面触发爬取时未登录会弹出扫码框）。</div>' +
-      '<div class="row" style="margin-bottom:10px">' +
-      '<div class="field"><label>东财账户</label><span id="em-login-badge"><span class="hint">检测中…</span></span></div>' +
-      '<div class="field"><label>&nbsp;</label><button class="btn" id="em-login-btn">东财扫码登录</button>' +
-      '<button class="btn" id="em-accounts-btn" style="margin-left:6px">账户管理</button></div></div>' +
+      '东财<b>实盘</b>明细需要登录态——请先到右上角<a href="#/accounts" onclick="EP.go(\'accounts\');return false" style="font-weight:600">🏦 账户中心</a>扫码登录。</div>' +
       '<div class="card-grid" id="ec-channels"></div>' +
       '<div class="row" style="margin-top:12px">' +
       '<div class="field"><label>数据源（多选）</label><div id="ec-src-chips">' +
@@ -67,159 +63,7 @@
       '<span class="hint" id="eh-bulk-count"></span></div></div>';
   }
 
-  /* ── 东财账户中心（登录态管理） ─────────────────────────────────────── */
-
-  function loadEmBadge(root) {
-    var box = root.querySelector('#em-login-badge');
-    if (!box) return;
-    EP.api('/api/broker/check').then(function (d) {
-      if (!d.ok) { box.innerHTML = EP.badge('检测失败', 'gray'); return; }
-      if (d.logged_in) {
-        box.innerHTML = EP.badge('✅ 在线 · ' + (d.alias || d.account_id) + ' · 实盘令牌齐', 'green');
-      } else if (d.reason === 'no_tokens') {
-        box.innerHTML = EP.badge('⚠️ 已登录但缺实盘令牌（建议重新扫码）', 'orange');
-      } else {
-        box.innerHTML = EP.badge('❌ 未登录（实盘明细不可用，点右侧扫码）', 'red');
-      }
-    }).catch(function () { box.innerHTML = EP.badge('检测失败', 'gray'); });
-  }
-
-  function _closeOverlay(ov, sid) {
-    if (sid) { EP.api('/api/broker/login/' + sid + '/cancel', { method: 'POST' }).catch(function () {}); }
-    ov.remove();
-  }
-
-  /** 扫码登录模态框。onDone: 登录成功后的回调（如自动继续爬取）。 */
-  function openLoginModal(root, onDone) {
-    var old = document.getElementById('em-login-overlay');
-    if (old) old.remove();
-    var ov = document.createElement('div');
-    ov.id = 'em-login-overlay';
-    ov.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:1000;' +
-      'display:flex;align-items:center;justify-content:center';
-    ov.innerHTML = '<div class="card" style="width:460px;max-width:94vw;position:relative;' +
-      'max-height:92vh;overflow:auto">' +
-      '<button class="btn" id="em-lg-close" style="position:absolute;top:10px;right:10px;padding:2px 10px">×</button>' +
-      '<h3>东财账户登录</h3>' +
-      '<div class="card-sub">用无头浏览器打开东财统一登录页，手机扫码后<b>自动捕获实盘令牌</b>（rtV3 四元组）并保活。' +
-      '登录成功后爬取自动继续。</div>' +
-      '<div id="em-lg-body"></div></div>';
-    document.body.appendChild(ov);
-    var body = ov.querySelector('#em-lg-body');
-    var sid = null, timer = null;
-    ov.querySelector('#em-lg-close').onclick = function () { _closeOverlay(ov, sid); };
-
-    function startQr() {
-      var alias = (ov.querySelector('#em-lg-alias') || {}).value || '东财账户';
-      body.innerHTML = '<p class="hint">正在打开东财登录页…（首次约需 5-8 秒）</p>';
-      EP.api('/api/broker/login/start', { method: 'POST', body: { alias: alias } })
-        .then(function (d) {
-          if (!d.ok) { fail(d.error || '发起失败'); return; }
-          sid = d.session_id;
-          poll();
-          timer = setInterval(poll, 1600);
-        }).catch(function (e) { fail(e.message); });
-    }
-
-    function poll() {
-      EP.api('/api/broker/login/' + sid + '/snapshot').then(function (d) {
-        if (d.status === 'success') {
-          clearInterval(timer); timer = null;
-          body.innerHTML = '<p style="color:var(--up,#c00);font-weight:600">✅ ' +
-            EP.fmt.esc(d.detail || '登录成功') + '</p><p class="hint">窗口即将关闭…</p>';
-          setTimeout(function () { ov.remove(); }, 1200);
-          EP.toast('东财登录成功，实盘令牌已捕获');
-          if (onDone) onDone();
-          return;
-        }
-        if (d.status === 'failed' || d.status === 'cancelled') {
-          clearInterval(timer); timer = null;
-          fail(d.error || d.detail || '登录失败');
-          return;
-        }
-        var html = '<div style="text-align:center">' +
-          '<img alt="登录二维码" src="data:image/png;base64,' + d.image + '" ' +
-          'style="max-width:100%;border:1px solid var(--line,#ddd);border-radius:6px">' +
-          '<p class="hint" style="margin-top:8px">' + EP.fmt.esc(d.detail || d.status) + '</p></div>';
-        body.innerHTML = html;
-      }).catch(function (e) { clearInterval(timer); timer = null; fail(e.message); });
-    }
-
-    function fail(msg) {
-      sid = null;
-      body.innerHTML = '<p style="color:var(--down,#390)">❌ ' + EP.fmt.esc(msg) + '</p>' +
-        '<button class="btn" id="em-lg-retry">重试扫码</button>';
-      body.querySelector('#em-lg-retry').onclick = function () { initial(); };
-    }
-
-    function initial() {
-      body.innerHTML = '<div class="row">' +
-        '<div class="field" style="flex:1"><label>账户备注名</label>' +
-        '<input class="input" id="em-lg-alias" value="东财账户"></div>' +
-        '<div class="field"><label>&nbsp;</label><button class="btn primary" id="em-lg-go">发起扫码登录</button></div></div>';
-      body.querySelector('#em-lg-go').onclick = startQr;
-      body.querySelector('#em-lg-alias').addEventListener('keydown', function (e) {
-        if (e.key === 'Enter') startQr();
-      });
-    }
-
-    initial();
-  }
-
-  /** 账户管理模态框：列表 + 心跳/删除。 */
-  function openAccountsModal() {
-    var old = document.getElementById('em-login-overlay');
-    if (old) old.remove();
-    var ov = document.createElement('div');
-    ov.id = 'em-login-overlay';
-    ov.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:1000;' +
-      'display:flex;align-items:center;justify-content:center';
-    ov.innerHTML = '<div class="card" style="width:560px;max-width:94vw;position:relative;' +
-      'max-height:86vh;overflow:auto">' +
-      '<button class="btn" id="em-ac-close" style="position:absolute;top:10px;right:10px;padding:2px 10px">×</button>' +
-      '<h3>东财账户管理</h3><div id="em-ac-body"><p class="hint">加载中…</p></div></div>';
-    document.body.appendChild(ov);
-    ov.querySelector('#em-ac-close').onclick = function () { ov.remove(); };
-
-    function load() {
-      EP.api('/api/broker/accounts').then(function (d) {
-        var accs = d.accounts || [];
-        var body = ov.querySelector('#em-ac-body');
-        if (!accs.length) {
-          body.innerHTML = '<p class="hint">暂无账户。回到「高手评估」页点「东财扫码登录」添加。</p>';
-          return;
-        }
-        body.innerHTML = '<table class="grid"><thead><tr><th>账户</th><th>状态</th><th>实盘令牌</th>' +
-          '<th>上次心跳</th><th>操作</th></tr></thead><tbody>' +
-          accs.map(function (a) {
-            return '<tr><td>' + EP.fmt.esc(a.alias) + '<br><span class="hint">' +
-              EP.fmt.esc(a.id) + '</span></td>' +
-              '<td>' + (a.status === 'active' ? EP.badge('在线', 'green') : EP.badge(a.status, 'red')) + '</td>' +
-              '<td>' + (a.has_tokens ? '✅' : '—') + '</td>' +
-              '<td class="hint">' + EP.fmt.esc(a.last_heartbeat_at || '—') + '</td>' +
-              '<td><button class="btn" data-hb="' + a.id + '">心跳</button> ' +
-              '<button class="btn" data-del="' + a.id + '">删除</button></td></tr>';
-          }).join('') + '</tbody></table>';
-        body.querySelectorAll('[data-hb]').forEach(function (b) {
-          b.onclick = function () {
-            b.disabled = true; b.textContent = '…';
-            EP.api('/api/broker/accounts/' + b.dataset.hb + '/heartbeat', { method: 'POST' })
-              .then(function (r) {
-                EP.toast(r.alive ? '在线，令牌已续期' : '登录态已失效（建议重新扫码）', r.alive ? 'ok' : 'error');
-                load();
-              });
-          };
-        });
-        body.querySelectorAll('[data-del]').forEach(function (b) {
-          b.onclick = function () {
-            EP.api('/api/broker/accounts/' + b.dataset.del, { method: 'DELETE' })
-              .then(function () { EP.toast('已删除'); load(); });
-          };
-        });
-      }).catch(function (e) { EP.toast(e.message, 'error'); });
-    }
-    load();
-  }
+  /* 东财账户中心已独立为 accounts.js（右上角「🏦 账户中心」入口） */
 
   function loadChannels(root) {
     EP.api('/api/expert-crawl/channels').then(function (d) {
@@ -236,13 +80,6 @@
         c.classList.toggle('on');
       };
     });
-    root.querySelector('#em-login-btn').onclick = function () {
-      openLoginModal(root, function () { loadEmBadge(root); });
-    };
-    root.querySelector('#em-accounts-btn').onclick = function () {
-      openAccountsModal();
-    };
-
     function doRun(btn, root2) {
       EP.api('/api/expert-crawl/run', {
         method: 'POST',
@@ -266,19 +103,8 @@
     root.querySelector('#ec-run').onclick = function () {
       if (!S.sources.length) { EP.toast('至少选一个数据源', 'error'); return; }
       var btn = this; btn.disabled = true;
-      /* 先探测东财登录态：未登录 → 弹扫码框，登录成功后自动继续爬取 */
-      EP.api('/api/broker/check').then(function (ck) {
-        if (ck.ok && ck.logged_in) { doRun(btn, root); return; }
-        btn.disabled = false;
-        EP.toast('东财未登录，请先扫码（登录后实盘明细才可采集）', 'error');
-        openLoginModal(root, function () {
-          loadEmBadge(root);
-          doRun(btn, root);
-        });
-      }).catch(function () {
-        /* 探测接口异常不阻塞爬取（模拟盘不依赖登录态） */
-        doRun(btn, root);
-      });
+      /* 登录态不再拦截：模拟盘爬取不依赖登录；实盘明细请先在「账户中心」扫码 */
+      doRun(btn, root);
     };
   }
 
@@ -611,7 +437,6 @@
   EP.loadExperts = function (root) {
     root.innerHTML = crawlPanel() + backfillPanel() + evalPanel();
     loadChannels(root);
-    loadEmBadge(root);
     bindCrawl(root); bindJobs(root); bindBackfill(root);
     bindEval(root);
     loadWatch(root);

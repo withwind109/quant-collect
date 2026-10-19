@@ -7,33 +7,57 @@
       "sources": [
         "eastmoney"
       ],
-      "activity": 295
+      "activity": 300
     },
     {
       "date": "2026-10-16",
       "sources": [
-        "eastmoney"
+        "tonghuashun"
       ],
-      "activity": 5
+      "activity": 96
+    },
+    {
+      "date": "2026-10-15",
+      "sources": [
+        "tonghuashun"
+      ],
+      "activity": 1
     }
   ],
   "coverage": [
     {
       "source": "eastmoney",
       "capability": "组合高手操作明细：组合名 + 累计收益率 + 当日收益率 + 股票 + 成交价 + 仓位变化",
-      "experts": 345,
-      "trades": 295,
-      "buys": 196,
-      "experts_with_buys": 196,
-      "stocks": 123,
-      "with_expert_name": 196,
-      "with_stock": 196,
-      "with_return_rate": 196,
-      "with_price": 196,
+      "experts": 671,
+      "trades": 621,
+      "buys": 464,
+      "experts_with_buys": 464,
+      "stocks": 191,
+      "with_expert_name": 464,
+      "with_stock": 464,
+      "with_return_rate": 464,
+      "with_price": 464,
       "live_experts": 50,
       "live_buys": 0,
-      "sim_experts": 295,
-      "sim_buys": 196
+      "sim_experts": 621,
+      "sim_buys": 464
+    },
+    {
+      "source": "tonghuashun",
+      "capability": "模拟炒股百强榜（收益率）+ 高手买卖动态；逐笔股票代码需登录且「追踪」该高手后才公开",
+      "experts": 50,
+      "trades": 0,
+      "buys": 0,
+      "experts_with_buys": 0,
+      "stocks": 0,
+      "with_expert_name": 0,
+      "with_stock": 0,
+      "with_return_rate": 0,
+      "with_price": 0,
+      "live_experts": 0,
+      "live_buys": 0,
+      "sim_experts": 50,
+      "sim_buys": 0
     }
   ]
 }

@@ -5,7 +5,7 @@ from playwright.sync_api import sync_playwright
 
 BASE = "http://127.0.0.1:8601"
 errors, failed = [], []
-name_key = {"高手评估": "experts", "高手跟随策略": "strategy"}
+name_key = {"高手评估": "experts", "高手跟随策略": "strategy", "东财账户中心": "accounts"}
 
 
 def e_is_visible(page, el):
@@ -23,7 +23,7 @@ def check_page(page, path, name, wait_ms=6000):
     page.on("requestfailed", lambda r: failed.append(f"{name}: {r.url}"))
     page.goto(BASE + "/", wait_until="networkidle")
     # 用点击导航（真实用户行为）切页面，避免 hash-only goto 的浏览器差异
-    nav_sel = {"experts": "#nav-experts", "strategy": "#nav-strategy"}
+    nav_sel = {"experts": "#nav-experts", "strategy": "#nav-strategy", "accounts": "#nav-accounts"}
     page.click(nav_sel[name_key[name]])
     page.wait_for_timeout(wait_ms)
     h3s, subs = [], []
@@ -52,14 +52,21 @@ with sync_playwright() as pw:
     b = pw.chromium.launch(headless=True, args=["--no-sandbox"])
     pg = b.new_page(viewport={"width": 1440, "height": 900})
 
-    for path, name in [("/#/experts", "高手评估"), ("/#/expert-strategy", "高手跟随策略")]:
+    for path, name in [("/#/experts", "高手评估"), ("/#/expert-strategy", "高手跟随策略"), ("/#/accounts", "东财账户中心")]:
         info, msgs = check_page(pg, path, name)
         print(f"═══ {name} ═══")
         for k, v in info.items():
             print(f"  {k}: {v}")
         print(f"  JS 错误: {msgs if msgs else '无'}")
         errors += [f"{name}: {m}" for m in msgs]
-        pg.screenshot(path=f"logs/shot_{'experts' if 'experts' in path else 'strategy'}.png", full_page=False)
+        pg.screenshot(path=f"logs/shot_{'experts' if 'experts' in path else ('accounts' if 'accounts' in path else 'strategy')}.png", full_page=False)
+
+    # 交互：账户中心——发起扫码按钮存在且可点（不发真扫码，验证 initial 态）
+    pg.click("#nav-accounts")
+    pg.wait_for_timeout(2500)
+    go = pg.query_selector("#ac-go")
+    print(f"  [账户中心] 发起扫码按钮={bool(go)} 状态徽章={count_visible(pg, '#ac-status .badge')} "
+          f"账户表={count_visible(pg, '#ac-list table.grid')}")
 
     # 交互：切子 tab（高手跟随策略页）
     page_ = pg

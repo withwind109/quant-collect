@@ -3,7 +3,7 @@
   'use strict';
   var EP = window.EP;
 
-  var PAGES = { experts: '高手评估', strategy: '高手跟随策略' };
+  var PAGES = { experts: '高手评估', strategy: '高手跟随策略', accounts: '东财账户中心' };
   var loaded = {};
 
   EP.go = function (name) {
@@ -21,11 +21,17 @@
     if (!loaded[name]) {
       var root = document.getElementById(name + '-root');
       if (name === 'experts') EP.loadExperts(root);
+      else if (name === 'accounts') EP.loadAccounts(root);
       else EP.loadStrategy(root);
       loaded[name] = true;
     } else if (name === 'strategy') {
       // 策略页每次进入都刷新（看板数据/运行状态是实时的）
       EP.loadStrategy(document.getElementById('strategy-root'));
+    } else if (name === 'accounts') {
+      // 账户中心每次进入都刷新（登录态/心跳是实时的）
+      var ac = document.getElementById('accounts-root');
+      if (ac._acDispose) ac._acDispose();   // 清理遗留扫码会话
+      EP.loadAccounts(ac);
     }
   }
 
