@@ -119,7 +119,20 @@ def _build_eastmoney(fetcher, settings: dict):
     """构造东财数据源（build_sources 与 history/bulk_history 共用，参数只此一处维护）。"""
     from sources.eastmoney import EastmoneySource
 
-    em_cfg = settings.get("eastmoney", {})
+    em_cfg = dict(settings.get("eastmoney", {}))
+    # 实盘 rtV3 令牌优先级（对齐 xcq-platform pipeline 2026-09-25 账户中心方案）:
+    # 登录态账户(broker_accounts 表) > config/env。config/env 三要素没配全时才尝试
+    # 从账户中心取, 取不到则保持空值(实盘明细自动跳过, 模拟盘不受影响)。
+    if not (em_cfg.get("spzh_ct_token") and em_cfg.get("spzh_ut_token") and em_cfg.get("spzh_user_id")):
+        try:
+            from core.broker_account import active_tokens
+            _tp = active_tokens("eastmoney") or {}
+            for k_src, k_cfg in (("ctToken", "spzh_ct_token"), ("utToken", "spzh_ut_token"),
+                                 ("userId", "spzh_user_id"), ("deviceId", "spzh_device_id")):
+                if _tp.get(k_src) and not em_cfg.get(k_cfg):
+                    em_cfg[k_cfg] = _tp[k_src]
+        except Exception as _tp_e:  # 令牌供给失败不阻塞爬取（模拟盘不受影响）
+            logger.warning(f"[pipeline] 账户中心令牌供给失败(非阻塞): {_tp_e}")
     return EastmoneySource(
         fetcher,
         rank_type=str(em_cfg.get("rank_type", "10005")),

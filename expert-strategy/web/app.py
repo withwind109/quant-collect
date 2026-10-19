@@ -37,6 +37,13 @@ def _ensure_schemas() -> None:
 @asynccontextmanager
 async def _lifespan(app: FastAPI):
     _ensure_schemas()
+    # 账户中心：幂等建表 + 心跳保活线程（30min 验证登录态/续令牌）
+    try:
+        from core.broker_account import _ensure_tables, account_manager
+        _ensure_tables()
+        account_manager.start_heartbeat()
+    except Exception:  # noqa: BLE001  心跳失败不阻塞服务启动
+        pass
     yield
 
 
@@ -45,10 +52,12 @@ def create_app() -> FastAPI:
                   docs_url=None, redoc_url=None, lifespan=_lifespan)
 
     # ── 路由注册（先于静态兜底） ───────────────────────────────────────────
+    from web.routes import broker as broker_router
     from web.routes import experts as experts_router
     from web.routes import strategy as strategy_router
     app.include_router(experts_router.router)
     app.include_router(strategy_router.router)
+    app.include_router(broker_router.router)
 
     # ── 手写 CORS + 慢请求日志（源项目同款中间件，精简版） ─────────────────
     @app.middleware("http")

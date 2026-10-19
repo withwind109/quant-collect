@@ -1,61 +1,31 @@
 [
   {
-    "stock_code": "301569",
+    "stock_code": "920006",
     "asset_type": "stock",
-    "stock_name": "C联亚",
-    "buy_experts": 269,
-    "buy_records": 269,
+    "stock_name": "晟楠科技",
+    "buy_experts": 242,
+    "buy_records": 242,
     "sources": [
       "eastmoney:股票买入热度榜"
     ],
-    "avg_price": 27.03,
+    "avg_price": 21.56,
     "amount": null,
-    "latest_time": "2026-10-17",
+    "latest_time": "2026-10-19",
     "net_amount": null,
     "note": "站点全量聚合口径，不含买入高手名单"
   },
   {
-    "stock_code": "600869",
+    "stock_code": "600825",
     "asset_type": "stock",
-    "stock_name": "远东股份",
-    "buy_experts": 127,
-    "buy_records": 127,
+    "stock_name": "新华传媒",
+    "buy_experts": 209,
+    "buy_records": 209,
     "sources": [
       "eastmoney:股票买入热度榜"
     ],
-    "avg_price": 18.96,
+    "avg_price": 15.0,
     "amount": null,
-    "latest_time": "2026-10-17",
-    "net_amount": null,
-    "note": "站点全量聚合口径，不含买入高手名单"
-  },
-  {
-    "stock_code": "002343",
-    "asset_type": "stock",
-    "stock_name": "慈文传媒",
-    "buy_experts": 116,
-    "buy_records": 116,
-    "sources": [
-      "eastmoney:股票买入热度榜"
-    ],
-    "avg_price": 9.14,
-    "amount": null,
-    "latest_time": "2026-10-17",
-    "net_amount": null,
-    "note": "站点全量聚合口径，不含买入高手名单"
-  },
-  {
-    "stock_code": "002242",
-    "asset_type": "stock",
-    "stock_name": "九阳股份",
-    "buy_experts": 104,
-    "buy_records": 104,
-    "sources": [
-      "eastmoney:股票买入热度榜"
-    ],
-    "avg_price": 17.73,
-    "amount": null,
-    "latest_time": "2026-10-17",
+    "latest_time": "2026-10-19",
     "net_amount": null,
     "note": "站点全量聚合口径，不含买入高手名单"
   },
@@ -63,14 +33,719 @@
     "stock_code": "688825",
     "asset_type": "stock",
     "stock_name": "长鑫科技",
+    "buy_experts": 203,
+    "buy_records": 203,
+    "sources": [
+      "eastmoney:股票买入热度榜"
+    ],
+    "avg_price": 42.79,
+    "amount": null,
+    "latest_time": "2026-10-19",
+    "net_amount": null,
+    "note": "站点全量聚合口径，不含买入高手名单"
+  },
+  {
+    "stock_code": "301569",
+    "asset_type": "stock",
+    "stock_name": "C联亚",
+    "buy_experts": 195,
+    "buy_records": 195,
+    "sources": [
+      "eastmoney:股票买入热度榜"
+    ],
+    "avg_price": 23.9,
+    "amount": null,
+    "latest_time": "2026-10-19",
+    "net_amount": null,
+    "note": "站点全量聚合口径，不含买入高手名单"
+  },
+  {
+    "stock_code": "000887",
+    "asset_type": "stock",
+    "stock_name": "中鼎股份",
+    "buy_experts": 146,
+    "buy_records": 146,
+    "sources": [
+      "eastmoney:股票买入热度榜"
+    ],
+    "avg_price": 17.12,
+    "amount": null,
+    "latest_time": "2026-10-19",
+    "net_amount": null,
+    "note": "站点全量聚合口径，不含买入高手名单"
+  },
+  {
+    "stock_code": "600869",
+    "asset_type": "stock",
+    "stock_name": "远东股份",
+    "buy_experts": 143,
+    "buy_records": 143,
+    "sources": [
+      "eastmoney:股票买入热度榜"
+    ],
+    "avg_price": 18.91,
+    "amount": null,
+    "latest_time": "2026-10-19",
+    "net_amount": null,
+    "note": "站点全量聚合口径，不含买入高手名单"
+  },
+  {
+    "stock_code": "002343",
+    "asset_type": "stock",
+    "stock_name": "慈文传媒",
+    "buy_experts": 115,
+    "buy_records": 115,
+    "sources": [
+      "eastmoney:股票买入热度榜"
+    ],
+    "avg_price": 8.81,
+    "amount": null,
+    "latest_time": "2026-10-19",
+    "net_amount": null,
+    "note": "站点全量聚合口径，不含买入高手名单"
+  },
+  {
+    "stock_code": "600519",
+    "asset_type": "stock",
+    "stock_name": "贵州茅台",
     "buy_experts": 101,
     "buy_records": 101,
     "sources": [
       "eastmoney:股票买入热度榜"
     ],
-    "avg_price": 44.83,
+    "avg_price": 1322.99,
     "amount": null,
-    "latest_time": "2026-10-17",
+    "latest_time": "2026-10-19",
+    "net_amount": null,
+    "note": "站点全量聚合口径，不含买入高手名单"
+  },
+  {
+    "stock_code": "600900",
+    "asset_type": "stock",
+    "stock_name": "长江电力",
+    "buy_experts": 89,
+    "buy_records": 89,
+    "sources": [
+      "eastmoney:股票买入热度榜"
+    ],
+    "avg_price": 29.27,
+    "amount": null,
+    "latest_time": "2026-10-19",
+    "net_amount": null,
+    "note": "站点全量聚合口径，不含买入高手名单"
+  },
+  {
+    "stock_code": "002085",
+    "asset_type": "stock",
+    "stock_name": "万丰奥威",
+    "buy_experts": 84,
+    "buy_records": 84,
+    "sources": [
+      "eastmoney:股票买入热度榜"
+    ],
+    "avg_price": 10.89,
+    "amount": null,
+    "latest_time": "2026-10-19",
+    "net_amount": null,
+    "note": "站点全量聚合口径，不含买入高手名单"
+  },
+  {
+    "stock_code": "000530",
+    "asset_type": "stock",
+    "stock_name": "冰山冷热",
+    "buy_experts": 73,
+    "buy_records": 73,
+    "sources": [
+      "eastmoney:股票买入热度榜"
+    ],
+    "avg_price": 7.03,
+    "amount": null,
+    "latest_time": "2026-10-19",
+    "net_amount": null,
+    "note": "站点全量聚合口径，不含买入高手名单"
+  },
+  {
+    "stock_code": "601811",
+    "asset_type": "stock",
+    "stock_name": "新华文轩",
+    "buy_experts": 66,
+    "buy_records": 66,
+    "sources": [
+      "eastmoney:股票买入热度榜"
+    ],
+    "avg_price": 25.44,
+    "amount": null,
+    "latest_time": "2026-10-19",
+    "net_amount": null,
+    "note": "站点全量聚合口径，不含买入高手名单"
+  },
+  {
+    "stock_code": "601398",
+    "asset_type": "stock",
+    "stock_name": "工商银行",
+    "buy_experts": 52,
+    "buy_records": 52,
+    "sources": [
+      "eastmoney:股票买入热度榜"
+    ],
+    "avg_price": 8.47,
+    "amount": null,
+    "latest_time": "2026-10-19",
+    "net_amount": null,
+    "note": "站点全量聚合口径，不含买入高手名单"
+  },
+  {
+    "stock_code": "300006",
+    "asset_type": "stock",
+    "stock_name": "莱美药业",
+    "buy_experts": 47,
+    "buy_records": 47,
+    "sources": [
+      "eastmoney:股票买入热度榜"
+    ],
+    "avg_price": 9.4,
+    "amount": null,
+    "latest_time": "2026-10-19",
+    "net_amount": null,
+    "note": "站点全量聚合口径，不含买入高手名单"
+  },
+  {
+    "stock_code": "002242",
+    "asset_type": "stock",
+    "stock_name": "九阳股份",
+    "buy_experts": 46,
+    "buy_records": 46,
+    "sources": [
+      "eastmoney:股票买入热度榜"
+    ],
+    "avg_price": 17.62,
+    "amount": null,
+    "latest_time": "2026-10-19",
+    "net_amount": null,
+    "note": "站点全量聚合口径，不含买入高手名单"
+  },
+  {
+    "stock_code": "601857",
+    "asset_type": "stock",
+    "stock_name": "中国石油",
+    "buy_experts": 45,
+    "buy_records": 45,
+    "sources": [
+      "eastmoney:股票买入热度榜"
+    ],
+    "avg_price": 12.57,
+    "amount": null,
+    "latest_time": "2026-10-19",
+    "net_amount": null,
+    "note": "站点全量聚合口径，不含买入高手名单"
+  },
+  {
+    "stock_code": "603999",
+    "asset_type": "stock",
+    "stock_name": "读者传媒",
+    "buy_experts": 45,
+    "buy_records": 45,
+    "sources": [
+      "eastmoney:股票买入热度榜"
+    ],
+    "avg_price": 7.81,
+    "amount": null,
+    "latest_time": "2026-10-19",
+    "net_amount": null,
+    "note": "站点全量聚合口径，不含买入高手名单"
+  },
+  {
+    "stock_code": "510300",
+    "asset_type": "stock",
+    "stock_name": "沪深300ETF华泰柏瑞",
+    "buy_experts": 43,
+    "buy_records": 43,
+    "sources": [
+      "eastmoney:股票买入热度榜"
+    ],
+    "avg_price": 4.22,
+    "amount": null,
+    "latest_time": "2026-10-19",
+    "net_amount": null,
+    "note": "站点全量聚合口径，不含买入高手名单"
+  },
+  {
+    "stock_code": "603893",
+    "asset_type": "stock",
+    "stock_name": "瑞芯微",
+    "buy_experts": 43,
+    "buy_records": 43,
+    "sources": [
+      "eastmoney:股票买入热度榜"
+    ],
+    "avg_price": 170.0,
+    "amount": null,
+    "latest_time": "2026-10-19",
+    "net_amount": null,
+    "note": "站点全量聚合口径，不含买入高手名单"
+  },
+  {
+    "stock_code": "600241",
+    "asset_type": "stock",
+    "stock_name": "时代万恒",
+    "buy_experts": 41,
+    "buy_records": 41,
+    "sources": [
+      "eastmoney:股票买入热度榜"
+    ],
+    "avg_price": 12.76,
+    "amount": null,
+    "latest_time": "2026-10-19",
+    "net_amount": null,
+    "note": "站点全量聚合口径，不含买入高手名单"
+  },
+  {
+    "stock_code": "601606",
+    "asset_type": "stock",
+    "stock_name": "长城军工",
+    "buy_experts": 40,
+    "buy_records": 40,
+    "sources": [
+      "eastmoney:股票买入热度榜"
+    ],
+    "avg_price": 34.11,
+    "amount": null,
+    "latest_time": "2026-10-19",
+    "net_amount": null,
+    "note": "站点全量聚合口径，不含买入高手名单"
+  },
+  {
+    "stock_code": "002594",
+    "asset_type": "stock",
+    "stock_name": "比亚迪",
+    "buy_experts": 37,
+    "buy_records": 37,
+    "sources": [
+      "eastmoney:股票买入热度榜"
+    ],
+    "avg_price": 82.5,
+    "amount": null,
+    "latest_time": "2026-10-19",
+    "net_amount": null,
+    "note": "站点全量聚合口径，不含买入高手名单"
+  },
+  {
+    "stock_code": "600036",
+    "asset_type": "stock",
+    "stock_name": "招商银行",
+    "buy_experts": 37,
+    "buy_records": 37,
+    "sources": [
+      "eastmoney:股票买入热度榜"
+    ],
+    "avg_price": 42.3,
+    "amount": null,
+    "latest_time": "2026-10-19",
+    "net_amount": null,
+    "note": "站点全量聚合口径，不含买入高手名单"
+  },
+  {
+    "stock_code": "600028",
+    "asset_type": "stock",
+    "stock_name": "中国石化",
+    "buy_experts": 36,
+    "buy_records": 36,
+    "sources": [
+      "eastmoney:股票买入热度榜"
+    ],
+    "avg_price": 5.5,
+    "amount": null,
+    "latest_time": "2026-10-19",
+    "net_amount": null,
+    "note": "站点全量聚合口径，不含买入高手名单"
+  },
+  {
+    "stock_code": "300059",
+    "asset_type": "stock",
+    "stock_name": "东方财富",
+    "buy_experts": 35,
+    "buy_records": 35,
+    "sources": [
+      "eastmoney:股票买入热度榜"
+    ],
+    "avg_price": 18.04,
+    "amount": null,
+    "latest_time": "2026-10-19",
+    "net_amount": null,
+    "note": "站点全量聚合口径，不含买入高手名单"
+  },
+  {
+    "stock_code": "300750",
+    "asset_type": "stock",
+    "stock_name": "宁德时代",
+    "buy_experts": 35,
+    "buy_records": 35,
+    "sources": [
+      "eastmoney:股票买入热度榜"
+    ],
+    "avg_price": 275.0,
+    "amount": null,
+    "latest_time": "2026-10-19",
+    "net_amount": null,
+    "note": "站点全量聚合口径，不含买入高手名单"
+  },
+  {
+    "stock_code": "601899",
+    "asset_type": "stock",
+    "stock_name": "紫金矿业",
+    "buy_experts": 34,
+    "buy_records": 34,
+    "sources": [
+      "eastmoney:股票买入热度榜"
+    ],
+    "avg_price": 29.79,
+    "amount": null,
+    "latest_time": "2026-10-19",
+    "net_amount": null,
+    "note": "站点全量聚合口径，不含买入高手名单"
+  },
+  {
+    "stock_code": "000099",
+    "asset_type": "stock",
+    "stock_name": "中信海直",
+    "buy_experts": 32,
+    "buy_records": 32,
+    "sources": [
+      "eastmoney:股票买入热度榜"
+    ],
+    "avg_price": 15.19,
+    "amount": null,
+    "latest_time": "2026-10-19",
+    "net_amount": null,
+    "note": "站点全量聚合口径，不含买入高手名单"
+  },
+  {
+    "stock_code": "601088",
+    "asset_type": "stock",
+    "stock_name": "中国神华",
+    "buy_experts": 32,
+    "buy_records": 32,
+    "sources": [
+      "eastmoney:股票买入热度榜"
+    ],
+    "avg_price": 50.07,
+    "amount": null,
+    "latest_time": "2026-10-19",
+    "net_amount": null,
+    "note": "站点全量聚合口径，不含买入高手名单"
+  },
+  {
+    "stock_code": "601999",
+    "asset_type": "stock",
+    "stock_name": "出版传媒",
+    "buy_experts": 32,
+    "buy_records": 32,
+    "sources": [
+      "eastmoney:股票买入热度榜"
+    ],
+    "avg_price": 7.43,
+    "amount": null,
+    "latest_time": "2026-10-19",
+    "net_amount": null,
+    "note": "站点全量聚合口径，不含买入高手名单"
+  },
+  {
+    "stock_code": "600916",
+    "asset_type": "stock",
+    "stock_name": "中国黄金",
+    "buy_experts": 30,
+    "buy_records": 30,
+    "sources": [
+      "eastmoney:股票买入热度榜"
+    ],
+    "avg_price": 7.1,
+    "amount": null,
+    "latest_time": "2026-10-19",
+    "net_amount": null,
+    "note": "站点全量聚合口径，不含买入高手名单"
+  },
+  {
+    "stock_code": "603259",
+    "asset_type": "stock",
+    "stock_name": "药明康德",
+    "buy_experts": 30,
+    "buy_records": 30,
+    "sources": [
+      "eastmoney:股票买入热度榜"
+    ],
+    "avg_price": 143.0,
+    "amount": null,
+    "latest_time": "2026-10-19",
+    "net_amount": null,
+    "note": "站点全量聚合口径，不含买入高手名单"
+  },
+  {
+    "stock_code": "518880",
+    "asset_type": "stock",
+    "stock_name": "黄金ETF华安",
+    "buy_experts": 29,
+    "buy_records": 29,
+    "sources": [
+      "eastmoney:股票买入热度榜"
+    ],
+    "avg_price": 8.53,
+    "amount": null,
+    "latest_time": "2026-10-19",
+    "net_amount": null,
+    "note": "站点全量聚合口径，不含买入高手名单"
+  },
+  {
+    "stock_code": "688041",
+    "asset_type": "stock",
+    "stock_name": "海光信息",
+    "buy_experts": 29,
+    "buy_records": 29,
+    "sources": [
+      "eastmoney:股票买入热度榜"
+    ],
+    "avg_price": 190.97,
+    "amount": null,
+    "latest_time": "2026-10-19",
+    "net_amount": null,
+    "note": "站点全量聚合口径，不含买入高手名单"
+  },
+  {
+    "stock_code": "000420",
+    "asset_type": "stock",
+    "stock_name": "吉林化纤",
+    "buy_experts": 28,
+    "buy_records": 28,
+    "sources": [
+      "eastmoney:股票买入热度榜"
+    ],
+    "avg_price": 3.82,
+    "amount": null,
+    "latest_time": "2026-10-19",
+    "net_amount": null,
+    "note": "站点全量聚合口径，不含买入高手名单"
+  },
+  {
+    "stock_code": "002889",
+    "asset_type": "stock",
+    "stock_name": "东方嘉盛",
+    "buy_experts": 28,
+    "buy_records": 28,
+    "sources": [
+      "eastmoney:股票买入热度榜"
+    ],
+    "avg_price": 15.15,
+    "amount": null,
+    "latest_time": "2026-10-19",
+    "net_amount": null,
+    "note": "站点全量聚合口径，不含买入高手名单"
+  },
+  {
+    "stock_code": "601988",
+    "asset_type": "stock",
+    "stock_name": "中国银行",
+    "buy_experts": 28,
+    "buy_records": 28,
+    "sources": [
+      "eastmoney:股票买入热度榜"
+    ],
+    "avg_price": 6.88,
+    "amount": null,
+    "latest_time": "2026-10-19",
+    "net_amount": null,
+    "note": "站点全量聚合口径，不含买入高手名单"
+  },
+  {
+    "stock_code": "001696",
+    "asset_type": "stock",
+    "stock_name": "宗申动力",
+    "buy_experts": 27,
+    "buy_records": 27,
+    "sources": [
+      "eastmoney:股票买入热度榜"
+    ],
+    "avg_price": 16.0,
+    "amount": null,
+    "latest_time": "2026-10-19",
+    "net_amount": null,
+    "note": "站点全量聚合口径，不含买入高手名单"
+  },
+  {
+    "stock_code": "600887",
+    "asset_type": "stock",
+    "stock_name": "伊利股份",
+    "buy_experts": 27,
+    "buy_records": 27,
+    "sources": [
+      "eastmoney:股票买入热度榜"
+    ],
+    "avg_price": 27.98,
+    "amount": null,
+    "latest_time": "2026-10-19",
+    "net_amount": null,
+    "note": "站点全量聚合口径，不含买入高手名单"
+  },
+  {
+    "stock_code": "000725",
+    "asset_type": "stock",
+    "stock_name": "京东方Ａ",
+    "buy_experts": 26,
+    "buy_records": 26,
+    "sources": [
+      "eastmoney:股票买入热度榜"
+    ],
+    "avg_price": 5.08,
+    "amount": null,
+    "latest_time": "2026-10-19",
+    "net_amount": null,
+    "note": "站点全量聚合口径，不含买入高手名单"
+  },
+  {
+    "stock_code": "601288",
+    "asset_type": "stock",
+    "stock_name": "农业银行",
+    "buy_experts": 26,
+    "buy_records": 26,
+    "sources": [
+      "eastmoney:股票买入热度榜"
+    ],
+    "avg_price": 7.22,
+    "amount": null,
+    "latest_time": "2026-10-19",
+    "net_amount": null,
+    "note": "站点全量聚合口径，不含买入高手名单"
+  },
+  {
+    "stock_code": "300308",
+    "asset_type": "stock",
+    "stock_name": "中际旭创",
+    "buy_experts": 24,
+    "buy_records": 24,
+    "sources": [
+      "eastmoney:股票买入热度榜"
+    ],
+    "avg_price": 666.88,
+    "amount": null,
+    "latest_time": "2026-10-19",
+    "net_amount": null,
+    "note": "站点全量聚合口径，不含买入高手名单"
+  },
+  {
+    "stock_code": "300411",
+    "asset_type": "stock",
+    "stock_name": "金盾股份",
+    "buy_experts": 24,
+    "buy_records": 24,
+    "sources": [
+      "eastmoney:股票买入热度榜"
+    ],
+    "avg_price": 10.75,
+    "amount": null,
+    "latest_time": "2026-10-19",
+    "net_amount": null,
+    "note": "站点全量聚合口径，不含买入高手名单"
+  },
+  {
+    "stock_code": "600127",
+    "asset_type": "stock",
+    "stock_name": "金健米业",
+    "buy_experts": 21,
+    "buy_records": 21,
+    "sources": [
+      "eastmoney:股票买入热度榜"
+    ],
+    "avg_price": 14.03,
+    "amount": null,
+    "latest_time": "2026-10-19",
+    "net_amount": null,
+    "note": "站点全量聚合口径，不含买入高手名单"
+  },
+  {
+    "stock_code": "600668",
+    "asset_type": "stock",
+    "stock_name": "尖峰集团",
+    "buy_experts": 21,
+    "buy_records": 21,
+    "sources": [
+      "eastmoney:股票买入热度榜"
+    ],
+    "avg_price": 8.49,
+    "amount": null,
+    "latest_time": "2026-10-19",
+    "net_amount": null,
+    "note": "站点全量聚合口径，不含买入高手名单"
+  },
+  {
+    "stock_code": "600843",
+    "asset_type": "stock",
+    "stock_name": "上工申贝",
+    "buy_experts": 21,
+    "buy_records": 21,
+    "sources": [
+      "eastmoney:股票买入热度榜"
+    ],
+    "avg_price": 8.94,
+    "amount": null,
+    "latest_time": "2026-10-19",
+    "net_amount": null,
+    "note": "站点全量聚合口径，不含买入高手名单"
+  },
+  {
+    "stock_code": "601318",
+    "asset_type": "stock",
+    "stock_name": "中国平安",
+    "buy_experts": 21,
+    "buy_records": 21,
+    "sources": [
+      "eastmoney:股票买入热度榜"
+    ],
+    "avg_price": 51.5,
+    "amount": null,
+    "latest_time": "2026-10-19",
+    "net_amount": null,
+    "note": "站点全量聚合口径，不含买入高手名单"
+  },
+  {
+    "stock_code": "000573",
+    "asset_type": "stock",
+    "stock_name": "粤宏远Ａ",
+    "buy_experts": 20,
+    "buy_records": 20,
+    "sources": [
+      "eastmoney:股票买入热度榜"
+    ],
+    "avg_price": 4.71,
+    "amount": null,
+    "latest_time": "2026-10-19",
+    "net_amount": null,
+    "note": "站点全量聚合口径，不含买入高手名单"
+  },
+  {
+    "stock_code": "600664",
+    "asset_type": "stock",
+    "stock_name": "哈药股份",
+    "buy_experts": 20,
+    "buy_records": 20,
+    "sources": [
+      "eastmoney:股票买入热度榜"
+    ],
+    "avg_price": 6.14,
+    "amount": null,
+    "latest_time": "2026-10-19",
+    "net_amount": null,
+    "note": "站点全量聚合口径，不含买入高手名单"
+  },
+  {
+    "stock_code": "600693",
+    "asset_type": "stock",
+    "stock_name": "东百集团",
+    "buy_experts": 20,
+    "buy_records": 20,
+    "sources": [
+      "eastmoney:股票买入热度榜"
+    ],
+    "avg_price": 9.15,
+    "amount": null,
+    "latest_time": "2026-10-19",
     "net_amount": null,
     "note": "站点全量聚合口径，不含买入高手名单"
   }

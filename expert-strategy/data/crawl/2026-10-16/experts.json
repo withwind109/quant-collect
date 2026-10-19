@@ -1,5 +1,27 @@
 [
   {
+    "source": "tonghuashun",
+    "asset_type": "stock",
+    "channel": "同花顺模拟炒股",
+    "expert_id": "6282672",
+    "name": "me_****58084",
+    "owner": "me_****58084",
+    "rank_label": "模拟炒股百强",
+    "followers": 3933,
+    "return_rate": 7354.0,
+    "total_return": null,
+    "market_type": "sim",
+    "extra": {
+      "home_url": "https://moni.10jqka.com.cn/6282672",
+      "duanwei": "初段",
+      "month_rate": -0.89,
+      "week_rate": -2.46,
+      "day_rate": 0.27,
+      "success_rate": 100.0,
+      "total_asset": 14907974.88
+    }
+  },
+  {
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
@@ -248,7 +270,7 @@
     "owner": "东方财富99992",
     "rank_label": "当日活跃组合",
     "followers": 0,
-    "return_rate": 800.64,
+    "return_rate": 787.66,
     "total_return": null,
     "market_type": "sim",
     "extra": {
@@ -344,7 +366,7 @@
     "owner": "鸿鹄中际",
     "rank_label": "当日活跃组合",
     "followers": 0,
-    "return_rate": 672.02,
+    "return_rate": 667.1,
     "total_return": null,
     "market_type": "sim",
     "extra": {
@@ -376,7 +398,7 @@
     "owner": "点石成金215",
     "rank_label": "当日活跃组合",
     "followers": 0,
-    "return_rate": 633.36,
+    "return_rate": 633.85,
     "total_return": null,
     "market_type": "sim",
     "extra": {
@@ -440,7 +462,7 @@
     "owner": "模拟组合12942848",
     "rank_label": "当日活跃组合",
     "followers": 0,
-    "return_rate": 594.27,
+    "return_rate": 593.97,
     "total_return": null,
     "market_type": "sim",
     "extra": {
@@ -461,6 +483,28 @@
     "market_type": "sim",
     "extra": {
       "daily_gain": 6.69
+    }
+  },
+  {
+    "source": "tonghuashun",
+    "asset_type": "stock",
+    "channel": "同花顺模拟炒股",
+    "expert_id": "112203232",
+    "name": "ube**5",
+    "owner": "ube**5",
+    "rank_label": "模拟炒股百强",
+    "followers": 22,
+    "return_rate": 576.42,
+    "total_return": null,
+    "market_type": "sim",
+    "extra": {
+      "home_url": "https://moni.10jqka.com.cn/112203232",
+      "duanwei": "初段",
+      "month_rate": -2.2,
+      "week_rate": -3.91,
+      "day_rate": 1.55,
+      "success_rate": 100.0,
+      "total_asset": 1352821.09
     }
   },
   {
@@ -675,22 +719,6 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
-    "expert_id": "10000000002255427",
-    "name": "翻着长",
-    "owner": "翻着长",
-    "rank_label": "当日活跃组合",
-    "followers": 0,
-    "return_rate": 482.04,
-    "total_return": null,
-    "market_type": "sim",
-    "extra": {
-      "daily_gain": -1.43
-    }
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财组合高手操作",
     "expert_id": "10000000000129047",
     "name": "n192213698906346_1",
     "owner": "n192213698906346_1",
@@ -701,6 +729,22 @@
     "market_type": "sim",
     "extra": {
       "daily_gain": 0.24
+    }
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
+    "expert_id": "10000000002255427",
+    "name": "翻着长",
+    "owner": "翻着长",
+    "rank_label": "当日活跃组合",
+    "followers": 0,
+    "return_rate": 478.14,
+    "total_return": null,
+    "market_type": "sim",
+    "extra": {
+      "daily_gain": -1.43
     }
   },
   {
@@ -931,22 +975,6 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
-    "expert_id": "231020100000141588",
-    "name": "模拟组合0241588",
-    "owner": "模拟组合0241588",
-    "rank_label": "当日活跃组合",
-    "followers": 0,
-    "return_rate": 408.36,
-    "total_return": null,
-    "market_type": "sim",
-    "extra": {
-      "daily_gain": 0.56
-    }
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财组合高手操作",
     "expert_id": "10000000012722070",
     "name": "模拟组合12722070",
     "owner": "模拟组合12722070",
@@ -957,6 +985,22 @@
     "market_type": "sim",
     "extra": {
       "daily_gain": -0.56
+    }
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
+    "expert_id": "231020100000141588",
+    "name": "模拟组合0241588",
+    "owner": "模拟组合0241588",
+    "rank_label": "当日活跃组合",
+    "followers": 0,
+    "return_rate": 404.69,
+    "total_return": null,
+    "market_type": "sim",
+    "extra": {
+      "daily_gain": 0.56
     }
   },
   {
@@ -1016,7 +1060,7 @@
     "owner": "新建账户f1",
     "rank_label": "当日活跃组合",
     "followers": 0,
-    "return_rate": 389.38,
+    "return_rate": 382.34,
     "total_return": null,
     "market_type": "sim",
     "extra": {
@@ -1139,22 +1183,6 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
-    "expert_id": "231200200000079402",
-    "name": "趋势决定价值",
-    "owner": "趋势决定价值",
-    "rank_label": "当日活跃组合",
-    "followers": 0,
-    "return_rate": 361.62,
-    "total_return": null,
-    "market_type": "sim",
-    "extra": {
-      "daily_gain": -7.18
-    }
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财组合高手操作",
     "expert_id": "231790200000234543",
     "name": "模拟组合7934543",
     "owner": "模拟组合7934543",
@@ -1232,6 +1260,28 @@
     }
   },
   {
+    "source": "tonghuashun",
+    "asset_type": "stock",
+    "channel": "同花顺模拟炒股",
+    "expert_id": "112308677",
+    "name": "ube**7",
+    "owner": "ube**7",
+    "rank_label": "模拟炒股百强",
+    "followers": 18,
+    "return_rate": 348.03,
+    "total_return": null,
+    "market_type": "sim",
+    "extra": {
+      "home_url": "https://moni.10jqka.com.cn/112308677",
+      "duanwei": "初段",
+      "month_rate": 1.01,
+      "week_rate": 0.81,
+      "day_rate": -0.42,
+      "success_rate": 100.0,
+      "total_asset": 896063.17
+    }
+  },
+  {
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
@@ -1299,6 +1349,22 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
+    "expert_id": "231200200000079402",
+    "name": "趋势决定价值",
+    "owner": "趋势决定价值",
+    "rank_label": "当日活跃组合",
+    "followers": 0,
+    "return_rate": 334.93,
+    "total_return": null,
+    "market_type": "sim",
+    "extra": {
+      "daily_gain": -7.18
+    }
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
     "expert_id": "231990300000348544",
     "name": "模拟组合9948544",
     "owner": "模拟组合9948544",
@@ -1347,22 +1413,6 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
-    "expert_id": "10000000004460470",
-    "name": "hjjjfdfui",
-    "owner": "hjjjfdfui",
-    "rank_label": "当日活跃组合",
-    "followers": 0,
-    "return_rate": 328.95,
-    "total_return": null,
-    "market_type": "sim",
-    "extra": {
-      "daily_gain": 1.13
-    }
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财组合高手操作",
     "expert_id": "10000000006783660",
     "name": "苍蝇再小也是肉",
     "owner": "苍蝇再小也是肉",
@@ -1405,6 +1455,22 @@
     "market_type": "sim",
     "extra": {
       "daily_gain": -6.11
+    }
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
+    "expert_id": "10000000004460470",
+    "name": "hjjjfdfui",
+    "owner": "hjjjfdfui",
+    "rank_label": "当日活跃组合",
+    "followers": 0,
+    "return_rate": 324.23,
+    "total_return": null,
+    "market_type": "sim",
+    "extra": {
+      "daily_gain": 1.13
     }
   },
   {
@@ -1496,7 +1562,7 @@
     "owner": "模拟组合7116662",
     "rank_label": "当日活跃组合",
     "followers": 0,
-    "return_rate": 318.3,
+    "return_rate": 317.35,
     "total_return": null,
     "market_type": "sim",
     "extra": {
@@ -1795,22 +1861,6 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
-    "expert_id": "10000000012824177",
-    "name": "模拟组合12824177",
-    "owner": "模拟组合12824177",
-    "rank_label": "当日活跃组合",
-    "followers": 0,
-    "return_rate": 278.32,
-    "total_return": null,
-    "market_type": "sim",
-    "extra": {
-      "daily_gain": 1.13
-    }
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财组合高手操作",
     "expert_id": "10000000006027248",
     "name": "hucs2010",
     "owner": "hucs2010",
@@ -1869,6 +1919,22 @@
     "market_type": "sim",
     "extra": {
       "daily_gain": -3.7
+    }
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
+    "expert_id": "10000000012824177",
+    "name": "模拟组合12824177",
+    "owner": "模拟组合12824177",
+    "rank_label": "当日活跃组合",
+    "followers": 0,
+    "return_rate": 274.71,
+    "total_return": null,
+    "market_type": "sim",
+    "extra": {
+      "daily_gain": 1.13
     }
   },
   {
@@ -2128,6 +2194,28 @@
     }
   },
   {
+    "source": "tonghuashun",
+    "asset_type": "stock",
+    "channel": "同花顺模拟炒股",
+    "expert_id": "112400226",
+    "name": "abc***918",
+    "owner": "abc***918",
+    "rank_label": "模拟炒股百强",
+    "followers": 1,
+    "return_rate": 251.55,
+    "total_return": null,
+    "market_type": "sim",
+    "extra": {
+      "home_url": "https://moni.10jqka.com.cn/112400226",
+      "duanwei": "初段",
+      "month_rate": -2.09,
+      "week_rate": -1.62,
+      "day_rate": -0.69,
+      "success_rate": 100.0,
+      "total_asset": 703094.33
+    }
+  },
+  {
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
@@ -2208,19 +2296,25 @@
     }
   },
   {
-    "source": "eastmoney",
+    "source": "tonghuashun",
     "asset_type": "stock",
-    "channel": "东财组合高手操作",
-    "expert_id": "10000000013056227",
-    "name": "相信自己",
-    "owner": "相信自己",
-    "rank_label": "当日活跃组合",
-    "followers": 0,
-    "return_rate": 237.35,
+    "channel": "同花顺模拟炒股",
+    "expert_id": "114918123",
+    "name": "ube**0",
+    "owner": "ube**0",
+    "rank_label": "模拟炒股百强",
+    "followers": 4,
+    "return_rate": 236.18,
     "total_return": null,
     "market_type": "sim",
     "extra": {
-      "daily_gain": -4.71
+      "home_url": "https://moni.10jqka.com.cn/114918123",
+      "duanwei": "初段",
+      "month_rate": -3.75,
+      "week_rate": -0.32,
+      "day_rate": -2.46,
+      "success_rate": 100.0,
+      "total_asset": 672352.79
     }
   },
   {
@@ -2237,6 +2331,22 @@
     "market_type": "sim",
     "extra": {
       "daily_gain": -0.99
+    }
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
+    "expert_id": "10000000013056227",
+    "name": "相信自己",
+    "owner": "相信自己",
+    "rank_label": "当日活跃组合",
+    "followers": 0,
+    "return_rate": 229.47,
+    "total_return": null,
+    "market_type": "sim",
+    "extra": {
+      "daily_gain": -4.71
     }
   },
   {
@@ -2301,6 +2411,28 @@
     "market_type": "sim",
     "extra": {
       "daily_gain": -0.34
+    }
+  },
+  {
+    "source": "tonghuashun",
+    "asset_type": "stock",
+    "channel": "同花顺模拟炒股",
+    "expert_id": "49580971",
+    "name": "hua****ng27",
+    "owner": "hua****ng27",
+    "rank_label": "模拟炒股百强",
+    "followers": 11,
+    "return_rate": 218.9,
+    "total_return": null,
+    "market_type": "sim",
+    "extra": {
+      "home_url": "https://moni.10jqka.com.cn/49580971",
+      "duanwei": "初段",
+      "month_rate": 1.72,
+      "week_rate": 0.02,
+      "day_rate": -0.24,
+      "success_rate": 100.0,
+      "total_asset": 637791.56
     }
   },
   {
@@ -2520,7 +2652,7 @@
     "owner": "热股hot1vV",
     "rank_label": "当日活跃组合",
     "followers": 0,
-    "return_rate": 182.85,
+    "return_rate": 182.06,
     "total_return": null,
     "market_type": "sim",
     "extra": {
@@ -2672,6 +2804,28 @@
     }
   },
   {
+    "source": "tonghuashun",
+    "asset_type": "stock",
+    "channel": "同花顺模拟炒股",
+    "expert_id": "112198538",
+    "name": "ube**1",
+    "owner": "ube**1",
+    "rank_label": "模拟炒股百强",
+    "followers": 10,
+    "return_rate": 165.85,
+    "total_return": null,
+    "market_type": "sim",
+    "extra": {
+      "home_url": "https://moni.10jqka.com.cn/112198538",
+      "duanwei": "初段",
+      "month_rate": -15.65,
+      "week_rate": -9.0,
+      "day_rate": -3.68,
+      "success_rate": 100.0,
+      "total_asset": 531738.45
+    }
+  },
+  {
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
@@ -2765,6 +2919,28 @@
     "market_type": "sim",
     "extra": {
       "daily_gain": -1.0
+    }
+  },
+  {
+    "source": "tonghuashun",
+    "asset_type": "stock",
+    "channel": "同花顺模拟炒股",
+    "expert_id": "102401097",
+    "name": "巅峰途中",
+    "owner": "巅峰途中",
+    "rank_label": "模拟炒股百强",
+    "followers": 0,
+    "return_rate": 155.96,
+    "total_return": null,
+    "market_type": "sim",
+    "extra": {
+      "home_url": "https://moni.10jqka.com.cn/102401097",
+      "duanwei": "初段",
+      "month_rate": 13.02,
+      "week_rate": 3.77,
+      "day_rate": 7.81,
+      "success_rate": 100.0,
+      "total_asset": 511892.77
     }
   },
   {
@@ -2952,7 +3128,7 @@
     "owner": "模拟组合10183463",
     "rank_label": "当日活跃组合",
     "followers": 0,
-    "return_rate": 144.81,
+    "return_rate": 142.55,
     "total_return": null,
     "market_type": "sim",
     "extra": {
@@ -2992,19 +3168,41 @@
     }
   },
   {
-    "source": "eastmoney",
+    "source": "tonghuashun",
     "asset_type": "stock",
-    "channel": "东财组合高手操作",
-    "expert_id": "243460300000137384",
-    "name": "模拟组合4637384",
-    "owner": "模拟组合4637384",
-    "rank_label": "当日活跃组合",
+    "channel": "同花顺模拟炒股",
+    "expert_id": "112497266",
+    "name": "我是纯散户",
+    "owner": "我是纯散户",
+    "rank_label": "模拟炒股百强",
     "followers": 0,
-    "return_rate": 132.3,
+    "return_rate": 130.96,
     "total_return": null,
     "market_type": "sim",
     "extra": {
-      "daily_gain": 3.12
+      "home_url": "https://moni.10jqka.com.cn/112497266",
+      "duanwei": "初段",
+      "month_rate": -4.31,
+      "week_rate": -1.85,
+      "day_rate": 0.0,
+      "success_rate": 100.0,
+      "total_asset": 461903.7
+    }
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
+    "expert_id": "253520300000350534",
+    "name": "金刚韭菜",
+    "owner": "金刚韭菜",
+    "rank_label": "当日活跃组合",
+    "followers": 0,
+    "return_rate": 130.54,
+    "total_return": null,
+    "market_type": "sim",
+    "extra": {
+      "daily_gain": -5.45
     }
   },
   {
@@ -3056,6 +3254,28 @@
     }
   },
   {
+    "source": "tonghuashun",
+    "asset_type": "stock",
+    "channel": "同花顺模拟炒股",
+    "expert_id": "86676353",
+    "name": "这是要起飞啊",
+    "owner": "这是要起飞啊",
+    "rank_label": "模拟炒股百强",
+    "followers": 4,
+    "return_rate": 128.0,
+    "total_return": null,
+    "market_type": "sim",
+    "extra": {
+      "home_url": "https://moni.10jqka.com.cn/86676353",
+      "duanwei": "初段",
+      "month_rate": -5.42,
+      "week_rate": -5.25,
+      "day_rate": -0.0,
+      "success_rate": 100.0,
+      "total_asset": 456012.89
+    }
+  },
+  {
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
@@ -3075,16 +3295,16 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
-    "expert_id": "253520300000350534",
-    "name": "金刚韭菜",
-    "owner": "金刚韭菜",
+    "expert_id": "243460300000137384",
+    "name": "模拟组合4637384",
+    "owner": "模拟组合4637384",
     "rank_label": "当日活跃组合",
     "followers": 0,
-    "return_rate": 127.36,
+    "return_rate": 127.5,
     "total_return": null,
     "market_type": "sim",
     "extra": {
-      "daily_gain": -5.45
+      "daily_gain": 3.12
     }
   },
   {
@@ -3117,22 +3337,6 @@
     "market_type": "sim",
     "extra": {
       "daily_gain": 5.86
-    }
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财组合高手操作",
-    "expert_id": "261134200000035986",
-    "name": "骑牛寻黑马",
-    "owner": "骑牛寻黑马",
-    "rank_label": "当日活跃组合",
-    "followers": 0,
-    "return_rate": 125.37,
-    "total_return": null,
-    "market_type": "sim",
-    "extra": {
-      "daily_gain": -5.48
     }
   },
   {
@@ -3181,6 +3385,28 @@
     "market_type": "sim",
     "extra": {
       "daily_gain": -0.05
+    }
+  },
+  {
+    "source": "tonghuashun",
+    "asset_type": "stock",
+    "channel": "同花顺模拟炒股",
+    "expert_id": "126228491",
+    "name": "轻轻巧巧QQ倩",
+    "owner": "轻轻巧巧QQ倩",
+    "rank_label": "模拟炒股百强",
+    "followers": 10,
+    "return_rate": 122.87,
+    "total_return": null,
+    "market_type": "sim",
+    "extra": {
+      "home_url": "https://moni.10jqka.com.cn/126228491",
+      "duanwei": "初段",
+      "month_rate": -1.55,
+      "week_rate": -1.15,
+      "day_rate": 0.21,
+      "success_rate": 100.0,
+      "total_asset": 445746.51
     }
   },
   {
@@ -3267,16 +3493,16 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
-    "expert_id": "252874400000234010",
-    "name": "反向思维168168",
-    "owner": "反向思维168168",
+    "expert_id": "261134200000035986",
+    "name": "骑牛寻黑马",
+    "owner": "骑牛寻黑马",
     "rank_label": "当日活跃组合",
     "followers": 0,
-    "return_rate": 120.3,
+    "return_rate": 120.85,
     "total_return": null,
     "market_type": "sim",
     "extra": {
-      "daily_gain": -1.2
+      "daily_gain": -5.48
     }
   },
   {
@@ -3328,6 +3554,28 @@
     }
   },
   {
+    "source": "tonghuashun",
+    "asset_type": "stock",
+    "channel": "同花顺模拟炒股",
+    "expert_id": "113581406",
+    "name": "zhu****ao888",
+    "owner": "zhu****ao888",
+    "rank_label": "模拟炒股百强",
+    "followers": 0,
+    "return_rate": 115.82,
+    "total_return": null,
+    "market_type": "sim",
+    "extra": {
+      "home_url": "https://moni.10jqka.com.cn/113581406",
+      "duanwei": "初段",
+      "month_rate": 4.09,
+      "week_rate": 3.76,
+      "day_rate": 0.0,
+      "success_rate": 100.0,
+      "total_asset": 431628.91
+    }
+  },
+  {
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
@@ -3341,6 +3589,28 @@
     "market_type": "sim",
     "extra": {
       "daily_gain": 3.83
+    }
+  },
+  {
+    "source": "tonghuashun",
+    "asset_type": "stock",
+    "channel": "同花顺模拟炒股",
+    "expert_id": "47542977",
+    "name": "che**o9",
+    "owner": "che**o9",
+    "rank_label": "模拟炒股百强",
+    "followers": 18,
+    "return_rate": 115.25,
+    "total_return": null,
+    "market_type": "sim",
+    "extra": {
+      "home_url": "https://moni.10jqka.com.cn/47542977",
+      "duanwei": "初段",
+      "month_rate": 0.22,
+      "week_rate": -0.22,
+      "day_rate": 0.56,
+      "success_rate": 100.0,
+      "total_asset": 430494.01
     }
   },
   {
@@ -3363,22 +3633,6 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
-    "expert_id": "252190200000049725",
-    "name": "吊龙一号",
-    "owner": "吊龙一号",
-    "rank_label": "当日活跃组合",
-    "followers": 0,
-    "return_rate": 114.74,
-    "total_return": null,
-    "market_type": "sim",
-    "extra": {
-      "daily_gain": -2.11
-    }
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财组合高手操作",
     "expert_id": "250720200000031591",
     "name": "中线盘",
     "owner": "中线盘",
@@ -3389,6 +3643,22 @@
     "market_type": "sim",
     "extra": {
       "daily_gain": 1.72
+    }
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
+    "expert_id": "252190200000049725",
+    "name": "吊龙一号",
+    "owner": "吊龙一号",
+    "rank_label": "当日活跃组合",
+    "followers": 0,
+    "return_rate": 114.09,
+    "total_return": null,
+    "market_type": "sim",
+    "extra": {
+      "daily_gain": -2.11
     }
   },
   {
@@ -3549,6 +3819,22 @@
     "market_type": "sim",
     "extra": {
       "daily_gain": -3.95
+    }
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
+    "expert_id": "252874400000234010",
+    "name": "反向思维168168",
+    "owner": "反向思维168168",
+    "rank_label": "当日活跃组合",
+    "followers": 0,
+    "return_rate": 106.17,
+    "total_return": null,
+    "market_type": "sim",
+    "extra": {
+      "daily_gain": -1.2
     }
   },
   {
@@ -3792,19 +4078,25 @@
     }
   },
   {
-    "source": "eastmoney",
+    "source": "tonghuashun",
     "asset_type": "stock",
-    "channel": "东财组合高手操作",
-    "expert_id": "262350100000234916",
-    "name": "稳定复利控制回撤",
-    "owner": "稳定复利控制回撤",
-    "rank_label": "当日活跃组合",
+    "channel": "同花顺模拟炒股",
+    "expert_id": "114918027",
+    "name": "ub**2",
+    "owner": "ub**2",
+    "rank_label": "模拟炒股百强",
     "followers": 0,
-    "return_rate": 92.92,
+    "return_rate": 92.91,
     "total_return": null,
     "market_type": "sim",
     "extra": {
-      "daily_gain": 0.73
+      "home_url": "https://moni.10jqka.com.cn/114918027",
+      "duanwei": "初段",
+      "month_rate": -2.01,
+      "week_rate": -2.77,
+      "day_rate": -1.02,
+      "success_rate": 100.0,
+      "total_asset": 385808.82
     }
   },
   {
@@ -4352,6 +4644,28 @@
     }
   },
   {
+    "source": "tonghuashun",
+    "asset_type": "stock",
+    "channel": "同花顺模拟炒股",
+    "expert_id": "126468570",
+    "name": "快乐猫4253",
+    "owner": "快乐猫4253",
+    "rank_label": "模拟炒股百强",
+    "followers": 16,
+    "return_rate": 74.62,
+    "total_return": null,
+    "market_type": "sim",
+    "extra": {
+      "home_url": "https://moni.10jqka.com.cn/126468570",
+      "duanwei": "初段",
+      "month_rate": -7.02,
+      "week_rate": -4.59,
+      "day_rate": 1.67,
+      "success_rate": 100.0,
+      "total_asset": 349239.08
+    }
+  },
+  {
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
@@ -4365,6 +4679,44 @@
     "market_type": "sim",
     "extra": {
       "daily_gain": -18.71
+    }
+  },
+  {
+    "source": "tonghuashun",
+    "asset_type": "stock",
+    "channel": "同花顺模拟炒股",
+    "expert_id": "114918041",
+    "name": "ub**4",
+    "owner": "ub**4",
+    "rank_label": "模拟炒股百强",
+    "followers": 6,
+    "return_rate": 74.08,
+    "total_return": null,
+    "market_type": "sim",
+    "extra": {
+      "home_url": "https://moni.10jqka.com.cn/114918041",
+      "duanwei": "初段",
+      "month_rate": 0.0,
+      "week_rate": 0.0,
+      "day_rate": 0.0,
+      "success_rate": 100.0,
+      "total_asset": 348160.41
+    }
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
+    "expert_id": "262350100000234916",
+    "name": "稳定复利控制回撤",
+    "owner": "稳定复利控制回撤",
+    "rank_label": "当日活跃组合",
+    "followers": 0,
+    "return_rate": 73.63,
+    "total_return": null,
+    "market_type": "sim",
+    "extra": {
+      "daily_gain": 0.73
     }
   },
   {
@@ -4528,6 +4880,50 @@
     }
   },
   {
+    "source": "tonghuashun",
+    "asset_type": "stock",
+    "channel": "同花顺模拟炒股",
+    "expert_id": "49828",
+    "name": "xtj**m",
+    "owner": "xtj**m",
+    "rank_label": "模拟炒股百强",
+    "followers": 0,
+    "return_rate": 70.93,
+    "total_return": null,
+    "market_type": "sim",
+    "extra": {
+      "home_url": "https://moni.10jqka.com.cn/49828",
+      "duanwei": "初段",
+      "month_rate": -15.32,
+      "week_rate": -13.4,
+      "day_rate": 0.54,
+      "success_rate": 100.0,
+      "total_asset": 341875.84
+    }
+  },
+  {
+    "source": "tonghuashun",
+    "asset_type": "stock",
+    "channel": "同花顺模拟炒股",
+    "expert_id": "58490599",
+    "name": "小军华",
+    "owner": "小军华",
+    "rank_label": "模拟炒股百强",
+    "followers": 27,
+    "return_rate": 70.78,
+    "total_return": null,
+    "market_type": "sim",
+    "extra": {
+      "home_url": "https://moni.10jqka.com.cn/58490599",
+      "duanwei": "初段",
+      "month_rate": -1.42,
+      "week_rate": -4.88,
+      "day_rate": -0.81,
+      "success_rate": 100.0,
+      "total_asset": 341567.28
+    }
+  },
+  {
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
@@ -4557,38 +4953,6 @@
     "market_type": "sim",
     "extra": {
       "daily_gain": -2.43
-    }
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财组合高手操作",
-    "expert_id": "252080400000029412",
-    "name": "模拟组合0829412",
-    "owner": "模拟组合0829412",
-    "rank_label": "当日活跃组合",
-    "followers": 0,
-    "return_rate": 70.27,
-    "total_return": null,
-    "market_type": "sim",
-    "extra": {
-      "daily_gain": -16.59
-    }
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财组合高手操作",
-    "expert_id": "262424300000236164",
-    "name": "模拟组合4236164",
-    "owner": "模拟组合4236164",
-    "rank_label": "当日活跃组合",
-    "followers": 0,
-    "return_rate": 70.07,
-    "total_return": null,
-    "market_type": "sim",
-    "extra": {
-      "daily_gain": -6.62
     }
   },
   {
@@ -4707,22 +5071,6 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
-    "expert_id": "243420300000074107",
-    "name": "新韭菜跳水",
-    "owner": "新韭菜跳水",
-    "rank_label": "当日活跃组合",
-    "followers": 0,
-    "return_rate": 66.53,
-    "total_return": null,
-    "market_type": "sim",
-    "extra": {
-      "daily_gain": 2.08
-    }
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财组合高手操作",
     "expert_id": "260894200000056315",
     "name": "模拟组合8956315",
     "owner": "模拟组合8956315",
@@ -4835,6 +5183,22 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
+    "expert_id": "262354300000235999",
+    "name": "模拟组合3535999",
+    "owner": "模拟组合3535999",
+    "rank_label": "当日活跃组合",
+    "followers": 0,
+    "return_rate": 63.42,
+    "total_return": null,
+    "market_type": "sim",
+    "extra": {
+      "daily_gain": -1.17
+    }
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
     "expert_id": "251284100000137737",
     "name": "博大精深源远流长",
     "owner": "博大精深源远流长",
@@ -4845,6 +5209,22 @@
     "market_type": "sim",
     "extra": {
       "daily_gain": 0.05
+    }
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
+    "expert_id": "262004100000033785",
+    "name": "做到100万",
+    "owner": "做到100万",
+    "rank_label": "当日活跃组合",
+    "followers": 0,
+    "return_rate": 63.33,
+    "total_return": null,
+    "market_type": "sim",
+    "extra": {
+      "daily_gain": -0.55
     }
   },
   {
@@ -4864,19 +5244,25 @@
     }
   },
   {
-    "source": "eastmoney",
+    "source": "tonghuashun",
     "asset_type": "stock",
-    "channel": "东财组合高手操作",
-    "expert_id": "262354300000235999",
-    "name": "模拟组合3535999",
-    "owner": "模拟组合3535999",
-    "rank_label": "当日活跃组合",
-    "followers": 0,
-    "return_rate": 62.75,
+    "channel": "同花顺模拟炒股",
+    "expert_id": "50865071",
+    "name": "leaposh",
+    "owner": "leaposh",
+    "rank_label": "模拟炒股百强",
+    "followers": 10,
+    "return_rate": 62.86,
     "total_return": null,
     "market_type": "sim",
     "extra": {
-      "daily_gain": -1.17
+      "home_url": "https://moni.10jqka.com.cn/50865071",
+      "duanwei": "初段",
+      "month_rate": -0.69,
+      "week_rate": -0.43,
+      "day_rate": 0.32,
+      "success_rate": 100.0,
+      "total_asset": 325747.72
     }
   },
   {
@@ -4899,6 +5285,22 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
+    "expert_id": "243420300000074107",
+    "name": "新韭菜跳水",
+    "owner": "新韭菜跳水",
+    "rank_label": "当日活跃组合",
+    "followers": 0,
+    "return_rate": 62.32,
+    "total_return": null,
+    "market_type": "sim",
+    "extra": {
+      "daily_gain": 2.08
+    }
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
     "expert_id": "261380200000028302",
     "name": "不破10日实盘模拟",
     "owner": "不破10日实盘模拟",
@@ -4909,6 +5311,28 @@
     "market_type": "sim",
     "extra": {
       "daily_gain": 2.09
+    }
+  },
+  {
+    "source": "tonghuashun",
+    "asset_type": "stock",
+    "channel": "同花顺模拟炒股",
+    "expert_id": "105191491",
+    "name": "103****996",
+    "owner": "103****996",
+    "rank_label": "模拟炒股百强",
+    "followers": 46,
+    "return_rate": 62.14,
+    "total_return": null,
+    "market_type": "sim",
+    "extra": {
+      "home_url": "https://moni.10jqka.com.cn/105191491",
+      "duanwei": "初段",
+      "month_rate": -1.8,
+      "week_rate": -2.35,
+      "day_rate": -0.28,
+      "success_rate": 100.0,
+      "total_asset": 324281.19
     }
   },
   {
@@ -4931,6 +5355,22 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
+    "expert_id": "261444300000039645",
+    "name": "wangwzh888",
+    "owner": "wangwzh888",
+    "rank_label": "当日活跃组合",
+    "followers": 0,
+    "return_rate": 61.93,
+    "total_return": null,
+    "market_type": "sim",
+    "extra": {
+      "daily_gain": -2.76
+    }
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
     "expert_id": "261624100000038522",
     "name": "模拟组合6238522",
     "owner": "模拟组合6238522",
@@ -4941,22 +5381,6 @@
     "market_type": "sim",
     "extra": {
       "daily_gain": -2.21
-    }
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财组合高手操作",
-    "expert_id": "261444300000039645",
-    "name": "wangwzh888",
-    "owner": "wangwzh888",
-    "rank_label": "当日活跃组合",
-    "followers": 0,
-    "return_rate": 61.19,
-    "total_return": null,
-    "market_type": "sim",
-    "extra": {
-      "daily_gain": -2.76
     }
   },
   {
@@ -5139,22 +5563,6 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
-    "expert_id": "262004100000033785",
-    "name": "做到100万",
-    "owner": "做到100万",
-    "rank_label": "当日活跃组合",
-    "followers": 0,
-    "return_rate": 58.64,
-    "total_return": null,
-    "market_type": "sim",
-    "extra": {
-      "daily_gain": -0.55
-    }
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财组合高手操作",
     "expert_id": "262534200000033951",
     "name": "上班688801",
     "owner": "上班688801",
@@ -5219,22 +5627,6 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
-    "expert_id": "262704200000147375",
-    "name": "模拟组合7047375",
-    "owner": "模拟组合7047375",
-    "rank_label": "当日活跃组合",
-    "followers": 0,
-    "return_rate": 58.03,
-    "total_return": null,
-    "market_type": "sim",
-    "extra": {
-      "daily_gain": 14.84
-    }
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财组合高手操作",
     "expert_id": "240220200000135493",
     "name": "模拟组合2235493",
     "owner": "模拟组合2235493",
@@ -5261,6 +5653,22 @@
     "market_type": "sim",
     "extra": {
       "daily_gain": 2.31
+    }
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
+    "expert_id": "262424300000236164",
+    "name": "模拟组合4236164",
+    "owner": "模拟组合4236164",
+    "rank_label": "当日活跃组合",
+    "followers": 0,
+    "return_rate": 56.86,
+    "total_return": null,
+    "market_type": "sim",
+    "extra": {
+      "daily_gain": -6.62
     }
   },
   {
@@ -5379,22 +5787,6 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
-    "expert_id": "261380200000233746",
-    "name": "st追随",
-    "owner": "st追随",
-    "rank_label": "当日活跃组合",
-    "followers": 0,
-    "return_rate": 54.12,
-    "total_return": null,
-    "market_type": "sim",
-    "extra": {
-      "daily_gain": -5.67
-    }
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财组合高手操作",
     "expert_id": "261890100000142129",
     "name": "模拟组合8942129",
     "owner": "模拟组合8942129",
@@ -5411,16 +5803,16 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
-    "expert_id": "261384200000235303",
-    "name": "小小失误问题",
-    "owner": "小小失误问题",
+    "expert_id": "261380200000233746",
+    "name": "st追随",
+    "owner": "st追随",
     "rank_label": "当日活跃组合",
     "followers": 0,
-    "return_rate": 53.38,
+    "return_rate": 53.46,
     "total_return": null,
     "market_type": "sim",
     "extra": {
-      "daily_gain": 3.23
+      "daily_gain": -5.67
     }
   },
   {
@@ -5459,6 +5851,44 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
+    "expert_id": "262704200000147375",
+    "name": "模拟组合7047375",
+    "owner": "模拟组合7047375",
+    "rank_label": "当日活跃组合",
+    "followers": 0,
+    "return_rate": 52.61,
+    "total_return": null,
+    "market_type": "sim",
+    "extra": {
+      "daily_gain": 14.84
+    }
+  },
+  {
+    "source": "tonghuashun",
+    "asset_type": "stock",
+    "channel": "同花顺模拟炒股",
+    "expert_id": "77480103",
+    "name": "me_230363779",
+    "owner": "me_230363779",
+    "rank_label": "模拟炒股百强",
+    "followers": 2,
+    "return_rate": 52.58,
+    "total_return": null,
+    "market_type": "sim",
+    "extra": {
+      "home_url": "https://moni.10jqka.com.cn/77480103",
+      "duanwei": "初段",
+      "month_rate": -4.6,
+      "week_rate": -3.86,
+      "day_rate": 0.47,
+      "success_rate": 100.0,
+      "total_asset": 305175.1
+    }
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
     "expert_id": "260084200000236610",
     "name": "模拟组合0836610",
     "owner": "模拟组合0836610",
@@ -5469,22 +5899,6 @@
     "market_type": "sim",
     "extra": {
       "daily_gain": 3.99
-    }
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财组合高手操作",
-    "expert_id": "262700300000047161",
-    "name": "模拟组合7047161",
-    "owner": "模拟组合7047161",
-    "rank_label": "当日活跃组合",
-    "followers": 0,
-    "return_rate": 52.17,
-    "total_return": null,
-    "market_type": "sim",
-    "extra": {
-      "daily_gain": 10.8
     }
   },
   {
@@ -5523,6 +5937,22 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
+    "expert_id": "261384200000235303",
+    "name": "小小失误问题",
+    "owner": "小小失误问题",
+    "rank_label": "当日活跃组合",
+    "followers": 0,
+    "return_rate": 51.72,
+    "total_return": null,
+    "market_type": "sim",
+    "extra": {
+      "daily_gain": 3.23
+    }
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
     "expert_id": "243440100000058133",
     "name": "模拟组合4458133",
     "owner": "模拟组合4458133",
@@ -5555,6 +5985,22 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
+    "expert_id": "251384300000039488",
+    "name": "模拟组合3839488",
+    "owner": "模拟组合3839488",
+    "rank_label": "当日活跃组合",
+    "followers": 0,
+    "return_rate": 50.72,
+    "total_return": null,
+    "market_type": "sim",
+    "extra": {
+      "daily_gain": 9.26
+    }
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
     "expert_id": "262574300000151706",
     "name": "模拟组合5751706",
     "owner": "模拟组合5751706",
@@ -5581,22 +6027,6 @@
     "market_type": "sim",
     "extra": {
       "daily_gain": -3.64
-    }
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财组合高手操作",
-    "expert_id": "262700400000147125",
-    "name": "模拟组合7047125",
-    "owner": "模拟组合7047125",
-    "rank_label": "当日活跃组合",
-    "followers": 0,
-    "return_rate": 50.39,
-    "total_return": null,
-    "market_type": "sim",
-    "extra": {
-      "daily_gain": 15.75
     }
   },
   {
@@ -5645,70 +6075,6 @@
     "market_type": "sim",
     "extra": {
       "daily_gain": -2.05
-    }
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财组合高手操作",
-    "expert_id": "262700100000047182",
-    "name": "模拟组合7047182",
-    "owner": "模拟组合7047182",
-    "rank_label": "当日活跃组合",
-    "followers": 0,
-    "return_rate": 49.71,
-    "total_return": null,
-    "market_type": "sim",
-    "extra": {
-      "daily_gain": 12.7
-    }
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财组合高手操作",
-    "expert_id": "262320100000033776",
-    "name": "模拟组合3233776",
-    "owner": "模拟组合3233776",
-    "rank_label": "当日活跃组合",
-    "followers": 0,
-    "return_rate": 49.58,
-    "total_return": null,
-    "market_type": "sim",
-    "extra": {
-      "daily_gain": 12.49
-    }
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财组合高手操作",
-    "expert_id": "251384300000039488",
-    "name": "模拟组合3839488",
-    "owner": "模拟组合3839488",
-    "rank_label": "当日活跃组合",
-    "followers": 0,
-    "return_rate": 49.35,
-    "total_return": null,
-    "market_type": "sim",
-    "extra": {
-      "daily_gain": 9.26
-    }
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财组合高手操作",
-    "expert_id": "262150100000134430",
-    "name": "源捷",
-    "owner": "源捷",
-    "rank_label": "当日活跃组合",
-    "followers": 0,
-    "return_rate": 49.12,
-    "total_return": null,
-    "market_type": "sim",
-    "extra": {
-      "daily_gain": -1.65
     }
   },
   {
@@ -5795,6 +6161,22 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
+    "expert_id": "262700100000047182",
+    "name": "模拟组合7047182",
+    "owner": "模拟组合7047182",
+    "rank_label": "当日活跃组合",
+    "followers": 0,
+    "return_rate": 47.95,
+    "total_return": null,
+    "market_type": "sim",
+    "extra": {
+      "daily_gain": 12.7
+    }
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
     "expert_id": "253574100000137489",
     "name": "三维通信4149",
     "owner": "三维通信4149",
@@ -5843,16 +6225,16 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
-    "expert_id": "262804400000034118",
-    "name": "推到了",
-    "owner": "推到了",
+    "expert_id": "262150100000134430",
+    "name": "源捷",
+    "owner": "源捷",
     "rank_label": "当日活跃组合",
     "followers": 0,
-    "return_rate": 47.45,
+    "return_rate": 47.52,
     "total_return": null,
     "market_type": "sim",
     "extra": {
-      "daily_gain": 8.05
+      "daily_gain": -1.65
     }
   },
   {
@@ -5936,6 +6318,28 @@
     }
   },
   {
+    "source": "tonghuashun",
+    "asset_type": "stock",
+    "channel": "同花顺模拟炒股",
+    "expert_id": "4968836",
+    "name": "rum***04",
+    "owner": "rum***04",
+    "rank_label": "模拟炒股百强",
+    "followers": 83,
+    "return_rate": 45.91,
+    "total_return": null,
+    "market_type": "sim",
+    "extra": {
+      "home_url": "https://moni.10jqka.com.cn/4968836",
+      "duanwei": "初段",
+      "month_rate": -10.96,
+      "week_rate": -8.45,
+      "day_rate": -0.85,
+      "success_rate": 100.0,
+      "total_asset": 291802.58
+    }
+  },
+  {
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
@@ -5987,22 +6391,6 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
-    "expert_id": "251070100000002157",
-    "name": "卧牛山的狼",
-    "owner": "卧牛山的狼",
-    "rank_label": "当日活跃组合",
-    "followers": 0,
-    "return_rate": 43.99,
-    "total_return": null,
-    "market_type": "sim",
-    "extra": {
-      "daily_gain": -8.12
-    }
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财组合高手操作",
     "expert_id": "261970200000138030",
     "name": "高菲",
     "owner": "高菲",
@@ -6032,6 +6420,44 @@
     }
   },
   {
+    "source": "tonghuashun",
+    "asset_type": "stock",
+    "channel": "同花顺模拟炒股",
+    "expert_id": "123927245",
+    "name": "hgx***jjf",
+    "owner": "hgx***jjf",
+    "rank_label": "模拟炒股百强",
+    "followers": 31,
+    "return_rate": 43.5,
+    "total_return": null,
+    "market_type": "sim",
+    "extra": {
+      "home_url": "https://moni.10jqka.com.cn/123927245",
+      "duanwei": "1段",
+      "month_rate": -10.78,
+      "week_rate": -7.69,
+      "day_rate": 1.25,
+      "success_rate": 100.0,
+      "total_asset": 287017.76
+    }
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
+    "expert_id": "261834100000072253",
+    "name": "模拟组合8372253",
+    "owner": "模拟组合8372253",
+    "rank_label": "当日活跃组合",
+    "followers": 0,
+    "return_rate": 43.41,
+    "total_return": null,
+    "market_type": "sim",
+    "extra": {
+      "daily_gain": 0.2
+    }
+  },
+  {
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
@@ -6051,16 +6477,16 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
-    "expert_id": "261834100000072253",
-    "name": "模拟组合8372253",
-    "owner": "模拟组合8372253",
+    "expert_id": "262700300000047161",
+    "name": "模拟组合7047161",
+    "owner": "模拟组合7047161",
     "rank_label": "当日活跃组合",
     "followers": 0,
-    "return_rate": 43.24,
+    "return_rate": 43.15,
     "total_return": null,
     "market_type": "sim",
     "extra": {
-      "daily_gain": 0.2
+      "daily_gain": 10.8
     }
   },
   {
@@ -6179,6 +6605,22 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
+    "expert_id": "262700400000147125",
+    "name": "模拟组合7047125",
+    "owner": "模拟组合7047125",
+    "rank_label": "当日活跃组合",
+    "followers": 0,
+    "return_rate": 41.53,
+    "total_return": null,
+    "market_type": "sim",
+    "extra": {
+      "daily_gain": 15.75
+    }
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
     "expert_id": "262560100000136802",
     "name": "模拟组合5636802",
     "owner": "模拟组合5636802",
@@ -6227,22 +6669,6 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
-    "expert_id": "262630400000234460",
-    "name": "模拟组合6334460",
-    "owner": "模拟组合6334460",
-    "rank_label": "当日活跃组合",
-    "followers": 0,
-    "return_rate": 40.79,
-    "total_return": null,
-    "market_type": "sim",
-    "extra": {
-      "daily_gain": 2.19
-    }
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财组合高手操作",
     "expert_id": "10000000009504121",
     "name": "模拟组合9504121",
     "owner": "模拟组合9504121",
@@ -6253,6 +6679,38 @@
     "market_type": "sim",
     "extra": {
       "daily_gain": 1.14
+    }
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
+    "expert_id": "251070100000002157",
+    "name": "卧牛山的狼",
+    "owner": "卧牛山的狼",
+    "rank_label": "当日活跃组合",
+    "followers": 0,
+    "return_rate": 40.67,
+    "total_return": null,
+    "market_type": "sim",
+    "extra": {
+      "daily_gain": -8.12
+    }
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
+    "expert_id": "262630400000234460",
+    "name": "模拟组合6334460",
+    "owner": "模拟组合6334460",
+    "rank_label": "当日活跃组合",
+    "followers": 0,
+    "return_rate": 40.51,
+    "total_return": null,
+    "market_type": "sim",
+    "extra": {
+      "daily_gain": 2.19
     }
   },
   {
@@ -6304,6 +6762,28 @@
     }
   },
   {
+    "source": "tonghuashun",
+    "asset_type": "stock",
+    "channel": "同花顺模拟炒股",
+    "expert_id": "114918192",
+    "name": "ube**7",
+    "owner": "ube**7",
+    "rank_label": "模拟炒股百强",
+    "followers": 3,
+    "return_rate": 39.9,
+    "total_return": null,
+    "market_type": "sim",
+    "extra": {
+      "home_url": "https://moni.10jqka.com.cn/114918192",
+      "duanwei": "初段",
+      "month_rate": -4.89,
+      "week_rate": -3.73,
+      "day_rate": 1.18,
+      "success_rate": 100.0,
+      "total_asset": 279769.41
+    }
+  },
+  {
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
@@ -6317,22 +6797,6 @@
     "market_type": "sim",
     "extra": {
       "daily_gain": 2.68
-    }
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财组合高手操作",
-    "expert_id": "261614100000235441",
-    "name": "模拟组合6135441",
-    "owner": "模拟组合6135441",
-    "rank_label": "当日活跃组合",
-    "followers": 0,
-    "return_rate": 39.48,
-    "total_return": null,
-    "market_type": "sim",
-    "extra": {
-      "daily_gain": 12.33
     }
   },
   {
@@ -6419,6 +6883,38 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
+    "expert_id": "252080400000029412",
+    "name": "模拟组合0829412",
+    "owner": "模拟组合0829412",
+    "rank_label": "当日活跃组合",
+    "followers": 0,
+    "return_rate": 38.32,
+    "total_return": null,
+    "market_type": "sim",
+    "extra": {
+      "daily_gain": -16.59
+    }
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
+    "expert_id": "262804400000034118",
+    "name": "推到了",
+    "owner": "推到了",
+    "rank_label": "当日活跃组合",
+    "followers": 0,
+    "return_rate": 38.16,
+    "total_return": null,
+    "market_type": "sim",
+    "extra": {
+      "daily_gain": 8.05
+    }
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
     "expert_id": "253164200000239364",
     "name": "模拟组合1639364",
     "owner": "模拟组合1639364",
@@ -6429,22 +6925,6 @@
     "market_type": "sim",
     "extra": {
       "daily_gain": 2.65
-    }
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财组合高手操作",
-    "expert_id": "262000400000065918",
-    "name": "模拟组合0065918",
-    "owner": "模拟组合0065918",
-    "rank_label": "当日活跃组合",
-    "followers": 0,
-    "return_rate": 38.05,
-    "total_return": null,
-    "market_type": "sim",
-    "extra": {
-      "daily_gain": 6.91
     }
   },
   {
@@ -6547,22 +7027,6 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
-    "expert_id": "262700300000047455",
-    "name": "模拟组合7047455",
-    "owner": "模拟组合7047455",
-    "rank_label": "当日活跃组合",
-    "followers": 0,
-    "return_rate": 36.62,
-    "total_return": null,
-    "market_type": "sim",
-    "extra": {
-      "daily_gain": -0.78
-    }
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财组合高手操作",
     "expert_id": "261744200000251170",
     "name": "模拟组合7451170",
     "owner": "模拟组合7451170",
@@ -6643,6 +7107,22 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
+    "expert_id": "262320100000033776",
+    "name": "模拟组合3233776",
+    "owner": "模拟组合3233776",
+    "rank_label": "当日活跃组合",
+    "followers": 0,
+    "return_rate": 35.68,
+    "total_return": null,
+    "market_type": "sim",
+    "extra": {
+      "daily_gain": 12.49
+    }
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
     "expert_id": "262570400000247685",
     "name": "模拟组合5747685",
     "owner": "模拟组合5747685",
@@ -6669,22 +7149,6 @@
     "market_type": "sim",
     "extra": {
       "daily_gain": 0.15
-    }
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财组合高手操作",
-    "expert_id": "262380200000038042",
-    "name": "模拟组合3838042",
-    "owner": "模拟组合3838042",
-    "rank_label": "当日活跃组合",
-    "followers": 0,
-    "return_rate": 35.45,
-    "total_return": null,
-    "market_type": "sim",
-    "extra": {
-      "daily_gain": 8.88
     }
   },
   {
@@ -6771,16 +7235,16 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
-    "expert_id": "262700300000047116",
-    "name": "模拟组合7047116",
-    "owner": "模拟组合7047116",
+    "expert_id": "261614100000235441",
+    "name": "模拟组合6135441",
+    "owner": "模拟组合6135441",
     "rank_label": "当日活跃组合",
     "followers": 0,
-    "return_rate": 34.3,
+    "return_rate": 34.41,
     "total_return": null,
     "market_type": "sim",
     "extra": {
-      "daily_gain": -2.37
+      "daily_gain": 12.33
     }
   },
   {
@@ -6915,6 +7379,22 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
+    "expert_id": "262000400000065918",
+    "name": "模拟组合0065918",
+    "owner": "模拟组合0065918",
+    "rank_label": "当日活跃组合",
+    "followers": 0,
+    "return_rate": 32.6,
+    "total_return": null,
+    "market_type": "sim",
+    "extra": {
+      "daily_gain": 6.91
+    }
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
     "expert_id": "252580400000042347",
     "name": "模拟组合5842347",
     "owner": "模拟组合5842347",
@@ -6973,22 +7453,6 @@
     "market_type": "sim",
     "extra": {
       "daily_gain": 0.62
-    }
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财组合高手操作",
-    "expert_id": "262770400000032853",
-    "name": "不服13",
-    "owner": "不服13",
-    "rank_label": "当日活跃组合",
-    "followers": 0,
-    "return_rate": 31.51,
-    "total_return": null,
-    "market_type": "sim",
-    "extra": {
-      "daily_gain": -0.5
     }
   },
   {
@@ -7075,6 +7539,22 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
+    "expert_id": "262380200000038042",
+    "name": "模拟组合3838042",
+    "owner": "模拟组合3838042",
+    "rank_label": "当日活跃组合",
+    "followers": 0,
+    "return_rate": 30.29,
+    "total_return": null,
+    "market_type": "sim",
+    "extra": {
+      "daily_gain": 8.88
+    }
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
     "expert_id": "250424200000054597",
     "name": "模拟组合4254597",
     "owner": "模拟组合4254597",
@@ -7117,22 +7597,6 @@
     "market_type": "sim",
     "extra": {
       "daily_gain": 2.3
-    }
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财组合高手操作",
-    "expert_id": "262044300000028168",
-    "name": "模拟组合0428168",
-    "owner": "模拟组合0428168",
-    "rank_label": "当日活跃组合",
-    "followers": 0,
-    "return_rate": 29.88,
-    "total_return": null,
-    "market_type": "sim",
-    "extra": {
-      "daily_gain": -6.7
     }
   },
   {
@@ -7187,22 +7651,6 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
-    "expert_id": "262700400000147171",
-    "name": "模拟组合7047171",
-    "owner": "模拟组合7047171",
-    "rank_label": "当日活跃组合",
-    "followers": 0,
-    "return_rate": 29.45,
-    "total_return": null,
-    "market_type": "sim",
-    "extra": {
-      "daily_gain": -3.3
-    }
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财组合高手操作",
     "expert_id": "262594200000048600",
     "name": "你牛复购吗",
     "owner": "你牛复购吗",
@@ -7213,6 +7661,22 @@
     "market_type": "sim",
     "extra": {
       "daily_gain": 6.64
+    }
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
+    "expert_id": "262700300000047455",
+    "name": "模拟组合7047455",
+    "owner": "模拟组合7047455",
+    "rank_label": "当日活跃组合",
+    "followers": 0,
+    "return_rate": 29.34,
+    "total_return": null,
+    "market_type": "sim",
+    "extra": {
+      "daily_gain": -0.78
     }
   },
   {
@@ -7267,22 +7731,6 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
-    "expert_id": "262390300000024796",
-    "name": "什么是反转",
-    "owner": "什么是反转",
-    "rank_label": "当日活跃组合",
-    "followers": 0,
-    "return_rate": 28.98,
-    "total_return": null,
-    "market_type": "sim",
-    "extra": {
-      "daily_gain": -3.05
-    }
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财组合高手操作",
     "expert_id": "262730200000036450",
     "name": "模拟组合7336450",
     "owner": "模拟组合7336450",
@@ -7331,16 +7779,16 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
-    "expert_id": "262844300000062689",
-    "name": "KKBB3456",
-    "owner": "KKBB3456",
+    "expert_id": "262044300000028168",
+    "name": "模拟组合0428168",
+    "owner": "模拟组合0428168",
     "rank_label": "当日活跃组合",
     "followers": 0,
-    "return_rate": 28.75,
+    "return_rate": 28.65,
     "total_return": null,
     "market_type": "sim",
     "extra": {
-      "daily_gain": 10.67
+      "daily_gain": -6.7
     }
   },
   {
@@ -7395,6 +7843,22 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
+    "expert_id": "252190400000152510",
+    "name": "模拟组合1952510",
+    "owner": "模拟组合1952510",
+    "rank_label": "当日活跃组合",
+    "followers": 0,
+    "return_rate": 28.18,
+    "total_return": null,
+    "market_type": "sim",
+    "extra": {
+      "daily_gain": 8.66
+    }
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
     "expert_id": "262570400000036973",
     "name": "诶今非昔比我",
     "owner": "诶今非昔比我",
@@ -7421,22 +7885,6 @@
     "market_type": "sim",
     "extra": {
       "daily_gain": -3.16
-    }
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财组合高手操作",
-    "expert_id": "262210100000236100",
-    "name": "模拟组合2136100",
-    "owner": "模拟组合2136100",
-    "rank_label": "当日活跃组合",
-    "followers": 0,
-    "return_rate": 27.95,
-    "total_return": null,
-    "market_type": "sim",
-    "extra": {
-      "daily_gain": -0.51
     }
   },
   {
@@ -7475,6 +7923,22 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
+    "expert_id": "262770400000032853",
+    "name": "不服13",
+    "owner": "不服13",
+    "rank_label": "当日活跃组合",
+    "followers": 0,
+    "return_rate": 27.79,
+    "total_return": null,
+    "market_type": "sim",
+    "extra": {
+      "daily_gain": -0.5
+    }
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
     "expert_id": "242724200000048707",
     "name": "模拟组合7248707",
     "owner": "模拟组合7248707",
@@ -7485,6 +7949,22 @@
     "market_type": "sim",
     "extra": {
       "daily_gain": 5.44
+    }
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
+    "expert_id": "262210100000236100",
+    "name": "模拟组合2136100",
+    "owner": "模拟组合2136100",
+    "rank_label": "当日活跃组合",
+    "followers": 0,
+    "return_rate": 27.69,
+    "total_return": null,
+    "market_type": "sim",
+    "extra": {
+      "daily_gain": -0.51
     }
   },
   {
@@ -7504,35 +7984,25 @@
     }
   },
   {
-    "source": "eastmoney",
+    "source": "tonghuashun",
     "asset_type": "stock",
-    "channel": "东财组合高手操作",
-    "expert_id": "262530300000134595",
-    "name": "张杰军222",
-    "owner": "张杰军222",
-    "rank_label": "当日活跃组合",
-    "followers": 0,
-    "return_rate": 27.57,
+    "channel": "同花顺模拟炒股",
+    "expert_id": "75688530",
+    "name": "知行合一2020",
+    "owner": "知行合一2020",
+    "rank_label": "模拟炒股百强",
+    "followers": 8,
+    "return_rate": 27.4,
     "total_return": null,
     "market_type": "sim",
     "extra": {
-      "daily_gain": -1.6
-    }
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财组合高手操作",
-    "expert_id": "262710400000147774",
-    "name": "借力",
-    "owner": "借力",
-    "rank_label": "当日活跃组合",
-    "followers": 0,
-    "return_rate": 27.37,
-    "total_return": null,
-    "market_type": "sim",
-    "extra": {
-      "daily_gain": 8.01
+      "home_url": "https://moni.10jqka.com.cn/75688530",
+      "duanwei": "初段",
+      "month_rate": 0.0,
+      "week_rate": 0.0,
+      "day_rate": 0.0,
+      "success_rate": 100.0,
+      "total_asset": 254801.25
     }
   },
   {
@@ -7619,16 +8089,32 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
-    "expert_id": "262710100000027048",
-    "name": "模拟组合7127048",
-    "owner": "模拟组合7127048",
+    "expert_id": "262700300000047116",
+    "name": "模拟组合7047116",
+    "owner": "模拟组合7047116",
     "rank_label": "当日活跃组合",
     "followers": 0,
-    "return_rate": 27.07,
+    "return_rate": 27.03,
     "total_return": null,
     "market_type": "sim",
     "extra": {
-      "daily_gain": 4.23
+      "daily_gain": -2.37
+    }
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
+    "expert_id": "262864400000035833",
+    "name": "模拟组合8635833",
+    "owner": "模拟组合8635833",
+    "rank_label": "当日活跃组合",
+    "followers": 0,
+    "return_rate": 27.0,
+    "total_return": null,
+    "market_type": "sim",
+    "extra": {
+      "daily_gain": -2.26
     }
   },
   {
@@ -7699,6 +8185,22 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
+    "expert_id": "262390300000024796",
+    "name": "什么是反转",
+    "owner": "什么是反转",
+    "rank_label": "当日活跃组合",
+    "followers": 0,
+    "return_rate": 26.47,
+    "total_return": null,
+    "market_type": "sim",
+    "extra": {
+      "daily_gain": -3.05
+    }
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
     "expert_id": "261550300000032910",
     "name": "模拟组合5532910",
     "owner": "模拟组合5532910",
@@ -7731,22 +8233,6 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
-    "expert_id": "252190400000152510",
-    "name": "模拟组合1952510",
-    "owner": "模拟组合1952510",
-    "rank_label": "当日活跃组合",
-    "followers": 0,
-    "return_rate": 26.22,
-    "total_return": null,
-    "market_type": "sim",
-    "extra": {
-      "daily_gain": 8.66
-    }
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财组合高手操作",
     "expert_id": "262210300000235848",
     "name": "聂孟乔",
     "owner": "聂孟乔",
@@ -7757,6 +8243,28 @@
     "market_type": "sim",
     "extra": {
       "daily_gain": -3.29
+    }
+  },
+  {
+    "source": "tonghuashun",
+    "asset_type": "stock",
+    "channel": "同花顺模拟炒股",
+    "expert_id": "114762529",
+    "name": "lkc****7238",
+    "owner": "lkc****7238",
+    "rank_label": "模拟炒股百强",
+    "followers": 31,
+    "return_rate": 26.12,
+    "total_return": null,
+    "market_type": "sim",
+    "extra": {
+      "home_url": "https://moni.10jqka.com.cn/114762529",
+      "duanwei": "初段",
+      "month_rate": -0.27,
+      "week_rate": -0.91,
+      "day_rate": 0.81,
+      "success_rate": 100.0,
+      "total_asset": 252241.15
     }
   },
   {
@@ -7792,19 +8300,25 @@
     }
   },
   {
-    "source": "eastmoney",
+    "source": "tonghuashun",
     "asset_type": "stock",
-    "channel": "东财组合高手操作",
-    "expert_id": "262704400000147298",
-    "name": "模拟组合7047298",
-    "owner": "模拟组合7047298",
-    "rank_label": "当日活跃组合",
-    "followers": 0,
+    "channel": "同花顺模拟炒股",
+    "expert_id": "109757622",
+    "name": "me_****31653",
+    "owner": "me_****31653",
+    "rank_label": "模拟炒股百强",
+    "followers": 4,
     "return_rate": 25.82,
     "total_return": null,
     "market_type": "sim",
     "extra": {
-      "daily_gain": -2.04
+      "home_url": "https://moni.10jqka.com.cn/109757622",
+      "duanwei": "初段",
+      "month_rate": -16.09,
+      "week_rate": -11.84,
+      "day_rate": -1.41,
+      "success_rate": 100.0,
+      "total_asset": 251664.92
     }
   },
   {
@@ -7821,22 +8335,6 @@
     "market_type": "sim",
     "extra": {
       "daily_gain": 3.24
-    }
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财组合高手操作",
-    "expert_id": "262630100000434043",
-    "name": "hshzwh内蒙",
-    "owner": "hshzwh内蒙",
-    "rank_label": "当日活跃组合",
-    "followers": 0,
-    "return_rate": 25.76,
-    "total_return": null,
-    "market_type": "sim",
-    "extra": {
-      "daily_gain": 10.75
     }
   },
   {
@@ -7875,6 +8373,22 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
+    "expert_id": "262710100000027048",
+    "name": "模拟组合7127048",
+    "owner": "模拟组合7127048",
+    "rank_label": "当日活跃组合",
+    "followers": 0,
+    "return_rate": 25.66,
+    "total_return": null,
+    "market_type": "sim",
+    "extra": {
+      "daily_gain": 4.23
+    }
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
     "expert_id": "262374100000040215",
     "name": "嘤嘤嘤嘤嘤嘤的",
     "owner": "嘤嘤嘤嘤嘤嘤的",
@@ -7885,6 +8399,22 @@
     "market_type": "sim",
     "extra": {
       "daily_gain": 7.31
+    }
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
+    "expert_id": "262530300000134595",
+    "name": "张杰军222",
+    "owner": "张杰军222",
+    "rank_label": "当日活跃组合",
+    "followers": 0,
+    "return_rate": 25.09,
+    "total_return": null,
+    "market_type": "sim",
+    "extra": {
+      "daily_gain": -1.6
     }
   },
   {
@@ -7923,22 +8453,6 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
-    "expert_id": "262700400000033896",
-    "name": "打板学习09",
-    "owner": "打板学习09",
-    "rank_label": "当日活跃组合",
-    "followers": 0,
-    "return_rate": 24.93,
-    "total_return": null,
-    "market_type": "sim",
-    "extra": {
-      "daily_gain": -2.81
-    }
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财组合高手操作",
     "expert_id": "262604200000038295",
     "name": "林好运2026",
     "owner": "林好运2026",
@@ -7965,6 +8479,22 @@
     "market_type": "sim",
     "extra": {
       "daily_gain": 0.46
+    }
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
+    "expert_id": "262844300000062689",
+    "name": "KKBB3456",
+    "owner": "KKBB3456",
+    "rank_label": "当日活跃组合",
+    "followers": 0,
+    "return_rate": 24.68,
+    "total_return": null,
+    "market_type": "sim",
+    "extra": {
+      "daily_gain": 10.67
     }
   },
   {
@@ -8035,16 +8565,16 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
-    "expert_id": "262444300000041279",
-    "name": "吉祥三宝走中路",
-    "owner": "吉祥三宝走中路",
+    "expert_id": "262710400000147774",
+    "name": "借力",
+    "owner": "借力",
     "rank_label": "当日活跃组合",
     "followers": 0,
-    "return_rate": 24.17,
+    "return_rate": 24.06,
     "total_return": null,
     "market_type": "sim",
     "extra": {
-      "daily_gain": -0.75
+      "daily_gain": 8.01
     }
   },
   {
@@ -8131,22 +8661,6 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
-    "expert_id": "262364100000041173",
-    "name": "二六八二五",
-    "owner": "二六八二五",
-    "rank_label": "当日活跃组合",
-    "followers": 0,
-    "return_rate": 23.61,
-    "total_return": null,
-    "market_type": "sim",
-    "extra": {
-      "daily_gain": 15.8
-    }
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财组合高手操作",
     "expert_id": "260610100000050041",
     "name": "模拟组合6150041",
     "owner": "模拟组合6150041",
@@ -8211,22 +8725,6 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
-    "expert_id": "262090400000138769",
-    "name": "马斯克76",
-    "owner": "马斯克76",
-    "rank_label": "当日活跃组合",
-    "followers": 0,
-    "return_rate": 23.44,
-    "total_return": null,
-    "market_type": "sim",
-    "extra": {
-      "daily_gain": -1.44
-    }
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财组合高手操作",
     "expert_id": "261520200000069766",
     "name": "模拟组合5269766",
     "owner": "模拟组合5269766",
@@ -8243,22 +8741,6 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
-    "expert_id": "262804200000085298",
-    "name": "草原狼哥",
-    "owner": "草原狼哥",
-    "rank_label": "当日活跃组合",
-    "followers": 0,
-    "return_rate": 22.96,
-    "total_return": null,
-    "market_type": "sim",
-    "extra": {
-      "daily_gain": -6.9
-    }
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财组合高手操作",
     "expert_id": "252100100000002794",
     "name": "日线低吸系列3",
     "owner": "日线低吸系列3",
@@ -8269,38 +8751,6 @@
     "market_type": "sim",
     "extra": {
       "daily_gain": 2.49
-    }
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财组合高手操作",
-    "expert_id": "262630100000334185",
-    "name": "又到了这天",
-    "owner": "又到了这天",
-    "rank_label": "当日活跃组合",
-    "followers": 0,
-    "return_rate": 22.77,
-    "total_return": null,
-    "market_type": "sim",
-    "extra": {
-      "daily_gain": 7.68
-    }
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财组合高手操作",
-    "expert_id": "262870100000033700",
-    "name": "九月六日十月十五",
-    "owner": "九月六日十月十五",
-    "rank_label": "当日活跃组合",
-    "followers": 0,
-    "return_rate": 22.57,
-    "total_return": null,
-    "market_type": "sim",
-    "extra": {
-      "daily_gain": 22.7
     }
   },
   {
@@ -8371,6 +8821,22 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
+    "expert_id": "262700400000147171",
+    "name": "模拟组合7047171",
+    "owner": "模拟组合7047171",
+    "rank_label": "当日活跃组合",
+    "followers": 0,
+    "return_rate": 22.03,
+    "total_return": null,
+    "market_type": "sim",
+    "extra": {
+      "daily_gain": -3.3
+    }
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
     "expert_id": "262854100000041014",
     "name": "模拟组合8541014",
     "owner": "模拟组合8541014",
@@ -8387,22 +8853,6 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
-    "expert_id": "262720300000034920",
-    "name": "qwert123789",
-    "owner": "qwert123789",
-    "rank_label": "当日活跃组合",
-    "followers": 0,
-    "return_rate": 21.93,
-    "total_return": null,
-    "market_type": "sim",
-    "extra": {
-      "daily_gain": 9.52
-    }
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财组合高手操作",
     "expert_id": "262850400000251906",
     "name": "向日葵专属",
     "owner": "向日葵专属",
@@ -8413,22 +8863,6 @@
     "market_type": "sim",
     "extra": {
       "daily_gain": 5.19
-    }
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财组合高手操作",
-    "expert_id": "253610100000084250",
-    "name": "模拟组合6184250",
-    "owner": "模拟组合6184250",
-    "rank_label": "当日活跃组合",
-    "followers": 0,
-    "return_rate": 21.82,
-    "total_return": null,
-    "market_type": "sim",
-    "extra": {
-      "daily_gain": 0.17
     }
   },
   {
@@ -8528,6 +8962,28 @@
     }
   },
   {
+    "source": "tonghuashun",
+    "asset_type": "stock",
+    "channel": "同花顺模拟炒股",
+    "expert_id": "114918166",
+    "name": "ube**5",
+    "owner": "ube**5",
+    "rank_label": "模拟炒股百强",
+    "followers": 5,
+    "return_rate": 21.33,
+    "total_return": null,
+    "market_type": "sim",
+    "extra": {
+      "home_url": "https://moni.10jqka.com.cn/114918166",
+      "duanwei": "初段",
+      "month_rate": -4.5,
+      "week_rate": -4.87,
+      "day_rate": -0.16,
+      "success_rate": 100.0,
+      "total_asset": 242679.0
+    }
+  },
+  {
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
@@ -8589,6 +9045,22 @@
     "market_type": "sim",
     "extra": {
       "daily_gain": 5.58
+    }
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
+    "expert_id": "262444300000041279",
+    "name": "吉祥三宝走中路",
+    "owner": "吉祥三宝走中路",
+    "rank_label": "当日活跃组合",
+    "followers": 0,
+    "return_rate": 21.15,
+    "total_return": null,
+    "market_type": "sim",
+    "extra": {
+      "daily_gain": -0.75
     }
   },
   {
@@ -8723,6 +9195,22 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
+    "expert_id": "253610100000084250",
+    "name": "模拟组合6184250",
+    "owner": "模拟组合6184250",
+    "rank_label": "当日活跃组合",
+    "followers": 0,
+    "return_rate": 20.75,
+    "total_return": null,
+    "market_type": "sim",
+    "extra": {
+      "daily_gain": 0.17
+    }
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
     "expert_id": "253270100000340143",
     "name": "V20251125",
     "owner": "V20251125",
@@ -8771,6 +9259,22 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
+    "expert_id": "262804200000085298",
+    "name": "草原狼哥",
+    "owner": "草原狼哥",
+    "rank_label": "当日活跃组合",
+    "followers": 0,
+    "return_rate": 20.52,
+    "total_return": null,
+    "market_type": "sim",
+    "extra": {
+      "daily_gain": -6.9
+    }
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
     "expert_id": "262814300000151428",
     "name": "Gdas",
     "owner": "Gdas",
@@ -8797,22 +9301,6 @@
     "market_type": "sim",
     "extra": {
       "daily_gain": -9.95
-    }
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财组合高手操作",
-    "expert_id": "262864400000033353",
-    "name": "涨停试试涨停",
-    "owner": "涨停试试涨停",
-    "rank_label": "当日活跃组合",
-    "followers": 0,
-    "return_rate": 20.19,
-    "total_return": null,
-    "market_type": "sim",
-    "extra": {
-      "daily_gain": 9.13
     }
   },
   {
@@ -8883,22 +9371,6 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
-    "expert_id": "262810200000134044",
-    "name": "模拟组合8134044",
-    "owner": "模拟组合8134044",
-    "rank_label": "当日活跃组合",
-    "followers": 0,
-    "return_rate": 19.77,
-    "total_return": null,
-    "market_type": "sim",
-    "extra": {
-      "daily_gain": 0.82
-    }
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财组合高手操作",
     "expert_id": "262180300000236000",
     "name": "模拟组合1836000",
     "owner": "模拟组合1836000",
@@ -8909,6 +9381,22 @@
     "market_type": "sim",
     "extra": {
       "daily_gain": -2.26
+    }
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
+    "expert_id": "262704400000147298",
+    "name": "模拟组合7047298",
+    "owner": "模拟组合7047298",
+    "rank_label": "当日活跃组合",
+    "followers": 0,
+    "return_rate": 19.6,
+    "total_return": null,
+    "market_type": "sim",
+    "extra": {
+      "daily_gain": -2.04
     }
   },
   {
@@ -8947,22 +9435,6 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
-    "expert_id": "262850100000734334",
-    "name": "实盘装糖模拟称王",
-    "owner": "实盘装糖模拟称王",
-    "rank_label": "当日活跃组合",
-    "followers": 0,
-    "return_rate": 19.57,
-    "total_return": null,
-    "market_type": "sim",
-    "extra": {
-      "daily_gain": 1.21
-    }
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财组合高手操作",
     "expert_id": "262814400000047579",
     "name": "模拟组合8147579",
     "owner": "模拟组合8147579",
@@ -8973,6 +9445,54 @@
     "market_type": "sim",
     "extra": {
       "daily_gain": 1.34
+    }
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
+    "expert_id": "262090400000138769",
+    "name": "马斯克76",
+    "owner": "马斯克76",
+    "rank_label": "当日活跃组合",
+    "followers": 0,
+    "return_rate": 19.51,
+    "total_return": null,
+    "market_type": "sim",
+    "extra": {
+      "daily_gain": -1.44
+    }
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
+    "expert_id": "262364100000041173",
+    "name": "二六八二五",
+    "owner": "二六八二五",
+    "rank_label": "当日活跃组合",
+    "followers": 0,
+    "return_rate": 19.31,
+    "total_return": null,
+    "market_type": "sim",
+    "extra": {
+      "daily_gain": 15.8
+    }
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
+    "expert_id": "262700400000033896",
+    "name": "打板学习09",
+    "owner": "打板学习09",
+    "rank_label": "当日活跃组合",
+    "followers": 0,
+    "return_rate": 19.18,
+    "total_return": null,
+    "market_type": "sim",
+    "extra": {
+      "daily_gain": -2.81
     }
   },
   {
@@ -9043,16 +9563,16 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
-    "expert_id": "260934400000008362",
-    "name": "模拟组合9308362",
-    "owner": "模拟组合9308362",
+    "expert_id": "262850100000734334",
+    "name": "实盘装糖模拟称王",
+    "owner": "实盘装糖模拟称王",
     "rank_label": "当日活跃组合",
     "followers": 0,
-    "return_rate": 19.03,
+    "return_rate": 19.01,
     "total_return": null,
     "market_type": "sim",
     "extra": {
-      "daily_gain": 3.28
+      "daily_gain": 1.21
     }
   },
   {
@@ -9069,6 +9589,22 @@
     "market_type": "sim",
     "extra": {
       "daily_gain": 8.58
+    }
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
+    "expert_id": "262810200000134044",
+    "name": "模拟组合8134044",
+    "owner": "模拟组合8134044",
+    "rank_label": "当日活跃组合",
+    "followers": 0,
+    "return_rate": 18.98,
+    "total_return": null,
+    "market_type": "sim",
+    "extra": {
+      "daily_gain": 0.82
     }
   },
   {
@@ -9112,7 +9648,7 @@
     "owner": "TX3",
     "rank_label": "当日活跃组合",
     "followers": 0,
-    "return_rate": 18.95,
+    "return_rate": 18.94,
     "total_return": null,
     "market_type": "sim",
     "extra": {
@@ -9192,7 +9728,7 @@
     "owner": "我在603186",
     "rank_label": "当日活跃组合",
     "followers": 0,
-    "return_rate": 18.64,
+    "return_rate": 18.62,
     "total_return": null,
     "market_type": "sim",
     "extra": {
@@ -9235,22 +9771,6 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
-    "expert_id": "251314100000040800",
-    "name": "模拟组合3140800",
-    "owner": "模拟组合3140800",
-    "rank_label": "当日活跃组合",
-    "followers": 0,
-    "return_rate": 18.52,
-    "total_return": null,
-    "market_type": "sim",
-    "extra": {
-      "daily_gain": 5.73
-    }
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财组合高手操作",
     "expert_id": "262510100000635219",
     "name": "模拟组合5135219",
     "owner": "模拟组合5135219",
@@ -9283,38 +9803,6 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
-    "expert_id": "262800300000037399",
-    "name": "模拟组合8037399",
-    "owner": "模拟组合8037399",
-    "rank_label": "当日活跃组合",
-    "followers": 0,
-    "return_rate": 18.29,
-    "total_return": null,
-    "market_type": "sim",
-    "extra": {
-      "daily_gain": 1.3
-    }
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财组合高手操作",
-    "expert_id": "262840300000437104",
-    "name": "sonqp",
-    "owner": "sonqp",
-    "rank_label": "当日活跃组合",
-    "followers": 0,
-    "return_rate": 18.28,
-    "total_return": null,
-    "market_type": "sim",
-    "extra": {
-      "daily_gain": -7.5
-    }
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财组合高手操作",
     "expert_id": "10000000009099722",
     "name": "模拟组合9099722",
     "owner": "模拟组合9099722",
@@ -9325,6 +9813,22 @@
     "market_type": "sim",
     "extra": {
       "daily_gain": 1.48
+    }
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
+    "expert_id": "262864400000033353",
+    "name": "涨停试试涨停",
+    "owner": "涨停试试涨停",
+    "rank_label": "当日活跃组合",
+    "followers": 0,
+    "return_rate": 18.06,
+    "total_return": null,
+    "market_type": "sim",
+    "extra": {
+      "daily_gain": 9.13
     }
   },
   {
@@ -9405,22 +9909,6 @@
     "market_type": "sim",
     "extra": {
       "daily_gain": 19.19
-    }
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财组合高手操作",
-    "expert_id": "262860100000134128",
-    "name": "模拟组合8634128",
-    "owner": "模拟组合8634128",
-    "rank_label": "当日活跃组合",
-    "followers": 0,
-    "return_rate": 17.5,
-    "total_return": null,
-    "market_type": "sim",
-    "extra": {
-      "daily_gain": 6.93
     }
   },
   {
@@ -9539,6 +10027,22 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
+    "expert_id": "262840300000437104",
+    "name": "sonqp",
+    "owner": "sonqp",
+    "rank_label": "当日活跃组合",
+    "followers": 0,
+    "return_rate": 16.72,
+    "total_return": null,
+    "market_type": "sim",
+    "extra": {
+      "daily_gain": -7.5
+    }
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
     "expert_id": "262810400000237806",
     "name": "知行合一666666",
     "owner": "知行合一666666",
@@ -9651,22 +10155,6 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
-    "expert_id": "251630100000008977",
-    "name": "模拟组合6308977",
-    "owner": "模拟组合6308977",
-    "rank_label": "当日活跃组合",
-    "followers": 0,
-    "return_rate": 16.44,
-    "total_return": null,
-    "market_type": "sim",
-    "extra": {
-      "daily_gain": 6.85
-    }
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财组合高手操作",
     "expert_id": "262870100000234320",
     "name": "模拟组合8734320",
     "owner": "模拟组合8734320",
@@ -9693,6 +10181,28 @@
     "market_type": "sim",
     "extra": {
       "daily_gain": -1.09
+    }
+  },
+  {
+    "source": "tonghuashun",
+    "asset_type": "stock",
+    "channel": "同花顺模拟炒股",
+    "expert_id": "73533506",
+    "name": "黯然伤神的林",
+    "owner": "黯然伤神的林",
+    "rank_label": "模拟炒股百强",
+    "followers": 18,
+    "return_rate": 16.16,
+    "total_return": null,
+    "market_type": "sim",
+    "extra": {
+      "home_url": "https://moni.10jqka.com.cn/73533506",
+      "duanwei": "初段",
+      "month_rate": -3.04,
+      "week_rate": -2.61,
+      "day_rate": 0.05,
+      "success_rate": 100.0,
+      "total_asset": 232308.84
     }
   },
   {
@@ -9731,6 +10241,22 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
+    "expert_id": "262860100000034109",
+    "name": "jhhgff",
+    "owner": "jhhgff",
+    "rank_label": "当日活跃组合",
+    "followers": 0,
+    "return_rate": 16.15,
+    "total_return": null,
+    "market_type": "sim",
+    "extra": {
+      "daily_gain": 5.45
+    }
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
     "expert_id": "252950100000149316",
     "name": "液冷123654",
     "owner": "液冷123654",
@@ -9741,38 +10267,6 @@
     "market_type": "sim",
     "extra": {
       "daily_gain": 3.06
-    }
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财组合高手操作",
-    "expert_id": "262810300000034018",
-    "name": "今年想那些",
-    "owner": "今年想那些",
-    "rank_label": "当日活跃组合",
-    "followers": 0,
-    "return_rate": 15.91,
-    "total_return": null,
-    "market_type": "sim",
-    "extra": {
-      "daily_gain": 5.67
-    }
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财组合高手操作",
-    "expert_id": "262860100000034109",
-    "name": "jhhgff",
-    "owner": "jhhgff",
-    "rank_label": "当日活跃组合",
-    "followers": 0,
-    "return_rate": 15.88,
-    "total_return": null,
-    "market_type": "sim",
-    "extra": {
-      "daily_gain": 5.45
     }
   },
   {
@@ -9891,6 +10385,22 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
+    "expert_id": "262860300000133849",
+    "name": "A5分钟上8a",
+    "owner": "A5分钟上8a",
+    "rank_label": "当日活跃组合",
+    "followers": 0,
+    "return_rate": 15.62,
+    "total_return": null,
+    "market_type": "sim",
+    "extra": {
+      "daily_gain": 0.74
+    }
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
     "expert_id": "262300200000240786",
     "name": "翻倍投入资金",
     "owner": "翻倍投入资金",
@@ -9917,22 +10427,6 @@
     "market_type": "sim",
     "extra": {
       "daily_gain": 9.88
-    }
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财组合高手操作",
-    "expert_id": "262800300000153536",
-    "name": "模拟组合8053536",
-    "owner": "模拟组合8053536",
-    "rank_label": "当日活跃组合",
-    "followers": 0,
-    "return_rate": 15.38,
-    "total_return": null,
-    "market_type": "sim",
-    "extra": {
-      "daily_gain": 10.54
     }
   },
   {
@@ -10083,6 +10577,38 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
+    "expert_id": "262884100000134059",
+    "name": "就是不是",
+    "owner": "就是不是",
+    "rank_label": "当日活跃组合",
+    "followers": 0,
+    "return_rate": 14.87,
+    "total_return": null,
+    "market_type": "sim",
+    "extra": {
+      "daily_gain": 14.27
+    }
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
+    "expert_id": "262884200000333992",
+    "name": "首板跟随模式",
+    "owner": "首板跟随模式",
+    "rank_label": "当日活跃组合",
+    "followers": 0,
+    "return_rate": 14.85,
+    "total_return": null,
+    "market_type": "sim",
+    "extra": {
+      "daily_gain": 14.25
+    }
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
     "expert_id": "262870100000334276",
     "name": "星帅",
     "owner": "星帅",
@@ -10157,22 +10683,6 @@
     "market_type": "sim",
     "extra": {
       "daily_gain": 9.17
-    }
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财组合高手操作",
-    "expert_id": "262880300000134509",
-    "name": "hdbskis",
-    "owner": "hdbskis",
-    "rank_label": "当日活跃组合",
-    "followers": 0,
-    "return_rate": 14.73,
-    "total_return": null,
-    "market_type": "sim",
-    "extra": {
-      "daily_gain": 14.73
     }
   },
   {
@@ -10291,16 +10801,16 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
-    "expert_id": "253300300000054652",
-    "name": "lknn",
-    "owner": "lknn",
+    "expert_id": "262870300000075522",
+    "name": "模拟组合8775522",
+    "owner": "模拟组合8775522",
     "rank_label": "当日活跃组合",
     "followers": 0,
-    "return_rate": 14.41,
+    "return_rate": 14.46,
     "total_return": null,
     "market_type": "sim",
     "extra": {
-      "daily_gain": 8.54
+      "daily_gain": 13.88
     }
   },
   {
@@ -10371,38 +10881,6 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
-    "expert_id": "262884100000134059",
-    "name": "就是不是",
-    "owner": "就是不是",
-    "rank_label": "当日活跃组合",
-    "followers": 0,
-    "return_rate": 14.27,
-    "total_return": null,
-    "market_type": "sim",
-    "extra": {
-      "daily_gain": 14.27
-    }
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财组合高手操作",
-    "expert_id": "262884200000333992",
-    "name": "首板跟随模式",
-    "owner": "首板跟随模式",
-    "rank_label": "当日活跃组合",
-    "followers": 0,
-    "return_rate": 14.25,
-    "total_return": null,
-    "market_type": "sim",
-    "extra": {
-      "daily_gain": 14.25
-    }
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财组合高手操作",
     "expert_id": "262860400000337384",
     "name": "小小霞100",
     "owner": "小小霞100",
@@ -10413,22 +10891,6 @@
     "market_type": "sim",
     "extra": {
       "daily_gain": 7.94
-    }
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财组合高手操作",
-    "expert_id": "262840200000237984",
-    "name": "模拟组合8437984",
-    "owner": "模拟组合8437984",
-    "rank_label": "当日活跃组合",
-    "followers": 0,
-    "return_rate": 14.21,
-    "total_return": null,
-    "market_type": "sim",
-    "extra": {
-      "daily_gain": 5.59
     }
   },
   {
@@ -10509,22 +10971,6 @@
     "market_type": "sim",
     "extra": {
       "daily_gain": 8.12
-    }
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财组合高手操作",
-    "expert_id": "262810300000136484",
-    "name": "我的超超",
-    "owner": "我的超超",
-    "rank_label": "当日活跃组合",
-    "followers": 0,
-    "return_rate": 14.06,
-    "total_return": null,
-    "market_type": "sim",
-    "extra": {
-      "daily_gain": -5.27
     }
   },
   {
@@ -10643,22 +11089,6 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
-    "expert_id": "262870300000075522",
-    "name": "模拟组合8775522",
-    "owner": "模拟组合8775522",
-    "rank_label": "当日活跃组合",
-    "followers": 0,
-    "return_rate": 13.88,
-    "total_return": null,
-    "market_type": "sim",
-    "extra": {
-      "daily_gain": 13.88
-    }
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财组合高手操作",
     "expert_id": "262524300000036900",
     "name": "分仓账户",
     "owner": "分仓账户",
@@ -10669,6 +11099,22 @@
     "market_type": "sim",
     "extra": {
       "daily_gain": -7.49
+    }
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
+    "expert_id": "262860100000134128",
+    "name": "模拟组合8634128",
+    "owner": "模拟组合8634128",
+    "rank_label": "当日活跃组合",
+    "followers": 0,
+    "return_rate": 13.7,
+    "total_return": null,
+    "market_type": "sim",
+    "extra": {
+      "daily_gain": 6.93
     }
   },
   {
@@ -10835,6 +11281,38 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
+    "expert_id": "262870100000033700",
+    "name": "九月六日十月十五",
+    "owner": "九月六日十月十五",
+    "rank_label": "当日活跃组合",
+    "followers": 0,
+    "return_rate": 13.32,
+    "total_return": null,
+    "market_type": "sim",
+    "extra": {
+      "daily_gain": 22.7
+    }
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
+    "expert_id": "262630100000434043",
+    "name": "hshzwh内蒙",
+    "owner": "hshzwh内蒙",
+    "rank_label": "当日活跃组合",
+    "followers": 0,
+    "return_rate": 13.29,
+    "total_return": null,
+    "market_type": "sim",
+    "extra": {
+      "daily_gain": 10.75
+    }
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
     "expert_id": "262870100000037925",
     "name": "大米小麦酒66",
     "owner": "大米小麦酒66",
@@ -10845,6 +11323,22 @@
     "market_type": "sim",
     "extra": {
       "daily_gain": 8.82
+    }
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
+    "expert_id": "262860400000064968",
+    "name": "模拟组合8664968",
+    "owner": "模拟组合8664968",
+    "rank_label": "当日活跃组合",
+    "followers": 0,
+    "return_rate": 13.14,
+    "total_return": null,
+    "market_type": "sim",
+    "extra": {
+      "daily_gain": 12.62
     }
   },
   {
@@ -10883,16 +11377,16 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
-    "expert_id": "262224200000067822",
-    "name": "模拟组合2267822",
-    "owner": "模拟组合2267822",
+    "expert_id": "251630100000008977",
+    "name": "模拟组合6308977",
+    "owner": "模拟组合6308977",
     "rank_label": "当日活跃组合",
     "followers": 0,
-    "return_rate": 13.08,
+    "return_rate": 13.1,
     "total_return": null,
     "market_type": "sim",
     "extra": {
-      "daily_gain": 9.34
+      "daily_gain": 6.85
     }
   },
   {
@@ -10909,22 +11403,6 @@
     "market_type": "sim",
     "extra": {
       "daily_gain": 19.94
-    }
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财组合高手操作",
-    "expert_id": "262860300000133849",
-    "name": "A5分钟上8a",
-    "owner": "A5分钟上8a",
-    "rank_label": "当日活跃组合",
-    "followers": 0,
-    "return_rate": 13.01,
-    "total_return": null,
-    "market_type": "sim",
-    "extra": {
-      "daily_gain": 0.74
     }
   },
   {
@@ -11027,6 +11505,22 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
+    "expert_id": "262850400000038495",
+    "name": "模拟组合8538495",
+    "owner": "模拟组合8538495",
+    "rank_label": "当日活跃组合",
+    "followers": 0,
+    "return_rate": 12.9,
+    "total_return": null,
+    "market_type": "sim",
+    "extra": {
+      "daily_gain": -0.16
+    }
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
     "expert_id": "262814200000152626",
     "name": "马路1G",
     "owner": "马路1G",
@@ -11037,22 +11531,6 @@
     "market_type": "sim",
     "extra": {
       "daily_gain": -5.29
-    }
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财组合高手操作",
-    "expert_id": "262874100000075190",
-    "name": "一要进步",
-    "owner": "一要进步",
-    "rank_label": "当日活跃组合",
-    "followers": 0,
-    "return_rate": 12.88,
-    "total_return": null,
-    "market_type": "sim",
-    "extra": {
-      "daily_gain": 12.88
     }
   },
   {
@@ -11117,22 +11595,6 @@
     "market_type": "sim",
     "extra": {
       "daily_gain": 0.43
-    }
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财组合高手操作",
-    "expert_id": "262860400000064968",
-    "name": "模拟组合8664968",
-    "owner": "模拟组合8664968",
-    "rank_label": "当日活跃组合",
-    "followers": 0,
-    "return_rate": 12.62,
-    "total_return": null,
-    "market_type": "sim",
-    "extra": {
-      "daily_gain": 12.62
     }
   },
   {
@@ -11219,6 +11681,22 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
+    "expert_id": "251314100000040800",
+    "name": "模拟组合3140800",
+    "owner": "模拟组合3140800",
+    "rank_label": "当日活跃组合",
+    "followers": 0,
+    "return_rate": 12.21,
+    "total_return": null,
+    "market_type": "sim",
+    "extra": {
+      "daily_gain": 5.73
+    }
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
     "expert_id": "240190300000012963",
     "name": "模拟组合1912963",
     "owner": "模拟组合1912963",
@@ -11229,6 +11707,22 @@
     "market_type": "sim",
     "extra": {
       "daily_gain": 5.1
+    }
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
+    "expert_id": "260934400000008362",
+    "name": "模拟组合9308362",
+    "owner": "模拟组合9308362",
+    "rank_label": "当日活跃组合",
+    "followers": 0,
+    "return_rate": 12.2,
+    "total_return": null,
+    "market_type": "sim",
+    "extra": {
+      "daily_gain": 3.28
     }
   },
   {
@@ -11315,22 +11809,6 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
-    "expert_id": "250074300000061569",
-    "name": "模拟组合0761569",
-    "owner": "模拟组合0761569",
-    "rank_label": "当日活跃组合",
-    "followers": 0,
-    "return_rate": 12.02,
-    "total_return": null,
-    "market_type": "sim",
-    "extra": {
-      "daily_gain": 4.59
-    }
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财组合高手操作",
     "expert_id": "262860300000035966",
     "name": "爆赚一年十倍",
     "owner": "爆赚一年十倍",
@@ -11341,6 +11819,22 @@
     "market_type": "sim",
     "extra": {
       "daily_gain": -5.76
+    }
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
+    "expert_id": "262800300000153536",
+    "name": "模拟组合8053536",
+    "owner": "模拟组合8053536",
+    "rank_label": "当日活跃组合",
+    "followers": 0,
+    "return_rate": 11.72,
+    "total_return": null,
+    "market_type": "sim",
+    "extra": {
+      "daily_gain": 10.54
     }
   },
   {
@@ -11363,22 +11857,6 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
-    "expert_id": "262850100000080310",
-    "name": "地方吗还",
-    "owner": "地方吗还",
-    "rank_label": "当日活跃组合",
-    "followers": 0,
-    "return_rate": 11.68,
-    "total_return": null,
-    "market_type": "sim",
-    "extra": {
-      "daily_gain": 10.04
-    }
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财组合高手操作",
     "expert_id": "262850300000234786",
     "name": "模拟组合8534786",
     "owner": "模拟组合8534786",
@@ -11389,22 +11867,6 @@
     "market_type": "sim",
     "extra": {
       "daily_gain": 3.08
-    }
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财组合高手操作",
-    "expert_id": "251424200000137430",
-    "name": "白银有色2026",
-    "owner": "白银有色2026",
-    "rank_label": "当日活跃组合",
-    "followers": 0,
-    "return_rate": 11.66,
-    "total_return": null,
-    "market_type": "sim",
-    "extra": {
-      "daily_gain": 15.84
     }
   },
   {
@@ -11715,6 +12177,22 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
+    "expert_id": "262630100000334185",
+    "name": "又到了这天",
+    "owner": "又到了这天",
+    "rank_label": "当日活跃组合",
+    "followers": 0,
+    "return_rate": 10.55,
+    "total_return": null,
+    "market_type": "sim",
+    "extra": {
+      "daily_gain": 7.68
+    }
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
     "expert_id": "262850400000033850",
     "name": "问问",
     "owner": "问问",
@@ -11731,32 +12209,38 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
-    "expert_id": "262864400000035833",
-    "name": "模拟组合8635833",
-    "owner": "模拟组合8635833",
+    "expert_id": "262810300000034018",
+    "name": "今年想那些",
+    "owner": "今年想那些",
     "rank_label": "当日活跃组合",
     "followers": 0,
-    "return_rate": 10.52,
+    "return_rate": 10.44,
     "total_return": null,
     "market_type": "sim",
     "extra": {
-      "daily_gain": -2.26
+      "daily_gain": 5.67
     }
   },
   {
-    "source": "eastmoney",
+    "source": "tonghuashun",
     "asset_type": "stock",
-    "channel": "东财组合高手操作",
-    "expert_id": "262850400000038495",
-    "name": "模拟组合8538495",
-    "owner": "模拟组合8538495",
-    "rank_label": "当日活跃组合",
-    "followers": 0,
-    "return_rate": 10.41,
+    "channel": "同花顺模拟炒股",
+    "expert_id": "122762966",
+    "name": "今天吹什么风",
+    "owner": "今天吹什么风",
+    "rank_label": "模拟炒股百强",
+    "followers": 2,
+    "return_rate": 10.34,
     "total_return": null,
     "market_type": "sim",
     "extra": {
-      "daily_gain": -0.16
+      "home_url": "https://moni.10jqka.com.cn/122762966",
+      "duanwei": "初段",
+      "month_rate": -2.08,
+      "week_rate": -6.11,
+      "day_rate": -1.98,
+      "success_rate": 100.0,
+      "total_asset": 220683.57
     }
   },
   {
@@ -11805,22 +12289,6 @@
     "market_type": "sim",
     "extra": {
       "daily_gain": -0.38
-    }
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财组合高手操作",
-    "expert_id": "262850300000934310",
-    "name": "Tyyyhg",
-    "owner": "Tyyyhg",
-    "rank_label": "当日活跃组合",
-    "followers": 0,
-    "return_rate": 10.19,
-    "total_return": null,
-    "market_type": "sim",
-    "extra": {
-      "daily_gain": 10.65
     }
   },
   {
@@ -11939,96 +12407,32 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
-    "expert_id": "260700200000055955",
-    "name": "模拟组合7055955",
-    "owner": "模拟组合7055955",
+    "expert_id": "262224200000067822",
+    "name": "模拟组合2267822",
+    "owner": "模拟组合2267822",
     "rank_label": "当日活跃组合",
     "followers": 0,
-    "return_rate": 10.04,
+    "return_rate": 10.03,
     "total_return": null,
     "market_type": "sim",
     "extra": {
-      "daily_gain": 10.04
+      "daily_gain": 9.34
     }
   },
   {
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
-    "expert_id": "262004800000073600",
-    "name": "回家数一数",
-    "owner": "回家数一数",
+    "expert_id": "253300300000054652",
+    "name": "lknn",
+    "owner": "lknn",
     "rank_label": "当日活跃组合",
     "followers": 0,
-    "return_rate": 10.04,
+    "return_rate": 10.03,
     "total_return": null,
     "market_type": "sim",
     "extra": {
-      "daily_gain": 10.04
-    }
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财组合高手操作",
-    "expert_id": "262870100000077583",
-    "name": "模拟组合8777583",
-    "owner": "模拟组合8777583",
-    "rank_label": "当日活跃组合",
-    "followers": 0,
-    "return_rate": 10.04,
-    "total_return": null,
-    "market_type": "sim",
-    "extra": {
-      "daily_gain": 10.04
-    }
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财组合高手操作",
-    "expert_id": "262874200000073773",
-    "name": "模拟组合8773773",
-    "owner": "模拟组合8773773",
-    "rank_label": "当日活跃组合",
-    "followers": 0,
-    "return_rate": 10.04,
-    "total_return": null,
-    "market_type": "sim",
-    "extra": {
-      "daily_gain": 10.04
-    }
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财组合高手操作",
-    "expert_id": "262874200000076839",
-    "name": "模拟组合8776839",
-    "owner": "模拟组合8776839",
-    "rank_label": "当日活跃组合",
-    "followers": 0,
-    "return_rate": 10.04,
-    "total_return": null,
-    "market_type": "sim",
-    "extra": {
-      "daily_gain": 10.04
-    }
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财组合高手操作",
-    "expert_id": "262884100000002120",
-    "name": "模拟组合8802120",
-    "owner": "模拟组合8802120",
-    "rank_label": "当日活跃组合",
-    "followers": 0,
-    "return_rate": 10.04,
-    "total_return": null,
-    "market_type": "sim",
-    "extra": {
-      "daily_gain": 10.04
+      "daily_gain": 8.54
     }
   },
   {
@@ -12077,6 +12481,22 @@
     "market_type": "sim",
     "extra": {
       "daily_gain": 12.89
+    }
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
+    "expert_id": "262720300000034920",
+    "name": "qwert123789",
+    "owner": "qwert123789",
+    "rank_label": "当日活跃组合",
+    "followers": 0,
+    "return_rate": 9.79,
+    "total_return": null,
+    "market_type": "sim",
+    "extra": {
+      "daily_gain": 9.52
     }
   },
   {
@@ -12179,22 +12599,6 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
-    "expert_id": "262884400000009968",
-    "name": "模拟组合8809968",
-    "owner": "模拟组合8809968",
-    "rank_label": "当日活跃组合",
-    "followers": 0,
-    "return_rate": 9.46,
-    "total_return": null,
-    "market_type": "sim",
-    "extra": {
-      "daily_gain": 9.46
-    }
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财组合高手操作",
     "expert_id": "230520300000057632",
     "name": "模拟组合5257632",
     "owner": "模拟组合5257632",
@@ -12205,54 +12609,6 @@
     "market_type": "sim",
     "extra": {
       "daily_gain": 1.46
-    }
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财组合高手操作",
-    "expert_id": "262850400000134406",
-    "name": "tugtknn124",
-    "owner": "tugtknn124",
-    "rank_label": "当日活跃组合",
-    "followers": 0,
-    "return_rate": 9.41,
-    "total_return": null,
-    "market_type": "sim",
-    "extra": {
-      "daily_gain": 9.41
-    }
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财组合高手操作",
-    "expert_id": "262880300000034491",
-    "name": "yy112233",
-    "owner": "yy112233",
-    "rank_label": "当日活跃组合",
-    "followers": 0,
-    "return_rate": 9.37,
-    "total_return": null,
-    "market_type": "sim",
-    "extra": {
-      "daily_gain": 9.37
-    }
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财组合高手操作",
-    "expert_id": "262724300000235312",
-    "name": "模拟组合7235312",
-    "owner": "模拟组合7235312",
-    "rank_label": "当日活跃组合",
-    "followers": 0,
-    "return_rate": 9.28,
-    "total_return": null,
-    "market_type": "sim",
-    "extra": {
-      "daily_gain": -0.78
     }
   },
   {
@@ -12307,6 +12663,22 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
+    "expert_id": "262810300000136484",
+    "name": "我的超超",
+    "owner": "我的超超",
+    "rank_label": "当日活跃组合",
+    "followers": 0,
+    "return_rate": 8.82,
+    "total_return": null,
+    "market_type": "sim",
+    "extra": {
+      "daily_gain": -5.27
+    }
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
     "expert_id": "262704300000078683",
     "name": "模拟组合7078683",
     "owner": "模拟组合7078683",
@@ -12317,22 +12689,6 @@
     "market_type": "sim",
     "extra": {
       "daily_gain": 8.91
-    }
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财组合高手操作",
-    "expert_id": "262870100000085719",
-    "name": "美股异动",
-    "owner": "美股异动",
-    "rank_label": "当日活跃组合",
-    "followers": 0,
-    "return_rate": 8.78,
-    "total_return": null,
-    "market_type": "sim",
-    "extra": {
-      "daily_gain": 8.78
     }
   },
   {
@@ -12483,22 +12839,6 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
-    "expert_id": "261604400000040139",
-    "name": "dhjjh",
-    "owner": "dhjjh",
-    "rank_label": "当日活跃组合",
-    "followers": 0,
-    "return_rate": 8.38,
-    "total_return": null,
-    "market_type": "sim",
-    "extra": {
-      "daily_gain": 7.57
-    }
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财组合高手操作",
     "expert_id": "262874400000053153",
     "name": "坚守370",
     "owner": "坚守370",
@@ -12509,22 +12849,6 @@
     "market_type": "sim",
     "extra": {
       "daily_gain": 8.47
-    }
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财组合高手操作",
-    "expert_id": "262880200000034085",
-    "name": "随随手一拍照",
-    "owner": "随随手一拍照",
-    "rank_label": "当日活跃组合",
-    "followers": 0,
-    "return_rate": 8.34,
-    "total_return": null,
-    "market_type": "sim",
-    "extra": {
-      "daily_gain": 8.34
     }
   },
   {
@@ -12643,6 +12967,22 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
+    "expert_id": "262724300000235312",
+    "name": "模拟组合7235312",
+    "owner": "模拟组合7235312",
+    "rank_label": "当日活跃组合",
+    "followers": 0,
+    "return_rate": 8.11,
+    "total_return": null,
+    "market_type": "sim",
+    "extra": {
+      "daily_gain": -0.78
+    }
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
     "expert_id": "262600100000033710",
     "name": "模拟组合6033710",
     "owner": "模拟组合6033710",
@@ -12691,22 +13031,6 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
-    "expert_id": "252590100000152183",
-    "name": "模拟组合5952183",
-    "owner": "模拟组合5952183",
-    "rank_label": "当日活跃组合",
-    "followers": 0,
-    "return_rate": 7.88,
-    "total_return": null,
-    "market_type": "sim",
-    "extra": {
-      "daily_gain": 9.72
-    }
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财组合高手操作",
     "expert_id": "253080200000069895",
     "name": "模拟组合0869895",
     "owner": "模拟组合0869895",
@@ -12749,38 +13073,6 @@
     "market_type": "sim",
     "extra": {
       "daily_gain": 7.8
-    }
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财组合高手操作",
-    "expert_id": "262874400000066053",
-    "name": "天命轻狂",
-    "owner": "天命轻狂",
-    "rank_label": "当日活跃组合",
-    "followers": 0,
-    "return_rate": 7.75,
-    "total_return": null,
-    "market_type": "sim",
-    "extra": {
-      "daily_gain": 7.75
-    }
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财组合高手操作",
-    "expert_id": "262504100000136605",
-    "name": "R7475284",
-    "owner": "R7475284",
-    "rank_label": "当日活跃组合",
-    "followers": 0,
-    "return_rate": 7.74,
-    "total_return": null,
-    "market_type": "sim",
-    "extra": {
-      "daily_gain": 9.11
     }
   },
   {
@@ -12931,32 +13223,16 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
-    "expert_id": "262880400000034163",
-    "name": "威海01",
-    "owner": "威海01",
+    "expert_id": "251424200000137430",
+    "name": "白银有色2026",
+    "owner": "白银有色2026",
     "rank_label": "当日活跃组合",
     "followers": 0,
-    "return_rate": 7.49,
+    "return_rate": 7.44,
     "total_return": null,
     "market_type": "sim",
     "extra": {
-      "daily_gain": 7.49
-    }
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财组合高手操作",
-    "expert_id": "253484400000234306",
-    "name": "后知后觉模拟仓",
-    "owner": "后知后觉模拟仓",
-    "rank_label": "当日活跃组合",
-    "followers": 0,
-    "return_rate": 7.47,
-    "total_return": null,
-    "market_type": "sim",
-    "extra": {
-      "daily_gain": -1.78
+      "daily_gain": 15.84
     }
   },
   {
@@ -13021,22 +13297,6 @@
     "market_type": "sim",
     "extra": {
       "daily_gain": 7.25
-    }
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财组合高手操作",
-    "expert_id": "262880400000133569",
-    "name": "suuwsu文轩",
-    "owner": "suuwsu文轩",
-    "rank_label": "当日活跃组合",
-    "followers": 0,
-    "return_rate": 7.15,
-    "total_return": null,
-    "market_type": "sim",
-    "extra": {
-      "daily_gain": 7.15
     }
   },
   {
@@ -13123,6 +13383,22 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
+    "expert_id": "262800300000037399",
+    "name": "模拟组合8037399",
+    "owner": "模拟组合8037399",
+    "rank_label": "当日活跃组合",
+    "followers": 0,
+    "return_rate": 6.99,
+    "total_return": null,
+    "market_type": "sim",
+    "extra": {
+      "daily_gain": 1.3
+    }
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
     "expert_id": "262884400000040979",
     "name": "核心增长",
     "owner": "核心增长",
@@ -13133,38 +13409,6 @@
     "market_type": "sim",
     "extra": {
       "daily_gain": 6.98
-    }
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财组合高手操作",
-    "expert_id": "262884200000034265",
-    "name": "模拟组合8834265",
-    "owner": "模拟组合8834265",
-    "rank_label": "当日活跃组合",
-    "followers": 0,
-    "return_rate": 6.96,
-    "total_return": null,
-    "market_type": "sim",
-    "extra": {
-      "daily_gain": 6.96
-    }
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财组合高手操作",
-    "expert_id": "262870400000135757",
-    "name": "模拟组合8735757",
-    "owner": "模拟组合8735757",
-    "rank_label": "当日活跃组合",
-    "followers": 0,
-    "return_rate": 6.93,
-    "total_return": null,
-    "market_type": "sim",
-    "extra": {
-      "daily_gain": 6.93
     }
   },
   {
@@ -13443,6 +13687,38 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
+    "expert_id": "262850400000134406",
+    "name": "tugtknn124",
+    "owner": "tugtknn124",
+    "rank_label": "当日活跃组合",
+    "followers": 0,
+    "return_rate": 5.94,
+    "total_return": null,
+    "market_type": "sim",
+    "extra": {
+      "daily_gain": 9.41
+    }
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
+    "expert_id": "262880300000034491",
+    "name": "yy112233",
+    "owner": "yy112233",
+    "rank_label": "当日活跃组合",
+    "followers": 0,
+    "return_rate": 5.92,
+    "total_return": null,
+    "market_type": "sim",
+    "extra": {
+      "daily_gain": 9.37
+    }
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
     "expert_id": "262700200000136333",
     "name": "老实人做军工",
     "owner": "老实人做军工",
@@ -13469,6 +13745,22 @@
     "market_type": "sim",
     "extra": {
       "daily_gain": -1.78
+    }
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
+    "expert_id": "262850300000934310",
+    "name": "Tyyyhg",
+    "owner": "Tyyyhg",
+    "rank_label": "当日活跃组合",
+    "followers": 0,
+    "return_rate": 5.74,
+    "total_return": null,
+    "market_type": "sim",
+    "extra": {
+      "daily_gain": 10.65
     }
   },
   {
@@ -13555,22 +13847,6 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
-    "expert_id": "260700200000059773",
-    "name": "宝总666",
-    "owner": "宝总666",
-    "rank_label": "当日活跃组合",
-    "followers": 0,
-    "return_rate": 5.64,
-    "total_return": null,
-    "market_type": "sim",
-    "extra": {
-      "daily_gain": 9.95
-    }
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财组合高手操作",
     "expert_id": "262590400000037087",
     "name": "模拟组合5937087",
     "owner": "模拟组合5937087",
@@ -13581,6 +13857,28 @@
     "market_type": "sim",
     "extra": {
       "daily_gain": 9.46
+    }
+  },
+  {
+    "source": "tonghuashun",
+    "asset_type": "stock",
+    "channel": "同花顺模拟炒股",
+    "expert_id": "83378102",
+    "name": "危机拐点",
+    "owner": "危机拐点",
+    "rank_label": "模拟炒股百强",
+    "followers": 4,
+    "return_rate": 5.52,
+    "total_return": null,
+    "market_type": "sim",
+    "extra": {
+      "home_url": "https://moni.10jqka.com.cn/83378102",
+      "duanwei": "初段",
+      "month_rate": 5.52,
+      "week_rate": 5.52,
+      "day_rate": 3.54,
+      "success_rate": 100.0,
+      "total_asset": 211039.58
     }
   },
   {
@@ -13629,6 +13927,28 @@
     "market_type": "sim",
     "extra": {
       "daily_gain": 0.04
+    }
+  },
+  {
+    "source": "tonghuashun",
+    "asset_type": "stock",
+    "channel": "同花顺模拟炒股",
+    "expert_id": "36831333",
+    "name": "sqj6686688",
+    "owner": "sqj6686688",
+    "rank_label": "模拟炒股百强",
+    "followers": 8,
+    "return_rate": 5.17,
+    "total_return": null,
+    "market_type": "sim",
+    "extra": {
+      "home_url": "https://moni.10jqka.com.cn/36831333",
+      "duanwei": "初段",
+      "month_rate": -9.13,
+      "week_rate": -6.57,
+      "day_rate": -0.43,
+      "success_rate": 100.0,
+      "total_asset": 210332.91
     }
   },
   {
@@ -13693,6 +14013,22 @@
     "market_type": "sim",
     "extra": {
       "daily_gain": 9.82
+    }
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
+    "expert_id": "262884200000034265",
+    "name": "模拟组合8834265",
+    "owner": "模拟组合8834265",
+    "rank_label": "当日活跃组合",
+    "followers": 0,
+    "return_rate": 5.09,
+    "total_return": null,
+    "market_type": "sim",
+    "extra": {
+      "daily_gain": 6.96
     }
   },
   {
@@ -13875,6 +14211,22 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
+    "expert_id": "262880300000134509",
+    "name": "hdbskis",
+    "owner": "hdbskis",
+    "rank_label": "当日活跃组合",
+    "followers": 0,
+    "return_rate": 4.61,
+    "total_return": null,
+    "market_type": "sim",
+    "extra": {
+      "daily_gain": 14.73
+    }
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
     "expert_id": "262520300000155260",
     "name": "模拟组合5255260",
     "owner": "模拟组合5255260",
@@ -13907,6 +14259,22 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
+    "expert_id": "253484400000234306",
+    "name": "后知后觉模拟仓",
+    "owner": "后知后觉模拟仓",
+    "rank_label": "当日活跃组合",
+    "followers": 0,
+    "return_rate": 4.52,
+    "total_return": null,
+    "market_type": "sim",
+    "extra": {
+      "daily_gain": -1.78
+    }
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
     "expert_id": "262874200000234686",
     "name": "bhujww",
     "owner": "bhujww",
@@ -13917,6 +14285,22 @@
     "market_type": "sim",
     "extra": {
       "daily_gain": 9.51
+    }
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
+    "expert_id": "262560100000052228",
+    "name": "模拟组合5652228",
+    "owner": "模拟组合5652228",
+    "rank_label": "当日活跃组合",
+    "followers": 0,
+    "return_rate": 4.37,
+    "total_return": null,
+    "market_type": "sim",
+    "extra": {
+      "daily_gain": 14.65
     }
   },
   {
@@ -14051,22 +14435,6 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
-    "expert_id": "262560100000052228",
-    "name": "模拟组合5652228",
-    "owner": "模拟组合5652228",
-    "rank_label": "当日活跃组合",
-    "followers": 0,
-    "return_rate": 4.1,
-    "total_return": null,
-    "market_type": "sim",
-    "extra": {
-      "daily_gain": 14.65
-    }
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财组合高手操作",
     "expert_id": "261190400000043799",
     "name": "模拟组合1943799",
     "owner": "模拟组合1943799",
@@ -14077,22 +14445,6 @@
     "market_type": "sim",
     "extra": {
       "daily_gain": 8.72
-    }
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财组合高手操作",
-    "expert_id": "10000000009935436",
-    "name": "模拟组合9935436",
-    "owner": "模拟组合9935436",
-    "rank_label": "当日活跃组合",
-    "followers": 0,
-    "return_rate": 3.92,
-    "total_return": null,
-    "market_type": "sim",
-    "extra": {
-      "daily_gain": 13.4
     }
   },
   {
@@ -14147,6 +14499,22 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
+    "expert_id": "262874100000075190",
+    "name": "一要进步",
+    "owner": "一要进步",
+    "rank_label": "当日活跃组合",
+    "followers": 0,
+    "return_rate": 3.73,
+    "total_return": null,
+    "market_type": "sim",
+    "extra": {
+      "daily_gain": 12.88
+    }
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
     "expert_id": "253274300000134973",
     "name": "大火箭6666",
     "owner": "大火箭6666",
@@ -14157,6 +14525,22 @@
     "market_type": "sim",
     "extra": {
       "daily_gain": 9.57
+    }
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
+    "expert_id": "262870100000085719",
+    "name": "美股异动",
+    "owner": "美股异动",
+    "rank_label": "当日活跃组合",
+    "followers": 0,
+    "return_rate": 3.67,
+    "total_return": null,
+    "market_type": "sim",
+    "extra": {
+      "daily_gain": 8.78
     }
   },
   {
@@ -14205,6 +14589,28 @@
     "market_type": "sim",
     "extra": {
       "daily_gain": 8.42
+    }
+  },
+  {
+    "source": "tonghuashun",
+    "asset_type": "stock",
+    "channel": "同花顺模拟炒股",
+    "expert_id": "53406913",
+    "name": "hux**s",
+    "owner": "hux**s",
+    "rank_label": "模拟炒股百强",
+    "followers": 2,
+    "return_rate": 3.51,
+    "total_return": null,
+    "market_type": "sim",
+    "extra": {
+      "home_url": "https://moni.10jqka.com.cn/53406913",
+      "duanwei": "初段",
+      "month_rate": -0.65,
+      "week_rate": -0.96,
+      "day_rate": -0.02,
+      "success_rate": 100.0,
+      "total_asset": 207017.74
     }
   },
   {
@@ -14291,6 +14697,22 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
+    "expert_id": "262504100000136605",
+    "name": "R7475284",
+    "owner": "R7475284",
+    "rank_label": "当日活跃组合",
+    "followers": 0,
+    "return_rate": 3.05,
+    "total_return": null,
+    "market_type": "sim",
+    "extra": {
+      "daily_gain": 9.11
+    }
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
     "expert_id": "262654300000048708",
     "name": "模拟组合6548708",
     "owner": "模拟组合6548708",
@@ -14323,6 +14745,22 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
+    "expert_id": "262840200000237984",
+    "name": "模拟组合8437984",
+    "owner": "模拟组合8437984",
+    "rank_label": "当日活跃组合",
+    "followers": 0,
+    "return_rate": 2.83,
+    "total_return": null,
+    "market_type": "sim",
+    "extra": {
+      "daily_gain": 5.59
+    }
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
     "expert_id": "261614100000029730",
     "name": "花钱买经验66",
     "owner": "花钱买经验66",
@@ -14349,6 +14787,28 @@
     "market_type": "sim",
     "extra": {
       "daily_gain": 9.91
+    }
+  },
+  {
+    "source": "tonghuashun",
+    "asset_type": "stock",
+    "channel": "同花顺模拟炒股",
+    "expert_id": "127461224",
+    "name": "九河下稍",
+    "owner": "九河下稍",
+    "rank_label": "模拟炒股百强",
+    "followers": 0,
+    "return_rate": 2.74,
+    "total_return": null,
+    "market_type": "sim",
+    "extra": {
+      "home_url": "https://moni.10jqka.com.cn/127461224",
+      "duanwei": "初段",
+      "month_rate": 0.0,
+      "week_rate": 0.0,
+      "day_rate": 0.0,
+      "success_rate": 100.0,
+      "total_asset": 205469.8
     }
   },
   {
@@ -14464,6 +14924,28 @@
     }
   },
   {
+    "source": "tonghuashun",
+    "asset_type": "stock",
+    "channel": "同花顺模拟炒股",
+    "expert_id": "83919715",
+    "name": "me_634163415",
+    "owner": "me_634163415",
+    "rank_label": "模拟炒股百强",
+    "followers": 3,
+    "return_rate": 2.42,
+    "total_return": null,
+    "market_type": "sim",
+    "extra": {
+      "home_url": "https://moni.10jqka.com.cn/83919715",
+      "duanwei": "初段",
+      "month_rate": 2.42,
+      "week_rate": 2.42,
+      "day_rate": -0.51,
+      "success_rate": 100.0,
+      "total_asset": 204847.32
+    }
+  },
+  {
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
@@ -14477,6 +14959,22 @@
     "market_type": "sim",
     "extra": {
       "daily_gain": -3.2
+    }
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
+    "expert_id": "261604400000040139",
+    "name": "dhjjh",
+    "owner": "dhjjh",
+    "rank_label": "当日活跃组合",
+    "followers": 0,
+    "return_rate": 2.25,
+    "total_return": null,
+    "market_type": "sim",
+    "extra": {
+      "daily_gain": 7.57
     }
   },
   {
@@ -14627,6 +15125,22 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
+    "expert_id": "260700200000059773",
+    "name": "宝总666",
+    "owner": "宝总666",
+    "rank_label": "当日活跃组合",
+    "followers": 0,
+    "return_rate": 1.59,
+    "total_return": null,
+    "market_type": "sim",
+    "extra": {
+      "daily_gain": 9.95
+    }
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
     "expert_id": "10000000009594877",
     "name": "模拟组合9594877",
     "owner": "模拟组合9594877",
@@ -14637,6 +15151,28 @@
     "market_type": "sim",
     "extra": {
       "daily_gain": 2.25
+    }
+  },
+  {
+    "source": "tonghuashun",
+    "asset_type": "stock",
+    "channel": "同花顺模拟炒股",
+    "expert_id": "105043766",
+    "name": "ycl***99",
+    "owner": "ycl***99",
+    "rank_label": "模拟炒股百强",
+    "followers": 115,
+    "return_rate": 1.45,
+    "total_return": null,
+    "market_type": "sim",
+    "extra": {
+      "home_url": "https://moni.10jqka.com.cn/105043766",
+      "duanwei": "初段",
+      "month_rate": 1.45,
+      "week_rate": 1.45,
+      "day_rate": 9.75,
+      "success_rate": 100.0,
+      "total_asset": 202898.99
     }
   },
   {
@@ -14707,22 +15243,6 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
-    "expert_id": "262800300000040620",
-    "name": "接近历史高",
-    "owner": "接近历史高",
-    "rank_label": "当日活跃组合",
-    "followers": 0,
-    "return_rate": 1.21,
-    "total_return": null,
-    "market_type": "sim",
-    "extra": {
-      "daily_gain": 7.14
-    }
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财组合高手操作",
     "expert_id": "262310100000084783",
     "name": "自研妖股",
     "owner": "自研妖股",
@@ -14787,16 +15307,16 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
-    "expert_id": "262244200000052678",
-    "name": "低吸为王1",
-    "owner": "低吸为王1",
+    "expert_id": "250074300000061569",
+    "name": "模拟组合0761569",
+    "owner": "模拟组合0761569",
     "rank_label": "当日活跃组合",
     "followers": 0,
-    "return_rate": 0.96,
+    "return_rate": 0.92,
     "total_return": null,
     "market_type": "sim",
     "extra": {
-      "daily_gain": 5.33
+      "daily_gain": 4.59
     }
   },
   {
@@ -14899,6 +15419,22 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
+    "expert_id": "262850100000080310",
+    "name": "地方吗还",
+    "owner": "地方吗还",
+    "rank_label": "当日活跃组合",
+    "followers": 0,
+    "return_rate": 0.56,
+    "total_return": null,
+    "market_type": "sim",
+    "extra": {
+      "daily_gain": 10.04
+    }
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
     "expert_id": "262034200000034681",
     "name": "模拟组合0334681",
     "owner": "模拟组合0334681",
@@ -14995,12 +15531,400 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
+    "expert_id": "10000000009935436",
+    "name": "模拟组合9935436",
+    "owner": "模拟组合9935436",
+    "rank_label": "当日活跃组合",
+    "followers": 0,
+    "return_rate": -0.07,
+    "total_return": null,
+    "market_type": "sim",
+    "extra": {
+      "daily_gain": 13.4
+    }
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
+    "expert_id": "260700200000055955",
+    "name": "模拟组合7055955",
+    "owner": "模拟组合7055955",
+    "rank_label": "当日活跃组合",
+    "followers": 0,
+    "return_rate": -0.92,
+    "total_return": null,
+    "market_type": "sim",
+    "extra": {
+      "daily_gain": 10.04
+    }
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
+    "expert_id": "262004800000073600",
+    "name": "回家数一数",
+    "owner": "回家数一数",
+    "rank_label": "当日活跃组合",
+    "followers": 0,
+    "return_rate": -0.92,
+    "total_return": null,
+    "market_type": "sim",
+    "extra": {
+      "daily_gain": 10.04
+    }
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
+    "expert_id": "262870100000077583",
+    "name": "模拟组合8777583",
+    "owner": "模拟组合8777583",
+    "rank_label": "当日活跃组合",
+    "followers": 0,
+    "return_rate": -0.92,
+    "total_return": null,
+    "market_type": "sim",
+    "extra": {
+      "daily_gain": 10.04
+    }
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
+    "expert_id": "262874200000073773",
+    "name": "模拟组合8773773",
+    "owner": "模拟组合8773773",
+    "rank_label": "当日活跃组合",
+    "followers": 0,
+    "return_rate": -0.92,
+    "total_return": null,
+    "market_type": "sim",
+    "extra": {
+      "daily_gain": 10.04
+    }
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
+    "expert_id": "262874200000076839",
+    "name": "模拟组合8776839",
+    "owner": "模拟组合8776839",
+    "rank_label": "当日活跃组合",
+    "followers": 0,
+    "return_rate": -0.92,
+    "total_return": null,
+    "market_type": "sim",
+    "extra": {
+      "daily_gain": 10.04
+    }
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
+    "expert_id": "262884100000002120",
+    "name": "模拟组合8802120",
+    "owner": "模拟组合8802120",
+    "rank_label": "当日活跃组合",
+    "followers": 0,
+    "return_rate": -0.92,
+    "total_return": null,
+    "market_type": "sim",
+    "extra": {
+      "daily_gain": 10.04
+    }
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
+    "expert_id": "262884400000009968",
+    "name": "模拟组合8809968",
+    "owner": "模拟组合8809968",
+    "rank_label": "当日活跃组合",
+    "followers": 0,
+    "return_rate": -0.95,
+    "total_return": null,
+    "market_type": "sim",
+    "extra": {
+      "daily_gain": 9.46
+    }
+  },
+  {
+    "source": "tonghuashun",
+    "asset_type": "stock",
+    "channel": "同花顺模拟炒股",
+    "expert_id": "124325042",
+    "name": "sun***715",
+    "owner": "sun***715",
+    "rank_label": "模拟炒股百强",
+    "followers": 0,
+    "return_rate": -1.43,
+    "total_return": null,
+    "market_type": "sim",
+    "extra": {
+      "home_url": "https://moni.10jqka.com.cn/124325042",
+      "duanwei": "初段",
+      "month_rate": 1.71,
+      "week_rate": -0.1,
+      "day_rate": -0.57,
+      "success_rate": 100.0,
+      "total_asset": 197142.6
+    }
+  },
+  {
+    "source": "tonghuashun",
+    "asset_type": "stock",
+    "channel": "同花顺模拟炒股",
+    "expert_id": "114918034",
+    "name": "ub**3",
+    "owner": "ub**3",
+    "rank_label": "模拟炒股百强",
+    "followers": 13,
+    "return_rate": -1.67,
+    "total_return": null,
+    "market_type": "sim",
+    "extra": {
+      "home_url": "https://moni.10jqka.com.cn/114918034",
+      "duanwei": "初段",
+      "month_rate": -8.12,
+      "week_rate": -6.65,
+      "day_rate": -0.94,
+      "success_rate": 100.0,
+      "total_asset": 196663.49
+    }
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
+    "expert_id": "262244200000052678",
+    "name": "低吸为王1",
+    "owner": "低吸为王1",
+    "rank_label": "当日活跃组合",
+    "followers": 0,
+    "return_rate": -1.72,
+    "total_return": null,
+    "market_type": "sim",
+    "extra": {
+      "daily_gain": 5.33
+    }
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
+    "expert_id": "262874400000066053",
+    "name": "天命轻狂",
+    "owner": "天命轻狂",
+    "rank_label": "当日活跃组合",
+    "followers": 0,
+    "return_rate": -2.22,
+    "total_return": null,
+    "market_type": "sim",
+    "extra": {
+      "daily_gain": 7.75
+    }
+  },
+  {
+    "source": "tonghuashun",
+    "asset_type": "stock",
+    "channel": "同花顺模拟炒股",
+    "expert_id": "118806292",
+    "name": "李涛1985",
+    "owner": "李涛1985",
+    "rank_label": "模拟炒股百强",
+    "followers": 0,
+    "return_rate": -2.39,
+    "total_return": null,
+    "market_type": "sim",
+    "extra": {
+      "home_url": "https://moni.10jqka.com.cn/118806292",
+      "duanwei": "初段",
+      "month_rate": -4.37,
+      "week_rate": -4.99,
+      "day_rate": 0.26,
+      "success_rate": 100.0,
+      "total_asset": 195202.77
+    }
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
+    "expert_id": "262880200000034085",
+    "name": "随随手一拍照",
+    "owner": "随随手一拍照",
+    "rank_label": "当日活跃组合",
+    "followers": 0,
+    "return_rate": -2.39,
+    "total_return": null,
+    "market_type": "sim",
+    "extra": {
+      "daily_gain": 8.34
+    }
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
+    "expert_id": "252590100000152183",
+    "name": "模拟组合5952183",
+    "owner": "模拟组合5952183",
+    "rank_label": "当日活跃组合",
+    "followers": 0,
+    "return_rate": -2.8,
+    "total_return": null,
+    "market_type": "sim",
+    "extra": {
+      "daily_gain": 9.72
+    }
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
+    "expert_id": "262880400000133569",
+    "name": "suuwsu文轩",
+    "owner": "suuwsu文轩",
+    "rank_label": "当日活跃组合",
+    "followers": 0,
+    "return_rate": -2.83,
+    "total_return": null,
+    "market_type": "sim",
+    "extra": {
+      "daily_gain": 7.15
+    }
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
+    "expert_id": "262880400000034163",
+    "name": "威海01",
+    "owner": "威海01",
+    "rank_label": "当日活跃组合",
+    "followers": 0,
+    "return_rate": -3.02,
+    "total_return": null,
+    "market_type": "sim",
+    "extra": {
+      "daily_gain": 7.49
+    }
+  },
+  {
+    "source": "tonghuashun",
+    "asset_type": "stock",
+    "channel": "同花顺模拟炒股",
+    "expert_id": "115550606",
+    "name": "奕可成",
+    "owner": "奕可成",
+    "rank_label": "模拟炒股百强",
+    "followers": 0,
+    "return_rate": -3.21,
+    "total_return": null,
+    "market_type": "sim",
+    "extra": {
+      "home_url": "https://moni.10jqka.com.cn/115550606",
+      "duanwei": "初段",
+      "month_rate": -0.27,
+      "week_rate": -0.37,
+      "day_rate": 0.03,
+      "success_rate": 100.0,
+      "total_asset": 193583.08
+    }
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
+    "expert_id": "262870400000135757",
+    "name": "模拟组合8735757",
+    "owner": "模拟组合8735757",
+    "rank_label": "当日活跃组合",
+    "followers": 0,
+    "return_rate": -3.41,
+    "total_return": null,
+    "market_type": "sim",
+    "extra": {
+      "daily_gain": 6.93
+    }
+  },
+  {
+    "source": "tonghuashun",
+    "asset_type": "stock",
+    "channel": "同花顺模拟炒股",
+    "expert_id": "69504260",
+    "name": "mjz****lien",
+    "owner": "mjz****lien",
+    "rank_label": "模拟炒股百强",
+    "followers": 55,
+    "return_rate": -3.67,
+    "total_return": null,
+    "market_type": "sim",
+    "extra": {
+      "home_url": "https://moni.10jqka.com.cn/69504260",
+      "duanwei": "初段",
+      "month_rate": -7.51,
+      "week_rate": -7.64,
+      "day_rate": 1.26,
+      "success_rate": 100.0,
+      "total_asset": 192664.36
+    }
+  },
+  {
+    "source": "tonghuashun",
+    "asset_type": "stock",
+    "channel": "同花顺模拟炒股",
+    "expert_id": "40729499",
+    "name": "每天涨不停58",
+    "owner": "每天涨不停58",
+    "rank_label": "模拟炒股百强",
+    "followers": 3,
+    "return_rate": -3.68,
+    "total_return": null,
+    "market_type": "sim",
+    "extra": {
+      "home_url": "https://moni.10jqka.com.cn/40729499",
+      "duanwei": "初段",
+      "month_rate": -11.15,
+      "week_rate": -7.42,
+      "day_rate": -1.02,
+      "success_rate": 100.0,
+      "total_asset": 192649.73
+    }
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
+    "expert_id": "262800300000040620",
+    "name": "接近历史高",
+    "owner": "接近历史高",
+    "rank_label": "当日活跃组合",
+    "followers": 0,
+    "return_rate": -8.2,
+    "total_return": null,
+    "market_type": "sim",
+    "extra": {
+      "daily_gain": 7.14
+    }
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
     "expert_id": "262140400000043604",
     "name": "模拟组合1443604",
     "owner": "模拟组合1443604",
     "rank_label": "当日活跃组合",
     "followers": 0,
-    "return_rate": 0.13,
+    "return_rate": -9.7,
     "total_return": null,
     "market_type": "sim",
     "extra": {
@@ -15008,113 +15932,1197 @@
     }
   },
   {
-    "source": "eastmoney",
+    "source": "tonghuashun",
     "asset_type": "stock",
-    "channel": "东财实盘组合榜",
-    "expert_id": "900356528",
-    "name": "ST华力创通",
-    "owner": "ST华力创通",
-    "rank_label": "东财实盘日榜",
-    "followers": 3,
-    "return_rate": null,
-    "total_return": null,
-    "market_type": "live",
-    "extra": {
-      "userid": "1030345542752870",
-      "labels": [
-        "国防军工"
-      ],
-      "rate_title": "日收益",
-      "rate_value": 20.04,
-      "daily_gain": 20.04
-    }
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财实盘组合榜",
-    "expert_id": "900155170",
-    "name": "妖妖妖1",
-    "owner": "股友000v6k3696",
-    "rank_label": "东财实盘日榜",
+    "channel": "同花顺模拟炒股",
+    "expert_id": "163562",
+    "name": "me_981776532",
+    "owner": "me_981776532",
+    "rank_label": "模拟炒股百强",
     "followers": 5,
-    "return_rate": null,
+    "return_rate": -11.86,
     "total_return": null,
-    "market_type": "live",
+    "market_type": "sim",
     "extra": {
-      "userid": "8745386080928872",
-      "labels": [
-        "化学制剂"
-      ],
-      "rate_title": "日收益",
-      "rate_value": 19.92,
-      "daily_gain": 19.92
+      "home_url": "https://moni.10jqka.com.cn/163562",
+      "duanwei": "初段",
+      "month_rate": -5.26,
+      "week_rate": -3.46,
+      "day_rate": 0.41,
+      "success_rate": 100.0,
+      "total_asset": 176278.92
+    }
+  },
+  {
+    "source": "tonghuashun",
+    "asset_type": "stock",
+    "channel": "同花顺模拟炒股",
+    "expert_id": "110041718",
+    "name": "huj***oa5",
+    "owner": "huj***oa5",
+    "rank_label": "模拟炒股百强",
+    "followers": 9,
+    "return_rate": -13.83,
+    "total_return": null,
+    "market_type": "sim",
+    "extra": {
+      "home_url": "https://moni.10jqka.com.cn/110041718",
+      "duanwei": "初段",
+      "month_rate": -2.04,
+      "week_rate": -3.84,
+      "day_rate": 0.58,
+      "success_rate": 100.0,
+      "total_asset": 172369.37
+    }
+  },
+  {
+    "source": "tonghuashun",
+    "asset_type": "stock",
+    "channel": "同花顺模拟炒股",
+    "expert_id": "112198998",
+    "name": "ube**2",
+    "owner": "ube**2",
+    "rank_label": "模拟炒股百强",
+    "followers": 11,
+    "return_rate": -15.76,
+    "total_return": null,
+    "market_type": "sim",
+    "extra": {
+      "home_url": "https://moni.10jqka.com.cn/112198998",
+      "duanwei": "初段",
+      "month_rate": -1.73,
+      "week_rate": -3.38,
+      "day_rate": 1.94,
+      "success_rate": 100.0,
+      "total_asset": 168497.36
+    }
+  },
+  {
+    "source": "tonghuashun",
+    "asset_type": "stock",
+    "channel": "同花顺模拟炒股",
+    "expert_id": "25829542",
+    "name": "li**i",
+    "owner": "li**i",
+    "rank_label": "模拟炒股百强",
+    "followers": 0,
+    "return_rate": -19.58,
+    "total_return": null,
+    "market_type": "sim",
+    "extra": {
+      "home_url": "https://moni.10jqka.com.cn/25829542",
+      "duanwei": "初段",
+      "month_rate": -18.88,
+      "week_rate": -9.56,
+      "day_rate": 0.76,
+      "success_rate": 100.0,
+      "total_asset": 160833.17
+    }
+  },
+  {
+    "source": "tonghuashun",
+    "asset_type": "stock",
+    "channel": "同花顺模拟炒股",
+    "expert_id": "114918197",
+    "name": "ube**8",
+    "owner": "ube**8",
+    "rank_label": "模拟炒股百强",
+    "followers": 15,
+    "return_rate": -24.8,
+    "total_return": null,
+    "market_type": "sim",
+    "extra": {
+      "home_url": "https://moni.10jqka.com.cn/114918197",
+      "duanwei": "初段",
+      "month_rate": 5.38,
+      "week_rate": 1.38,
+      "day_rate": -3.59,
+      "success_rate": 100.0,
+      "total_asset": 150423.87
+    }
+  },
+  {
+    "source": "tonghuashun",
+    "asset_type": "stock",
+    "channel": "同花顺模拟炒股",
+    "expert_id": "123967747",
+    "name": "勤恳的活阎罗",
+    "owner": "勤恳的活阎罗",
+    "rank_label": "模拟炒股百强",
+    "followers": 6,
+    "return_rate": -60.63,
+    "total_return": null,
+    "market_type": "sim",
+    "extra": {
+      "home_url": "https://moni.10jqka.com.cn/123967747",
+      "duanwei": "初段",
+      "month_rate": -3.68,
+      "week_rate": -4.34,
+      "day_rate": -2.63,
+      "success_rate": 100.0,
+      "total_asset": 78767.72
+    }
+  },
+  {
+    "source": "tonghuashun",
+    "asset_type": "stock",
+    "channel": "同花顺模拟炒股",
+    "expert_id": "112202713",
+    "name": "ube**4",
+    "owner": "ube**4",
+    "rank_label": "模拟炒股百强",
+    "followers": 11,
+    "return_rate": -73.18,
+    "total_return": null,
+    "market_type": "sim",
+    "extra": {
+      "home_url": "https://moni.10jqka.com.cn/112202713",
+      "duanwei": "初段",
+      "month_rate": -4.6,
+      "week_rate": -5.11,
+      "day_rate": 0.28,
+      "success_rate": 100.0,
+      "total_asset": 53620.68
+    }
+  },
+  {
+    "source": "tonghuashun",
+    "asset_type": "stock",
+    "channel": "同花顺模拟炒股",
+    "expert_id": "93678954",
+    "name": "大阳创世",
+    "owner": "大阳创世",
+    "rank_label": "模拟炒股百强",
+    "followers": 7,
+    "return_rate": -73.37,
+    "total_return": null,
+    "market_type": "sim",
+    "extra": {
+      "home_url": "https://moni.10jqka.com.cn/93678954",
+      "duanwei": "初段",
+      "month_rate": -1.76,
+      "week_rate": 0.0,
+      "day_rate": 0.0,
+      "success_rate": 100.0,
+      "total_asset": 53258.62
     }
   },
   {
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财实盘组合榜",
-    "expert_id": "900457793",
-    "name": "津门炒家",
-    "owner": "津门炒家",
-    "rank_label": "东财实盘日榜",
-    "followers": 2,
-    "return_rate": null,
-    "total_return": null,
-    "market_type": "live",
-    "extra": {
-      "userid": "1844555237037104",
-      "labels": [
-        "化学制剂"
-      ],
-      "rate_title": "日收益",
-      "rate_value": 19.91,
-      "daily_gain": 19.91
-    }
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财实盘组合榜",
-    "expert_id": "900462491",
-    "name": "认明不认清",
-    "owner": "认明不认清",
+    "expert_id": "900118407",
+    "name": "寻1021",
+    "owner": "股友8306Hu6763",
     "rank_label": "东财实盘日榜",
     "followers": 0,
     "return_rate": null,
     "total_return": null,
     "market_type": "live",
     "extra": {
-      "userid": "1115276355858546",
-      "labels": [
-        "化学制剂"
-      ],
+      "userid": "8925316238985428",
+      "labels": [],
       "rate_title": "日收益",
-      "rate_value": 19.85,
-      "daily_gain": 19.85
+      "rate_value": 0.0,
+      "daily_gain": 0.0
     }
   },
   {
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财实盘组合榜",
-    "expert_id": "3526976",
-    "name": "新手上路rtf",
-    "owner": "乱世救世主",
+    "expert_id": "900118348",
+    "name": "鸿运当头实盘",
+    "owner": "股友08T1R60978",
+    "rank_label": "东财实盘日榜",
+    "followers": 0,
+    "return_rate": null,
+    "total_return": null,
+    "market_type": "live",
+    "extra": {
+      "userid": "2631356220903916",
+      "labels": [],
+      "rate_title": "日收益",
+      "rate_value": 0.0,
+      "daily_gain": 0.0
+    }
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财实盘组合榜",
+    "expert_id": "900118336",
+    "name": "生死看淡一切随风",
+    "owner": "無限亂鬥",
+    "rank_label": "东财实盘日榜",
+    "followers": 0,
+    "return_rate": null,
+    "total_return": null,
+    "market_type": "live",
+    "extra": {
+      "userid": "3943316261033328",
+      "labels": [
+        "汽车"
+      ],
+      "rate_title": "日收益",
+      "rate_value": 0.0,
+      "daily_gain": 0.0
+    }
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财实盘组合榜",
+    "expert_id": "900118335",
+    "name": "韭菜坐几路",
+    "owner": "股友907V30975a",
+    "rank_label": "东财实盘日榜",
+    "followers": 0,
+    "return_rate": null,
+    "total_return": null,
+    "market_type": "live",
+    "extra": {
+      "userid": "6820316156155100",
+      "labels": [],
+      "rate_title": "日收益",
+      "rate_value": 0.0,
+      "daily_gain": 0.0
+    }
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财实盘组合榜",
+    "expert_id": "900118280",
+    "name": "实盘组合0118280",
+    "owner": "股友01561gP075",
+    "rank_label": "东财实盘日榜",
+    "followers": 0,
+    "return_rate": null,
+    "total_return": null,
+    "market_type": "live",
+    "extra": {
+      "userid": "6320356261620664",
+      "labels": [],
+      "rate_title": "日收益",
+      "rate_value": 0.0,
+      "daily_gain": 0.0
+    }
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财实盘组合榜",
+    "expert_id": "900118070",
+    "name": "烟灭哥哥",
+    "owner": "股友BLyZd6",
+    "rank_label": "东财实盘日榜",
+    "followers": 2233,
+    "return_rate": null,
+    "total_return": null,
+    "market_type": "live",
+    "extra": {
+      "userid": "2959325829174776",
+      "labels": [
+        "房地产",
+        "工控设备"
+      ],
+      "rate_title": "日收益",
+      "rate_value": 0.0,
+      "daily_gain": 0.0
+    }
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财实盘组合榜",
+    "expert_id": "900118026",
+    "name": "不会买的来",
+    "owner": "股友593Q30O773",
+    "rank_label": "东财实盘日榜",
+    "followers": 0,
+    "return_rate": null,
+    "total_return": null,
+    "market_type": "live",
+    "extra": {
+      "userid": "8662306255281524",
+      "labels": [],
+      "rate_title": "日收益",
+      "rate_value": 0.0,
+      "daily_gain": 0.0
+    }
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财实盘组合榜",
+    "expert_id": "900117954",
+    "name": "春風化雨",
+    "owner": "春风化雨518",
+    "rank_label": "东财实盘日榜",
+    "followers": 1,
+    "return_rate": null,
+    "total_return": null,
+    "market_type": "live",
+    "extra": {
+      "userid": "5742004953774444",
+      "labels": [
+        "电子"
+      ],
+      "rate_title": "日收益",
+      "rate_value": 0.0,
+      "daily_gain": 0.0
+    }
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财实盘组合榜",
+    "expert_id": "900117893",
+    "name": "jiabaozuo",
+    "owner": "贫困韭菜",
+    "rank_label": "东财实盘日榜",
+    "followers": 0,
+    "return_rate": null,
+    "total_return": null,
+    "market_type": "live",
+    "extra": {
+      "userid": "9511316069784398",
+      "labels": [],
+      "rate_title": "日收益",
+      "rate_value": 0.0,
+      "daily_gain": 0.0
+    }
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财实盘组合榜",
+    "expert_id": "900117822",
+    "name": "123天天在家",
+    "owner": "基民rOSpxK",
+    "rank_label": "东财实盘日榜",
+    "followers": 0,
+    "return_rate": null,
+    "total_return": null,
+    "market_type": "live",
+    "extra": {
+      "userid": "3969316051865224",
+      "labels": [],
+      "rate_title": "日收益",
+      "rate_value": 0.0,
+      "daily_gain": 0.0
+    }
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财实盘组合榜",
+    "expert_id": "900117647",
+    "name": "热门大炒",
+    "owner": "梦中醉",
+    "rank_label": "东财实盘日榜",
+    "followers": 0,
+    "return_rate": null,
+    "total_return": null,
+    "market_type": "live",
+    "extra": {
+      "userid": "3085356250488626",
+      "labels": [],
+      "rate_title": "日收益",
+      "rate_value": 0.0,
+      "daily_gain": 0.0
+    }
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财实盘组合榜",
+    "expert_id": "900117641",
+    "name": "c201533497",
+    "owner": "股友MQ72596131",
+    "rank_label": "东财实盘日榜",
+    "followers": 0,
+    "return_rate": null,
+    "total_return": null,
+    "market_type": "live",
+    "extra": {
+      "userid": "3189316237238336",
+      "labels": [],
+      "rate_title": "日收益",
+      "rate_value": 0.0,
+      "daily_gain": 0.0
+    }
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财实盘组合榜",
+    "expert_id": "900117634",
+    "name": "抄底抄在了山顶",
+    "owner": "过期的小雪碧",
+    "rank_label": "东财实盘日榜",
+    "followers": 0,
+    "return_rate": null,
+    "total_return": null,
+    "market_type": "live",
+    "extra": {
+      "userid": "3584306193306054",
+      "labels": [],
+      "rate_title": "日收益",
+      "rate_value": 0.0,
+      "daily_gain": 0.0
+    }
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财实盘组合榜",
+    "expert_id": "900117583",
+    "name": "图旅途1胡他",
+    "owner": "股友981I79W235",
+    "rank_label": "东财实盘日榜",
+    "followers": 0,
+    "return_rate": null,
+    "total_return": null,
+    "market_type": "live",
+    "extra": {
+      "userid": "5774366256723668",
+      "labels": [],
+      "rate_title": "日收益",
+      "rate_value": 0.0,
+      "daily_gain": 0.0
+    }
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财实盘组合榜",
+    "expert_id": "900117463",
+    "name": "实盘组合0117463",
+    "owner": "一只小迷妹",
+    "rank_label": "东财实盘日榜",
+    "followers": 0,
+    "return_rate": null,
+    "total_return": null,
+    "market_type": "live",
+    "extra": {
+      "userid": "3534395837661840",
+      "labels": [],
+      "rate_title": "日收益",
+      "rate_value": 0.0,
+      "daily_gain": 0.0
+    }
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财实盘组合榜",
+    "expert_id": "900117408",
+    "name": "Liubaoshen",
+    "owner": "基民6TBnWI",
+    "rank_label": "东财实盘日榜",
+    "followers": 0,
+    "return_rate": null,
+    "total_return": null,
+    "market_type": "live",
+    "extra": {
+      "userid": "5931356038047906",
+      "labels": [],
+      "rate_title": "日收益",
+      "rate_value": 0.0,
+      "daily_gain": 0.0
+    }
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财实盘组合榜",
+    "expert_id": "900117365",
+    "name": "韭菜的自我修y",
+    "owner": "大a能冲下嘛",
+    "rank_label": "东财实盘日榜",
+    "followers": 0,
+    "return_rate": null,
+    "total_return": null,
+    "market_type": "live",
+    "extra": {
+      "userid": "8788366212510956",
+      "labels": [
+        "国有大型银行Ⅲ"
+      ],
+      "rate_title": "日收益",
+      "rate_value": 0.0,
+      "daily_gain": 0.0
+    }
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财实盘组合榜",
+    "expert_id": "900117164",
+    "name": "新能源汽车环保股",
+    "owner": "股友h83707t708",
+    "rank_label": "东财实盘日榜",
+    "followers": 3,
+    "return_rate": null,
+    "total_return": null,
+    "market_type": "live",
+    "extra": {
+      "userid": "5918376251186740",
+      "labels": [],
+      "rate_title": "日收益",
+      "rate_value": 0.0,
+      "daily_gain": 0.0
+    }
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财实盘组合榜",
+    "expert_id": "900116827",
+    "name": "fhfc1587354",
+    "owner": "股友589k193o11",
+    "rank_label": "东财实盘日榜",
+    "followers": 0,
+    "return_rate": null,
+    "total_return": null,
+    "market_type": "live",
+    "extra": {
+      "userid": "4946396251016950",
+      "labels": [],
+      "rate_title": "日收益",
+      "rate_value": 0.0,
+      "daily_gain": 0.0
+    }
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财实盘组合榜",
+    "expert_id": "900116782",
+    "name": "测试一下下啊",
+    "owner": "L龙哥A",
+    "rank_label": "东财实盘日榜",
+    "followers": 0,
+    "return_rate": null,
+    "total_return": null,
+    "market_type": "live",
+    "extra": {
+      "userid": "8052365649696576",
+      "labels": [],
+      "rate_title": "日收益",
+      "rate_value": 0.0,
+      "daily_gain": 0.0
+    }
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财实盘组合榜",
+    "expert_id": "900116774",
+    "name": "7月1日组合",
+    "owner": "股友l577Z53765",
+    "rank_label": "东财实盘日榜",
+    "followers": 0,
+    "return_rate": null,
+    "total_return": null,
+    "market_type": "live",
+    "extra": {
+      "userid": "8495316249487628",
+      "labels": [],
+      "rate_title": "日收益",
+      "rate_value": 0.0,
+      "daily_gain": 0.0
+    }
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财实盘组合榜",
+    "expert_id": "900116690",
+    "name": "生物医疗类",
+    "owner": "赚钱度众生",
+    "rank_label": "东财实盘日榜",
+    "followers": 3,
+    "return_rate": null,
+    "total_return": null,
+    "market_type": "live",
+    "extra": {
+      "userid": "2733346250286342",
+      "labels": [],
+      "rate_title": "日收益",
+      "rate_value": 0.0,
+      "daily_gain": 0.0
+    }
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财实盘组合榜",
+    "expert_id": "900116572",
+    "name": "A軍",
+    "owner": "股友h9610558v1",
+    "rank_label": "东财实盘日榜",
+    "followers": 0,
+    "return_rate": null,
+    "total_return": null,
+    "market_type": "live",
+    "extra": {
+      "userid": "7481366178090380",
+      "labels": [],
+      "rate_title": "日收益",
+      "rate_value": 0.0,
+      "daily_gain": 0.0
+    }
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财实盘组合榜",
+    "expert_id": "900116511",
+    "name": "光伏十年",
+    "owner": "股友2W259699V0",
+    "rank_label": "东财实盘日榜",
+    "followers": 0,
+    "return_rate": null,
+    "total_return": null,
+    "market_type": "live",
+    "extra": {
+      "userid": "6605386190803992",
+      "labels": [],
+      "rate_title": "日收益",
+      "rate_value": 0.0,
+      "daily_gain": 0.0
+    }
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财实盘组合榜",
+    "expert_id": "900116488",
+    "name": "LYC川哥",
+    "owner": "基民26v025Z102",
+    "rank_label": "东财实盘日榜",
+    "followers": 0,
+    "return_rate": null,
+    "total_return": null,
+    "market_type": "live",
+    "extra": {
+      "userid": "1287336244775768",
+      "labels": [],
+      "rate_title": "日收益",
+      "rate_value": 0.0,
+      "daily_gain": 0.0
+    }
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财实盘组合榜",
+    "expert_id": "900116483",
+    "name": "要小心翼翼",
+    "owner": "新手强强",
+    "rank_label": "东财实盘日榜",
+    "followers": 0,
+    "return_rate": null,
+    "total_return": null,
+    "market_type": "live",
+    "extra": {
+      "userid": "4937346219326192",
+      "labels": [],
+      "rate_title": "日收益",
+      "rate_value": 0.0,
+      "daily_gain": 0.0
+    }
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财实盘组合榜",
+    "expert_id": "900116460",
+    "name": "隔壁啪啪啪怎么办",
+    "owner": "小小股民鸭",
+    "rank_label": "东财实盘日榜",
+    "followers": 0,
+    "return_rate": null,
+    "total_return": null,
+    "market_type": "live",
+    "extra": {
+      "userid": "2069385928063722",
+      "labels": [],
+      "rate_title": "日收益",
+      "rate_value": 0.0,
+      "daily_gain": 0.0
+    }
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财实盘组合榜",
+    "expert_id": "900116264",
+    "name": "安享幸福晚年",
+    "owner": "平阳凯哥",
+    "rank_label": "东财实盘日榜",
+    "followers": 0,
+    "return_rate": null,
+    "total_return": null,
+    "market_type": "live",
+    "extra": {
+      "userid": "7269316241202614",
+      "labels": [],
+      "rate_title": "日收益",
+      "rate_value": 0.0,
+      "daily_gain": 0.0
+    }
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财实盘组合榜",
+    "expert_id": "900116213",
+    "name": "细水长流626",
+    "owner": "RyanzhoU",
+    "rank_label": "东财实盘日榜",
+    "followers": 0,
+    "return_rate": null,
+    "total_return": null,
+    "market_type": "live",
+    "extra": {
+      "userid": "6338144641605678",
+      "labels": [],
+      "rate_title": "日收益",
+      "rate_value": 0.0,
+      "daily_gain": 0.0
+    }
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财实盘组合榜",
+    "expert_id": "900116165",
+    "name": "车联网1",
+    "owner": "股友8078Lz2559",
+    "rank_label": "东财实盘日榜",
+    "followers": 5,
+    "return_rate": null,
+    "total_return": null,
+    "market_type": "live",
+    "extra": {
+      "userid": "6979366238295294",
+      "labels": [],
+      "rate_title": "日收益",
+      "rate_value": 0.0,
+      "daily_gain": 0.0
+    }
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财实盘组合榜",
+    "expert_id": "900116091",
+    "name": "baiyunfengfafafa",
+    "owner": "盆满暴富debyf",
+    "rank_label": "东财实盘日榜",
+    "followers": 0,
+    "return_rate": null,
+    "total_return": null,
+    "market_type": "live",
+    "extra": {
+      "userid": "6023316243558956",
+      "labels": [],
+      "rate_title": "日收益",
+      "rate_value": 0.0,
+      "daily_gain": 0.0
+    }
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财实盘组合榜",
+    "expert_id": "900116075",
+    "name": "小约定的黑色白影",
+    "owner": "股友29117Qt159",
+    "rank_label": "东财实盘日榜",
+    "followers": 0,
+    "return_rate": null,
+    "total_return": null,
+    "market_type": "live",
+    "extra": {
+      "userid": "6250346226343202",
+      "labels": [],
+      "rate_title": "日收益",
+      "rate_value": 0.0,
+      "daily_gain": 0.0
+    }
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财实盘组合榜",
+    "expert_id": "900116038",
+    "name": "hsos",
+    "owner": "股友6892l3U722",
+    "rank_label": "东财实盘日榜",
+    "followers": 0,
+    "return_rate": null,
+    "total_return": null,
+    "market_type": "live",
+    "extra": {
+      "userid": "1022346209809670",
+      "labels": [],
+      "rate_title": "日收益",
+      "rate_value": 0.0,
+      "daily_gain": 0.0
+    }
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财实盘组合榜",
+    "expert_id": "900115965",
+    "name": "Zz实盘",
+    "owner": "Joseph灬Zz",
+    "rank_label": "东财实盘日榜",
+    "followers": 0,
+    "return_rate": null,
+    "total_return": null,
+    "market_type": "live",
+    "extra": {
+      "userid": "9192306242033662",
+      "labels": [
+        "机床工具",
+        "机械设备"
+      ],
+      "rate_title": "日收益",
+      "rate_value": 0.0,
+      "daily_gain": 0.0
+    }
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财实盘组合榜",
+    "expert_id": "900115866",
+    "name": "wumingqiang1992",
+    "owner": "基民2076aa6909",
+    "rank_label": "东财实盘日榜",
+    "followers": 0,
+    "return_rate": null,
+    "total_return": null,
+    "market_type": "live",
+    "extra": {
+      "userid": "7296336119241502",
+      "labels": [
+        "电力设备",
+        "线缆部件及其他"
+      ],
+      "rate_title": "日收益",
+      "rate_value": 0.0,
+      "daily_gain": 0.0
+    }
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财实盘组合榜",
+    "expert_id": "900115850",
+    "name": "实盘组合0115850",
+    "owner": "股友2127K0F500",
+    "rank_label": "东财实盘日榜",
+    "followers": 0,
+    "return_rate": null,
+    "total_return": null,
+    "market_type": "live",
+    "extra": {
+      "userid": "9463316206368180",
+      "labels": [],
+      "rate_title": "日收益",
+      "rate_value": 0.0,
+      "daily_gain": 0.0
+    }
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财实盘组合榜",
+    "expert_id": "900115839",
+    "name": "实盘组合0115839",
+    "owner": "股友95q636F585",
+    "rank_label": "东财实盘日榜",
+    "followers": 0,
+    "return_rate": null,
+    "total_return": null,
+    "market_type": "live",
+    "extra": {
+      "userid": "7979386244209566",
+      "labels": [],
+      "rate_title": "日收益",
+      "rate_value": 0.0,
+      "daily_gain": 0.0
+    }
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财实盘组合榜",
+    "expert_id": "900115733",
+    "name": "小阿光",
+    "owner": "股友7001Y2v107",
+    "rank_label": "东财实盘日榜",
+    "followers": 0,
+    "return_rate": null,
+    "total_return": null,
+    "market_type": "live",
+    "extra": {
+      "userid": "6144326231613432",
+      "labels": [],
+      "rate_title": "日收益",
+      "rate_value": 0.0,
+      "daily_gain": 0.0
+    }
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财实盘组合榜",
+    "expert_id": "900115701",
+    "name": "600热点股",
+    "owner": "股友RootbY",
     "rank_label": "东财实盘日榜",
     "followers": 2,
     "return_rate": null,
     "total_return": null,
     "market_type": "live",
     "extra": {
-      "userid": "3786094467036290",
+      "userid": "3344375952870722",
+      "labels": [],
+      "rate_title": "日收益",
+      "rate_value": 0.0,
+      "daily_gain": 0.0
+    }
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财实盘组合榜",
+    "expert_id": "900115443",
+    "name": "无中生有哈",
+    "owner": "股友758fp61507",
+    "rank_label": "东财实盘日榜",
+    "followers": 0,
+    "return_rate": null,
+    "total_return": null,
+    "market_type": "live",
+    "extra": {
+      "userid": "6110336240996884",
+      "labels": [],
+      "rate_title": "日收益",
+      "rate_value": 0.0,
+      "daily_gain": 0.0
+    }
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财实盘组合榜",
+    "expert_id": "900115399",
+    "name": "小喻123",
+    "owner": "穆然随风",
+    "rank_label": "东财实盘日榜",
+    "followers": 0,
+    "return_rate": null,
+    "total_return": null,
+    "market_type": "live",
+    "extra": {
+      "userid": "5846365887853356",
+      "labels": [],
+      "rate_title": "日收益",
+      "rate_value": 0.0,
+      "daily_gain": 0.0
+    }
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财实盘组合榜",
+    "expert_id": "900115373",
+    "name": "张爸爸的持仓",
+    "owner": "股友M90789126X",
+    "rank_label": "东财实盘日榜",
+    "followers": 0,
+    "return_rate": null,
+    "total_return": null,
+    "market_type": "live",
+    "extra": {
+      "userid": "4843386237622250",
+      "labels": [],
+      "rate_title": "日收益",
+      "rate_value": 0.0,
+      "daily_gain": 0.0
+    }
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财实盘组合榜",
+    "expert_id": "900115304",
+    "name": "通行证账号",
+    "owner": "股友8082Q85i22",
+    "rank_label": "东财实盘日榜",
+    "followers": 2,
+    "return_rate": null,
+    "total_return": null,
+    "market_type": "live",
+    "extra": {
+      "userid": "5369236239956520",
+      "labels": [],
+      "rate_title": "日收益",
+      "rate_value": 0.0,
+      "daily_gain": 0.0
+    }
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财实盘组合榜",
+    "expert_id": "900114855",
+    "name": "sunshinestate",
+    "owner": "yoyo莹",
+    "rank_label": "东财实盘日榜",
+    "followers": 0,
+    "return_rate": null,
+    "total_return": null,
+    "market_type": "live",
+    "extra": {
+      "userid": "1858396236561950",
+      "labels": [],
+      "rate_title": "日收益",
+      "rate_value": 0.0,
+      "daily_gain": 0.0
+    }
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财实盘组合榜",
+    "expert_id": "900114850",
+    "name": "一路_长_红",
+    "owner": "财富未来星",
+    "rank_label": "东财实盘日榜",
+    "followers": 0,
+    "return_rate": null,
+    "total_return": null,
+    "market_type": "live",
+    "extra": {
+      "userid": "8230306072631964",
       "labels": [
-        "其他专用设备"
+        "铜",
+        "电力设备"
       ],
       "rate_title": "日收益",
-      "rate_value": 19.84,
-      "daily_gain": 19.84
+      "rate_value": 0.0,
+      "daily_gain": 0.0
+    }
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财实盘组合榜",
+    "expert_id": "900114807",
+    "name": "没地花钱",
+    "owner": "股友tuceVB",
+    "rank_label": "东财实盘日榜",
+    "followers": 0,
+    "return_rate": null,
+    "total_return": null,
+    "market_type": "live",
+    "extra": {
+      "userid": "4707325916070304",
+      "labels": [],
+      "rate_title": "日收益",
+      "rate_value": 0.0,
+      "daily_gain": 0.0
+    }
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财实盘组合榜",
+    "expert_id": "900114566",
+    "name": "稳健小杜",
+    "owner": "杜中军",
+    "rank_label": "东财实盘日榜",
+    "followers": 2,
+    "return_rate": null,
+    "total_return": null,
+    "market_type": "live",
+    "extra": {
+      "userid": "3859376098205878",
+      "labels": [],
+      "rate_title": "日收益",
+      "rate_value": 0.0,
+      "daily_gain": 0.0
+    }
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财实盘组合榜",
+    "expert_id": "900114532",
+    "name": "chvxf65",
+    "owner": "长江长呀黄河黄呀",
+    "rank_label": "东财实盘日榜",
+    "followers": 1,
+    "return_rate": null,
+    "total_return": null,
+    "market_type": "live",
+    "extra": {
+      "userid": "3418144664969398",
+      "labels": [],
+      "rate_title": "日收益",
+      "rate_value": 0.0,
+      "daily_gain": 0.0
+    }
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财实盘组合榜",
+    "expert_id": "900114323",
+    "name": "zzyyjj",
+    "owner": "清汤泡面",
+    "rank_label": "东财实盘日榜",
+    "followers": 0,
+    "return_rate": null,
+    "total_return": null,
+    "market_type": "live",
+    "extra": {
+      "userid": "3009306171566474",
+      "labels": [],
+      "rate_title": "日收益",
+      "rate_value": 0.0,
+      "daily_gain": 0.0
+    }
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财实盘组合榜",
+    "expert_id": "900114209",
+    "name": "漫漫无限电量",
+    "owner": "漫漫无限电量",
+    "rank_label": "东财实盘日榜",
+    "followers": 0,
+    "return_rate": null,
+    "total_return": null,
+    "market_type": "live",
+    "extra": {
+      "userid": "2683094340251628",
+      "labels": [],
+      "rate_title": "日收益",
+      "rate_value": 0.0,
+      "daily_gain": 0.0
     }
   }
 ]

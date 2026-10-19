@@ -100,7 +100,7 @@ python main.py strategy run --backtest unified_sim
 
 启动后访问 **http://127.0.0.1:8601**（`python main.py ui --port 8601` 等价），两个页面：
 
-* **高手评估**（`#/experts`）：**分渠道数据爬取**（东财/同花顺/雪球/支付宝四渠道独立状态卡片 + 凭证/最新日/条数，多选触发，任务日志可按任务切换）+ **调仓历史回补**（单组合/批量，评估的数据基础）+ **高手能力评估**（逐高手镜像回测 → 总收益/年化/夏普/索提诺/最大回撤/Calmar/胜率/盈亏比/超额/Alpha，按综合评分排序；样本不足自动标记沉底；行内一键关注；明细抽屉含 ECharts 净值曲线 vs 沪深300 + 逐笔成交）。
+* **高手评估**（`#/experts`）：**分渠道数据爬取**（东财/同花顺/雪球/支付宝四渠道独立状态卡片 + 凭证/最新日/条数，多选触发，任务日志可按任务切换；内置**东财账户中心**——点「开始爬取」时未登录自动弹扫码框，登录后自动捕获 rtV3 实盘令牌并 30min 心跳保活）+ **调仓历史回补**（单组合/批量，评估的数据基础）+ **高手能力评估**（逐高手镜像回测 → 总收益/年化/夏普/索提诺/最大回撤/Calmar/胜率/盈亏比/超额/Alpha，按综合评分排序；样本不足自动标记沉底；行内一键关注；明细抽屉含 ECharts 净值曲线 vs 沪深300 + 逐笔成交）。
 * **高手跟随策略**（`#/expert-strategy`）：策略看板（模拟账户前向表现 + 晋级）/ 策略文件（json5 原文 + 解析 + 指纹 + 另存为）/ 回测配置 / 运行回测（后台运行 + 记录 + 发布）/ 数据体检。
 
 API 示例（与页面同源，也可供脚本调用）：
@@ -115,7 +115,20 @@ curl "localhost:8601/api/expert-crawl/evaluation/detail?expert_id=10000000000005
 curl -X POST localhost:8601/api/expert-crawl/run \
      -H 'Content-Type: application/json' -d '{"sources":["eastmoney"],"top":50}'
 curl localhost:8601/api/expert-crawl/status           # 全部后台任务状态（含 expert_eval）
+curl localhost:8601/api/broker/check                  # 东财登录态探测（账户中心）
+curl -X POST localhost:8601/api/broker/login/start -H 'Content-Type: application/json' -d '{"alias":"东财账户"}'  # 发起扫码
 ```
+
+## 东财账户中心（实盘令牌）
+
+实盘调仓明细（rtV3）需要 APP 四元组令牌 `ctToken/utToken/userId/deviceId + SM4 签名`，Web Cookie 无效。
+本项目的获取方式（移植自 xcq-platform 账户中心，存储改 SQLite）：
+
+* **触发**：高手评估页点「东财扫码登录」或点「开始爬取」（未登录自动弹出）→ 无头浏览器打开东财统一登录 → passport2 二维码 → 手机扫码。
+* **令牌捕获**：登录会话内监听发往 `spzhapi/emdcspzhapi` 的请求提取四元组；未捕获到时用 passport2 身份 cookie 兜底映射（ct/ut/pi/sid → 四元组，已实测 rtV3 认证通过）。
+* **存储**：`broker_accounts` 表（experts.db，令牌存 tokens_json）+ storage_state 快照（`data/broker_accounts/`，已 gitignore）。
+* **保活**：每 30 分钟心跳验证登录态并续期令牌；失效标 expired（页面徽章变红），每天最多重探 2 次。
+* **供给**：`pipeline._build_eastmoney` 在 config/env 未配令牌时自动从账户中心取（对齐 xcq 2026-09-25 方案）。实盘扫描名单 = config `spzh_follow` ∪ 关注列表 live 条目。
 
 ## 高手能力评估说明
 

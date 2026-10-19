@@ -54,11 +54,14 @@ FOLLOW_BT_DIR_CFG = FOLLOW_CFG_DIR / "backtests"
 FOLLOW_BT_USER_DIR = FOLLOW_BT_DIR_CFG / "user"
 
 
+BROKER_DIR = DATA_DIR / "broker_accounts"      # 账户中心 storage_state（敏感，gitignore）
+
+
 def ensure_dirs() -> None:
     """确保运行目录存在（导入即用，幂等）。"""
     for d in (DATA_DIR, CRAWL_DATA_DIR, HISTORY_DIR, HISTORY_BULK_DIR,
               FOLLOW_BT_DIR, FOLLOW_V2_DIR, MODELS_DIR / "expert_follow",
-              EVAL_DIR,
+              EVAL_DIR, BROKER_DIR,
               FOLLOW_STRAT_DIR, FOLLOW_USER_DIR, FOLLOW_BT_DIR_CFG,
               FOLLOW_BT_USER_DIR, LOG_DIR):
         d.mkdir(parents=True, exist_ok=True)

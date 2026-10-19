@@ -278,7 +278,7 @@
     "owner": "东方财富99992",
     "rank_label": "当日活跃组合",
     "market_type": "sim",
-    "return_rate": 800.64,
+    "return_rate": 787.66,
     "day_return_rate": -0.33,
     "followers": 0,
     "buy_count": 1,
@@ -413,7 +413,7 @@
     "owner": "鸿鹄中际",
     "rank_label": "当日活跃组合",
     "market_type": "sim",
-    "return_rate": 672.02,
+    "return_rate": 667.1,
     "day_return_rate": -0.97,
     "followers": 0,
     "buy_count": 1,
@@ -467,7 +467,7 @@
     "owner": "点石成金215",
     "rank_label": "当日活跃组合",
     "market_type": "sim",
-    "return_rate": 633.36,
+    "return_rate": 633.85,
     "day_return_rate": -0.62,
     "followers": 0,
     "buy_count": 1,
@@ -575,7 +575,7 @@
     "owner": "模拟组合12942848",
     "rank_label": "当日活跃组合",
     "market_type": "sim",
-    "return_rate": 594.27,
+    "return_rate": 593.97,
     "day_return_rate": -0.46,
     "followers": 0,
     "buy_count": 1,
@@ -813,33 +813,6 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
-    "expert_id": "10000000002255427",
-    "expert_name": "翻着长",
-    "owner": "翻着长",
-    "rank_label": "当日活跃组合",
-    "market_type": "sim",
-    "return_rate": 482.04,
-    "day_return_rate": -1.43,
-    "followers": 0,
-    "buy_count": 1,
-    "stocks": [
-      {
-        "stock_code": "300347",
-        "stock_name": "泰格医药",
-        "action": "买入",
-        "price": 52.99,
-        "volume": null,
-        "amount": null,
-        "weight_before": 25.59,
-        "weight_after": 39.38,
-        "trade_time": "2026-10-16 09:30"
-      }
-    ]
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财组合高手操作",
     "expert_id": "10000000000129047",
     "expert_name": "n192213698906346_1",
     "owner": "n192213698906346_1",
@@ -860,6 +833,33 @@
         "weight_before": 0.0,
         "weight_after": 99.98,
         "trade_time": "2026-10-16 10:49"
+      }
+    ]
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
+    "expert_id": "10000000002255427",
+    "expert_name": "翻着长",
+    "owner": "翻着长",
+    "rank_label": "当日活跃组合",
+    "market_type": "sim",
+    "return_rate": 478.14,
+    "day_return_rate": -1.43,
+    "followers": 0,
+    "buy_count": 1,
+    "stocks": [
+      {
+        "stock_code": "300347",
+        "stock_name": "泰格医药",
+        "action": "买入",
+        "price": 52.99,
+        "volume": null,
+        "amount": null,
+        "weight_before": 25.59,
+        "weight_after": 39.38,
+        "trade_time": "2026-10-16 09:30"
       }
     ]
   },
@@ -1250,7 +1250,7 @@
     "owner": "新建账户f1",
     "rank_label": "当日活跃组合",
     "market_type": "sim",
-    "return_rate": 389.38,
+    "return_rate": 382.34,
     "day_return_rate": 4.09,
     "followers": 0,
     "buy_count": 1,
@@ -1346,33 +1346,6 @@
         "weight_before": 0.0,
         "weight_after": 3.99,
         "trade_time": "2026-10-16 11:06"
-      }
-    ]
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财组合高手操作",
-    "expert_id": "231200200000079402",
-    "expert_name": "趋势决定价值",
-    "owner": "趋势决定价值",
-    "rank_label": "当日活跃组合",
-    "market_type": "sim",
-    "return_rate": 361.62,
-    "day_return_rate": -7.18,
-    "followers": 0,
-    "buy_count": 1,
-    "stocks": [
-      {
-        "stock_code": "000995",
-        "stock_name": "皇台酒业",
-        "action": "买入",
-        "price": 14.32,
-        "volume": null,
-        "amount": null,
-        "weight_before": 50.12,
-        "weight_after": 99.49,
-        "trade_time": "2026-10-16 09:35"
       }
     ]
   },
@@ -1542,6 +1515,33 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
+    "expert_id": "231200200000079402",
+    "expert_name": "趋势决定价值",
+    "owner": "趋势决定价值",
+    "rank_label": "当日活跃组合",
+    "market_type": "sim",
+    "return_rate": 334.93,
+    "day_return_rate": -7.18,
+    "followers": 0,
+    "buy_count": 1,
+    "stocks": [
+      {
+        "stock_code": "000995",
+        "stock_name": "皇台酒业",
+        "action": "买入",
+        "price": 14.32,
+        "volume": null,
+        "amount": null,
+        "weight_before": 50.12,
+        "weight_after": 99.49,
+        "trade_time": "2026-10-16 09:35"
+      }
+    ]
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
     "expert_id": "231990300000348544",
     "expert_name": "模拟组合9948544",
     "owner": "模拟组合9948544",
@@ -1616,33 +1616,6 @@
         "weight_before": 0.0,
         "weight_after": 98.97,
         "trade_time": "2026-10-16 09:43"
-      }
-    ]
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财组合高手操作",
-    "expert_id": "10000000004460470",
-    "expert_name": "hjjjfdfui",
-    "owner": "hjjjfdfui",
-    "rank_label": "当日活跃组合",
-    "market_type": "sim",
-    "return_rate": 328.95,
-    "day_return_rate": 1.13,
-    "followers": 0,
-    "buy_count": 1,
-    "stocks": [
-      {
-        "stock_code": "002343",
-        "stock_name": "慈文传媒",
-        "action": "买入",
-        "price": 9.15,
-        "volume": null,
-        "amount": null,
-        "weight_before": 7.66,
-        "weight_after": 11.36,
-        "trade_time": "2026-10-16 09:31"
       }
     ]
   },
@@ -1731,6 +1704,33 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
+    "expert_id": "10000000004460470",
+    "expert_name": "hjjjfdfui",
+    "owner": "hjjjfdfui",
+    "rank_label": "当日活跃组合",
+    "market_type": "sim",
+    "return_rate": 324.23,
+    "day_return_rate": 1.13,
+    "followers": 0,
+    "buy_count": 1,
+    "stocks": [
+      {
+        "stock_code": "002343",
+        "stock_name": "慈文传媒",
+        "action": "买入",
+        "price": 9.15,
+        "volume": null,
+        "amount": null,
+        "weight_before": 7.66,
+        "weight_after": 11.36,
+        "trade_time": "2026-10-16 09:31"
+      }
+    ]
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
     "expert_id": "10000000002771995",
     "expert_name": "牛奈何NBHH",
     "owner": "牛奈何NBHH",
@@ -1790,7 +1790,7 @@
     "owner": "模拟组合7116662",
     "rank_label": "当日活跃组合",
     "market_type": "sim",
-    "return_rate": 318.3,
+    "return_rate": 317.35,
     "day_return_rate": -2.35,
     "followers": 0,
     "buy_count": 1,
@@ -2109,33 +2109,6 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
-    "expert_id": "10000000012824177",
-    "expert_name": "模拟组合12824177",
-    "owner": "模拟组合12824177",
-    "rank_label": "当日活跃组合",
-    "market_type": "sim",
-    "return_rate": 278.32,
-    "day_return_rate": 1.13,
-    "followers": 0,
-    "buy_count": 1,
-    "stocks": [
-      {
-        "stock_code": "601212",
-        "stock_name": "白银有色",
-        "action": "买入",
-        "price": 5.24,
-        "volume": null,
-        "amount": null,
-        "weight_before": 41.69,
-        "weight_after": 99.27,
-        "trade_time": "2026-10-16 09:30"
-      }
-    ]
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财组合高手操作",
     "expert_id": "10000000006027248",
     "expert_name": "hucs2010",
     "owner": "hucs2010",
@@ -2237,6 +2210,33 @@
         "weight_before": 49.79,
         "weight_after": 99.78,
         "trade_time": "2026-10-16 10:06"
+      }
+    ]
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
+    "expert_id": "10000000012824177",
+    "expert_name": "模拟组合12824177",
+    "owner": "模拟组合12824177",
+    "rank_label": "当日活跃组合",
+    "market_type": "sim",
+    "return_rate": 274.71,
+    "day_return_rate": 1.13,
+    "followers": 0,
+    "buy_count": 1,
+    "stocks": [
+      {
+        "stock_code": "601212",
+        "stock_name": "白银有色",
+        "action": "买入",
+        "price": 5.24,
+        "volume": null,
+        "amount": null,
+        "weight_before": 41.69,
+        "weight_after": 99.27,
+        "trade_time": "2026-10-16 09:30"
       }
     ]
   },
@@ -2600,7 +2600,7 @@
     "owner": "相信自己",
     "rank_label": "当日活跃组合",
     "market_type": "sim",
-    "return_rate": 237.35,
+    "return_rate": 229.47,
     "day_return_rate": -4.71,
     "followers": 0,
     "buy_count": 1,
@@ -2978,7 +2978,7 @@
     "owner": "热股hot1vV",
     "rank_label": "当日活跃组合",
     "market_type": "sim",
-    "return_rate": 182.85,
+    "return_rate": 182.06,
     "day_return_rate": -1.18,
     "followers": 0,
     "buy_count": 1,
@@ -3545,7 +3545,7 @@
     "owner": "模拟组合10183463",
     "rank_label": "当日活跃组合",
     "market_type": "sim",
-    "return_rate": 144.81,
+    "return_rate": 142.55,
     "day_return_rate": -0.56,
     "followers": 0,
     "buy_count": 1,
@@ -3621,26 +3621,26 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
-    "expert_id": "243460300000137384",
-    "expert_name": "模拟组合4637384",
-    "owner": "模拟组合4637384",
+    "expert_id": "253520300000350534",
+    "expert_name": "金刚韭菜",
+    "owner": "金刚韭菜",
     "rank_label": "当日活跃组合",
     "market_type": "sim",
-    "return_rate": 132.3,
-    "day_return_rate": 3.12,
+    "return_rate": 130.54,
+    "day_return_rate": -5.45,
     "followers": 0,
     "buy_count": 1,
     "stocks": [
       {
-        "stock_code": "601118",
-        "stock_name": "海南橡胶",
+        "stock_code": "301716",
+        "stock_name": "鸿富诚",
         "action": "买入",
-        "price": 6.53,
+        "price": 527.5,
         "volume": null,
         "amount": null,
         "weight_before": 0.0,
-        "weight_after": 99.66,
-        "trade_time": "2026-10-16 09:35"
+        "weight_after": 90.35,
+        "trade_time": "2026-10-16 09:33"
       }
     ]
   },
@@ -3729,26 +3729,26 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
-    "expert_id": "253520300000350534",
-    "expert_name": "金刚韭菜",
-    "owner": "金刚韭菜",
+    "expert_id": "243460300000137384",
+    "expert_name": "模拟组合4637384",
+    "owner": "模拟组合4637384",
     "rank_label": "当日活跃组合",
     "market_type": "sim",
-    "return_rate": 127.36,
-    "day_return_rate": -5.45,
+    "return_rate": 127.5,
+    "day_return_rate": 3.12,
     "followers": 0,
     "buy_count": 1,
     "stocks": [
       {
-        "stock_code": "301716",
-        "stock_name": "鸿富诚",
+        "stock_code": "601118",
+        "stock_name": "海南橡胶",
         "action": "买入",
-        "price": 527.5,
+        "price": 6.53,
         "volume": null,
         "amount": null,
         "weight_before": 0.0,
-        "weight_after": 90.35,
-        "trade_time": "2026-10-16 09:33"
+        "weight_after": 99.66,
+        "trade_time": "2026-10-16 09:35"
       }
     ]
   },
@@ -3776,33 +3776,6 @@
         "weight_before": 26.53,
         "weight_after": 53.35,
         "trade_time": "2026-10-16 09:46"
-      }
-    ]
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财组合高手操作",
-    "expert_id": "261134200000035986",
-    "expert_name": "骑牛寻黑马",
-    "owner": "骑牛寻黑马",
-    "rank_label": "当日活跃组合",
-    "market_type": "sim",
-    "return_rate": 125.37,
-    "day_return_rate": -5.48,
-    "followers": 0,
-    "buy_count": 1,
-    "stocks": [
-      {
-        "stock_code": "300599",
-        "stock_name": "雄塑科技",
-        "action": "买入",
-        "price": 12.32,
-        "volume": null,
-        "amount": null,
-        "weight_before": 0.0,
-        "weight_after": 99.95,
-        "trade_time": "2026-10-16 09:34"
       }
     ]
   },
@@ -3999,26 +3972,26 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
-    "expert_id": "252874400000234010",
-    "expert_name": "反向思维168168",
-    "owner": "反向思维168168",
+    "expert_id": "261134200000035986",
+    "expert_name": "骑牛寻黑马",
+    "owner": "骑牛寻黑马",
     "rank_label": "当日活跃组合",
     "market_type": "sim",
-    "return_rate": 120.3,
-    "day_return_rate": -1.2,
+    "return_rate": 120.85,
+    "day_return_rate": -5.48,
     "followers": 0,
     "buy_count": 1,
     "stocks": [
       {
-        "stock_code": "002343",
-        "stock_name": "慈文传媒",
+        "stock_code": "300599",
+        "stock_name": "雄塑科技",
         "action": "买入",
-        "price": 9.77,
+        "price": 12.32,
         "volume": null,
         "amount": null,
         "weight_before": 0.0,
-        "weight_after": 76.06,
-        "trade_time": "2026-10-16 09:30"
+        "weight_after": 99.95,
+        "trade_time": "2026-10-16 09:34"
       }
     ]
   },
@@ -4112,7 +4085,7 @@
     "owner": "吊龙一号",
     "rank_label": "当日活跃组合",
     "market_type": "sim",
-    "return_rate": 114.74,
+    "return_rate": 114.09,
     "day_return_rate": -2.11,
     "followers": 0,
     "buy_count": 1,
@@ -4370,6 +4343,33 @@
         "weight_before": 0.0,
         "weight_after": 49.6,
         "trade_time": "2026-10-16 14:33"
+      }
+    ]
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
+    "expert_id": "252874400000234010",
+    "expert_name": "反向思维168168",
+    "owner": "反向思维168168",
+    "rank_label": "当日活跃组合",
+    "market_type": "sim",
+    "return_rate": 106.17,
+    "day_return_rate": -1.2,
+    "followers": 0,
+    "buy_count": 1,
+    "stocks": [
+      {
+        "stock_code": "002343",
+        "stock_name": "慈文传媒",
+        "action": "买入",
+        "price": 9.77,
+        "volume": null,
+        "amount": null,
+        "weight_before": 0.0,
+        "weight_after": 76.06,
+        "trade_time": "2026-10-16 09:30"
       }
     ]
   },
@@ -4721,33 +4721,6 @@
         "weight_before": 71.35,
         "weight_after": 99.91,
         "trade_time": "2026-10-16 10:08"
-      }
-    ]
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财组合高手操作",
-    "expert_id": "262350100000234916",
-    "expert_name": "稳定复利控制回撤",
-    "owner": "稳定复利控制回撤",
-    "rank_label": "当日活跃组合",
-    "market_type": "sim",
-    "return_rate": 92.92,
-    "day_return_rate": 0.73,
-    "followers": 0,
-    "buy_count": 1,
-    "stocks": [
-      {
-        "stock_code": "000993",
-        "stock_name": "闽东电力",
-        "action": "买入",
-        "price": 18.05,
-        "volume": null,
-        "amount": null,
-        "weight_before": 0.0,
-        "weight_after": 100.0,
-        "trade_time": "2026-10-16 09:30"
       }
     ]
   },
@@ -5457,6 +5430,33 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
+    "expert_id": "262350100000234916",
+    "expert_name": "稳定复利控制回撤",
+    "owner": "稳定复利控制回撤",
+    "rank_label": "当日活跃组合",
+    "market_type": "sim",
+    "return_rate": 73.63,
+    "day_return_rate": 0.73,
+    "followers": 0,
+    "buy_count": 1,
+    "stocks": [
+      {
+        "stock_code": "000993",
+        "stock_name": "闽东电力",
+        "action": "买入",
+        "price": 18.05,
+        "volume": null,
+        "amount": null,
+        "weight_before": 0.0,
+        "weight_after": 100.0,
+        "trade_time": "2026-10-16 09:30"
+      }
+    ]
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
     "expert_id": "262254100000045517",
     "expert_name": "模拟组合2545517",
     "owner": "模拟组合2545517",
@@ -5700,60 +5700,6 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
-    "expert_id": "252080400000029412",
-    "expert_name": "模拟组合0829412",
-    "owner": "模拟组合0829412",
-    "rank_label": "当日活跃组合",
-    "market_type": "sim",
-    "return_rate": 70.27,
-    "day_return_rate": -16.59,
-    "followers": 0,
-    "buy_count": 1,
-    "stocks": [
-      {
-        "stock_code": "920196",
-        "stock_name": "N南乳",
-        "action": "买入",
-        "price": 26.98,
-        "volume": null,
-        "amount": null,
-        "weight_before": 0.0,
-        "weight_after": 99.47,
-        "trade_time": "2026-10-16 09:31"
-      }
-    ]
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财组合高手操作",
-    "expert_id": "262424300000236164",
-    "expert_name": "模拟组合4236164",
-    "owner": "模拟组合4236164",
-    "rank_label": "当日活跃组合",
-    "market_type": "sim",
-    "return_rate": 70.07,
-    "day_return_rate": -6.62,
-    "followers": 0,
-    "buy_count": 1,
-    "stocks": [
-      {
-        "stock_code": "002343",
-        "stock_name": "慈文传媒",
-        "action": "买入",
-        "price": 9.33,
-        "volume": null,
-        "amount": null,
-        "weight_before": 0.0,
-        "weight_after": 98.8,
-        "trade_time": "2026-10-16 09:32"
-      }
-    ]
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财组合高手操作",
     "expert_id": "262500200000338636",
     "expert_name": "彪哥带你回本的",
     "owner": "彪哥带你回本的",
@@ -5889,33 +5835,6 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
-    "expert_id": "243420300000074107",
-    "expert_name": "新韭菜跳水",
-    "owner": "新韭菜跳水",
-    "rank_label": "当日活跃组合",
-    "market_type": "sim",
-    "return_rate": 66.53,
-    "day_return_rate": 2.08,
-    "followers": 0,
-    "buy_count": 1,
-    "stocks": [
-      {
-        "stock_code": "002185",
-        "stock_name": "华天科技",
-        "action": "买入",
-        "price": 14.37,
-        "volume": null,
-        "amount": null,
-        "weight_before": 0.0,
-        "weight_after": 49.79,
-        "trade_time": "2026-10-16 09:32"
-      }
-    ]
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财组合高手操作",
     "expert_id": "252380300000341112",
     "expert_name": "模拟组合3841112",
     "owner": "模拟组合3841112",
@@ -6024,6 +5943,33 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
+    "expert_id": "262354300000235999",
+    "expert_name": "模拟组合3535999",
+    "owner": "模拟组合3535999",
+    "rank_label": "当日活跃组合",
+    "market_type": "sim",
+    "return_rate": 63.42,
+    "day_return_rate": -1.17,
+    "followers": 0,
+    "buy_count": 1,
+    "stocks": [
+      {
+        "stock_code": "600228",
+        "stock_name": "返利科技",
+        "action": "买入",
+        "price": 9.93,
+        "volume": null,
+        "amount": null,
+        "weight_before": 0.0,
+        "weight_after": 99.84,
+        "trade_time": "2026-10-16 09:33"
+      }
+    ]
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
     "expert_id": "251284100000137737",
     "expert_name": "博大精深源远流长",
     "owner": "博大精深源远流长",
@@ -6044,6 +5990,33 @@
         "weight_before": 0.0,
         "weight_after": 14.13,
         "trade_time": "2026-10-16 14:49"
+      }
+    ]
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
+    "expert_id": "262004100000033785",
+    "expert_name": "做到100万",
+    "owner": "做到100万",
+    "rank_label": "当日活跃组合",
+    "market_type": "sim",
+    "return_rate": 63.33,
+    "day_return_rate": -0.55,
+    "followers": 0,
+    "buy_count": 1,
+    "stocks": [
+      {
+        "stock_code": "600408",
+        "stock_name": "安泰集团",
+        "action": "买入",
+        "price": 3.74,
+        "volume": null,
+        "amount": null,
+        "weight_before": 0.0,
+        "weight_after": 0.35,
+        "trade_time": "2026-10-16 09:32"
       }
     ]
   },
@@ -6078,33 +6051,6 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
-    "expert_id": "262354300000235999",
-    "expert_name": "模拟组合3535999",
-    "owner": "模拟组合3535999",
-    "rank_label": "当日活跃组合",
-    "market_type": "sim",
-    "return_rate": 62.75,
-    "day_return_rate": -1.17,
-    "followers": 0,
-    "buy_count": 1,
-    "stocks": [
-      {
-        "stock_code": "600228",
-        "stock_name": "返利科技",
-        "action": "买入",
-        "price": 9.93,
-        "volume": null,
-        "amount": null,
-        "weight_before": 0.0,
-        "weight_after": 99.84,
-        "trade_time": "2026-10-16 09:33"
-      }
-    ]
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财组合高手操作",
     "expert_id": "261470100000033810",
     "expert_name": "模拟组合4733810",
     "owner": "模拟组合4733810",
@@ -6125,6 +6071,33 @@
         "weight_before": 0.0,
         "weight_after": 99.28,
         "trade_time": "2026-10-16 11:02"
+      }
+    ]
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
+    "expert_id": "243420300000074107",
+    "expert_name": "新韭菜跳水",
+    "owner": "新韭菜跳水",
+    "rank_label": "当日活跃组合",
+    "market_type": "sim",
+    "return_rate": 62.32,
+    "day_return_rate": 2.08,
+    "followers": 0,
+    "buy_count": 1,
+    "stocks": [
+      {
+        "stock_code": "002185",
+        "stock_name": "华天科技",
+        "action": "买入",
+        "price": 14.37,
+        "volume": null,
+        "amount": null,
+        "weight_before": 0.0,
+        "weight_after": 49.79,
+        "trade_time": "2026-10-16 09:32"
       }
     ]
   },
@@ -6159,6 +6132,33 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
+    "expert_id": "261444300000039645",
+    "expert_name": "wangwzh888",
+    "owner": "wangwzh888",
+    "rank_label": "当日活跃组合",
+    "market_type": "sim",
+    "return_rate": 61.93,
+    "day_return_rate": -2.76,
+    "followers": 0,
+    "buy_count": 1,
+    "stocks": [
+      {
+        "stock_code": "605189",
+        "stock_name": "富春染织",
+        "action": "买入",
+        "price": 17.61,
+        "volume": null,
+        "amount": null,
+        "weight_before": 0.0,
+        "weight_after": 53.18,
+        "trade_time": "2026-10-16 09:30"
+      }
+    ]
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
     "expert_id": "261624100000038522",
     "expert_name": "模拟组合6238522",
     "owner": "模拟组合6238522",
@@ -6179,33 +6179,6 @@
         "weight_before": 0.0,
         "weight_after": 99.68,
         "trade_time": "2026-10-16 11:19"
-      }
-    ]
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财组合高手操作",
-    "expert_id": "261444300000039645",
-    "expert_name": "wangwzh888",
-    "owner": "wangwzh888",
-    "rank_label": "当日活跃组合",
-    "market_type": "sim",
-    "return_rate": 61.19,
-    "day_return_rate": -2.76,
-    "followers": 0,
-    "buy_count": 1,
-    "stocks": [
-      {
-        "stock_code": "605189",
-        "stock_name": "富春染织",
-        "action": "买入",
-        "price": 17.61,
-        "volume": null,
-        "amount": null,
-        "weight_before": 0.0,
-        "weight_after": 53.18,
-        "trade_time": "2026-10-16 09:30"
       }
     ]
   },
@@ -6456,33 +6429,6 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
-    "expert_id": "262004100000033785",
-    "expert_name": "做到100万",
-    "owner": "做到100万",
-    "rank_label": "当日活跃组合",
-    "market_type": "sim",
-    "return_rate": 58.64,
-    "day_return_rate": -0.55,
-    "followers": 0,
-    "buy_count": 1,
-    "stocks": [
-      {
-        "stock_code": "600408",
-        "stock_name": "安泰集团",
-        "action": "买入",
-        "price": 3.74,
-        "volume": null,
-        "amount": null,
-        "weight_before": 0.0,
-        "weight_after": 0.35,
-        "trade_time": "2026-10-16 09:32"
-      }
-    ]
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财组合高手操作",
     "expert_id": "262534200000033951",
     "expert_name": "上班688801",
     "owner": "上班688801",
@@ -6591,33 +6537,6 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
-    "expert_id": "262704200000147375",
-    "expert_name": "模拟组合7047375",
-    "owner": "模拟组合7047375",
-    "rank_label": "当日活跃组合",
-    "market_type": "sim",
-    "return_rate": 58.03,
-    "day_return_rate": 14.84,
-    "followers": 0,
-    "buy_count": 1,
-    "stocks": [
-      {
-        "stock_code": "300006",
-        "stock_name": "莱美药业",
-        "action": "买入",
-        "price": 8.84,
-        "volume": null,
-        "amount": null,
-        "weight_before": 0.0,
-        "weight_after": 99.06,
-        "trade_time": "2026-10-16 09:32"
-      }
-    ]
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财组合高手操作",
     "expert_id": "240220200000135493",
     "expert_name": "模拟组合2235493",
     "owner": "模拟组合2235493",
@@ -6638,6 +6557,33 @@
         "weight_before": 30.04,
         "weight_after": 34.19,
         "trade_time": "2026-10-16 14:15"
+      }
+    ]
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
+    "expert_id": "262424300000236164",
+    "expert_name": "模拟组合4236164",
+    "owner": "模拟组合4236164",
+    "rank_label": "当日活跃组合",
+    "market_type": "sim",
+    "return_rate": 56.86,
+    "day_return_rate": -6.62,
+    "followers": 0,
+    "buy_count": 1,
+    "stocks": [
+      {
+        "stock_code": "002343",
+        "stock_name": "慈文传媒",
+        "action": "买入",
+        "price": 9.33,
+        "volume": null,
+        "amount": null,
+        "weight_before": 0.0,
+        "weight_after": 98.8,
+        "trade_time": "2026-10-16 09:32"
       }
     ]
   },
@@ -6807,33 +6753,6 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
-    "expert_id": "261380200000233746",
-    "expert_name": "st追随",
-    "owner": "st追随",
-    "rank_label": "当日活跃组合",
-    "market_type": "sim",
-    "return_rate": 54.12,
-    "day_return_rate": -5.67,
-    "followers": 0,
-    "buy_count": 1,
-    "stocks": [
-      {
-        "stock_code": "301660",
-        "stock_name": "C粤芯-U",
-        "action": "买入",
-        "price": 35.4,
-        "volume": null,
-        "amount": null,
-        "weight_before": 0.0,
-        "weight_after": 26.03,
-        "trade_time": "2026-10-16 09:35"
-      }
-    ]
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财组合高手操作",
     "expert_id": "261890100000142129",
     "expert_name": "模拟组合8942129",
     "owner": "模拟组合8942129",
@@ -6861,26 +6780,26 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
-    "expert_id": "261384200000235303",
-    "expert_name": "小小失误问题",
-    "owner": "小小失误问题",
+    "expert_id": "261380200000233746",
+    "expert_name": "st追随",
+    "owner": "st追随",
     "rank_label": "当日活跃组合",
     "market_type": "sim",
-    "return_rate": 53.38,
-    "day_return_rate": 3.23,
+    "return_rate": 53.46,
+    "day_return_rate": -5.67,
     "followers": 0,
     "buy_count": 1,
     "stocks": [
       {
-        "stock_code": "601091",
-        "stock_name": "沈鼓集团",
+        "stock_code": "301660",
+        "stock_name": "C粤芯-U",
         "action": "买入",
-        "price": 20.46,
+        "price": 35.4,
         "volume": null,
         "amount": null,
         "weight_before": 0.0,
-        "weight_after": 99.9,
-        "trade_time": "2026-10-16 09:33"
+        "weight_after": 26.03,
+        "trade_time": "2026-10-16 09:35"
       }
     ]
   },
@@ -6942,6 +6861,33 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
+    "expert_id": "262704200000147375",
+    "expert_name": "模拟组合7047375",
+    "owner": "模拟组合7047375",
+    "rank_label": "当日活跃组合",
+    "market_type": "sim",
+    "return_rate": 52.61,
+    "day_return_rate": 14.84,
+    "followers": 0,
+    "buy_count": 1,
+    "stocks": [
+      {
+        "stock_code": "300006",
+        "stock_name": "莱美药业",
+        "action": "买入",
+        "price": 8.84,
+        "volume": null,
+        "amount": null,
+        "weight_before": 0.0,
+        "weight_after": 99.06,
+        "trade_time": "2026-10-16 09:32"
+      }
+    ]
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
     "expert_id": "260084200000236610",
     "expert_name": "模拟组合0836610",
     "owner": "模拟组合0836610",
@@ -6962,33 +6908,6 @@
         "weight_before": 0.0,
         "weight_after": 99.63,
         "trade_time": "2026-10-16 09:44"
-      }
-    ]
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财组合高手操作",
-    "expert_id": "262700300000047161",
-    "expert_name": "模拟组合7047161",
-    "owner": "模拟组合7047161",
-    "rank_label": "当日活跃组合",
-    "market_type": "sim",
-    "return_rate": 52.17,
-    "day_return_rate": 10.8,
-    "followers": 0,
-    "buy_count": 1,
-    "stocks": [
-      {
-        "stock_code": "300006",
-        "stock_name": "莱美药业",
-        "action": "买入",
-        "price": 8.97,
-        "volume": null,
-        "amount": null,
-        "weight_before": 90.26,
-        "weight_after": 99.95,
-        "trade_time": "2026-10-16 09:32"
       }
     ]
   },
@@ -7043,6 +6962,33 @@
         "weight_before": 66.67,
         "weight_after": 99.95,
         "trade_time": "2026-10-16 13:07"
+      }
+    ]
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
+    "expert_id": "261384200000235303",
+    "expert_name": "小小失误问题",
+    "owner": "小小失误问题",
+    "rank_label": "当日活跃组合",
+    "market_type": "sim",
+    "return_rate": 51.72,
+    "day_return_rate": 3.23,
+    "followers": 0,
+    "buy_count": 1,
+    "stocks": [
+      {
+        "stock_code": "601091",
+        "stock_name": "沈鼓集团",
+        "action": "买入",
+        "price": 20.46,
+        "volume": null,
+        "amount": null,
+        "weight_before": 0.0,
+        "weight_after": 99.9,
+        "trade_time": "2026-10-16 09:33"
       }
     ]
   },
@@ -7131,33 +7077,6 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
-    "expert_id": "262700400000147125",
-    "expert_name": "模拟组合7047125",
-    "owner": "模拟组合7047125",
-    "rank_label": "当日活跃组合",
-    "market_type": "sim",
-    "return_rate": 50.39,
-    "day_return_rate": 15.75,
-    "followers": 0,
-    "buy_count": 1,
-    "stocks": [
-      {
-        "stock_code": "300006",
-        "stock_name": "莱美药业",
-        "action": "买入",
-        "price": 8.56,
-        "volume": null,
-        "amount": null,
-        "weight_before": 0.0,
-        "weight_after": 98.79,
-        "trade_time": "2026-10-16 09:30"
-      }
-    ]
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财组合高手操作",
     "expert_id": "260694300000061203",
     "expert_name": "模拟组合6961203",
     "owner": "模拟组合6961203",
@@ -7232,87 +7151,6 @@
         "weight_before": 59.17,
         "weight_after": 59.34,
         "trade_time": "2026-10-16 14:17"
-      }
-    ]
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财组合高手操作",
-    "expert_id": "262700100000047182",
-    "expert_name": "模拟组合7047182",
-    "owner": "模拟组合7047182",
-    "rank_label": "当日活跃组合",
-    "market_type": "sim",
-    "return_rate": 49.71,
-    "day_return_rate": 12.7,
-    "followers": 0,
-    "buy_count": 1,
-    "stocks": [
-      {
-        "stock_code": "300006",
-        "stock_name": "莱美药业",
-        "action": "买入",
-        "price": 8.84,
-        "volume": null,
-        "amount": null,
-        "weight_before": 0.0,
-        "weight_after": 99.82,
-        "trade_time": "2026-10-16 09:32"
-      }
-    ]
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财组合高手操作",
-    "expert_id": "262320100000033776",
-    "expert_name": "模拟组合3233776",
-    "owner": "模拟组合3233776",
-    "rank_label": "当日活跃组合",
-    "market_type": "sim",
-    "return_rate": 49.58,
-    "day_return_rate": 12.49,
-    "followers": 0,
-    "buy_count": 1,
-    "stocks": [
-      {
-        "stock_code": "301010",
-        "stock_name": "晶雪节能",
-        "action": "买入",
-        "price": 23.14,
-        "volume": null,
-        "amount": null,
-        "weight_before": 0.0,
-        "weight_after": 99.22,
-        "trade_time": "2026-10-16 09:33"
-      }
-    ]
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财组合高手操作",
-    "expert_id": "262150100000134430",
-    "expert_name": "源捷",
-    "owner": "源捷",
-    "rank_label": "当日活跃组合",
-    "market_type": "sim",
-    "return_rate": 49.12,
-    "day_return_rate": -1.65,
-    "followers": 0,
-    "buy_count": 1,
-    "stocks": [
-      {
-        "stock_code": "603011",
-        "stock_name": "合锻智能",
-        "action": "买入",
-        "price": 19.66,
-        "volume": null,
-        "amount": null,
-        "weight_before": 0.0,
-        "weight_after": 97.33,
-        "trade_time": "2026-10-16 09:31"
       }
     ]
   },
@@ -7401,6 +7239,33 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
+    "expert_id": "262700100000047182",
+    "expert_name": "模拟组合7047182",
+    "owner": "模拟组合7047182",
+    "rank_label": "当日活跃组合",
+    "market_type": "sim",
+    "return_rate": 47.95,
+    "day_return_rate": 12.7,
+    "followers": 0,
+    "buy_count": 1,
+    "stocks": [
+      {
+        "stock_code": "300006",
+        "stock_name": "莱美药业",
+        "action": "买入",
+        "price": 8.84,
+        "volume": null,
+        "amount": null,
+        "weight_before": 0.0,
+        "weight_after": 99.82,
+        "trade_time": "2026-10-16 09:32"
+      }
+    ]
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
     "expert_id": "260410300000048866",
     "expert_name": "反人性的心态",
     "owner": "反人性的心态",
@@ -7455,26 +7320,26 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
-    "expert_id": "262804400000034118",
-    "expert_name": "推到了",
-    "owner": "推到了",
+    "expert_id": "262150100000134430",
+    "expert_name": "源捷",
+    "owner": "源捷",
     "rank_label": "当日活跃组合",
     "market_type": "sim",
-    "return_rate": 47.45,
-    "day_return_rate": 8.05,
+    "return_rate": 47.52,
+    "day_return_rate": -1.65,
     "followers": 0,
     "buy_count": 1,
     "stocks": [
       {
-        "stock_code": "000530",
-        "stock_name": "冰山冷热",
+        "stock_code": "603011",
+        "stock_name": "合锻智能",
         "action": "买入",
-        "price": 6.74,
+        "price": 19.66,
         "volume": null,
         "amount": null,
         "weight_before": 0.0,
-        "weight_after": 99.82,
-        "trade_time": "2026-10-16 09:33"
+        "weight_after": 97.33,
+        "trade_time": "2026-10-16 09:31"
       }
     ]
   },
@@ -7617,33 +7482,6 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
-    "expert_id": "251070100000002157",
-    "expert_name": "卧牛山的狼",
-    "owner": "卧牛山的狼",
-    "rank_label": "当日活跃组合",
-    "market_type": "sim",
-    "return_rate": 43.99,
-    "day_return_rate": -8.12,
-    "followers": 0,
-    "buy_count": 1,
-    "stocks": [
-      {
-        "stock_code": "000626",
-        "stock_name": "远大控股",
-        "action": "买入",
-        "price": 8.96,
-        "volume": null,
-        "amount": null,
-        "weight_before": 0.0,
-        "weight_after": 99.87,
-        "trade_time": "2026-10-16 09:30"
-      }
-    ]
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财组合高手操作",
     "expert_id": "261970200000138030",
     "expert_name": "高菲",
     "owner": "高菲",
@@ -7718,6 +7556,33 @@
         "weight_before": 0.0,
         "weight_after": 99.46,
         "trade_time": "2026-10-16 14:21"
+      }
+    ]
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
+    "expert_id": "262700300000047161",
+    "expert_name": "模拟组合7047161",
+    "owner": "模拟组合7047161",
+    "rank_label": "当日活跃组合",
+    "market_type": "sim",
+    "return_rate": 43.15,
+    "day_return_rate": 10.8,
+    "followers": 0,
+    "buy_count": 1,
+    "stocks": [
+      {
+        "stock_code": "300006",
+        "stock_name": "莱美药业",
+        "action": "买入",
+        "price": 8.97,
+        "volume": null,
+        "amount": null,
+        "weight_before": 90.26,
+        "weight_after": 99.95,
+        "trade_time": "2026-10-16 09:32"
       }
     ]
   },
@@ -7860,6 +7725,33 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
+    "expert_id": "262700400000147125",
+    "expert_name": "模拟组合7047125",
+    "owner": "模拟组合7047125",
+    "rank_label": "当日活跃组合",
+    "market_type": "sim",
+    "return_rate": 41.53,
+    "day_return_rate": 15.75,
+    "followers": 0,
+    "buy_count": 1,
+    "stocks": [
+      {
+        "stock_code": "300006",
+        "stock_name": "莱美药业",
+        "action": "买入",
+        "price": 8.56,
+        "volume": null,
+        "amount": null,
+        "weight_before": 0.0,
+        "weight_after": 98.79,
+        "trade_time": "2026-10-16 09:30"
+      }
+    ]
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
     "expert_id": "262560100000136802",
     "expert_name": "模拟组合5636802",
     "owner": "模拟组合5636802",
@@ -7934,6 +7826,33 @@
         "weight_before": 8.28,
         "weight_after": 13.56,
         "trade_time": "2026-10-16 13:02"
+      }
+    ]
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
+    "expert_id": "251070100000002157",
+    "expert_name": "卧牛山的狼",
+    "owner": "卧牛山的狼",
+    "rank_label": "当日活跃组合",
+    "market_type": "sim",
+    "return_rate": 40.67,
+    "day_return_rate": -8.12,
+    "followers": 0,
+    "buy_count": 1,
+    "stocks": [
+      {
+        "stock_code": "000626",
+        "stock_name": "远大控股",
+        "action": "买入",
+        "price": 8.96,
+        "volume": null,
+        "amount": null,
+        "weight_before": 0.0,
+        "weight_after": 99.87,
+        "trade_time": "2026-10-16 09:30"
       }
     ]
   },
@@ -8049,33 +7968,6 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
-    "expert_id": "261614100000235441",
-    "expert_name": "模拟组合6135441",
-    "owner": "模拟组合6135441",
-    "rank_label": "当日活跃组合",
-    "market_type": "sim",
-    "return_rate": 39.48,
-    "day_return_rate": 12.33,
-    "followers": 0,
-    "buy_count": 1,
-    "stocks": [
-      {
-        "stock_code": "002343",
-        "stock_name": "慈文传媒",
-        "action": "买入",
-        "price": 9.24,
-        "volume": null,
-        "amount": null,
-        "weight_before": 91.97,
-        "weight_after": 99.67,
-        "trade_time": "2026-10-16 09:34"
-      }
-    ]
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财组合高手操作",
     "expert_id": "10000000011760628",
     "expert_name": "pdbqgmo",
     "owner": "pdbqgmo",
@@ -8184,6 +8076,60 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
+    "expert_id": "252080400000029412",
+    "expert_name": "模拟组合0829412",
+    "owner": "模拟组合0829412",
+    "rank_label": "当日活跃组合",
+    "market_type": "sim",
+    "return_rate": 38.32,
+    "day_return_rate": -16.59,
+    "followers": 0,
+    "buy_count": 1,
+    "stocks": [
+      {
+        "stock_code": "920196",
+        "stock_name": "N南乳",
+        "action": "买入",
+        "price": 26.98,
+        "volume": null,
+        "amount": null,
+        "weight_before": 0.0,
+        "weight_after": 99.47,
+        "trade_time": "2026-10-16 09:31"
+      }
+    ]
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
+    "expert_id": "262804400000034118",
+    "expert_name": "推到了",
+    "owner": "推到了",
+    "rank_label": "当日活跃组合",
+    "market_type": "sim",
+    "return_rate": 38.16,
+    "day_return_rate": 8.05,
+    "followers": 0,
+    "buy_count": 1,
+    "stocks": [
+      {
+        "stock_code": "000530",
+        "stock_name": "冰山冷热",
+        "action": "买入",
+        "price": 6.74,
+        "volume": null,
+        "amount": null,
+        "weight_before": 0.0,
+        "weight_after": 99.82,
+        "trade_time": "2026-10-16 09:33"
+      }
+    ]
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
     "expert_id": "253164200000239364",
     "expert_name": "模拟组合1639364",
     "owner": "模拟组合1639364",
@@ -8204,33 +8150,6 @@
         "weight_before": 0.0,
         "weight_after": 99.39,
         "trade_time": "2026-10-16 14:40"
-      }
-    ]
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财组合高手操作",
-    "expert_id": "262000400000065918",
-    "expert_name": "模拟组合0065918",
-    "owner": "模拟组合0065918",
-    "rank_label": "当日活跃组合",
-    "market_type": "sim",
-    "return_rate": 38.05,
-    "day_return_rate": 6.91,
-    "followers": 0,
-    "buy_count": 1,
-    "stocks": [
-      {
-        "stock_code": "603668",
-        "stock_name": "天马科技",
-        "action": "买入",
-        "price": 7.04,
-        "volume": null,
-        "amount": null,
-        "weight_before": 0.0,
-        "weight_after": 95.13,
-        "trade_time": "2026-10-16 09:31"
       }
     ]
   },
@@ -8454,6 +8373,33 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
+    "expert_id": "262320100000033776",
+    "expert_name": "模拟组合3233776",
+    "owner": "模拟组合3233776",
+    "rank_label": "当日活跃组合",
+    "market_type": "sim",
+    "return_rate": 35.68,
+    "day_return_rate": 12.49,
+    "followers": 0,
+    "buy_count": 1,
+    "stocks": [
+      {
+        "stock_code": "301010",
+        "stock_name": "晶雪节能",
+        "action": "买入",
+        "price": 23.14,
+        "volume": null,
+        "amount": null,
+        "weight_before": 0.0,
+        "weight_after": 99.22,
+        "trade_time": "2026-10-16 09:33"
+      }
+    ]
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
     "expert_id": "262570400000247685",
     "expert_name": "模拟组合5747685",
     "owner": "模拟组合5747685",
@@ -8501,33 +8447,6 @@
         "weight_before": 43.45,
         "weight_after": 69.23,
         "trade_time": "2026-10-16 14:52"
-      }
-    ]
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财组合高手操作",
-    "expert_id": "262380200000038042",
-    "expert_name": "模拟组合3838042",
-    "owner": "模拟组合3838042",
-    "rank_label": "当日活跃组合",
-    "market_type": "sim",
-    "return_rate": 35.45,
-    "day_return_rate": 8.88,
-    "followers": 0,
-    "buy_count": 1,
-    "stocks": [
-      {
-        "stock_code": "300006",
-        "stock_name": "莱美药业",
-        "action": "买入",
-        "price": 8.94,
-        "volume": null,
-        "amount": null,
-        "weight_before": 0.0,
-        "weight_after": 99.27,
-        "trade_time": "2026-10-16 09:35"
       }
     ]
   },
@@ -8616,13 +8535,13 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
-    "expert_id": "262700300000047116",
-    "expert_name": "模拟组合7047116",
-    "owner": "模拟组合7047116",
+    "expert_id": "261614100000235441",
+    "expert_name": "模拟组合6135441",
+    "owner": "模拟组合6135441",
     "rank_label": "当日活跃组合",
     "market_type": "sim",
-    "return_rate": 34.3,
-    "day_return_rate": -2.37,
+    "return_rate": 34.41,
+    "day_return_rate": 12.33,
     "followers": 0,
     "buy_count": 1,
     "stocks": [
@@ -8630,12 +8549,12 @@
         "stock_code": "002343",
         "stock_name": "慈文传媒",
         "action": "买入",
-        "price": 9.8,
+        "price": 9.24,
         "volume": null,
         "amount": null,
-        "weight_before": 0.0,
-        "weight_after": 99.97,
-        "trade_time": "2026-10-16 09:30"
+        "weight_before": 91.97,
+        "weight_after": 99.67,
+        "trade_time": "2026-10-16 09:34"
       }
     ]
   },
@@ -8805,6 +8724,33 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
+    "expert_id": "262000400000065918",
+    "expert_name": "模拟组合0065918",
+    "owner": "模拟组合0065918",
+    "rank_label": "当日活跃组合",
+    "market_type": "sim",
+    "return_rate": 32.6,
+    "day_return_rate": 6.91,
+    "followers": 0,
+    "buy_count": 1,
+    "stocks": [
+      {
+        "stock_code": "603668",
+        "stock_name": "天马科技",
+        "action": "买入",
+        "price": 7.04,
+        "volume": null,
+        "amount": null,
+        "weight_before": 0.0,
+        "weight_after": 95.13,
+        "trade_time": "2026-10-16 09:31"
+      }
+    ]
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
     "expert_id": "252580400000042347",
     "expert_name": "模拟组合5842347",
     "owner": "模拟组合5842347",
@@ -8852,33 +8798,6 @@
         "weight_before": 8.9,
         "weight_after": 10.68,
         "trade_time": "2026-10-16 13:00"
-      }
-    ]
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财组合高手操作",
-    "expert_id": "262770400000032853",
-    "expert_name": "不服13",
-    "owner": "不服13",
-    "rank_label": "当日活跃组合",
-    "market_type": "sim",
-    "return_rate": 31.51,
-    "day_return_rate": -0.5,
-    "followers": 0,
-    "buy_count": 1,
-    "stocks": [
-      {
-        "stock_code": "600252",
-        "stock_name": "中恒集团",
-        "action": "买入",
-        "price": 2.47,
-        "volume": null,
-        "amount": null,
-        "weight_before": 0.0,
-        "weight_after": 99.18,
-        "trade_time": "2026-10-16 09:31"
       }
     ]
   },
@@ -8967,6 +8886,33 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
+    "expert_id": "262380200000038042",
+    "expert_name": "模拟组合3838042",
+    "owner": "模拟组合3838042",
+    "rank_label": "当日活跃组合",
+    "market_type": "sim",
+    "return_rate": 30.29,
+    "day_return_rate": 8.88,
+    "followers": 0,
+    "buy_count": 1,
+    "stocks": [
+      {
+        "stock_code": "300006",
+        "stock_name": "莱美药业",
+        "action": "买入",
+        "price": 8.94,
+        "volume": null,
+        "amount": null,
+        "weight_before": 0.0,
+        "weight_after": 99.27,
+        "trade_time": "2026-10-16 09:35"
+      }
+    ]
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
     "expert_id": "250424200000054597",
     "expert_name": "模拟组合4254597",
     "owner": "模拟组合4254597",
@@ -9021,33 +8967,6 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
-    "expert_id": "262044300000028168",
-    "expert_name": "模拟组合0428168",
-    "owner": "模拟组合0428168",
-    "rank_label": "当日活跃组合",
-    "market_type": "sim",
-    "return_rate": 29.88,
-    "day_return_rate": -6.7,
-    "followers": 0,
-    "buy_count": 1,
-    "stocks": [
-      {
-        "stock_code": "605189",
-        "stock_name": "富春染织",
-        "action": "买入",
-        "price": 17.61,
-        "volume": null,
-        "amount": null,
-        "weight_before": 0.0,
-        "weight_after": 89.64,
-        "trade_time": "2026-10-16 09:30"
-      }
-    ]
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财组合高手操作",
     "expert_id": "262654200000050537",
     "expert_name": "只为更好",
     "owner": "只为更好",
@@ -9095,33 +9014,6 @@
         "weight_before": 0.0,
         "weight_after": 2.85,
         "trade_time": "2026-10-16 13:30"
-      }
-    ]
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财组合高手操作",
-    "expert_id": "262700400000147171",
-    "expert_name": "模拟组合7047171",
-    "owner": "模拟组合7047171",
-    "rank_label": "当日活跃组合",
-    "market_type": "sim",
-    "return_rate": 29.45,
-    "day_return_rate": -3.3,
-    "followers": 0,
-    "buy_count": 1,
-    "stocks": [
-      {
-        "stock_code": "002343",
-        "stock_name": "慈文传媒",
-        "action": "买入",
-        "price": 9.77,
-        "volume": null,
-        "amount": null,
-        "weight_before": 0.0,
-        "weight_after": 99.69,
-        "trade_time": "2026-10-16 09:30"
       }
     ]
   },
@@ -9210,33 +9102,6 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
-    "expert_id": "262390300000024796",
-    "expert_name": "什么是反转",
-    "owner": "什么是反转",
-    "rank_label": "当日活跃组合",
-    "market_type": "sim",
-    "return_rate": 28.98,
-    "day_return_rate": -3.05,
-    "followers": 0,
-    "buy_count": 1,
-    "stocks": [
-      {
-        "stock_code": "002549",
-        "stock_name": "凯美特气",
-        "action": "买入",
-        "price": 14.05,
-        "volume": null,
-        "amount": null,
-        "weight_before": 0.0,
-        "weight_after": 99.72,
-        "trade_time": "2026-10-16 09:35"
-      }
-    ]
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财组合高手操作",
     "expert_id": "262730200000036450",
     "expert_name": "模拟组合7336450",
     "owner": "模拟组合7336450",
@@ -9291,26 +9156,26 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
-    "expert_id": "262844300000062689",
-    "expert_name": "KKBB3456",
-    "owner": "KKBB3456",
+    "expert_id": "262044300000028168",
+    "expert_name": "模拟组合0428168",
+    "owner": "模拟组合0428168",
     "rank_label": "当日活跃组合",
     "market_type": "sim",
-    "return_rate": 28.75,
-    "day_return_rate": 10.67,
+    "return_rate": 28.65,
+    "day_return_rate": -6.7,
     "followers": 0,
     "buy_count": 1,
     "stocks": [
       {
-        "stock_code": "300006",
-        "stock_name": "莱美药业",
+        "stock_code": "605189",
+        "stock_name": "富春染织",
         "action": "买入",
-        "price": 8.7,
+        "price": 17.61,
         "volume": null,
         "amount": null,
         "weight_before": 0.0,
-        "weight_after": 99.19,
-        "trade_time": "2026-10-16 09:31"
+        "weight_after": 89.64,
+        "trade_time": "2026-10-16 09:30"
       }
     ]
   },
@@ -9372,6 +9237,33 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
+    "expert_id": "252190400000152510",
+    "expert_name": "模拟组合1952510",
+    "owner": "模拟组合1952510",
+    "rank_label": "当日活跃组合",
+    "market_type": "sim",
+    "return_rate": 28.18,
+    "day_return_rate": 8.66,
+    "followers": 0,
+    "buy_count": 1,
+    "stocks": [
+      {
+        "stock_code": "000099",
+        "stock_name": "中信海直",
+        "action": "买入",
+        "price": 13.56,
+        "volume": null,
+        "amount": null,
+        "weight_before": 0.0,
+        "weight_after": 99.91,
+        "trade_time": "2026-10-16 09:32"
+      }
+    ]
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
     "expert_id": "262570400000036973",
     "expert_name": "诶今非昔比我",
     "owner": "诶今非昔比我",
@@ -9426,33 +9318,6 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
-    "expert_id": "262210100000236100",
-    "expert_name": "模拟组合2136100",
-    "owner": "模拟组合2136100",
-    "rank_label": "当日活跃组合",
-    "market_type": "sim",
-    "return_rate": 27.95,
-    "day_return_rate": -0.51,
-    "followers": 0,
-    "buy_count": 1,
-    "stocks": [
-      {
-        "stock_code": "600105",
-        "stock_name": "永鼎股份",
-        "action": "买入",
-        "price": 28.81,
-        "volume": null,
-        "amount": null,
-        "weight_before": 0.0,
-        "weight_after": 98.66,
-        "trade_time": "2026-10-16 09:32"
-      }
-    ]
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财组合高手操作",
     "expert_id": "262580300000035492",
     "expert_name": "超短线接力",
     "owner": "超短线接力",
@@ -9480,6 +9345,60 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
+    "expert_id": "262770400000032853",
+    "expert_name": "不服13",
+    "owner": "不服13",
+    "rank_label": "当日活跃组合",
+    "market_type": "sim",
+    "return_rate": 27.79,
+    "day_return_rate": -0.5,
+    "followers": 0,
+    "buy_count": 1,
+    "stocks": [
+      {
+        "stock_code": "600252",
+        "stock_name": "中恒集团",
+        "action": "买入",
+        "price": 2.47,
+        "volume": null,
+        "amount": null,
+        "weight_before": 0.0,
+        "weight_after": 99.18,
+        "trade_time": "2026-10-16 09:31"
+      }
+    ]
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
+    "expert_id": "262210100000236100",
+    "expert_name": "模拟组合2136100",
+    "owner": "模拟组合2136100",
+    "rank_label": "当日活跃组合",
+    "market_type": "sim",
+    "return_rate": 27.69,
+    "day_return_rate": -0.51,
+    "followers": 0,
+    "buy_count": 1,
+    "stocks": [
+      {
+        "stock_code": "600105",
+        "stock_name": "永鼎股份",
+        "action": "买入",
+        "price": 28.81,
+        "volume": null,
+        "amount": null,
+        "weight_before": 0.0,
+        "weight_after": 98.66,
+        "trade_time": "2026-10-16 09:32"
+      }
+    ]
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
     "expert_id": "262600300000334057",
     "expert_name": "穗穗穗",
     "owner": "穗穗穗",
@@ -9500,33 +9419,6 @@
         "weight_before": 0.0,
         "weight_after": 99.78,
         "trade_time": "2026-10-16 09:46"
-      }
-    ]
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财组合高手操作",
-    "expert_id": "262530300000134595",
-    "expert_name": "张杰军222",
-    "owner": "张杰军222",
-    "rank_label": "当日活跃组合",
-    "market_type": "sim",
-    "return_rate": 27.57,
-    "day_return_rate": -1.6,
-    "followers": 0,
-    "buy_count": 1,
-    "stocks": [
-      {
-        "stock_code": "002343",
-        "stock_name": "慈文传媒",
-        "action": "买入",
-        "price": 9.63,
-        "volume": null,
-        "amount": null,
-        "weight_before": 0.0,
-        "weight_after": 49.79,
-        "trade_time": "2026-10-16 09:30"
       }
     ]
   },
@@ -9615,26 +9507,53 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
-    "expert_id": "262710100000027048",
-    "expert_name": "模拟组合7127048",
-    "owner": "模拟组合7127048",
+    "expert_id": "262700300000047116",
+    "expert_name": "模拟组合7047116",
+    "owner": "模拟组合7047116",
     "rank_label": "当日活跃组合",
     "market_type": "sim",
-    "return_rate": 27.07,
-    "day_return_rate": 4.23,
+    "return_rate": 27.03,
+    "day_return_rate": -2.37,
     "followers": 0,
     "buy_count": 1,
     "stocks": [
       {
-        "stock_code": "688505",
-        "stock_name": "复旦张江",
+        "stock_code": "002343",
+        "stock_name": "慈文传媒",
         "action": "买入",
-        "price": 7.87,
+        "price": 9.8,
         "volume": null,
         "amount": null,
         "weight_before": 0.0,
-        "weight_after": 19.66,
-        "trade_time": "2026-10-16 09:35"
+        "weight_after": 99.97,
+        "trade_time": "2026-10-16 09:30"
+      }
+    ]
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
+    "expert_id": "262864400000035833",
+    "expert_name": "模拟组合8635833",
+    "owner": "模拟组合8635833",
+    "rank_label": "当日活跃组合",
+    "market_type": "sim",
+    "return_rate": 27.0,
+    "day_return_rate": -2.26,
+    "followers": 0,
+    "buy_count": 1,
+    "stocks": [
+      {
+        "stock_code": "301230",
+        "stock_name": "泓博医药",
+        "action": "买入",
+        "price": 36.92,
+        "volume": null,
+        "amount": null,
+        "weight_before": 0.0,
+        "weight_after": 99.65,
+        "trade_time": "2026-10-16 09:31"
       }
     ]
   },
@@ -9723,6 +9642,33 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
+    "expert_id": "262390300000024796",
+    "expert_name": "什么是反转",
+    "owner": "什么是反转",
+    "rank_label": "当日活跃组合",
+    "market_type": "sim",
+    "return_rate": 26.47,
+    "day_return_rate": -3.05,
+    "followers": 0,
+    "buy_count": 1,
+    "stocks": [
+      {
+        "stock_code": "002549",
+        "stock_name": "凯美特气",
+        "action": "买入",
+        "price": 14.05,
+        "volume": null,
+        "amount": null,
+        "weight_before": 0.0,
+        "weight_after": 99.72,
+        "trade_time": "2026-10-16 09:35"
+      }
+    ]
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
     "expert_id": "261550300000032910",
     "expert_name": "模拟组合5532910",
     "owner": "模拟组合5532910",
@@ -9743,33 +9689,6 @@
         "weight_before": 0.0,
         "weight_after": 99.0,
         "trade_time": "2026-10-16 10:41"
-      }
-    ]
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财组合高手操作",
-    "expert_id": "252190400000152510",
-    "expert_name": "模拟组合1952510",
-    "owner": "模拟组合1952510",
-    "rank_label": "当日活跃组合",
-    "market_type": "sim",
-    "return_rate": 26.22,
-    "day_return_rate": 8.66,
-    "followers": 0,
-    "buy_count": 1,
-    "stocks": [
-      {
-        "stock_code": "000099",
-        "stock_name": "中信海直",
-        "action": "买入",
-        "price": 13.56,
-        "volume": null,
-        "amount": null,
-        "weight_before": 0.0,
-        "weight_after": 99.91,
-        "trade_time": "2026-10-16 09:32"
       }
     ]
   },
@@ -9858,33 +9777,6 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
-    "expert_id": "262704400000147298",
-    "expert_name": "模拟组合7047298",
-    "owner": "模拟组合7047298",
-    "rank_label": "当日活跃组合",
-    "market_type": "sim",
-    "return_rate": 25.82,
-    "day_return_rate": -2.04,
-    "followers": 0,
-    "buy_count": 1,
-    "stocks": [
-      {
-        "stock_code": "002343",
-        "stock_name": "慈文传媒",
-        "action": "买入",
-        "price": 9.77,
-        "volume": null,
-        "amount": null,
-        "weight_before": 0.0,
-        "weight_after": 99.68,
-        "trade_time": "2026-10-16 09:30"
-      }
-    ]
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财组合高手操作",
     "expert_id": "262700200000634972",
     "expert_name": "ff888888",
     "owner": "ff888888",
@@ -9905,33 +9797,6 @@
         "weight_before": 0.0,
         "weight_after": 49.83,
         "trade_time": "2026-10-16 10:01"
-      }
-    ]
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财组合高手操作",
-    "expert_id": "262630100000434043",
-    "expert_name": "hshzwh内蒙",
-    "owner": "hshzwh内蒙",
-    "rank_label": "当日活跃组合",
-    "market_type": "sim",
-    "return_rate": 25.76,
-    "day_return_rate": 10.75,
-    "followers": 0,
-    "buy_count": 1,
-    "stocks": [
-      {
-        "stock_code": "601811",
-        "stock_name": "新华文轩",
-        "action": "买入",
-        "price": 26.17,
-        "volume": null,
-        "amount": null,
-        "weight_before": 0.0,
-        "weight_after": 99.3,
-        "trade_time": "2026-10-16 09:30"
       }
     ]
   },
@@ -9993,6 +9858,33 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
+    "expert_id": "262710100000027048",
+    "expert_name": "模拟组合7127048",
+    "owner": "模拟组合7127048",
+    "rank_label": "当日活跃组合",
+    "market_type": "sim",
+    "return_rate": 25.66,
+    "day_return_rate": 4.23,
+    "followers": 0,
+    "buy_count": 1,
+    "stocks": [
+      {
+        "stock_code": "688505",
+        "stock_name": "复旦张江",
+        "action": "买入",
+        "price": 7.87,
+        "volume": null,
+        "amount": null,
+        "weight_before": 0.0,
+        "weight_after": 19.66,
+        "trade_time": "2026-10-16 09:35"
+      }
+    ]
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
     "expert_id": "262374100000040215",
     "expert_name": "嘤嘤嘤嘤嘤嘤的",
     "owner": "嘤嘤嘤嘤嘤嘤的",
@@ -10020,13 +9912,13 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
-    "expert_id": "262700400000033896",
-    "expert_name": "打板学习09",
-    "owner": "打板学习09",
+    "expert_id": "262530300000134595",
+    "expert_name": "张杰军222",
+    "owner": "张杰军222",
     "rank_label": "当日活跃组合",
     "market_type": "sim",
-    "return_rate": 24.93,
-    "day_return_rate": -2.81,
+    "return_rate": 25.09,
+    "day_return_rate": -1.6,
     "followers": 0,
     "buy_count": 1,
     "stocks": [
@@ -10034,12 +9926,12 @@
         "stock_code": "002343",
         "stock_name": "慈文传媒",
         "action": "买入",
-        "price": 9.23,
+        "price": 9.63,
         "volume": null,
         "amount": null,
-        "weight_before": 99.33,
-        "weight_after": 99.92,
-        "trade_time": "2026-10-16 09:35"
+        "weight_before": 0.0,
+        "weight_after": 49.79,
+        "trade_time": "2026-10-16 09:30"
       }
     ]
   },
@@ -10067,6 +9959,33 @@
         "weight_before": 0.0,
         "weight_after": 99.11,
         "trade_time": "2026-10-16 09:39"
+      }
+    ]
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
+    "expert_id": "262844300000062689",
+    "expert_name": "KKBB3456",
+    "owner": "KKBB3456",
+    "rank_label": "当日活跃组合",
+    "market_type": "sim",
+    "return_rate": 24.68,
+    "day_return_rate": 10.67,
+    "followers": 0,
+    "buy_count": 1,
+    "stocks": [
+      {
+        "stock_code": "300006",
+        "stock_name": "莱美药业",
+        "action": "买入",
+        "price": 8.7,
+        "volume": null,
+        "amount": null,
+        "weight_before": 0.0,
+        "weight_after": 99.19,
+        "trade_time": "2026-10-16 09:31"
       }
     ]
   },
@@ -10148,33 +10067,6 @@
         "weight_before": 0.0,
         "weight_after": 98.81,
         "trade_time": "2026-10-16 10:12"
-      }
-    ]
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财组合高手操作",
-    "expert_id": "262444300000041279",
-    "expert_name": "吉祥三宝走中路",
-    "owner": "吉祥三宝走中路",
-    "rank_label": "当日活跃组合",
-    "market_type": "sim",
-    "return_rate": 24.17,
-    "day_return_rate": -0.75,
-    "followers": 0,
-    "buy_count": 1,
-    "stocks": [
-      {
-        "stock_code": "000993",
-        "stock_name": "闽东电力",
-        "action": "买入",
-        "price": 18.75,
-        "volume": null,
-        "amount": null,
-        "weight_before": 0.0,
-        "weight_after": 24.88,
-        "trade_time": "2026-10-16 09:32"
       }
     ]
   },
@@ -10290,33 +10182,6 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
-    "expert_id": "262364100000041173",
-    "expert_name": "二六八二五",
-    "owner": "二六八二五",
-    "rank_label": "当日活跃组合",
-    "market_type": "sim",
-    "return_rate": 23.61,
-    "day_return_rate": 15.8,
-    "followers": 0,
-    "buy_count": 1,
-    "stocks": [
-      {
-        "stock_code": "000530",
-        "stock_name": "冰山冷热",
-        "action": "买入",
-        "price": 6.7,
-        "volume": null,
-        "amount": null,
-        "weight_before": 0.0,
-        "weight_after": 96.91,
-        "trade_time": "2026-10-16 09:30"
-      }
-    ]
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财组合高手操作",
     "expert_id": "260610100000050041",
     "expert_name": "模拟组合6150041",
     "owner": "模拟组合6150041",
@@ -10398,33 +10263,6 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
-    "expert_id": "262090400000138769",
-    "expert_name": "马斯克76",
-    "owner": "马斯克76",
-    "rank_label": "当日活跃组合",
-    "market_type": "sim",
-    "return_rate": 23.44,
-    "day_return_rate": -1.44,
-    "followers": 0,
-    "buy_count": 1,
-    "stocks": [
-      {
-        "stock_code": "301282",
-        "stock_name": "金禄电子",
-        "action": "买入",
-        "price": 46.54,
-        "volume": null,
-        "amount": null,
-        "weight_before": 80.73,
-        "weight_after": 99.92,
-        "trade_time": "2026-10-16 09:34"
-      }
-    ]
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财组合高手操作",
     "expert_id": "261520200000069766",
     "expert_name": "模拟组合5269766",
     "owner": "模拟组合5269766",
@@ -10452,60 +10290,6 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
-    "expert_id": "262804200000085298",
-    "expert_name": "草原狼哥",
-    "owner": "草原狼哥",
-    "rank_label": "当日活跃组合",
-    "market_type": "sim",
-    "return_rate": 22.96,
-    "day_return_rate": -6.9,
-    "followers": 0,
-    "buy_count": 1,
-    "stocks": [
-      {
-        "stock_code": "002815",
-        "stock_name": "崇达技术",
-        "action": "买入",
-        "price": 24.67,
-        "volume": null,
-        "amount": null,
-        "weight_before": 0.0,
-        "weight_after": 99.29,
-        "trade_time": "2026-10-16 09:33"
-      }
-    ]
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财组合高手操作",
-    "expert_id": "262630100000334185",
-    "expert_name": "又到了这天",
-    "owner": "又到了这天",
-    "rank_label": "当日活跃组合",
-    "market_type": "sim",
-    "return_rate": 22.77,
-    "day_return_rate": 7.68,
-    "followers": 0,
-    "buy_count": 1,
-    "stocks": [
-      {
-        "stock_code": "601811",
-        "stock_name": "新华文轩",
-        "action": "买入",
-        "price": 26.1,
-        "volume": null,
-        "amount": null,
-        "weight_before": 0.0,
-        "weight_after": 99.68,
-        "trade_time": "2026-10-16 09:25"
-      }
-    ]
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财组合高手操作",
     "expert_id": "252100100000002794",
     "expert_name": "日线低吸系列3",
     "owner": "日线低吸系列3",
@@ -10526,33 +10310,6 @@
         "weight_before": 0.0,
         "weight_after": 99.95,
         "trade_time": "2026-10-16 14:10"
-      }
-    ]
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财组合高手操作",
-    "expert_id": "262870100000033700",
-    "expert_name": "九月六日十月十五",
-    "owner": "九月六日十月十五",
-    "rank_label": "当日活跃组合",
-    "market_type": "sim",
-    "return_rate": 22.57,
-    "day_return_rate": 22.7,
-    "followers": 0,
-    "buy_count": 1,
-    "stocks": [
-      {
-        "stock_code": "000530",
-        "stock_name": "冰山冷热",
-        "action": "买入",
-        "price": 6.7,
-        "volume": null,
-        "amount": null,
-        "weight_before": 0.0,
-        "weight_after": 99.74,
-        "trade_time": "2026-10-16 09:30"
       }
     ]
   },
@@ -10641,6 +10398,33 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
+    "expert_id": "262700400000147171",
+    "expert_name": "模拟组合7047171",
+    "owner": "模拟组合7047171",
+    "rank_label": "当日活跃组合",
+    "market_type": "sim",
+    "return_rate": 22.03,
+    "day_return_rate": -3.3,
+    "followers": 0,
+    "buy_count": 1,
+    "stocks": [
+      {
+        "stock_code": "002343",
+        "stock_name": "慈文传媒",
+        "action": "买入",
+        "price": 9.77,
+        "volume": null,
+        "amount": null,
+        "weight_before": 0.0,
+        "weight_after": 99.69,
+        "trade_time": "2026-10-16 09:30"
+      }
+    ]
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
     "expert_id": "262854100000041014",
     "expert_name": "模拟组合8541014",
     "owner": "模拟组合8541014",
@@ -10661,60 +10445,6 @@
         "weight_before": 50.21,
         "weight_after": 99.9,
         "trade_time": "2026-10-16 10:54"
-      }
-    ]
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财组合高手操作",
-    "expert_id": "262720300000034920",
-    "expert_name": "qwert123789",
-    "owner": "qwert123789",
-    "rank_label": "当日活跃组合",
-    "market_type": "sim",
-    "return_rate": 21.93,
-    "day_return_rate": 9.52,
-    "followers": 0,
-    "buy_count": 1,
-    "stocks": [
-      {
-        "stock_code": "601811",
-        "stock_name": "新华文轩",
-        "action": "买入",
-        "price": 25.66,
-        "volume": null,
-        "amount": null,
-        "weight_before": 0.0,
-        "weight_after": 99.68,
-        "trade_time": "2026-10-16 09:32"
-      }
-    ]
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财组合高手操作",
-    "expert_id": "253610100000084250",
-    "expert_name": "模拟组合6184250",
-    "owner": "模拟组合6184250",
-    "rank_label": "当日活跃组合",
-    "market_type": "sim",
-    "return_rate": 21.82,
-    "day_return_rate": 0.17,
-    "followers": 0,
-    "buy_count": 1,
-    "stocks": [
-      {
-        "stock_code": "600241",
-        "stock_name": "时代万恒",
-        "action": "买入",
-        "price": 12.97,
-        "volume": null,
-        "amount": null,
-        "weight_before": 0.0,
-        "weight_after": 2.68,
-        "trade_time": "2026-10-16 09:31"
       }
     ]
   },
@@ -10877,6 +10607,33 @@
         "weight_before": 51.53,
         "weight_after": 99.65,
         "trade_time": "2026-10-16 09:56"
+      }
+    ]
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
+    "expert_id": "262444300000041279",
+    "expert_name": "吉祥三宝走中路",
+    "owner": "吉祥三宝走中路",
+    "rank_label": "当日活跃组合",
+    "market_type": "sim",
+    "return_rate": 21.15,
+    "day_return_rate": -0.75,
+    "followers": 0,
+    "buy_count": 1,
+    "stocks": [
+      {
+        "stock_code": "000993",
+        "stock_name": "闽东电力",
+        "action": "买入",
+        "price": 18.75,
+        "volume": null,
+        "amount": null,
+        "weight_before": 0.0,
+        "weight_after": 24.88,
+        "trade_time": "2026-10-16 09:32"
       }
     ]
   },
@@ -11073,6 +10830,33 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
+    "expert_id": "253610100000084250",
+    "expert_name": "模拟组合6184250",
+    "owner": "模拟组合6184250",
+    "rank_label": "当日活跃组合",
+    "market_type": "sim",
+    "return_rate": 20.75,
+    "day_return_rate": 0.17,
+    "followers": 0,
+    "buy_count": 1,
+    "stocks": [
+      {
+        "stock_code": "600241",
+        "stock_name": "时代万恒",
+        "action": "买入",
+        "price": 12.97,
+        "volume": null,
+        "amount": null,
+        "weight_before": 0.0,
+        "weight_after": 2.68,
+        "trade_time": "2026-10-16 09:31"
+      }
+    ]
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
     "expert_id": "242890400000055079",
     "expert_name": "模拟组合8955079",
     "owner": "模拟组合8955079",
@@ -11093,6 +10877,33 @@
         "weight_before": 0.0,
         "weight_after": 0.42,
         "trade_time": "2026-10-16 10:26"
+      }
+    ]
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
+    "expert_id": "262804200000085298",
+    "expert_name": "草原狼哥",
+    "owner": "草原狼哥",
+    "rank_label": "当日活跃组合",
+    "market_type": "sim",
+    "return_rate": 20.52,
+    "day_return_rate": -6.9,
+    "followers": 0,
+    "buy_count": 1,
+    "stocks": [
+      {
+        "stock_code": "002815",
+        "stock_name": "崇达技术",
+        "action": "买入",
+        "price": 24.67,
+        "volume": null,
+        "amount": null,
+        "weight_before": 0.0,
+        "weight_after": 99.29,
+        "trade_time": "2026-10-16 09:33"
       }
     ]
   },
@@ -11235,13 +11046,13 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
-    "expert_id": "262810200000134044",
-    "expert_name": "模拟组合8134044",
-    "owner": "模拟组合8134044",
+    "expert_id": "262704400000147298",
+    "expert_name": "模拟组合7047298",
+    "owner": "模拟组合7047298",
     "rank_label": "当日活跃组合",
     "market_type": "sim",
-    "return_rate": 19.77,
-    "day_return_rate": 0.82,
+    "return_rate": 19.6,
+    "day_return_rate": -2.04,
     "followers": 0,
     "buy_count": 1,
     "stocks": [
@@ -11249,12 +11060,12 @@
         "stock_code": "002343",
         "stock_name": "慈文传媒",
         "action": "买入",
-        "price": 9.29,
+        "price": 9.77,
         "volume": null,
         "amount": null,
         "weight_before": 0.0,
-        "weight_after": 0.08,
-        "trade_time": "2026-10-16 09:34"
+        "weight_after": 99.68,
+        "trade_time": "2026-10-16 09:30"
       }
     ]
   },
@@ -11316,26 +11127,80 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
-    "expert_id": "262850100000734334",
-    "expert_name": "实盘装糖模拟称王",
-    "owner": "实盘装糖模拟称王",
+    "expert_id": "262090400000138769",
+    "expert_name": "马斯克76",
+    "owner": "马斯克76",
     "rank_label": "当日活跃组合",
     "market_type": "sim",
-    "return_rate": 19.57,
-    "day_return_rate": 1.21,
+    "return_rate": 19.51,
+    "day_return_rate": -1.44,
     "followers": 0,
     "buy_count": 1,
     "stocks": [
       {
-        "stock_code": "605058",
-        "stock_name": "澳弘电子",
+        "stock_code": "301282",
+        "stock_name": "金禄电子",
         "action": "买入",
-        "price": 65.47,
+        "price": 46.54,
+        "volume": null,
+        "amount": null,
+        "weight_before": 80.73,
+        "weight_after": 99.92,
+        "trade_time": "2026-10-16 09:34"
+      }
+    ]
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
+    "expert_id": "262364100000041173",
+    "expert_name": "二六八二五",
+    "owner": "二六八二五",
+    "rank_label": "当日活跃组合",
+    "market_type": "sim",
+    "return_rate": 19.31,
+    "day_return_rate": 15.8,
+    "followers": 0,
+    "buy_count": 1,
+    "stocks": [
+      {
+        "stock_code": "000530",
+        "stock_name": "冰山冷热",
+        "action": "买入",
+        "price": 6.7,
         "volume": null,
         "amount": null,
         "weight_before": 0.0,
-        "weight_after": 99.1,
-        "trade_time": "2026-10-16 09:34"
+        "weight_after": 96.91,
+        "trade_time": "2026-10-16 09:30"
+      }
+    ]
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
+    "expert_id": "262700400000033896",
+    "expert_name": "打板学习09",
+    "owner": "打板学习09",
+    "rank_label": "当日活跃组合",
+    "market_type": "sim",
+    "return_rate": 19.18,
+    "day_return_rate": -2.81,
+    "followers": 0,
+    "buy_count": 1,
+    "stocks": [
+      {
+        "stock_code": "002343",
+        "stock_name": "慈文传媒",
+        "action": "买入",
+        "price": 9.23,
+        "volume": null,
+        "amount": null,
+        "weight_before": 99.33,
+        "weight_after": 99.92,
+        "trade_time": "2026-10-16 09:35"
       }
     ]
   },
@@ -11451,26 +11316,26 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
-    "expert_id": "260934400000008362",
-    "expert_name": "模拟组合9308362",
-    "owner": "模拟组合9308362",
+    "expert_id": "262850100000734334",
+    "expert_name": "实盘装糖模拟称王",
+    "owner": "实盘装糖模拟称王",
     "rank_label": "当日活跃组合",
     "market_type": "sim",
-    "return_rate": 19.03,
-    "day_return_rate": 3.28,
+    "return_rate": 19.01,
+    "day_return_rate": 1.21,
     "followers": 0,
     "buy_count": 1,
     "stocks": [
       {
-        "stock_code": "002343",
-        "stock_name": "慈文传媒",
+        "stock_code": "605058",
+        "stock_name": "澳弘电子",
         "action": "买入",
-        "price": 9.16,
+        "price": 65.47,
         "volume": null,
         "amount": null,
         "weight_before": 0.0,
-        "weight_after": 99.14,
-        "trade_time": "2026-10-16 09:35"
+        "weight_after": 99.1,
+        "trade_time": "2026-10-16 09:34"
       }
     ]
   },
@@ -11498,6 +11363,33 @@
         "weight_before": 0.0,
         "weight_after": 0.42,
         "trade_time": "2026-10-16 09:52"
+      }
+    ]
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
+    "expert_id": "262810200000134044",
+    "expert_name": "模拟组合8134044",
+    "owner": "模拟组合8134044",
+    "rank_label": "当日活跃组合",
+    "market_type": "sim",
+    "return_rate": 18.98,
+    "day_return_rate": 0.82,
+    "followers": 0,
+    "buy_count": 1,
+    "stocks": [
+      {
+        "stock_code": "002343",
+        "stock_name": "慈文传媒",
+        "action": "买入",
+        "price": 9.29,
+        "volume": null,
+        "amount": null,
+        "weight_before": 0.0,
+        "weight_after": 0.08,
+        "trade_time": "2026-10-16 09:34"
       }
     ]
   },
@@ -11667,33 +11559,6 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
-    "expert_id": "251314100000040800",
-    "expert_name": "模拟组合3140800",
-    "owner": "模拟组合3140800",
-    "rank_label": "当日活跃组合",
-    "market_type": "sim",
-    "return_rate": 18.52,
-    "day_return_rate": 5.73,
-    "followers": 0,
-    "buy_count": 1,
-    "stocks": [
-      {
-        "stock_code": "600241",
-        "stock_name": "时代万恒",
-        "action": "买入",
-        "price": 13.25,
-        "volume": null,
-        "amount": null,
-        "weight_before": 0.0,
-        "weight_after": 99.03,
-        "trade_time": "2026-10-16 09:32"
-      }
-    ]
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财组合高手操作",
     "expert_id": "262510100000635219",
     "expert_name": "模拟组合5135219",
     "owner": "模拟组合5135219",
@@ -11741,60 +11606,6 @@
         "weight_before": 0.0,
         "weight_after": 49.12,
         "trade_time": "2026-10-16 09:41"
-      }
-    ]
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财组合高手操作",
-    "expert_id": "262800300000037399",
-    "expert_name": "模拟组合8037399",
-    "owner": "模拟组合8037399",
-    "rank_label": "当日活跃组合",
-    "market_type": "sim",
-    "return_rate": 18.29,
-    "day_return_rate": 1.3,
-    "followers": 0,
-    "buy_count": 1,
-    "stocks": [
-      {
-        "stock_code": "000993",
-        "stock_name": "闽东电力",
-        "action": "买入",
-        "price": 18.66,
-        "volume": null,
-        "amount": null,
-        "weight_before": 0.0,
-        "weight_after": 97.0,
-        "trade_time": "2026-10-16 09:33"
-      }
-    ]
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财组合高手操作",
-    "expert_id": "262840300000437104",
-    "expert_name": "sonqp",
-    "owner": "sonqp",
-    "rank_label": "当日活跃组合",
-    "market_type": "sim",
-    "return_rate": 18.28,
-    "day_return_rate": -7.5,
-    "followers": 0,
-    "buy_count": 1,
-    "stocks": [
-      {
-        "stock_code": "003006",
-        "stock_name": "百亚股份",
-        "action": "买入",
-        "price": 23.99,
-        "volume": null,
-        "amount": null,
-        "weight_before": 0.0,
-        "weight_after": 99.59,
-        "trade_time": "2026-10-16 09:35"
       }
     ]
   },
@@ -12045,6 +11856,33 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
+    "expert_id": "262840300000437104",
+    "expert_name": "sonqp",
+    "owner": "sonqp",
+    "rank_label": "当日活跃组合",
+    "market_type": "sim",
+    "return_rate": 16.72,
+    "day_return_rate": -7.5,
+    "followers": 0,
+    "buy_count": 1,
+    "stocks": [
+      {
+        "stock_code": "003006",
+        "stock_name": "百亚股份",
+        "action": "买入",
+        "price": 23.99,
+        "volume": null,
+        "amount": null,
+        "weight_before": 0.0,
+        "weight_after": 99.59,
+        "trade_time": "2026-10-16 09:35"
+      }
+    ]
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
     "expert_id": "241720200000047807",
     "expert_name": "长888888",
     "owner": "长888888",
@@ -12153,33 +11991,6 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
-    "expert_id": "251630100000008977",
-    "expert_name": "模拟组合6308977",
-    "owner": "模拟组合6308977",
-    "rank_label": "当日活跃组合",
-    "market_type": "sim",
-    "return_rate": 16.44,
-    "day_return_rate": 6.85,
-    "followers": 0,
-    "buy_count": 1,
-    "stocks": [
-      {
-        "stock_code": "300300",
-        "stock_name": "海峡创新",
-        "action": "买入",
-        "price": 10.68,
-        "volume": null,
-        "amount": null,
-        "weight_before": 0.0,
-        "weight_after": 99.09,
-        "trade_time": "2026-10-16 09:30"
-      }
-    ]
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财组合高手操作",
     "expert_id": "262870100000234320",
     "expert_name": "模拟组合8734320",
     "owner": "模拟组合8734320",
@@ -12281,33 +12092,6 @@
         "weight_before": 0.0,
         "weight_after": 36.71,
         "trade_time": "2026-10-16 09:48"
-      }
-    ]
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财组合高手操作",
-    "expert_id": "262810300000034018",
-    "expert_name": "今年想那些",
-    "owner": "今年想那些",
-    "rank_label": "当日活跃组合",
-    "market_type": "sim",
-    "return_rate": 15.91,
-    "day_return_rate": 5.67,
-    "followers": 0,
-    "buy_count": 1,
-    "stocks": [
-      {
-        "stock_code": "300111",
-        "stock_name": "向日葵",
-        "action": "买入",
-        "price": 3.81,
-        "volume": null,
-        "amount": null,
-        "weight_before": 0.0,
-        "weight_after": 100.0,
-        "trade_time": "2026-10-16 09:34"
       }
     ]
   },
@@ -12450,6 +12234,33 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
+    "expert_id": "262860300000133849",
+    "expert_name": "A5分钟上8a",
+    "owner": "A5分钟上8a",
+    "rank_label": "当日活跃组合",
+    "market_type": "sim",
+    "return_rate": 15.62,
+    "day_return_rate": 0.74,
+    "followers": 0,
+    "buy_count": 1,
+    "stocks": [
+      {
+        "stock_code": "605058",
+        "stock_name": "澳弘电子",
+        "action": "买入",
+        "price": 65.28,
+        "volume": null,
+        "amount": null,
+        "weight_before": 0.0,
+        "weight_after": 99.61,
+        "trade_time": "2026-10-16 09:34"
+      }
+    ]
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
     "expert_id": "262300200000240786",
     "expert_name": "翻倍投入资金",
     "owner": "翻倍投入资金",
@@ -12470,33 +12281,6 @@
         "weight_before": 0.0,
         "weight_after": 35.11,
         "trade_time": "2026-10-16 11:20"
-      }
-    ]
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财组合高手操作",
-    "expert_id": "262800300000153536",
-    "expert_name": "模拟组合8053536",
-    "owner": "模拟组合8053536",
-    "rank_label": "当日活跃组合",
-    "market_type": "sim",
-    "return_rate": 15.38,
-    "day_return_rate": 10.54,
-    "followers": 0,
-    "buy_count": 1,
-    "stocks": [
-      {
-        "stock_code": "300006",
-        "stock_name": "莱美药业",
-        "action": "买入",
-        "price": 8.81,
-        "volume": null,
-        "amount": null,
-        "weight_before": 0.0,
-        "weight_after": 99.87,
-        "trade_time": "2026-10-16 09:32"
       }
     ]
   },
@@ -12666,6 +12450,60 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
+    "expert_id": "262884100000134059",
+    "expert_name": "就是不是",
+    "owner": "就是不是",
+    "rank_label": "当日活跃组合",
+    "market_type": "sim",
+    "return_rate": 14.87,
+    "day_return_rate": 14.27,
+    "followers": 0,
+    "buy_count": 1,
+    "stocks": [
+      {
+        "stock_code": "000530",
+        "stock_name": "冰山冷热",
+        "action": "买入",
+        "price": 6.66,
+        "volume": null,
+        "amount": null,
+        "weight_before": 0.0,
+        "weight_after": 99.8,
+        "trade_time": "2026-10-16 09:30"
+      }
+    ]
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
+    "expert_id": "262884200000333992",
+    "expert_name": "首板跟随模式",
+    "owner": "首板跟随模式",
+    "rank_label": "当日活跃组合",
+    "market_type": "sim",
+    "return_rate": 14.85,
+    "day_return_rate": 14.25,
+    "followers": 0,
+    "buy_count": 1,
+    "stocks": [
+      {
+        "stock_code": "000530",
+        "stock_name": "冰山冷热",
+        "action": "买入",
+        "price": 6.66,
+        "volume": null,
+        "amount": null,
+        "weight_before": 0.0,
+        "weight_after": 99.67,
+        "trade_time": "2026-10-16 09:30"
+      }
+    ]
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
     "expert_id": "262870100000334276",
     "expert_name": "星帅",
     "owner": "星帅",
@@ -12767,33 +12605,6 @@
         "weight_before": 0.0,
         "weight_after": 99.7,
         "trade_time": "2026-10-16 10:24"
-      }
-    ]
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财组合高手操作",
-    "expert_id": "262880300000134509",
-    "expert_name": "hdbskis",
-    "owner": "hdbskis",
-    "rank_label": "当日活跃组合",
-    "market_type": "sim",
-    "return_rate": 14.73,
-    "day_return_rate": 14.73,
-    "followers": 0,
-    "buy_count": 1,
-    "stocks": [
-      {
-        "stock_code": "301010",
-        "stock_name": "晶雪节能",
-        "action": "买入",
-        "price": 22.69,
-        "volume": null,
-        "amount": null,
-        "weight_before": 0.0,
-        "weight_after": 99.94,
-        "trade_time": "2026-10-16 09:36"
       }
     ]
   },
@@ -12909,6 +12720,33 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
+    "expert_id": "262870300000075522",
+    "expert_name": "模拟组合8775522",
+    "owner": "模拟组合8775522",
+    "rank_label": "当日活跃组合",
+    "market_type": "sim",
+    "return_rate": 14.46,
+    "day_return_rate": 13.88,
+    "followers": 0,
+    "buy_count": 1,
+    "stocks": [
+      {
+        "stock_code": "000530",
+        "stock_name": "冰山冷热",
+        "action": "买入",
+        "price": 6.65,
+        "volume": null,
+        "amount": null,
+        "weight_before": 0.0,
+        "weight_after": 95.92,
+        "trade_time": "2026-10-16 09:25"
+      }
+    ]
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
     "expert_id": "262534200000040327",
     "expert_name": "起势迅猛",
     "owner": "起势迅猛",
@@ -12929,33 +12767,6 @@
         "weight_before": 0.0,
         "weight_after": 99.87,
         "trade_time": "2026-10-16 10:12"
-      }
-    ]
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财组合高手操作",
-    "expert_id": "253300300000054652",
-    "expert_name": "lknn",
-    "owner": "lknn",
-    "rank_label": "当日活跃组合",
-    "market_type": "sim",
-    "return_rate": 14.41,
-    "day_return_rate": 8.54,
-    "followers": 0,
-    "buy_count": 1,
-    "stocks": [
-      {
-        "stock_code": "603668",
-        "stock_name": "天马科技",
-        "action": "买入",
-        "price": 6.86,
-        "volume": null,
-        "amount": null,
-        "weight_before": 0.0,
-        "weight_after": 83.8,
-        "trade_time": "2026-10-16 09:25"
       }
     ]
   },
@@ -13017,60 +12828,6 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
-    "expert_id": "262884100000134059",
-    "expert_name": "就是不是",
-    "owner": "就是不是",
-    "rank_label": "当日活跃组合",
-    "market_type": "sim",
-    "return_rate": 14.27,
-    "day_return_rate": 14.27,
-    "followers": 0,
-    "buy_count": 1,
-    "stocks": [
-      {
-        "stock_code": "000530",
-        "stock_name": "冰山冷热",
-        "action": "买入",
-        "price": 6.66,
-        "volume": null,
-        "amount": null,
-        "weight_before": 0.0,
-        "weight_after": 99.8,
-        "trade_time": "2026-10-16 09:30"
-      }
-    ]
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财组合高手操作",
-    "expert_id": "262884200000333992",
-    "expert_name": "首板跟随模式",
-    "owner": "首板跟随模式",
-    "rank_label": "当日活跃组合",
-    "market_type": "sim",
-    "return_rate": 14.25,
-    "day_return_rate": 14.25,
-    "followers": 0,
-    "buy_count": 1,
-    "stocks": [
-      {
-        "stock_code": "000530",
-        "stock_name": "冰山冷热",
-        "action": "买入",
-        "price": 6.66,
-        "volume": null,
-        "amount": null,
-        "weight_before": 0.0,
-        "weight_after": 99.67,
-        "trade_time": "2026-10-16 09:30"
-      }
-    ]
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财组合高手操作",
     "expert_id": "262860400000337384",
     "expert_name": "小小霞100",
     "owner": "小小霞100",
@@ -13091,33 +12848,6 @@
         "weight_before": 0.0,
         "weight_after": 99.76,
         "trade_time": "2026-10-16 13:48"
-      }
-    ]
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财组合高手操作",
-    "expert_id": "262840200000237984",
-    "expert_name": "模拟组合8437984",
-    "owner": "模拟组合8437984",
-    "rank_label": "当日活跃组合",
-    "market_type": "sim",
-    "return_rate": 14.21,
-    "day_return_rate": 5.59,
-    "followers": 0,
-    "buy_count": 1,
-    "stocks": [
-      {
-        "stock_code": "601811",
-        "stock_name": "新华文轩",
-        "action": "买入",
-        "price": 26.5,
-        "volume": null,
-        "amount": null,
-        "weight_before": 0.0,
-        "weight_after": 99.77,
-        "trade_time": "2026-10-16 09:33"
       }
     ]
   },
@@ -13226,33 +12956,6 @@
         "weight_before": 16.89,
         "weight_after": 25.64,
         "trade_time": "2026-10-16 13:05"
-      }
-    ]
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财组合高手操作",
-    "expert_id": "262810300000136484",
-    "expert_name": "我的超超",
-    "owner": "我的超超",
-    "rank_label": "当日活跃组合",
-    "market_type": "sim",
-    "return_rate": 14.06,
-    "day_return_rate": -5.27,
-    "followers": 0,
-    "buy_count": 1,
-    "stocks": [
-      {
-        "stock_code": "000993",
-        "stock_name": "闽东电力",
-        "action": "买入",
-        "price": 18.98,
-        "volume": null,
-        "amount": null,
-        "weight_before": 0.0,
-        "weight_after": 49.62,
-        "trade_time": "2026-10-16 09:35"
       }
     ]
   },
@@ -13415,33 +13118,6 @@
         "weight_before": 0.0,
         "weight_after": 24.86,
         "trade_time": "2026-10-16 10:37"
-      }
-    ]
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财组合高手操作",
-    "expert_id": "262870300000075522",
-    "expert_name": "模拟组合8775522",
-    "owner": "模拟组合8775522",
-    "rank_label": "当日活跃组合",
-    "market_type": "sim",
-    "return_rate": 13.88,
-    "day_return_rate": 13.88,
-    "followers": 0,
-    "buy_count": 1,
-    "stocks": [
-      {
-        "stock_code": "000530",
-        "stock_name": "冰山冷热",
-        "action": "买入",
-        "price": 6.65,
-        "volume": null,
-        "amount": null,
-        "weight_before": 0.0,
-        "weight_after": 95.92,
-        "trade_time": "2026-10-16 09:25"
       }
     ]
   },
@@ -13719,6 +13395,87 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
+    "expert_id": "262870100000033700",
+    "expert_name": "九月六日十月十五",
+    "owner": "九月六日十月十五",
+    "rank_label": "当日活跃组合",
+    "market_type": "sim",
+    "return_rate": 13.32,
+    "day_return_rate": 22.7,
+    "followers": 0,
+    "buy_count": 1,
+    "stocks": [
+      {
+        "stock_code": "000530",
+        "stock_name": "冰山冷热",
+        "action": "买入",
+        "price": 6.7,
+        "volume": null,
+        "amount": null,
+        "weight_before": 0.0,
+        "weight_after": 99.74,
+        "trade_time": "2026-10-16 09:30"
+      }
+    ]
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
+    "expert_id": "262630100000434043",
+    "expert_name": "hshzwh内蒙",
+    "owner": "hshzwh内蒙",
+    "rank_label": "当日活跃组合",
+    "market_type": "sim",
+    "return_rate": 13.29,
+    "day_return_rate": 10.75,
+    "followers": 0,
+    "buy_count": 1,
+    "stocks": [
+      {
+        "stock_code": "601811",
+        "stock_name": "新华文轩",
+        "action": "买入",
+        "price": 26.17,
+        "volume": null,
+        "amount": null,
+        "weight_before": 0.0,
+        "weight_after": 99.3,
+        "trade_time": "2026-10-16 09:30"
+      }
+    ]
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
+    "expert_id": "262860400000064968",
+    "expert_name": "模拟组合8664968",
+    "owner": "模拟组合8664968",
+    "rank_label": "当日活跃组合",
+    "market_type": "sim",
+    "return_rate": 13.14,
+    "day_return_rate": 12.62,
+    "followers": 0,
+    "buy_count": 1,
+    "stocks": [
+      {
+        "stock_code": "000530",
+        "stock_name": "冰山冷热",
+        "action": "买入",
+        "price": 6.65,
+        "volume": null,
+        "amount": null,
+        "weight_before": 0.0,
+        "weight_after": 87.19,
+        "trade_time": "2026-10-16 09:25"
+      }
+    ]
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
     "expert_id": "262870200000034540",
     "expert_name": "模拟组合8734540",
     "owner": "模拟组合8734540",
@@ -13739,6 +13496,33 @@
         "weight_before": 0.0,
         "weight_after": 99.49,
         "trade_time": "2026-10-16 09:59"
+      }
+    ]
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
+    "expert_id": "251630100000008977",
+    "expert_name": "模拟组合6308977",
+    "owner": "模拟组合6308977",
+    "rank_label": "当日活跃组合",
+    "market_type": "sim",
+    "return_rate": 13.1,
+    "day_return_rate": 6.85,
+    "followers": 0,
+    "buy_count": 1,
+    "stocks": [
+      {
+        "stock_code": "300300",
+        "stock_name": "海峡创新",
+        "action": "买入",
+        "price": 10.68,
+        "volume": null,
+        "amount": null,
+        "weight_before": 0.0,
+        "weight_after": 99.09,
+        "trade_time": "2026-10-16 09:30"
       }
     ]
   },
@@ -13773,33 +13557,6 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
-    "expert_id": "262224200000067822",
-    "expert_name": "模拟组合2267822",
-    "owner": "模拟组合2267822",
-    "rank_label": "当日活跃组合",
-    "market_type": "sim",
-    "return_rate": 13.08,
-    "day_return_rate": 9.34,
-    "followers": 0,
-    "buy_count": 1,
-    "stocks": [
-      {
-        "stock_code": "002531",
-        "stock_name": "天顺风能",
-        "action": "买入",
-        "price": 6.77,
-        "volume": null,
-        "amount": null,
-        "weight_before": 0.0,
-        "weight_after": 99.93,
-        "trade_time": "2026-10-16 09:31"
-      }
-    ]
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财组合高手操作",
     "expert_id": "262684300000081569",
     "expert_name": "模拟组合6881569",
     "owner": "模拟组合6881569",
@@ -13820,33 +13577,6 @@
         "weight_before": 0.0,
         "weight_after": 0.22,
         "trade_time": "2026-10-16 11:02"
-      }
-    ]
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财组合高手操作",
-    "expert_id": "262860300000133849",
-    "expert_name": "A5分钟上8a",
-    "owner": "A5分钟上8a",
-    "rank_label": "当日活跃组合",
-    "market_type": "sim",
-    "return_rate": 13.01,
-    "day_return_rate": 0.74,
-    "followers": 0,
-    "buy_count": 1,
-    "stocks": [
-      {
-        "stock_code": "605058",
-        "stock_name": "澳弘电子",
-        "action": "买入",
-        "price": 65.28,
-        "volume": null,
-        "amount": null,
-        "weight_before": 0.0,
-        "weight_after": 99.61,
-        "trade_time": "2026-10-16 09:34"
       }
     ]
   },
@@ -13962,6 +13692,33 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
+    "expert_id": "262850400000038495",
+    "expert_name": "模拟组合8538495",
+    "owner": "模拟组合8538495",
+    "rank_label": "当日活跃组合",
+    "market_type": "sim",
+    "return_rate": 12.9,
+    "day_return_rate": -0.16,
+    "followers": 0,
+    "buy_count": 1,
+    "stocks": [
+      {
+        "stock_code": "605058",
+        "stock_name": "澳弘电子",
+        "action": "买入",
+        "price": 65.94,
+        "volume": null,
+        "amount": null,
+        "weight_before": 0.0,
+        "weight_after": 99.57,
+        "trade_time": "2026-10-16 09:35"
+      }
+    ]
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
     "expert_id": "230930400000145566",
     "expert_name": "模拟组合9345566",
     "owner": "模拟组合9345566",
@@ -13982,33 +13739,6 @@
         "weight_before": 0.0,
         "weight_after": 99.7,
         "trade_time": "2026-10-16 13:01"
-      }
-    ]
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财组合高手操作",
-    "expert_id": "262874100000075190",
-    "expert_name": "一要进步",
-    "owner": "一要进步",
-    "rank_label": "当日活跃组合",
-    "market_type": "sim",
-    "return_rate": 12.88,
-    "day_return_rate": 12.88,
-    "followers": 0,
-    "buy_count": 1,
-    "stocks": [
-      {
-        "stock_code": "000530",
-        "stock_name": "冰山冷热",
-        "action": "买入",
-        "price": 6.74,
-        "volume": null,
-        "amount": null,
-        "weight_before": 0.0,
-        "weight_after": 99.51,
-        "trade_time": "2026-10-16 09:30"
       }
     ]
   },
@@ -14090,33 +13820,6 @@
         "weight_before": 0.0,
         "weight_after": 72.59,
         "trade_time": "2026-10-16 10:04"
-      }
-    ]
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财组合高手操作",
-    "expert_id": "262860400000064968",
-    "expert_name": "模拟组合8664968",
-    "owner": "模拟组合8664968",
-    "rank_label": "当日活跃组合",
-    "market_type": "sim",
-    "return_rate": 12.62,
-    "day_return_rate": 12.62,
-    "followers": 0,
-    "buy_count": 1,
-    "stocks": [
-      {
-        "stock_code": "000530",
-        "stock_name": "冰山冷热",
-        "action": "买入",
-        "price": 6.65,
-        "volume": null,
-        "amount": null,
-        "weight_before": 0.0,
-        "weight_after": 87.19,
-        "trade_time": "2026-10-16 09:25"
       }
     ]
   },
@@ -14259,6 +13962,33 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
+    "expert_id": "251314100000040800",
+    "expert_name": "模拟组合3140800",
+    "owner": "模拟组合3140800",
+    "rank_label": "当日活跃组合",
+    "market_type": "sim",
+    "return_rate": 12.21,
+    "day_return_rate": 5.73,
+    "followers": 0,
+    "buy_count": 1,
+    "stocks": [
+      {
+        "stock_code": "600241",
+        "stock_name": "时代万恒",
+        "action": "买入",
+        "price": 13.25,
+        "volume": null,
+        "amount": null,
+        "weight_before": 0.0,
+        "weight_after": 99.03,
+        "trade_time": "2026-10-16 09:32"
+      }
+    ]
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
     "expert_id": "240190300000012963",
     "expert_name": "模拟组合1912963",
     "owner": "模拟组合1912963",
@@ -14279,6 +14009,33 @@
         "weight_before": 0.0,
         "weight_after": 99.18,
         "trade_time": "2026-10-16 10:14"
+      }
+    ]
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
+    "expert_id": "260934400000008362",
+    "expert_name": "模拟组合9308362",
+    "owner": "模拟组合9308362",
+    "rank_label": "当日活跃组合",
+    "market_type": "sim",
+    "return_rate": 12.2,
+    "day_return_rate": 3.28,
+    "followers": 0,
+    "buy_count": 1,
+    "stocks": [
+      {
+        "stock_code": "002343",
+        "stock_name": "慈文传媒",
+        "action": "买入",
+        "price": 9.16,
+        "volume": null,
+        "amount": null,
+        "weight_before": 0.0,
+        "weight_after": 99.14,
+        "trade_time": "2026-10-16 09:35"
       }
     ]
   },
@@ -14367,33 +14124,6 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
-    "expert_id": "250074300000061569",
-    "expert_name": "模拟组合0761569",
-    "owner": "模拟组合0761569",
-    "rank_label": "当日活跃组合",
-    "market_type": "sim",
-    "return_rate": 12.02,
-    "day_return_rate": 4.59,
-    "followers": 0,
-    "buy_count": 1,
-    "stocks": [
-      {
-        "stock_code": "601811",
-        "stock_name": "新华文轩",
-        "action": "买入",
-        "price": 26.76,
-        "volume": null,
-        "amount": null,
-        "weight_before": 0.0,
-        "weight_after": 99.19,
-        "trade_time": "2026-10-16 09:36"
-      }
-    ]
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财组合高手操作",
     "expert_id": "262860300000035966",
     "expert_name": "爆赚一年十倍",
     "owner": "爆赚一年十倍",
@@ -14421,6 +14151,33 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
+    "expert_id": "262800300000153536",
+    "expert_name": "模拟组合8053536",
+    "owner": "模拟组合8053536",
+    "rank_label": "当日活跃组合",
+    "market_type": "sim",
+    "return_rate": 11.72,
+    "day_return_rate": 10.54,
+    "followers": 0,
+    "buy_count": 1,
+    "stocks": [
+      {
+        "stock_code": "300006",
+        "stock_name": "莱美药业",
+        "action": "买入",
+        "price": 8.81,
+        "volume": null,
+        "amount": null,
+        "weight_before": 0.0,
+        "weight_after": 99.87,
+        "trade_time": "2026-10-16 09:32"
+      }
+    ]
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
     "expert_id": "262084100000070669",
     "expert_name": "模拟组合0870669",
     "owner": "模拟组合0870669",
@@ -14441,60 +14198,6 @@
         "weight_before": 47.21,
         "weight_after": 59.93,
         "trade_time": "2026-10-16 13:31"
-      }
-    ]
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财组合高手操作",
-    "expert_id": "262850100000080310",
-    "expert_name": "地方吗还",
-    "owner": "地方吗还",
-    "rank_label": "当日活跃组合",
-    "market_type": "sim",
-    "return_rate": 11.68,
-    "day_return_rate": 10.04,
-    "followers": 0,
-    "buy_count": 1,
-    "stocks": [
-      {
-        "stock_code": "601811",
-        "stock_name": "新华文轩",
-        "action": "买入",
-        "price": 25.54,
-        "volume": null,
-        "amount": null,
-        "weight_before": 0.0,
-        "weight_after": 99.75,
-        "trade_time": "2026-10-16 09:31"
-      }
-    ]
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财组合高手操作",
-    "expert_id": "251424200000137430",
-    "expert_name": "白银有色2026",
-    "owner": "白银有色2026",
-    "rank_label": "当日活跃组合",
-    "market_type": "sim",
-    "return_rate": 11.66,
-    "day_return_rate": 15.84,
-    "followers": 0,
-    "buy_count": 1,
-    "stocks": [
-      {
-        "stock_code": "300006",
-        "stock_name": "莱美药业",
-        "action": "买入",
-        "price": 8.69,
-        "volume": null,
-        "amount": null,
-        "weight_before": 65.95,
-        "weight_after": 99.49,
-        "trade_time": "2026-10-16 09:30"
       }
     ]
   },
@@ -14880,26 +14583,26 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
-    "expert_id": "262864400000035833",
-    "expert_name": "模拟组合8635833",
-    "owner": "模拟组合8635833",
+    "expert_id": "262630100000334185",
+    "expert_name": "又到了这天",
+    "owner": "又到了这天",
     "rank_label": "当日活跃组合",
     "market_type": "sim",
-    "return_rate": 10.52,
-    "day_return_rate": -2.26,
+    "return_rate": 10.55,
+    "day_return_rate": 7.68,
     "followers": 0,
     "buy_count": 1,
     "stocks": [
       {
-        "stock_code": "301230",
-        "stock_name": "泓博医药",
+        "stock_code": "601811",
+        "stock_name": "新华文轩",
         "action": "买入",
-        "price": 36.92,
+        "price": 26.1,
         "volume": null,
         "amount": null,
         "weight_before": 0.0,
-        "weight_after": 99.65,
-        "trade_time": "2026-10-16 09:31"
+        "weight_after": 99.68,
+        "trade_time": "2026-10-16 09:25"
       }
     ]
   },
@@ -14907,26 +14610,26 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
-    "expert_id": "262850400000038495",
-    "expert_name": "模拟组合8538495",
-    "owner": "模拟组合8538495",
+    "expert_id": "262810300000034018",
+    "expert_name": "今年想那些",
+    "owner": "今年想那些",
     "rank_label": "当日活跃组合",
     "market_type": "sim",
-    "return_rate": 10.41,
-    "day_return_rate": -0.16,
+    "return_rate": 10.44,
+    "day_return_rate": 5.67,
     "followers": 0,
     "buy_count": 1,
     "stocks": [
       {
-        "stock_code": "605058",
-        "stock_name": "澳弘电子",
+        "stock_code": "300111",
+        "stock_name": "向日葵",
         "action": "买入",
-        "price": 65.94,
+        "price": 3.81,
         "volume": null,
         "amount": null,
         "weight_before": 0.0,
-        "weight_after": 99.57,
-        "trade_time": "2026-10-16 09:35"
+        "weight_after": 100.0,
+        "trade_time": "2026-10-16 09:34"
       }
     ]
   },
@@ -14954,33 +14657,6 @@
         "weight_before": 17.39,
         "weight_after": 28.51,
         "trade_time": "2026-10-16 09:56"
-      }
-    ]
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财组合高手操作",
-    "expert_id": "262850300000934310",
-    "expert_name": "Tyyyhg",
-    "owner": "Tyyyhg",
-    "rank_label": "当日活跃组合",
-    "market_type": "sim",
-    "return_rate": 10.19,
-    "day_return_rate": 10.65,
-    "followers": 0,
-    "buy_count": 1,
-    "stocks": [
-      {
-        "stock_code": "300111",
-        "stock_name": "向日葵",
-        "action": "买入",
-        "price": 3.82,
-        "volume": null,
-        "amount": null,
-        "weight_before": 0.0,
-        "weight_after": 57.2,
-        "trade_time": "2026-10-16 09:34"
       }
     ]
   },
@@ -15177,25 +14853,25 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
-    "expert_id": "260700200000055955",
-    "expert_name": "模拟组合7055955",
-    "owner": "模拟组合7055955",
+    "expert_id": "262224200000067822",
+    "expert_name": "模拟组合2267822",
+    "owner": "模拟组合2267822",
     "rank_label": "当日活跃组合",
     "market_type": "sim",
-    "return_rate": 10.04,
-    "day_return_rate": 10.04,
+    "return_rate": 10.03,
+    "day_return_rate": 9.34,
     "followers": 0,
     "buy_count": 1,
     "stocks": [
       {
-        "stock_code": "601811",
-        "stock_name": "新华文轩",
+        "stock_code": "002531",
+        "stock_name": "天顺风能",
         "action": "买入",
-        "price": 25.54,
+        "price": 6.77,
         "volume": null,
         "amount": null,
         "weight_before": 0.0,
-        "weight_after": 99.71,
+        "weight_after": 99.93,
         "trade_time": "2026-10-16 09:31"
       }
     ]
@@ -15204,134 +14880,26 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
-    "expert_id": "262004800000073600",
-    "expert_name": "回家数一数",
-    "owner": "回家数一数",
+    "expert_id": "253300300000054652",
+    "expert_name": "lknn",
+    "owner": "lknn",
     "rank_label": "当日活跃组合",
     "market_type": "sim",
-    "return_rate": 10.04,
-    "day_return_rate": 10.04,
+    "return_rate": 10.03,
+    "day_return_rate": 8.54,
     "followers": 0,
     "buy_count": 1,
     "stocks": [
       {
-        "stock_code": "601811",
-        "stock_name": "新华文轩",
+        "stock_code": "603668",
+        "stock_name": "天马科技",
         "action": "买入",
-        "price": 25.54,
+        "price": 6.86,
         "volume": null,
         "amount": null,
         "weight_before": 0.0,
-        "weight_after": 99.71,
-        "trade_time": "2026-10-16 09:31"
-      }
-    ]
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财组合高手操作",
-    "expert_id": "262870100000077583",
-    "expert_name": "模拟组合8777583",
-    "owner": "模拟组合8777583",
-    "rank_label": "当日活跃组合",
-    "market_type": "sim",
-    "return_rate": 10.04,
-    "day_return_rate": 10.04,
-    "followers": 0,
-    "buy_count": 1,
-    "stocks": [
-      {
-        "stock_code": "601811",
-        "stock_name": "新华文轩",
-        "action": "买入",
-        "price": 25.54,
-        "volume": null,
-        "amount": null,
-        "weight_before": 99.45,
-        "weight_after": 99.71,
-        "trade_time": "2026-10-16 09:31"
-      }
-    ]
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财组合高手操作",
-    "expert_id": "262874200000073773",
-    "expert_name": "模拟组合8773773",
-    "owner": "模拟组合8773773",
-    "rank_label": "当日活跃组合",
-    "market_type": "sim",
-    "return_rate": 10.04,
-    "day_return_rate": 10.04,
-    "followers": 0,
-    "buy_count": 1,
-    "stocks": [
-      {
-        "stock_code": "601811",
-        "stock_name": "新华文轩",
-        "action": "买入",
-        "price": 25.54,
-        "volume": null,
-        "amount": null,
-        "weight_before": 0.0,
-        "weight_after": 99.71,
-        "trade_time": "2026-10-16 09:31"
-      }
-    ]
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财组合高手操作",
-    "expert_id": "262874200000076839",
-    "expert_name": "模拟组合8776839",
-    "owner": "模拟组合8776839",
-    "rank_label": "当日活跃组合",
-    "market_type": "sim",
-    "return_rate": 10.04,
-    "day_return_rate": 10.04,
-    "followers": 0,
-    "buy_count": 1,
-    "stocks": [
-      {
-        "stock_code": "601811",
-        "stock_name": "新华文轩",
-        "action": "买入",
-        "price": 25.54,
-        "volume": null,
-        "amount": null,
-        "weight_before": 0.0,
-        "weight_after": 99.71,
-        "trade_time": "2026-10-16 09:31"
-      }
-    ]
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财组合高手操作",
-    "expert_id": "262884100000002120",
-    "expert_name": "模拟组合8802120",
-    "owner": "模拟组合8802120",
-    "rank_label": "当日活跃组合",
-    "market_type": "sim",
-    "return_rate": 10.04,
-    "day_return_rate": 10.04,
-    "followers": 0,
-    "buy_count": 1,
-    "stocks": [
-      {
-        "stock_code": "601811",
-        "stock_name": "新华文轩",
-        "action": "买入",
-        "price": 25.54,
-        "volume": null,
-        "amount": null,
-        "weight_before": 0.0,
-        "weight_after": 99.71,
-        "trade_time": "2026-10-16 09:31"
+        "weight_after": 83.8,
+        "trade_time": "2026-10-16 09:25"
       }
     ]
   },
@@ -15413,6 +14981,33 @@
         "weight_before": 0.0,
         "weight_after": 0.29,
         "trade_time": "2026-10-16 13:41"
+      }
+    ]
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
+    "expert_id": "262720300000034920",
+    "expert_name": "qwert123789",
+    "owner": "qwert123789",
+    "rank_label": "当日活跃组合",
+    "market_type": "sim",
+    "return_rate": 9.79,
+    "day_return_rate": 9.52,
+    "followers": 0,
+    "buy_count": 1,
+    "stocks": [
+      {
+        "stock_code": "601811",
+        "stock_name": "新华文轩",
+        "action": "买入",
+        "price": 25.66,
+        "volume": null,
+        "amount": null,
+        "weight_before": 0.0,
+        "weight_after": 99.68,
+        "trade_time": "2026-10-16 09:32"
       }
     ]
   },
@@ -15528,33 +15123,6 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
-    "expert_id": "262884400000009968",
-    "expert_name": "模拟组合8809968",
-    "owner": "模拟组合8809968",
-    "rank_label": "当日活跃组合",
-    "market_type": "sim",
-    "return_rate": 9.46,
-    "day_return_rate": 9.46,
-    "followers": 0,
-    "buy_count": 1,
-    "stocks": [
-      {
-        "stock_code": "601811",
-        "stock_name": "新华文轩",
-        "action": "买入",
-        "price": 25.54,
-        "volume": null,
-        "amount": null,
-        "weight_before": 0.0,
-        "weight_after": 94.44,
-        "trade_time": "2026-10-16 09:31"
-      }
-    ]
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财组合高手操作",
     "expert_id": "262370300000054990",
     "expert_name": "模拟组合3754990",
     "owner": "模拟组合3754990",
@@ -15575,87 +15143,6 @@
         "weight_before": 0.0,
         "weight_after": 92.23,
         "trade_time": "2026-10-16 10:52"
-      }
-    ]
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财组合高手操作",
-    "expert_id": "262850400000134406",
-    "expert_name": "tugtknn124",
-    "owner": "tugtknn124",
-    "rank_label": "当日活跃组合",
-    "market_type": "sim",
-    "return_rate": 9.41,
-    "day_return_rate": 9.41,
-    "followers": 0,
-    "buy_count": 1,
-    "stocks": [
-      {
-        "stock_code": "300006",
-        "stock_name": "莱美药业",
-        "action": "买入",
-        "price": 8.9,
-        "volume": null,
-        "amount": null,
-        "weight_before": 0.0,
-        "weight_after": 99.69,
-        "trade_time": "2026-10-16 09:35"
-      }
-    ]
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财组合高手操作",
-    "expert_id": "262880300000034491",
-    "expert_name": "yy112233",
-    "owner": "yy112233",
-    "rank_label": "当日活跃组合",
-    "market_type": "sim",
-    "return_rate": 9.37,
-    "day_return_rate": 9.37,
-    "followers": 0,
-    "buy_count": 1,
-    "stocks": [
-      {
-        "stock_code": "300006",
-        "stock_name": "莱美药业",
-        "action": "买入",
-        "price": 8.9,
-        "volume": null,
-        "amount": null,
-        "weight_before": 0.0,
-        "weight_after": 99.25,
-        "trade_time": "2026-10-16 09:35"
-      }
-    ]
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财组合高手操作",
-    "expert_id": "262724300000235312",
-    "expert_name": "模拟组合7235312",
-    "owner": "模拟组合7235312",
-    "rank_label": "当日活跃组合",
-    "market_type": "sim",
-    "return_rate": 9.28,
-    "day_return_rate": -0.78,
-    "followers": 0,
-    "buy_count": 1,
-    "stocks": [
-      {
-        "stock_code": "000823",
-        "stock_name": "超声电子",
-        "action": "买入",
-        "price": 25.16,
-        "volume": null,
-        "amount": null,
-        "weight_before": 23.98,
-        "weight_after": 42.9,
-        "trade_time": "2026-10-16 09:31"
       }
     ]
   },
@@ -15690,6 +15177,33 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
+    "expert_id": "262810300000136484",
+    "expert_name": "我的超超",
+    "owner": "我的超超",
+    "rank_label": "当日活跃组合",
+    "market_type": "sim",
+    "return_rate": 8.82,
+    "day_return_rate": -5.27,
+    "followers": 0,
+    "buy_count": 1,
+    "stocks": [
+      {
+        "stock_code": "000993",
+        "stock_name": "闽东电力",
+        "action": "买入",
+        "price": 18.98,
+        "volume": null,
+        "amount": null,
+        "weight_before": 0.0,
+        "weight_after": 49.62,
+        "trade_time": "2026-10-16 09:35"
+      }
+    ]
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
     "expert_id": "262704300000078683",
     "expert_name": "模拟组合7078683",
     "owner": "模拟组合7078683",
@@ -15710,33 +15224,6 @@
         "weight_before": 0.0,
         "weight_after": 24.95,
         "trade_time": "2026-10-16 14:48"
-      }
-    ]
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财组合高手操作",
-    "expert_id": "262870100000085719",
-    "expert_name": "美股异动",
-    "owner": "美股异动",
-    "rank_label": "当日活跃组合",
-    "market_type": "sim",
-    "return_rate": 8.78,
-    "day_return_rate": 8.78,
-    "followers": 0,
-    "buy_count": 1,
-    "stocks": [
-      {
-        "stock_code": "300111",
-        "stock_name": "向日葵",
-        "action": "买入",
-        "price": 3.7,
-        "volume": null,
-        "amount": null,
-        "weight_before": 0.0,
-        "weight_after": 99.7,
-        "trade_time": "2026-10-16 09:25"
       }
     ]
   },
@@ -15960,60 +15447,6 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
-    "expert_id": "261604400000040139",
-    "expert_name": "dhjjh",
-    "owner": "dhjjh",
-    "rank_label": "当日活跃组合",
-    "market_type": "sim",
-    "return_rate": 8.38,
-    "day_return_rate": 7.57,
-    "followers": 0,
-    "buy_count": 1,
-    "stocks": [
-      {
-        "stock_code": "600199",
-        "stock_name": "金种子酒",
-        "action": "买入",
-        "price": 7.54,
-        "volume": null,
-        "amount": null,
-        "weight_before": 0.0,
-        "weight_after": 99.86,
-        "trade_time": "2026-10-16 09:30"
-      }
-    ]
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财组合高手操作",
-    "expert_id": "262880200000034085",
-    "expert_name": "随随手一拍照",
-    "owner": "随随手一拍照",
-    "rank_label": "当日活跃组合",
-    "market_type": "sim",
-    "return_rate": 8.34,
-    "day_return_rate": 8.34,
-    "followers": 0,
-    "buy_count": 1,
-    "stocks": [
-      {
-        "stock_code": "601811",
-        "stock_name": "新华文轩",
-        "action": "买入",
-        "price": 25.93,
-        "volume": null,
-        "amount": null,
-        "weight_before": 0.0,
-        "weight_after": 99.15,
-        "trade_time": "2026-10-16 09:30"
-      }
-    ]
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财组合高手操作",
     "expert_id": "260290200000051551",
     "expert_name": "模拟组合2951551",
     "owner": "模拟组合2951551",
@@ -16176,6 +15609,33 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
+    "expert_id": "262724300000235312",
+    "expert_name": "模拟组合7235312",
+    "owner": "模拟组合7235312",
+    "rank_label": "当日活跃组合",
+    "market_type": "sim",
+    "return_rate": 8.11,
+    "day_return_rate": -0.78,
+    "followers": 0,
+    "buy_count": 1,
+    "stocks": [
+      {
+        "stock_code": "000823",
+        "stock_name": "超声电子",
+        "action": "买入",
+        "price": 25.16,
+        "volume": null,
+        "amount": null,
+        "weight_before": 23.98,
+        "weight_after": 42.9,
+        "trade_time": "2026-10-16 09:31"
+      }
+    ]
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
     "expert_id": "262880400000136525",
     "expert_name": "模拟组合8836525",
     "owner": "模拟组合8836525",
@@ -16196,33 +15656,6 @@
         "weight_before": 0.0,
         "weight_after": 99.5,
         "trade_time": "2026-10-16 10:08"
-      }
-    ]
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财组合高手操作",
-    "expert_id": "252590100000152183",
-    "expert_name": "模拟组合5952183",
-    "owner": "模拟组合5952183",
-    "rank_label": "当日活跃组合",
-    "market_type": "sim",
-    "return_rate": 7.88,
-    "day_return_rate": 9.72,
-    "followers": 0,
-    "buy_count": 1,
-    "stocks": [
-      {
-        "stock_code": "601811",
-        "stock_name": "新华文轩",
-        "action": "买入",
-        "price": 25.6,
-        "volume": null,
-        "amount": null,
-        "weight_before": 0.0,
-        "weight_after": 99.03,
-        "trade_time": "2026-10-16 09:31"
       }
     ]
   },
@@ -16277,60 +15710,6 @@
         "weight_before": 0.0,
         "weight_after": 49.75,
         "trade_time": "2026-10-16 13:58"
-      }
-    ]
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财组合高手操作",
-    "expert_id": "262874400000066053",
-    "expert_name": "天命轻狂",
-    "owner": "天命轻狂",
-    "rank_label": "当日活跃组合",
-    "market_type": "sim",
-    "return_rate": 7.75,
-    "day_return_rate": 7.75,
-    "followers": 0,
-    "buy_count": 1,
-    "stocks": [
-      {
-        "stock_code": "601811",
-        "stock_name": "新华文轩",
-        "action": "买入",
-        "price": 25.93,
-        "volume": null,
-        "amount": null,
-        "weight_before": 0.0,
-        "weight_after": 92.14,
-        "trade_time": "2026-10-16 09:30"
-      }
-    ]
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财组合高手操作",
-    "expert_id": "262504100000136605",
-    "expert_name": "R7475284",
-    "owner": "R7475284",
-    "rank_label": "当日活跃组合",
-    "market_type": "sim",
-    "return_rate": 7.74,
-    "day_return_rate": 9.11,
-    "followers": 0,
-    "buy_count": 1,
-    "stocks": [
-      {
-        "stock_code": "300006",
-        "stock_name": "莱美药业",
-        "action": "买入",
-        "price": 8.89,
-        "volume": null,
-        "amount": null,
-        "weight_before": 25.85,
-        "weight_after": 50.83,
-        "trade_time": "2026-10-16 09:32"
       }
     ]
   },
@@ -16527,25 +15906,25 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
-    "expert_id": "262880400000034163",
-    "expert_name": "威海01",
-    "owner": "威海01",
+    "expert_id": "251424200000137430",
+    "expert_name": "白银有色2026",
+    "owner": "白银有色2026",
     "rank_label": "当日活跃组合",
     "market_type": "sim",
-    "return_rate": 7.49,
-    "day_return_rate": 7.49,
+    "return_rate": 7.44,
+    "day_return_rate": 15.84,
     "followers": 0,
     "buy_count": 1,
     "stocks": [
       {
-        "stock_code": "601811",
-        "stock_name": "新华文轩",
+        "stock_code": "300006",
+        "stock_name": "莱美药业",
         "action": "买入",
-        "price": 26.11,
+        "price": 8.69,
         "volume": null,
         "amount": null,
-        "weight_before": 0.0,
-        "weight_after": 97.75,
+        "weight_before": 65.95,
+        "weight_after": 99.49,
         "trade_time": "2026-10-16 09:30"
       }
     ]
@@ -16662,33 +16041,6 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
-    "expert_id": "262880400000133569",
-    "expert_name": "suuwsu文轩",
-    "owner": "suuwsu文轩",
-    "rank_label": "当日活跃组合",
-    "market_type": "sim",
-    "return_rate": 7.15,
-    "day_return_rate": 7.15,
-    "followers": 0,
-    "buy_count": 1,
-    "stocks": [
-      {
-        "stock_code": "601811",
-        "stock_name": "新华文轩",
-        "action": "买入",
-        "price": 26.1,
-        "volume": null,
-        "amount": null,
-        "weight_before": 0.0,
-        "weight_after": 92.74,
-        "trade_time": "2026-10-16 09:25"
-      }
-    ]
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财组合高手操作",
     "expert_id": "261624200000234255",
     "expert_name": "模拟组合6234255",
     "owner": "模拟组合6234255",
@@ -16797,6 +16149,33 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
+    "expert_id": "262800300000037399",
+    "expert_name": "模拟组合8037399",
+    "owner": "模拟组合8037399",
+    "rank_label": "当日活跃组合",
+    "market_type": "sim",
+    "return_rate": 6.99,
+    "day_return_rate": 1.3,
+    "followers": 0,
+    "buy_count": 1,
+    "stocks": [
+      {
+        "stock_code": "000993",
+        "stock_name": "闽东电力",
+        "action": "买入",
+        "price": 18.66,
+        "volume": null,
+        "amount": null,
+        "weight_before": 0.0,
+        "weight_after": 97.0,
+        "trade_time": "2026-10-16 09:33"
+      }
+    ]
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
     "expert_id": "262884400000040979",
     "expert_name": "核心增长",
     "owner": "核心增长",
@@ -16817,60 +16196,6 @@
         "weight_before": 0.0,
         "weight_after": 99.93,
         "trade_time": "2026-10-16 11:23"
-      }
-    ]
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财组合高手操作",
-    "expert_id": "262884200000034265",
-    "expert_name": "模拟组合8834265",
-    "owner": "模拟组合8834265",
-    "rank_label": "当日活跃组合",
-    "market_type": "sim",
-    "return_rate": 6.96,
-    "day_return_rate": 6.96,
-    "followers": 0,
-    "buy_count": 1,
-    "stocks": [
-      {
-        "stock_code": "300300",
-        "stock_name": "海峡创新",
-        "action": "买入",
-        "price": 10.7,
-        "volume": null,
-        "amount": null,
-        "weight_before": 83.44,
-        "weight_after": 99.91,
-        "trade_time": "2026-10-16 09:31"
-      }
-    ]
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财组合高手操作",
-    "expert_id": "262870400000135757",
-    "expert_name": "模拟组合8735757",
-    "owner": "模拟组合8735757",
-    "rank_label": "当日活跃组合",
-    "market_type": "sim",
-    "return_rate": 6.93,
-    "day_return_rate": 6.93,
-    "followers": 0,
-    "buy_count": 1,
-    "stocks": [
-      {
-        "stock_code": "601811",
-        "stock_name": "新华文轩",
-        "action": "买入",
-        "price": 26.37,
-        "volume": null,
-        "amount": null,
-        "weight_before": 50.13,
-        "weight_after": 96.64,
-        "trade_time": "2026-10-16 09:31"
       }
     ]
   },
@@ -17148,6 +16473,60 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
+    "expert_id": "262850400000134406",
+    "expert_name": "tugtknn124",
+    "owner": "tugtknn124",
+    "rank_label": "当日活跃组合",
+    "market_type": "sim",
+    "return_rate": 5.94,
+    "day_return_rate": 9.41,
+    "followers": 0,
+    "buy_count": 1,
+    "stocks": [
+      {
+        "stock_code": "300006",
+        "stock_name": "莱美药业",
+        "action": "买入",
+        "price": 8.9,
+        "volume": null,
+        "amount": null,
+        "weight_before": 0.0,
+        "weight_after": 99.69,
+        "trade_time": "2026-10-16 09:35"
+      }
+    ]
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
+    "expert_id": "262880300000034491",
+    "expert_name": "yy112233",
+    "owner": "yy112233",
+    "rank_label": "当日活跃组合",
+    "market_type": "sim",
+    "return_rate": 5.92,
+    "day_return_rate": 9.37,
+    "followers": 0,
+    "buy_count": 1,
+    "stocks": [
+      {
+        "stock_code": "300006",
+        "stock_name": "莱美药业",
+        "action": "买入",
+        "price": 8.9,
+        "volume": null,
+        "amount": null,
+        "weight_before": 0.0,
+        "weight_after": 99.25,
+        "trade_time": "2026-10-16 09:35"
+      }
+    ]
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
     "expert_id": "262700200000136333",
     "expert_name": "老实人做军工",
     "owner": "老实人做军工",
@@ -17195,6 +16574,33 @@
         "weight_before": 32.89,
         "weight_after": 50.67,
         "trade_time": "2026-10-16 13:16"
+      }
+    ]
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
+    "expert_id": "262850300000934310",
+    "expert_name": "Tyyyhg",
+    "owner": "Tyyyhg",
+    "rank_label": "当日活跃组合",
+    "market_type": "sim",
+    "return_rate": 5.74,
+    "day_return_rate": 10.65,
+    "followers": 0,
+    "buy_count": 1,
+    "stocks": [
+      {
+        "stock_code": "300111",
+        "stock_name": "向日葵",
+        "action": "买入",
+        "price": 3.82,
+        "volume": null,
+        "amount": null,
+        "weight_before": 0.0,
+        "weight_after": 57.2,
+        "trade_time": "2026-10-16 09:34"
       }
     ]
   },
@@ -17303,33 +16709,6 @@
         "weight_before": 0.0,
         "weight_after": 49.91,
         "trade_time": "2026-10-16 14:43"
-      }
-    ]
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财组合高手操作",
-    "expert_id": "260700200000059773",
-    "expert_name": "宝总666",
-    "owner": "宝总666",
-    "rank_label": "当日活跃组合",
-    "market_type": "sim",
-    "return_rate": 5.64,
-    "day_return_rate": 9.95,
-    "followers": 0,
-    "buy_count": 1,
-    "stocks": [
-      {
-        "stock_code": "603668",
-        "stock_name": "天马科技",
-        "action": "买入",
-        "price": 6.86,
-        "volume": null,
-        "amount": null,
-        "weight_before": 0.0,
-        "weight_after": 99.98,
-        "trade_time": "2026-10-16 09:25"
       }
     ]
   },
@@ -17519,6 +16898,33 @@
         "weight_before": 0.0,
         "weight_after": 47.68,
         "trade_time": "2026-10-16 13:29"
+      }
+    ]
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
+    "expert_id": "262884200000034265",
+    "expert_name": "模拟组合8834265",
+    "owner": "模拟组合8834265",
+    "rank_label": "当日活跃组合",
+    "market_type": "sim",
+    "return_rate": 5.09,
+    "day_return_rate": 6.96,
+    "followers": 0,
+    "buy_count": 1,
+    "stocks": [
+      {
+        "stock_code": "300300",
+        "stock_name": "海峡创新",
+        "action": "买入",
+        "price": 10.7,
+        "volume": null,
+        "amount": null,
+        "weight_before": 83.44,
+        "weight_after": 99.91,
+        "trade_time": "2026-10-16 09:31"
       }
     ]
   },
@@ -17796,6 +17202,33 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
+    "expert_id": "262880300000134509",
+    "expert_name": "hdbskis",
+    "owner": "hdbskis",
+    "rank_label": "当日活跃组合",
+    "market_type": "sim",
+    "return_rate": 4.61,
+    "day_return_rate": 14.73,
+    "followers": 0,
+    "buy_count": 1,
+    "stocks": [
+      {
+        "stock_code": "301010",
+        "stock_name": "晶雪节能",
+        "action": "买入",
+        "price": 22.69,
+        "volume": null,
+        "amount": null,
+        "weight_before": 0.0,
+        "weight_after": 99.94,
+        "trade_time": "2026-10-16 09:36"
+      }
+    ]
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
     "expert_id": "262874200000234686",
     "expert_name": "bhujww",
     "owner": "bhujww",
@@ -17816,6 +17249,33 @@
         "weight_before": 0.0,
         "weight_after": 99.9,
         "trade_time": "2026-10-16 11:19"
+      }
+    ]
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
+    "expert_id": "262560100000052228",
+    "expert_name": "模拟组合5652228",
+    "owner": "模拟组合5652228",
+    "rank_label": "当日活跃组合",
+    "market_type": "sim",
+    "return_rate": 4.37,
+    "day_return_rate": 14.65,
+    "followers": 0,
+    "buy_count": 1,
+    "stocks": [
+      {
+        "stock_code": "000530",
+        "stock_name": "冰山冷热",
+        "action": "买入",
+        "price": 6.68,
+        "volume": null,
+        "amount": null,
+        "weight_before": 0.0,
+        "weight_after": 99.49,
+        "trade_time": "2026-10-16 09:31"
       }
     ]
   },
@@ -17904,60 +17364,6 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
-    "expert_id": "262560100000052228",
-    "expert_name": "模拟组合5652228",
-    "owner": "模拟组合5652228",
-    "rank_label": "当日活跃组合",
-    "market_type": "sim",
-    "return_rate": 4.1,
-    "day_return_rate": 14.65,
-    "followers": 0,
-    "buy_count": 1,
-    "stocks": [
-      {
-        "stock_code": "000530",
-        "stock_name": "冰山冷热",
-        "action": "买入",
-        "price": 6.68,
-        "volume": null,
-        "amount": null,
-        "weight_before": 0.0,
-        "weight_after": 99.49,
-        "trade_time": "2026-10-16 09:31"
-      }
-    ]
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财组合高手操作",
-    "expert_id": "10000000009935436",
-    "expert_name": "模拟组合9935436",
-    "owner": "模拟组合9935436",
-    "rank_label": "当日活跃组合",
-    "market_type": "sim",
-    "return_rate": 3.92,
-    "day_return_rate": 13.4,
-    "followers": 0,
-    "buy_count": 1,
-    "stocks": [
-      {
-        "stock_code": "300006",
-        "stock_name": "莱美药业",
-        "action": "买入",
-        "price": 8.65,
-        "volume": null,
-        "amount": null,
-        "weight_before": 0.0,
-        "weight_after": 99.92,
-        "trade_time": "2026-10-16 09:30"
-      }
-    ]
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财组合高手操作",
     "expert_id": "10000000003383964",
     "expert_name": "爱嗑瓜子的猫",
     "owner": "爱嗑瓜子的猫",
@@ -18012,6 +17418,33 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
+    "expert_id": "262874100000075190",
+    "expert_name": "一要进步",
+    "owner": "一要进步",
+    "rank_label": "当日活跃组合",
+    "market_type": "sim",
+    "return_rate": 3.73,
+    "day_return_rate": 12.88,
+    "followers": 0,
+    "buy_count": 1,
+    "stocks": [
+      {
+        "stock_code": "000530",
+        "stock_name": "冰山冷热",
+        "action": "买入",
+        "price": 6.74,
+        "volume": null,
+        "amount": null,
+        "weight_before": 0.0,
+        "weight_after": 99.51,
+        "trade_time": "2026-10-16 09:30"
+      }
+    ]
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
     "expert_id": "253274300000134973",
     "expert_name": "大火箭6666",
     "owner": "大火箭6666",
@@ -18032,6 +17465,33 @@
         "weight_before": 0.0,
         "weight_after": 24.52,
         "trade_time": "2026-10-16 10:28"
+      }
+    ]
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
+    "expert_id": "262870100000085719",
+    "expert_name": "美股异动",
+    "owner": "美股异动",
+    "rank_label": "当日活跃组合",
+    "market_type": "sim",
+    "return_rate": 3.67,
+    "day_return_rate": 8.78,
+    "followers": 0,
+    "buy_count": 1,
+    "stocks": [
+      {
+        "stock_code": "300111",
+        "stock_name": "向日葵",
+        "action": "买入",
+        "price": 3.7,
+        "volume": null,
+        "amount": null,
+        "weight_before": 0.0,
+        "weight_after": 99.7,
+        "trade_time": "2026-10-16 09:25"
       }
     ]
   },
@@ -18201,6 +17661,33 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
+    "expert_id": "262504100000136605",
+    "expert_name": "R7475284",
+    "owner": "R7475284",
+    "rank_label": "当日活跃组合",
+    "market_type": "sim",
+    "return_rate": 3.05,
+    "day_return_rate": 9.11,
+    "followers": 0,
+    "buy_count": 1,
+    "stocks": [
+      {
+        "stock_code": "300006",
+        "stock_name": "莱美药业",
+        "action": "买入",
+        "price": 8.89,
+        "volume": null,
+        "amount": null,
+        "weight_before": 25.85,
+        "weight_after": 50.83,
+        "trade_time": "2026-10-16 09:32"
+      }
+    ]
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
     "expert_id": "262654300000048708",
     "expert_name": "模拟组合6548708",
     "owner": "模拟组合6548708",
@@ -18221,6 +17708,33 @@
         "weight_before": 0.0,
         "weight_after": 99.62,
         "trade_time": "2026-10-16 10:54"
+      }
+    ]
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
+    "expert_id": "262840200000237984",
+    "expert_name": "模拟组合8437984",
+    "owner": "模拟组合8437984",
+    "rank_label": "当日活跃组合",
+    "market_type": "sim",
+    "return_rate": 2.83,
+    "day_return_rate": 5.59,
+    "followers": 0,
+    "buy_count": 1,
+    "stocks": [
+      {
+        "stock_code": "601811",
+        "stock_name": "新华文轩",
+        "action": "买入",
+        "price": 26.5,
+        "volume": null,
+        "amount": null,
+        "weight_before": 0.0,
+        "weight_after": 99.77,
+        "trade_time": "2026-10-16 09:33"
       }
     ]
   },
@@ -18356,6 +17870,33 @@
         "weight_before": 0.0,
         "weight_after": 23.37,
         "trade_time": "2026-10-16 13:00"
+      }
+    ]
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
+    "expert_id": "261604400000040139",
+    "expert_name": "dhjjh",
+    "owner": "dhjjh",
+    "rank_label": "当日活跃组合",
+    "market_type": "sim",
+    "return_rate": 2.25,
+    "day_return_rate": 7.57,
+    "followers": 0,
+    "buy_count": 1,
+    "stocks": [
+      {
+        "stock_code": "600199",
+        "stock_name": "金种子酒",
+        "action": "买入",
+        "price": 7.54,
+        "volume": null,
+        "amount": null,
+        "weight_before": 0.0,
+        "weight_after": 99.86,
+        "trade_time": "2026-10-16 09:30"
       }
     ]
   },
@@ -18552,6 +18093,33 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
+    "expert_id": "260700200000059773",
+    "expert_name": "宝总666",
+    "owner": "宝总666",
+    "rank_label": "当日活跃组合",
+    "market_type": "sim",
+    "return_rate": 1.59,
+    "day_return_rate": 9.95,
+    "followers": 0,
+    "buy_count": 1,
+    "stocks": [
+      {
+        "stock_code": "603668",
+        "stock_name": "天马科技",
+        "action": "买入",
+        "price": 6.86,
+        "volume": null,
+        "amount": null,
+        "weight_before": 0.0,
+        "weight_after": 99.98,
+        "trade_time": "2026-10-16 09:25"
+      }
+    ]
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
     "expert_id": "10000000009594877",
     "expert_name": "模拟组合9594877",
     "owner": "模拟组合9594877",
@@ -18633,33 +18201,6 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
-    "expert_id": "262800300000040620",
-    "expert_name": "接近历史高",
-    "owner": "接近历史高",
-    "rank_label": "当日活跃组合",
-    "market_type": "sim",
-    "return_rate": 1.21,
-    "day_return_rate": 7.14,
-    "followers": 0,
-    "buy_count": 1,
-    "stocks": [
-      {
-        "stock_code": "601811",
-        "stock_name": "新华文轩",
-        "action": "买入",
-        "price": 26.1,
-        "volume": null,
-        "amount": null,
-        "weight_before": 0.0,
-        "weight_after": 92.65,
-        "trade_time": "2026-10-16 09:25"
-      }
-    ]
-  },
-  {
-    "source": "eastmoney",
-    "asset_type": "stock",
-    "channel": "东财组合高手操作",
     "expert_id": "261730300000253062",
     "expert_name": "模拟组合7353062",
     "owner": "模拟组合7353062",
@@ -18687,26 +18228,26 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
-    "expert_id": "262244200000052678",
-    "expert_name": "低吸为王1",
-    "owner": "低吸为王1",
+    "expert_id": "250074300000061569",
+    "expert_name": "模拟组合0761569",
+    "owner": "模拟组合0761569",
     "rank_label": "当日活跃组合",
     "market_type": "sim",
-    "return_rate": 0.96,
-    "day_return_rate": 5.33,
+    "return_rate": 0.92,
+    "day_return_rate": 4.59,
     "followers": 0,
     "buy_count": 1,
     "stocks": [
       {
-        "stock_code": "600241",
-        "stock_name": "时代万恒",
+        "stock_code": "601811",
+        "stock_name": "新华文轩",
         "action": "买入",
-        "price": 12.77,
+        "price": 26.76,
         "volume": null,
         "amount": null,
         "weight_before": 0.0,
-        "weight_after": 49.85,
-        "trade_time": "2026-10-16 09:31"
+        "weight_after": 99.19,
+        "trade_time": "2026-10-16 09:36"
       }
     ]
   },
@@ -18849,6 +18390,33 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
+    "expert_id": "262850100000080310",
+    "expert_name": "地方吗还",
+    "owner": "地方吗还",
+    "rank_label": "当日活跃组合",
+    "market_type": "sim",
+    "return_rate": 0.56,
+    "day_return_rate": 10.04,
+    "followers": 0,
+    "buy_count": 1,
+    "stocks": [
+      {
+        "stock_code": "601811",
+        "stock_name": "新华文轩",
+        "action": "买入",
+        "price": 25.54,
+        "volume": null,
+        "amount": null,
+        "weight_before": 0.0,
+        "weight_after": 99.75,
+        "trade_time": "2026-10-16 09:31"
+      }
+    ]
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
     "expert_id": "262034200000034681",
     "expert_name": "模拟组合0334681",
     "owner": "模拟组合0334681",
@@ -18957,12 +18525,444 @@
     "source": "eastmoney",
     "asset_type": "stock",
     "channel": "东财组合高手操作",
+    "expert_id": "10000000009935436",
+    "expert_name": "模拟组合9935436",
+    "owner": "模拟组合9935436",
+    "rank_label": "当日活跃组合",
+    "market_type": "sim",
+    "return_rate": -0.07,
+    "day_return_rate": 13.4,
+    "followers": 0,
+    "buy_count": 1,
+    "stocks": [
+      {
+        "stock_code": "300006",
+        "stock_name": "莱美药业",
+        "action": "买入",
+        "price": 8.65,
+        "volume": null,
+        "amount": null,
+        "weight_before": 0.0,
+        "weight_after": 99.92,
+        "trade_time": "2026-10-16 09:30"
+      }
+    ]
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
+    "expert_id": "260700200000055955",
+    "expert_name": "模拟组合7055955",
+    "owner": "模拟组合7055955",
+    "rank_label": "当日活跃组合",
+    "market_type": "sim",
+    "return_rate": -0.92,
+    "day_return_rate": 10.04,
+    "followers": 0,
+    "buy_count": 1,
+    "stocks": [
+      {
+        "stock_code": "601811",
+        "stock_name": "新华文轩",
+        "action": "买入",
+        "price": 25.54,
+        "volume": null,
+        "amount": null,
+        "weight_before": 0.0,
+        "weight_after": 99.71,
+        "trade_time": "2026-10-16 09:31"
+      }
+    ]
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
+    "expert_id": "262004800000073600",
+    "expert_name": "回家数一数",
+    "owner": "回家数一数",
+    "rank_label": "当日活跃组合",
+    "market_type": "sim",
+    "return_rate": -0.92,
+    "day_return_rate": 10.04,
+    "followers": 0,
+    "buy_count": 1,
+    "stocks": [
+      {
+        "stock_code": "601811",
+        "stock_name": "新华文轩",
+        "action": "买入",
+        "price": 25.54,
+        "volume": null,
+        "amount": null,
+        "weight_before": 0.0,
+        "weight_after": 99.71,
+        "trade_time": "2026-10-16 09:31"
+      }
+    ]
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
+    "expert_id": "262870100000077583",
+    "expert_name": "模拟组合8777583",
+    "owner": "模拟组合8777583",
+    "rank_label": "当日活跃组合",
+    "market_type": "sim",
+    "return_rate": -0.92,
+    "day_return_rate": 10.04,
+    "followers": 0,
+    "buy_count": 1,
+    "stocks": [
+      {
+        "stock_code": "601811",
+        "stock_name": "新华文轩",
+        "action": "买入",
+        "price": 25.54,
+        "volume": null,
+        "amount": null,
+        "weight_before": 99.45,
+        "weight_after": 99.71,
+        "trade_time": "2026-10-16 09:31"
+      }
+    ]
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
+    "expert_id": "262874200000073773",
+    "expert_name": "模拟组合8773773",
+    "owner": "模拟组合8773773",
+    "rank_label": "当日活跃组合",
+    "market_type": "sim",
+    "return_rate": -0.92,
+    "day_return_rate": 10.04,
+    "followers": 0,
+    "buy_count": 1,
+    "stocks": [
+      {
+        "stock_code": "601811",
+        "stock_name": "新华文轩",
+        "action": "买入",
+        "price": 25.54,
+        "volume": null,
+        "amount": null,
+        "weight_before": 0.0,
+        "weight_after": 99.71,
+        "trade_time": "2026-10-16 09:31"
+      }
+    ]
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
+    "expert_id": "262874200000076839",
+    "expert_name": "模拟组合8776839",
+    "owner": "模拟组合8776839",
+    "rank_label": "当日活跃组合",
+    "market_type": "sim",
+    "return_rate": -0.92,
+    "day_return_rate": 10.04,
+    "followers": 0,
+    "buy_count": 1,
+    "stocks": [
+      {
+        "stock_code": "601811",
+        "stock_name": "新华文轩",
+        "action": "买入",
+        "price": 25.54,
+        "volume": null,
+        "amount": null,
+        "weight_before": 0.0,
+        "weight_after": 99.71,
+        "trade_time": "2026-10-16 09:31"
+      }
+    ]
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
+    "expert_id": "262884100000002120",
+    "expert_name": "模拟组合8802120",
+    "owner": "模拟组合8802120",
+    "rank_label": "当日活跃组合",
+    "market_type": "sim",
+    "return_rate": -0.92,
+    "day_return_rate": 10.04,
+    "followers": 0,
+    "buy_count": 1,
+    "stocks": [
+      {
+        "stock_code": "601811",
+        "stock_name": "新华文轩",
+        "action": "买入",
+        "price": 25.54,
+        "volume": null,
+        "amount": null,
+        "weight_before": 0.0,
+        "weight_after": 99.71,
+        "trade_time": "2026-10-16 09:31"
+      }
+    ]
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
+    "expert_id": "262884400000009968",
+    "expert_name": "模拟组合8809968",
+    "owner": "模拟组合8809968",
+    "rank_label": "当日活跃组合",
+    "market_type": "sim",
+    "return_rate": -0.95,
+    "day_return_rate": 9.46,
+    "followers": 0,
+    "buy_count": 1,
+    "stocks": [
+      {
+        "stock_code": "601811",
+        "stock_name": "新华文轩",
+        "action": "买入",
+        "price": 25.54,
+        "volume": null,
+        "amount": null,
+        "weight_before": 0.0,
+        "weight_after": 94.44,
+        "trade_time": "2026-10-16 09:31"
+      }
+    ]
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
+    "expert_id": "262244200000052678",
+    "expert_name": "低吸为王1",
+    "owner": "低吸为王1",
+    "rank_label": "当日活跃组合",
+    "market_type": "sim",
+    "return_rate": -1.72,
+    "day_return_rate": 5.33,
+    "followers": 0,
+    "buy_count": 1,
+    "stocks": [
+      {
+        "stock_code": "600241",
+        "stock_name": "时代万恒",
+        "action": "买入",
+        "price": 12.77,
+        "volume": null,
+        "amount": null,
+        "weight_before": 0.0,
+        "weight_after": 49.85,
+        "trade_time": "2026-10-16 09:31"
+      }
+    ]
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
+    "expert_id": "262874400000066053",
+    "expert_name": "天命轻狂",
+    "owner": "天命轻狂",
+    "rank_label": "当日活跃组合",
+    "market_type": "sim",
+    "return_rate": -2.22,
+    "day_return_rate": 7.75,
+    "followers": 0,
+    "buy_count": 1,
+    "stocks": [
+      {
+        "stock_code": "601811",
+        "stock_name": "新华文轩",
+        "action": "买入",
+        "price": 25.93,
+        "volume": null,
+        "amount": null,
+        "weight_before": 0.0,
+        "weight_after": 92.14,
+        "trade_time": "2026-10-16 09:30"
+      }
+    ]
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
+    "expert_id": "262880200000034085",
+    "expert_name": "随随手一拍照",
+    "owner": "随随手一拍照",
+    "rank_label": "当日活跃组合",
+    "market_type": "sim",
+    "return_rate": -2.39,
+    "day_return_rate": 8.34,
+    "followers": 0,
+    "buy_count": 1,
+    "stocks": [
+      {
+        "stock_code": "601811",
+        "stock_name": "新华文轩",
+        "action": "买入",
+        "price": 25.93,
+        "volume": null,
+        "amount": null,
+        "weight_before": 0.0,
+        "weight_after": 99.15,
+        "trade_time": "2026-10-16 09:30"
+      }
+    ]
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
+    "expert_id": "252590100000152183",
+    "expert_name": "模拟组合5952183",
+    "owner": "模拟组合5952183",
+    "rank_label": "当日活跃组合",
+    "market_type": "sim",
+    "return_rate": -2.8,
+    "day_return_rate": 9.72,
+    "followers": 0,
+    "buy_count": 1,
+    "stocks": [
+      {
+        "stock_code": "601811",
+        "stock_name": "新华文轩",
+        "action": "买入",
+        "price": 25.6,
+        "volume": null,
+        "amount": null,
+        "weight_before": 0.0,
+        "weight_after": 99.03,
+        "trade_time": "2026-10-16 09:31"
+      }
+    ]
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
+    "expert_id": "262880400000133569",
+    "expert_name": "suuwsu文轩",
+    "owner": "suuwsu文轩",
+    "rank_label": "当日活跃组合",
+    "market_type": "sim",
+    "return_rate": -2.83,
+    "day_return_rate": 7.15,
+    "followers": 0,
+    "buy_count": 1,
+    "stocks": [
+      {
+        "stock_code": "601811",
+        "stock_name": "新华文轩",
+        "action": "买入",
+        "price": 26.1,
+        "volume": null,
+        "amount": null,
+        "weight_before": 0.0,
+        "weight_after": 92.74,
+        "trade_time": "2026-10-16 09:25"
+      }
+    ]
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
+    "expert_id": "262880400000034163",
+    "expert_name": "威海01",
+    "owner": "威海01",
+    "rank_label": "当日活跃组合",
+    "market_type": "sim",
+    "return_rate": -3.02,
+    "day_return_rate": 7.49,
+    "followers": 0,
+    "buy_count": 1,
+    "stocks": [
+      {
+        "stock_code": "601811",
+        "stock_name": "新华文轩",
+        "action": "买入",
+        "price": 26.11,
+        "volume": null,
+        "amount": null,
+        "weight_before": 0.0,
+        "weight_after": 97.75,
+        "trade_time": "2026-10-16 09:30"
+      }
+    ]
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
+    "expert_id": "262870400000135757",
+    "expert_name": "模拟组合8735757",
+    "owner": "模拟组合8735757",
+    "rank_label": "当日活跃组合",
+    "market_type": "sim",
+    "return_rate": -3.41,
+    "day_return_rate": 6.93,
+    "followers": 0,
+    "buy_count": 1,
+    "stocks": [
+      {
+        "stock_code": "601811",
+        "stock_name": "新华文轩",
+        "action": "买入",
+        "price": 26.37,
+        "volume": null,
+        "amount": null,
+        "weight_before": 50.13,
+        "weight_after": 96.64,
+        "trade_time": "2026-10-16 09:31"
+      }
+    ]
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
+    "expert_id": "262800300000040620",
+    "expert_name": "接近历史高",
+    "owner": "接近历史高",
+    "rank_label": "当日活跃组合",
+    "market_type": "sim",
+    "return_rate": -8.2,
+    "day_return_rate": 7.14,
+    "followers": 0,
+    "buy_count": 1,
+    "stocks": [
+      {
+        "stock_code": "601811",
+        "stock_name": "新华文轩",
+        "action": "买入",
+        "price": 26.1,
+        "volume": null,
+        "amount": null,
+        "weight_before": 0.0,
+        "weight_after": 92.65,
+        "trade_time": "2026-10-16 09:25"
+      }
+    ]
+  },
+  {
+    "source": "eastmoney",
+    "asset_type": "stock",
+    "channel": "东财组合高手操作",
     "expert_id": "262140400000043604",
     "expert_name": "模拟组合1443604",
     "owner": "模拟组合1443604",
     "rank_label": "当日活跃组合",
     "market_type": "sim",
-    "return_rate": 0.13,
+    "return_rate": -9.7,
     "day_return_rate": 8.26,
     "followers": 0,
     "buy_count": 1,
