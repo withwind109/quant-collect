@@ -22,6 +22,8 @@ data/prices/
 data/history_bulk/
 data/*.db-wal
 data/*.db-shm
+# 高手能力评估的「无行情代码」跳过缓存（可重新生成）
+data/eval/price_miss.json
 
 # ── 爬取日产出的 JSON/CSV 体积小，默认提交（按需可在下面忽略）──
 # data/2026-*/

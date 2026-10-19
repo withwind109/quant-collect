@@ -3,7 +3,7 @@
   'use strict';
   var EP = window.EP;
 
-  var PAGES = { experts: '社区高手', strategy: '高手跟随策略' };
+  var PAGES = { experts: '高手评估', strategy: '高手跟随策略' };
   var loaded = {};
 
   EP.go = function (name) {

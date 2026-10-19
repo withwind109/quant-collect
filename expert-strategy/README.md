@@ -1,7 +1,7 @@
-# expert-platform — 社区高手 & 高手跟随策略平台
+# expert-platform — 高手评估 & 高手跟随策略平台
 
-从 xcq-platform 迁移出来的**独立项目**：社区高手（东财高手操作流水）抓取 + 高手跟随策略
-（策略文件化 / 统一回测 / 模拟盘前向验证 / 晋级管理）。
+从 xcq-platform 迁移出来的**独立项目**：**高手评估**（分渠道爬取高手操作流水 + 逐高手镜像
+回测评估盈利能力）+ 高手跟随策略（策略文件化 / 统一回测 / 模拟盘前向验证 / 晋级管理）。
 
 Web 层为 **FastAPI + 原生 HTML 前端**（参考源项目 xcq-platform 的 dashboard 架构：
 `web/app.py` create_app + 扁平 `web/routes/*.py` + `web/static/` 单 HTML/hash 路由/vanilla JS/
@@ -25,7 +25,7 @@ ECharts 本地 vendor），页面直接调用业务模块，无额外中间层�
 
 ```
 expert-platform/
-├── main.py                  # CLI 入口（crawl/history/bulk-history/db-sync/strategy/ui/prices）
+├── main.py                  # CLI 入口（crawl/history/bulk-history/db-sync/strategy/expert-eval/ui/prices）
 ├── start.sh                 # 一键：venv → 依赖 → chromium → 启动服务（默认 8601）
 ├── config.yaml              # 爬虫配置（Cookie 走 .env；browser 段控制无头浏览器通道）
 ├── requirements.txt         # 只保留本项目实际用到的依赖（fastapi/uvicorn/curl_cffi/playwright…）
@@ -53,7 +53,8 @@ expert-platform/
 │       ├── accounts.py / promotion.py / alpha.py / registry.py / ledger.py / stops.py / recs_store.py
 │       ├── v3_pool.py / v3_screen_rank.py / v3_config.py / v3_store.py
 │       ├── watchlist.py     #     关注高手
-│       └── paper_sim.py     #     模拟盘前向净值（按日重放）
+│       ├── paper_sim.py     #     模拟盘前向净值（按日重放）
+│       └── expert_eval.py   #     高手能力评估（逐高手镜像回测→夏普/索提诺/回撤/年化/胜率）
 ├── web/                     # FastAPI + 原生 HTML 前端（替代原 Streamlit UI）
 │   ├── app.py               #   create_app 工厂 + 路由注册 + 静态挂载 + lifespan 建表
 │   ├── jobs.py              #   后台任务（模块级状态 + run_job.py 子进程）
@@ -61,7 +62,7 @@ expert-platform/
 │   │   ├── experts.py       #   /api/expert-crawl/*（爬取/回补/关注/数据浏览）
 │   │   └── strategy.py      #   /api/expert-follow/*（看板/策略/回测/发布/晋级/体检）
 │   └── static/              #   index.html + css/ + js/（vanilla）+ echarts.min.js（本地 vendor）
-└── data/                    # crawl/ history/ history_bulk/ *.db / 运行产出
+└── data/                    # crawl/ history/ history_bulk/ eval/ *.db / 运行产出
 ```
 
 ## 快速开始
@@ -90,24 +91,40 @@ python main.py prices --index 000300.SH
 # 6. 批量回补高手调仓历史（跟随策略的数据基础；--limit 20 先小批量试）
 python main.py bulk-history --limit 20
 
-# 7. 跑一次统一回测
+# 7. 高手能力评估（逐高手镜像回测，产出 data/eval/latest.json）
+python main.py expert-eval --env sim --min-sells 3 --min-days 20
+
+# 8. 跑一次统一回测
 python main.py strategy run --backtest unified_sim
 ```
 
 启动后访问 **http://127.0.0.1:8601**（`python main.py ui --port 8601` 等价），两个页面：
 
-* **社区高手**（`#/experts`）：触发爬取 / 按日期浏览（高手买入主视图、高手榜、成交明细、个股聚合、热度榜、信号、覆盖度）/ 关注管理 / 单组合与批量历史回补。
+* **高手评估**（`#/experts`）：**分渠道数据爬取**（东财/同花顺/雪球/支付宝四渠道独立状态卡片 + 凭证/最新日/条数，多选触发，任务日志可按任务切换）+ **调仓历史回补**（单组合/批量，评估的数据基础）+ **高手能力评估**（逐高手镜像回测 → 总收益/年化/夏普/索提诺/最大回撤/Calmar/胜率/盈亏比/超额/Alpha，按综合评分排序；样本不足自动标记沉底；行内一键关注；明细抽屉含 ECharts 净值曲线 vs 沪深300 + 逐笔成交）。
 * **高手跟随策略**（`#/expert-strategy`）：策略看板（模拟账户前向表现 + 晋级）/ 策略文件（json5 原文 + 解析 + 指纹 + 另存为）/ 回测配置 / 运行回测（后台运行 + 记录 + 发布）/ 数据体检。
 
 API 示例（与页面同源，也可供脚本调用）：
 
 ```bash
 curl localhost:8601/api/expert-crawl/dates            # 可用交易日
-curl localhost:8601/api/expert-crawl/data?date=...    # 当日全量数据
+curl localhost:8601/api/expert-crawl/channels         # 分渠道数据状态（凭证/最新日/条数）
+curl localhost:8601/api/expert-crawl/evaluation       # 最新能力评估结果（rows+meta）
+curl -X POST localhost:8601/api/expert-crawl/evaluation/run \
+     -H 'Content-Type: application/json' -d '{"env":"sim","min_sells":3,"min_days":20}'
+curl "localhost:8601/api/expert-crawl/evaluation/detail?expert_id=10000000000005437&env=sim"
 curl -X POST localhost:8601/api/expert-crawl/run \
      -H 'Content-Type: application/json' -d '{"sources":["eastmoney"],"top":50}'
-curl localhost:8601/api/expert-crawl/status           # 全部后台任务状态
+curl localhost:8601/api/expert-crawl/status           # 全部后台任务状态（含 expert_eval）
 ```
+
+## 高手能力评估说明
+
+* **做法**：把每位高手的调仓记录当作「无脑跟单」跑一次镜像回测，用回测指标衡量他自身的盈利能力——跟得动、算得清，才值得关注。
+* **口径**（与 `strategy/follow_backtest.py` 单一事实源）：日终净目标权重（weight_after）→ T+1 开盘 ±0.2% 滑点执行；佣金万 0.8（最低 5 元）、卖出印花税 0.05%；涨停拦截、目标权重 <1% 噪音过滤；窗口从该高手首笔信号日起。
+* **指标**：总收益 / 年化 / 夏普 / 索提诺 / 最大回撤 / Calmar / 胜率 / 盈亏比 / 超额（沪深300）/ Alpha·Beta（对中证500 回归）/ 覆盖天数 / 买卖笔数。
+* **综合评分**：夏普、索提诺、Calmar、胜率四项的分位秩平均（0-100）；卖出 < `--min-sells` 或覆盖 < `--min-days` 个交易日 → 样本不足，不给分、排序沉底。
+* **数据来源**：sim = 每日爬取流水 ∪ `data/history_bulk/` 批量回补全史（去重合并）；live = `expert_trades` 视图（rtV3 实盘流水）。**只爬了一两天流水时大多数高手样本不足——先跑 bulk-history 回补，评估才有意义。**
+* **产出**：`data/eval/latest.json`（Web 页读取）+ `data/eval/expert_eval_<run_id>.json`（历次）。
 
 ## 跟随策略引擎说明（迁移保持原口径）
 
@@ -123,5 +140,6 @@ curl localhost:8601/api/expert-crawl/status           # 全部后台任务状态
 1. `v3_tiers` 引擎（LightGBM 模型训练流水线 expert_imitation）未迁移；统一回测配置中已停用，其余策略（mirror / signal）全部可用。
 2. 模拟盘前向净值由 `paper_sim.py` 按日重放近似（不含日内止损止盈的精细模拟）；原平台的实时条件单 / 自动交易联动未迁移。
 3. 实盘（rtV3 流水）数据依赖每日爬取自动累积到 `crawl_trade(market_type='live')`，样本不足时 data_env=live 的回测结论仅供参考。
-4. 关注列表（watchlist）为空时 v1 镜像策略无可跟高手，属预期。
+4. 关注列表（watchlist）为空时 v1 镜像策略无可跟高手，属预期（现在可从高手评估页一键关注）。
+5. 高手能力评估依赖本地行情库覆盖其交易标的；未覆盖的标的在回测里按「顺延不了就放弃」处理，指标页会显示行情覆盖率。
 5. 前端无登录鉴权（内网工具定位，与原平台一致）；券商登录态是服务端概念，本项目只用 Cookie。

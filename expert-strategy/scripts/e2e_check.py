@@ -5,7 +5,7 @@ from playwright.sync_api import sync_playwright
 
 BASE = "http://127.0.0.1:8601"
 errors, failed = [], []
-name_key = {"社区高手": "experts", "高手跟随策略": "strategy"}
+name_key = {"高手评估": "experts", "高手跟随策略": "strategy"}
 
 
 def e_is_visible(page, el):
@@ -52,7 +52,7 @@ with sync_playwright() as pw:
     b = pw.chromium.launch(headless=True, args=["--no-sandbox"])
     pg = b.new_page(viewport={"width": 1440, "height": 900})
 
-    for path, name in [("/#/experts", "社区高手"), ("/#/expert-strategy", "高手跟随策略")]:
+    for path, name in [("/#/experts", "高手评估"), ("/#/expert-strategy", "高手跟随策略")]:
         info, msgs = check_page(pg, path, name)
         print(f"═══ {name} ═══")
         for k, v in info.items():
@@ -74,14 +74,28 @@ with sync_playwright() as pw:
                   f"empty={count_visible(page_, '.empty')} jobs={count_visible(page_, '.job')} "
                   f"h3={[e.inner_text() for e in page_.query_selector_all('#strategy-root h3')][:2]}")
 
-    # 交互：社区高手页切子 tab
+    # 交互：高手评估页——打开明细抽屉（净值曲线 + 成交）+ 样本筛选
     page_.click("#nav-experts")
     page_.wait_for_timeout(3000)
-    tabs = page_.query_selector_all("#experts-root .subtabs a")
-    for i in range(1, len(tabs)):
-        tabs[i].click()
-        page_.wait_for_timeout(1200)
-        print(f"  [子tab {i}] {tabs[i].inner_text()} → rows={count_visible(page_, '#experts-root table.grid tbody tr')}")
+    det = page_.query_selector_all("#experts-root [data-detail]")
+    if det:
+        det[0].click()
+        page_.wait_for_timeout(5000)
+        print(f"  [明细抽屉] 打开={bool(page_.query_selector('#ee-drawer'))} "
+              f"曲线canvas={count_visible(page_, '#ed-chart canvas')} "
+              f"成交行={count_visible(page_, '#ed-trades table.grid tbody tr')} "
+              f"指标卡={count_visible(page_, '#ed-kv .kv')}")
+        close = page_.query_selector("#ed-close")
+        if close:
+            close.click()
+            page_.wait_for_timeout(500)
+    cb = page_.query_selector("#ee-sample-only")
+    if cb:
+        before = count_visible(page_, "#experts-root table.grid tbody tr")
+        cb.click()
+        page_.wait_for_timeout(800)
+        after = count_visible(page_, "#experts-root table.grid tbody tr")
+        print(f"  [样本筛选] 勾选时行数={before} → 取消勾选后={after}")
 
     b.close()
 

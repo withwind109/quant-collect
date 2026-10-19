@@ -1,23 +1,26 @@
-"""社区高手页 API（对齐源项目 routes_experts_crawl.py 的功能面）。
+"""高手评估页 API（原「社区高手」页重构：分渠道数据爬取 + 高手能力评估）。
 
-GET  /api/expert-crawl/dates          可用交易日（DB ∪ 文件目录）
-GET  /api/expert-crawl/data           指定/最新日期爬取数据
-GET  /api/expert-crawl/status         任务状态（crawl/history/bulk_history）
-GET  /api/expert-crawl/log            任务日志尾部
-POST /api/expert-crawl/run            触发爬取（子进程，东财 Cookie 认证）
-POST /api/expert-crawl/history        单组合调仓历史回补
-POST /api/expert-crawl/bulk-history   批量回补（强制 curl 轻量后端）
-GET  /api/expert-crawl/history-file   单组合已回补的历史记录
-GET  /api/expert-crawl/watchlist      关注列表
-POST /api/expert-crawl/watchlist      加关注
+GET  /api/expert-crawl/dates               可用交易日
+GET  /api/expert-crawl/channels            分渠道数据状态（各源凭证/最新日/条数）
+GET  /api/expert-crawl/status              任务状态（crawl/history/bulk_history/expert_eval/…）
+GET  /api/expert-crawl/log                 任务日志尾部
+POST /api/expert-crawl/run                 触发爬取（子进程，东财 Cookie 认证）
+POST /api/expert-crawl/history             单组合调仓历史回补
+POST /api/expert-crawl/bulk-history        批量回补（强制 curl 轻量后端）
+GET  /api/expert-crawl/history-file        单组合已回补的历史记录
+GET  /api/expert-crawl/watchlist           关注列表
+POST /api/expert-crawl/watchlist           加关注
 DELETE /api/expert-crawl/watchlist/{expert_id}  取消关注
+GET  /api/expert-crawl/sources             数据源选项（前端 chips）
+GET  /api/expert-crawl/evaluation          最新一次能力评估结果（rows+meta+bench）
+POST /api/expert-crawl/evaluation/run      触发能力评估（后台子进程）
+GET  /api/expert-crawl/evaluation/detail   单高手明细（净值曲线+成交+指标，现算）
 """
 
 from __future__ import annotations
 
 import json
-from pathlib import Path
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List
 
 from fastapi import APIRouter, HTTPException, Query
 from pydantic import BaseModel
@@ -32,10 +35,10 @@ SOURCE_LABELS = {"eastmoney": "东财", "xueqiu": "雪球",
                  "tonghuashun": "同花顺", "alipay": "支付宝"}
 
 #: 全部后台任务名（状态文件 logs/job_<name>.json）；策略页的回测/净值更新/体检也走这套
-_JOB_NAMES = ("crawl", "history", "bulk_history", "backtest", "paper_update", "health")
+_JOB_NAMES = ("crawl", "history", "bulk_history", "expert_eval", "backtest", "paper_update", "health")
 
 
-# ── 数据读取（SQLite 优先，回退 data/crawl/<日期>/*.json） ─────────────────
+# ── 数据读取 ─────────────────────────────────────────────────────────────────
 
 def _db():
     from core import db
@@ -54,34 +57,7 @@ def _dates() -> List[str]:
     return sorted(dates, reverse=True)
 
 
-def _load_json(fp: Path):
-    if not fp.exists():
-        return []
-    try:
-        return json.loads(fp.read_text(encoding="utf-8"))
-    except (OSError, ValueError):
-        return []
-
-
-def _read_day(date: str) -> Optional[Dict[str, Any]]:
-    data = _db().read_day(date, DB_PATH)
-    if data is not None:
-        return data
-    day_dir = CRAWL_DATA_DIR / date
-    if not (day_dir / "expert_buys.json").exists():
-        return None
-    return {
-        "experts": _load_json(day_dir / "experts.json"),
-        "expert_buys": _load_json(day_dir / "expert_buys.json"),
-        "buys": _load_json(day_dir / "trades.json"),
-        "buy_aggregated": _load_json(day_dir / "buy_aggregated.json"),
-        "stock_rank": _load_json(day_dir / "stock_rank.json"),
-        "signals": _load_json(day_dir / "signals.json"),
-        "meta": _load_json(day_dir / "meta.json") or {},
-    }
-
-
-# ── 端点 ─────────────────────────────────────────────────────────────────
+# ── 端点 ─────────────────────────────────────────────────────────────────────
 
 @router.get("/dates")
 async def dates() -> Dict[str, Any]:
@@ -89,48 +65,56 @@ async def dates() -> Dict[str, Any]:
     return {"dates": ds, "latest": ds[0] if ds else None}
 
 
-@router.get("/data")
-async def data(date: str = Query("", description="YYYY-MM-DD，空=最新日期")) -> Dict[str, Any]:
+@router.get("/channels")
+async def channels() -> Dict[str, Any]:
+    """分渠道数据状态：凭证 / 最新交易日 / 高手数 / 成交数 / 有数据天数。"""
+    db = _db()
+
+    def _group(sql: str) -> Dict[str, dict]:
+        return {(r.get("source") or ""): r for r in db.q(sql)}
+
+    trade_st = _group("""SELECT source, COUNT(*) AS n, COUNT(DISTINCT trade_date) AS days,
+                                MAX(trade_date) AS last_date FROM crawl_trade GROUP BY source""")
+    expert_st = _group("SELECT source, COUNT(*) AS n FROM crawl_expert GROUP BY source")
+    buy_st = _group("SELECT source, COUNT(*) AS n FROM crawl_expert_buy GROUP BY source")
+
+    cred: Dict[str, str] = {}
+    try:
+        from settings import DEFAULT_CONFIG, load_settings
+        s = load_settings(DEFAULT_CONFIG)
+        cred = {"eastmoney": "cookie" if s["eastmoney"].get("cookie") else "none",
+                "xueqiu": "cookie" if s["xueqiu"].get("cookie") else "none",
+                "tonghuashun": "cookie" if s["tonghuashun"].get("cookie") else "none",
+                "alipay": "endpoint" if s["alipay"].get("rank_url") else "none"}
+    except Exception:  # noqa: BLE001  设置读取失败不阻塞页面
+        pass
+
+    out = []
+    for src in SOURCE_CHOICES:
+        t = trade_st.get(src) or {}
+        out.append({
+            "source": src, "label": SOURCE_LABELS[src],
+            "credential": cred.get(src, "none"),
+            "last_date": t.get("last_date"),
+            "days": t.get("days") or 0,
+            "trades": t.get("n") or 0,
+            "experts": (expert_st.get(src) or {}).get("n") or 0,
+            "buys": (buy_st.get(src) or {}).get("n") or 0,
+            "has_data": bool(t),
+        })
     ds = _dates()
-    if not ds:
-        return {"date": None, "msg": "还没有数据，先触发一次爬取"}
-    target = date if date in ds else (date or ds[0])
-    d = _read_day(target)
-    if d is None:
-        raise HTTPException(404, f"{target} 没有可展示的数据")
-    meta = d.get("meta") or {}
-    n_live = sum(1 for e in d.get("expert_buys") or [] if e.get("market_type") == "live")
-    return {
-        "date": target,
-        "dates_total": len(ds),
-        "summary": {
-            "experts": len(d.get("experts") or []),
-            "expert_buys": len(d.get("expert_buys") or []),
-            "trades": len(d.get("buys") or []),
-            "stocks": len(d.get("buy_aggregated") or []),
-            "live_experts": n_live,
-            "coverage": len(meta.get("coverage") or []),
-            "date_mode": meta.get("date_mode") or "—",
-            "crawled_at": (meta.get("crawled_at") or "—")[:19],
-        },
-        "coverage": meta.get("coverage") or [],
-        "experts": d.get("experts") or [],
-        "expert_buys": d.get("expert_buys") or [],
-        "trades": d.get("buys") or [],
-        "buy_aggregated": d.get("buy_aggregated") or [],
-        "stock_rank": d.get("stock_rank") or [],
-        "signals": d.get("signals") or [],
-    }
+    return {"channels": out, "choices": SOURCE_CHOICES, "labels": SOURCE_LABELS,
+            "latest_date": ds[0] if ds else None, "dates_total": len(ds)}
 
 
 @router.get("/status")
 async def status() -> Dict[str, Any]:
-    """全部后台任务状态（crawl/history/bulk_history/backtest/paper_update/health）。"""
+    """全部后台任务状态（crawl/history/bulk_history/expert_eval/backtest/paper_update/health）。"""
     return {name: jobs.job_view(name, include_log=False) for name in _JOB_NAMES}
 
 
 @router.get("/log")
-async def log(job: str = Query("crawl", pattern="^(crawl|history|bulk_history|backtest|paper_update|health)$")) -> Dict[str, Any]:
+async def log(job: str = Query("crawl", pattern="^(crawl|history|bulk_history|expert_eval|backtest|paper_update|health)$")) -> Dict[str, Any]:
     return {"job": job, "log_tail": jobs.read_log_tail(job)}
 
 
@@ -212,7 +196,7 @@ async def history_file(zjzh: str = Query("")) -> Dict[str, Any]:
                          "weight_after": r.get("weight_after")} for r in recs[:500]]}
 
 
-# ── 关注管理 ─────────────────────────────────────────────────────────────
+# ── 关注管理（评估结果一键关注） ─────────────────────────────────────────────
 
 @router.get("/watchlist")
 async def watchlist() -> Dict[str, Any]:
@@ -247,3 +231,54 @@ async def watch_remove(expert_id: str) -> Dict[str, Any]:
 @router.get("/sources")
 async def sources() -> Dict[str, Any]:
     return {"choices": SOURCE_CHOICES, "labels": SOURCE_LABELS}
+
+
+# ── 高手能力评估 ─────────────────────────────────────────────────────────────
+
+class EvalBody(BaseModel):
+    env: str = "sim"
+    start: str = ""
+    end: str = ""
+    min_sells: int = 3
+    min_days: int = 20
+
+
+@router.get("/evaluation")
+async def evaluation() -> Dict[str, Any]:
+    """最新一次评估结果（rows 按综合评分/夏普排序，前端自行筛选）。"""
+    from strategy.expert_eval import EVAL_LATEST
+    if not EVAL_LATEST.exists():
+        return {"ok": False, "msg": "还没有评估结果——先点「开始评估」", "rows": [], "meta": {}}
+    try:
+        d = json.loads(EVAL_LATEST.read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return {"ok": False, "msg": "评估结果文件损坏，请重新评估", "rows": [], "meta": {}}
+    d["ok"] = True
+    return d
+
+
+@router.post("/evaluation/run")
+async def evaluation_run(body: EvalBody) -> Dict[str, Any]:
+    env = body.env if body.env in ("sim", "live") else "sim"
+    argv = ["-m", "strategy.expert_eval", "--env", env,
+            "--min-sells", str(max(1, body.min_sells)), "--min-days", str(max(1, body.min_days))]
+    if body.start.strip():
+        argv += ["--start", body.start.strip()]
+    if body.end.strip():
+        argv += ["--end", body.end.strip()]
+    try:
+        jobs.start_job("expert_eval", argv)
+    except jobs.JobBusy as exc:
+        raise HTTPException(409, str(exc)) from exc
+    return {"ok": True, "msg": "评估已启动", "env": env}
+
+
+@router.get("/evaluation/detail")
+async def evaluation_detail(expert_id: str = Query(""), env: str = Query("sim")) -> Dict[str, Any]:
+    if not expert_id.strip():
+        raise HTTPException(400, "缺少高手ID")
+    from strategy import expert_eval as EE
+    d = EE.expert_detail(expert_id.strip(), env=env if env in ("sim", "live") else "sim")
+    if not d.get("ok"):
+        raise HTTPException(404, d.get("msg") or "无法评估该高手")
+    return d

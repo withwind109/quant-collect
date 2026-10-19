@@ -1,28 +1,72 @@
-/* 社区高手页（#/experts）—— 对应原 Streamlit views/experts.py 的功能面 */
+/* 高手评估页（#/experts）—— 2026-10-19 重构：分渠道数据爬取 + 高手能力评估。
+   替代原「按日期浏览」视图（高手买入/高手榜/成交明细/个股聚合/热度榜/信号 6 个子 tab 已删除）。
+   能力评估口径见 src/strategy/expert_eval.py（与 follow_backtest 同一套交易成本）。 */
 (function () {
   'use strict';
   var EP = window.EP;
-  var S = { date: '', sources: ['eastmoney', 'tonghuashun'], wl: [], cache: {} };
-
+  var S = {
+    sources: ['eastmoney', 'tonghuashun'],
+    env: 'sim',
+    minSells: 3,
+    sampleOnly: true,
+    eval: null,        // 最新一次评估结果（/evaluation）
+    wl: {},            // expert_id -> name（关注列表）
+    chart: null        // 明细抽屉的 ECharts 实例
+  };
   var SRC_LABELS = { eastmoney: '东财', tonghuashun: '同花顺', xueqiu: '雪球', alipay: '支付宝' };
-  var PAGE = 50;
+  var LOG_JOBS = [['crawl', '爬取'], ['bulk_history', '批量回补'], ['expert_eval', '能力评估'], ['history', '单组合回补']];
 
-  /* ── ① 爬取面板 ── */
+  /* ═══════════ ① 分渠道数据爬取 ═══════════ */
+
+  function channelCards(ch) {
+    var cred = ch.credential === 'none' ? EP.badge('未配置凭证', 'gray')
+      : EP.badge(ch.credential === 'cookie' ? 'Cookie 已配置' : '端点已配置', 'green');
+    return '<div class="card"><h3>' + EP.fmt.esc(ch.label) +
+      ' <span class="hint" style="font-weight:400">' + EP.fmt.esc(ch.source) + '</span></h3>' +
+      EP.kvCards([
+        ['凭证', '', function () { return cred; }],
+        ['最新交易日', ch.last_date || '—'],
+        ['有数据天数', ch.days, function () { return EP.fmt.num(ch.days, 0); }],
+        ['高手数', ch.experts, function () { return EP.fmt.num(ch.experts, 0); }],
+        ['成交条数', ch.trades, function () { return EP.fmt.num(ch.trades, 0); }]
+      ]) + '</div>';
+  }
+
   function crawlPanel() {
-    var chips = ['eastmoney', 'tonghuashun', 'xueqiu', 'alipay'].map(function (s) {
-      var on = S.sources.indexOf(s) >= 0;
-      return '<span class="chip' + (on ? ' on' : '') + '" data-src="' + s + '">' + SRC_LABELS[s] + '</span>';
-    }).join('');
-    return '<div class="card"><h3>① 触发爬取</h3>' +
-      '<div class="card-sub">东财使用 Cookie 认证（.env 的 EASTMONEY_COOKIE，不再扫码登录）；数据源可多选，未来新增渠道只需在 sources/ 下加一个源。请求经无头浏览器通道发出（模拟真实用户会话）。</div>' +
-      '<div class="row">' +
-      '<div class="field"><label>数据源</label><div id="ec-src-chips">' + chips + '</div></div>' +
+    return '<div class="card"><h3>① 分渠道数据爬取</h3>' +
+      '<div class="card-sub">按渠道抓取高手操作流水（东财 Cookie 认证，不再扫码；请求经无头浏览器通道发出）。各渠道独立统计、独立开关，数据落本地 SQLite（data/experts.db）。</div>' +
+      '<div class="card-grid" id="ec-channels"></div>' +
+      '<div class="row" style="margin-top:12px">' +
+      '<div class="field"><label>数据源（多选）</label><div id="ec-src-chips">' +
+      ['eastmoney', 'tonghuashun', 'xueqiu', 'alipay'].map(function (s) {
+        var on = S.sources.indexOf(s) >= 0;
+        return '<span class="chip' + (on ? ' on' : '') + '" data-src="' + s + '">' + SRC_LABELS[s] + '</span>';
+      }).join('') + '</div></div>' +
       '<div class="field"><label>交易日（空=自动推断）</label><input class="input" id="ec-date" placeholder="YYYY-MM-DD" style="min-width:130px"></div>' +
       '<div class="field"><label>每榜数量</label><input class="input num" id="ec-top" value="50" style="min-width:90px"></div>' +
       '<div class="field"><label>&nbsp;</label><button class="btn primary" id="ec-run">▶ 开始爬取</button></div>' +
-      '</div>' +
-      '<div id="ec-jobs"></div><div id="ec-log"></div>' +
-      '<div class="hint">产出目录：data/crawl/&lt;日期&gt;/（JSON + SQLite 双写）</div></div>';
+      '</div><div id="ec-jobs"></div><div id="ec-log"></div></div>';
+  }
+
+  function backfillPanel() {
+    return '<div class="card"><h3>调仓历史回补 <span class="hint" style="font-weight:400">（能力评估的数据基础：单日流水只能看最近一天，回补才能算夏普/回撤）</span></h3>' +
+      '<div class="row">' +
+      '<div class="field"><label>模拟盘组合号（1000… 长号）</label><input class="input" id="eh-zjzh" placeholder="1000…" style="min-width:220px"></div>' +
+      '<div class="field"><label>起始日（空=全部）</label><input class="input" id="eh-since" placeholder="YYYY-MM-DD" style="min-width:130px"></div>' +
+      '<div class="field"><label>&nbsp;</label><button class="btn" id="eh-run">回补</button>' +
+      '<button class="btn" id="eh-view" style="margin-left:6px">查看已回补记录</button></div>' +
+      '</div><div id="eh-result"></div>' +
+      '<div class="row" style="margin-top:10px">' +
+      '<div class="field"><label>批量回补：只跑前 N 个（0=全部）</label><input class="input num" id="eh-limit" value="20" style="min-width:90px"></div>' +
+      '<div class="field"><label>&nbsp;</label><button class="btn" id="eh-bulk">批量回补</button></div>' +
+      '<span class="hint" id="eh-bulk-count"></span></div></div>';
+  }
+
+  function loadChannels(root) {
+    EP.api('/api/expert-crawl/channels').then(function (d) {
+      root.querySelector('#ec-channels').innerHTML =
+        (d.channels || []).map(channelCards).join('');
+    }).catch(function (e) { EP.toast(e.message, 'error'); });
   }
 
   function bindCrawl(root) {
@@ -46,7 +90,9 @@
         var logLoad = EP.logPanel(root.querySelector('#ec-log'), '/api/expert-crawl/log', 'crawl');
         var timer = setInterval(function () {
           EP.api('/api/expert-crawl/status').then(function (d) {
-            if (d.crawl && d.crawl.state !== 'running') { clearInterval(timer); logLoad(); refreshData(root); }
+            if (d.crawl && d.crawl.state !== 'running') {
+              clearInterval(timer); logLoad(); loadChannels(root);
+            }
           });
         }, 3000);
       }).catch(function (e) { EP.toast(e.message, 'error'); btn.disabled = false; });
@@ -55,26 +101,26 @@
 
   function bindJobs(root) {
     EP.jobPanel(root.querySelector('#ec-jobs'), '/api/expert-crawl/status',
-      ['crawl', 'history', 'bulk_history'], ['爬取', '单组合回补', '批量回补']);
+      ['crawl', 'bulk_history', 'expert_eval'], ['爬取', '批量回补', '能力评估']);
+    // 日志：可按任务切换
+    var sel = '<div class="row" style="margin-top:8px"><div class="field"><label>任务日志</label><select class="select" id="ec-log-job">' +
+      LOG_JOBS.map(function (j) { return '<option value="' + j[0] + '">' + j[1] + '</option>'; }).join('') +
+      '</select></div></div>';
+    root.querySelector('#ec-jobs').insertAdjacentHTML('afterend', sel);
+    var logBox = root.querySelector('#ec-log');
+    function loadLog() {
+      var job = root.querySelector('#ec-log-job').value;
+      EP.api('/api/expert-crawl/log?job=' + job).then(function (d) {
+        logBox.innerHTML = d.log_tail
+          ? '<div class="job done"><div class="log">' + EP.fmt.esc(d.log_tail) + '</div></div>'
+          : '<div class="job idle">暂无日志</div>';
+      });
+    }
+    root.querySelector('#ec-log-job').onchange = loadLog;
+    loadLog();
   }
 
-  /* ── ② 历史回补 ── */
-  function historyPanel() {
-    return '<div class="card"><h3>② 高手调仓历史回补</h3>' +
-      '<div class="card-sub">跟随策略回测的数据基础（data/history_bulk/&lt;组合号&gt;.json）。单组合回补立即执行；批量回补在后台跑（自动走轻量后端，不挤浏览器通道）。</div>' +
-      '<div class="row">' +
-      '<div class="field"><label>模拟盘组合号（1000… 长号）</label><input class="input" id="eh-zjzh" placeholder="1000…" style="min-width:220px"></div>' +
-      '<div class="field"><label>起始日（空=全部）</label><input class="input" id="eh-since" placeholder="YYYY-MM-DD" style="min-width:130px"></div>' +
-      '<div class="field"><label>&nbsp;</label><button class="btn" id="eh-run">回补</button>' +
-      '<button class="btn" id="eh-view" style="margin-left:6px">查看已回补记录</button></div>' +
-      '</div><div id="eh-result"></div>' +
-      '<div class="row" style="margin-top:10px">' +
-      '<div class="field"><label>批量回补：只跑前 N 个（0=全部）</label><input class="input num" id="eh-limit" value="20" style="min-width:90px"></div>' +
-      '<div class="field"><label>&nbsp;</label><button class="btn" id="eh-bulk">批量回补</button></div>' +
-      '<span class="hint" id="eh-bulk-count"></span></div></div>';
-  }
-
-  function bindHistory(root) {
+  function bindBackfill(root) {
     root.querySelector('#eh-run').onclick = function () {
       var z = root.querySelector('#eh-zjzh').value.trim();
       if (!z) { EP.toast('请输入组合号', 'error'); return; }
@@ -116,255 +162,275 @@
     });
   }
 
-  /* ── ③ 关注管理 ── */
-  function watchPanel() {
-    return '<div class="card"><h3>③ 关注高手</h3>' +
-      '<div class="card-sub">关注名单是 v1 镜像策略（universe.source=watchlist）与 v2（include_watchlist）的跟随来源。</div>' +
+  /* ═══════════ ② 高手能力评估 ═══════════ */
+
+  function evalPanel() {
+    return '<div class="card"><h3>② 高手能力评估</h3>' +
+      '<div class="card-sub">逐高手镜像回测（= 无脑跟他的单）：T+1 开盘 ±0.2% 滑点、佣金万 0.8（最低 5 元）、卖出印花税 0.05%、涨停拦截、噪音过滤。窗口从该高手首笔信号日起。按综合评分（夏普/索提诺/Calmar/胜率 分位秩平均）排序——分高且样本充足的，就是值得跟的人。</div>' +
       '<div class="row">' +
-      '<div class="field"><label>高手ID（组合号）</label><input class="input" id="ew-id" placeholder="1000…" style="min-width:220px"></div>' +
-      '<div class="field"><label>备注名（可选）</label><input class="input" id="ew-name" style="min-width:160px"></div>' +
-      '<div class="field"><label>&nbsp;</label><button class="btn primary" id="ew-add">＋ 关注</button></div>' +
-      '</div><div id="ew-table"></div></div>';
+      '<div class="field"><label>数据环境</label><select class="select" id="ee-env">' +
+      '<option value="sim">模拟盘（流水+回补）</option><option value="live">实盘（rtV3 流水）</option></select></div>' +
+      '<div class="field"><label>最少卖出笔数</label><select class="select" id="ee-min-sells">' +
+      [1, 3, 5, 10, 20].map(function (n) { return '<option value="' + n + '"' + (n === 3 ? ' selected' : '') + '>' + n + '</option>'; }).join('') +
+      '</select></div>' +
+      '<div class="field"><label>&nbsp;</label><label style="display:flex;align-items:center;gap:6px;cursor:pointer">' +
+      '<input type="checkbox" id="ee-sample-only" checked> 只看样本充足</label></div>' +
+      '<div class="field"><label>&nbsp;</label><button class="btn primary" id="ee-run">▶ 开始评估</button>' +
+      '<button class="btn" id="ee-refresh" style="margin-left:6px">刷新结果</button></div>' +
+      '</div><div id="ee-summary"></div><div id="ee-table"></div>' +
+      '<div style="margin-top:12px"><h3 style="font-size:14px;margin-bottom:8px">关注列表 <span class="hint" style="font-weight:400">（v1 镜像策略的跟随来源）</span></h3><div id="ee-wl"></div></div></div>';
   }
 
-  function watchTable(root) {
-    EP.api('/api/expert-crawl/watchlist').then(function (d) {
-      S.wl = d.rows || [];
-      var el = root.querySelector('#ew-table');
-      if (!S.wl.length) { el.innerHTML = '<div class="hint">关注列表为空（模拟盘）</div>'; return; }
-      EP.table(el, S.wl, [
-        { key: 'expert_id', label: '高手ID' },
-        { key: 'name', label: '名称' },
-        { key: 'created_at', label: '加入时间', fmt: function (v) { return EP.fmt.ts(v); } },
-        { key: 'expert_id', label: '操作', html: function (v) {
-          return '<button class="btn sm danger" data-del="' + EP.fmt.esc(v) + '">取消关注</button>'; } }
-      ], { search: false, height: 220, pageSize: 100 });
-      el.querySelectorAll('[data-del]').forEach(function (b) {
-        b.onclick = function () {
-          EP.api('/api/expert-crawl/watchlist/' + encodeURIComponent(b.dataset.del), { method: 'DELETE' })
-            .then(function () { EP.toast('已取消关注'); watchTable(root); })
-            .catch(function (e) { EP.toast(e.message, 'error'); });
-        };
-      });
-    });
-  }
+  function num0(v) { return EP.fmt.num(v, 0); }
+  function f2(v) { return v == null ? '—' : Number(v).toFixed(2); }
 
-  function bindWatch(root) {
-    root.querySelector('#ew-add').onclick = function () {
-      var id = root.querySelector('#ew-id').value.trim();
-      if (!id) { EP.toast('请输入高手ID', 'error'); return; }
-      EP.api('/api/expert-crawl/watchlist', { method: 'POST',
-        body: { expert_id: id, name: root.querySelector('#ew-name').value.trim() } })
-        .then(function () { EP.toast('已关注'); watchTable(root); })
-        .catch(function (e) { EP.toast(e.message, 'error'); });
-    };
-    watchTable(root);
-  }
-
-  /* ── ④ 按日期浏览 ── */
-  var SUB = ['高手买入（主视图）', '高手榜', '成交明细', '个股聚合', '热度榜', '信号'];
-
-  function dataPanel() {
-    var subs = SUB.map(function (t, i) {
-      return '<a data-sub="' + i + '" class="' + (i === 0 ? 'active' : '') + '">' + t + '</a>';
-    }).join('');
-    return '<div class="card"><h3>④ 按日期浏览</h3>' +
-      '<div class="row"><div class="field"><label>交易日</label><select class="select" id="ed-date" style="min-width:140px"></select></div>' +
-      '<span class="hint" id="ed-info"></span></div>' +
-      '<div id="ed-summary"></div><div id="ed-coverage"></div>' +
-      '<div class="subtabs">' + subs + '</div><div id="ed-table"></div></div>';
-  }
-
-  function flattenBuys(ebs) {
-    var rows = [];
-    (ebs || []).forEach(function (e) {
-      (e.stocks || []).forEach(function (s) {
-        rows.push({
-          expert_name: e.expert_name || e.expert_id, expert_id: e.expert_id,
-          owner: e.owner || '', source: e.source,
-          source_label: SRC_LABELS[e.source] || e.source || '—',
-          market_type: e.market_type, is_live: e.market_type === 'live',
-          return_rate: e.return_rate, day_return_rate: e.day_return_rate, followers: e.followers,
-          stock_code: s.stock_code, stock_name: s.stock_name || '',
-          action: s.action, price: s.price,
-          weight_before: s.weight_before, weight_after: s.weight_after,
-          trade_time: (s.trade_time || '').slice(-8)
-        });
-      });
-    });
-    return rows;
-  }
-
-  var BUY_COLS = [
-    { key: 'expert_name', label: '高手' },
-    { key: 'source_label', label: '来源' },
-    { key: 'is_live', label: '类型', fmt: function (v) { return v ? EP.badge('实盘', 'red') : EP.badge('模拟', 'gray'); } },
-    { key: 'return_rate', label: '收益率%', num: true, fmt: function (v) { return EP.fmt.signedPct(v); } },
-    { key: 'day_return_rate', label: '今日%', num: true, fmt: function (v) { return EP.fmt.signedPct(v); } },
-    { key: 'followers', label: '粉丝', num: true, fmt: function (v) { return EP.fmt.num(v, 0); } },
-    { key: 'stock_code', label: '股票' },
-    { key: 'stock_name', label: '股票名' },
-    { key: 'action', label: '方向', fmt: function (v) {
-      return v === 'buy' ? '<span class="up">买入</span>' : (v === 'sell' ? '<span class="down">卖出</span>' : EP.fmt.esc(v)); } },
-    { key: 'price', label: '价格', num: true, fmt: function (v) { return EP.fmt.num(v); } },
-    { key: 'weight_before', label: '持仓前%', num: true, fmt: function (v) { return EP.fmt.num(v); } },
-    { key: 'weight_after', label: '持仓后%', num: true, fmt: function (v) { return EP.fmt.num(v); } },
-    { key: 'trade_time', label: '时间' }
+  var EVAL_COLS = [
+    { key: 'rank', label: '#', num: true, fmt: num0 },
+    { key: 'name', label: '高手', fmt: function (v, r) { return '<b>' + EP.fmt.esc(v || r.expert_id) + '</b>'; } },
+    { key: 'expert_id', label: 'ID' },
+    { key: 'source', label: '来源', fmt: function (v) { return EP.fmt.esc(SRC_LABELS[v] || v || '—'); } },
+    { key: 'total_return_pct', label: '总收益%', num: true, fmt: EP.fmt.signedPct },
+    { key: 'annualized_pct', label: '年化%', num: true, fmt: EP.fmt.signedPct },
+    { key: 'sharpe', label: '夏普', num: true, fmt: function (v) { return v == null ? '—' : '<b>' + f2(v) + '</b>'; } },
+    { key: 'sortino', label: '索提诺', num: true, fmt: f2 },
+    { key: 'max_drawdown_pct', label: '最大回撤%', num: true, fmt: function (v) { return v == null ? '—' : '<span class="down">' + f2(v) + '%</span>'; } },
+    { key: 'calmar', label: 'Calmar', num: true, fmt: f2 },
+    { key: 'win_rate_pct', label: '胜率%', num: true, fmt: function (v) { return v == null ? '—' : v.toFixed(1) + '%'; } },
+    { key: 'profit_factor', label: '盈亏比', num: true, fmt: f2 },
+    { key: 'n_sell', label: '卖出', num: true, fmt: num0 },
+    { key: 'trading_days', label: '覆盖天数', num: true, fmt: num0 },
+    { key: 'sample_ok', label: '样本', fmt: function (v) { return v ? EP.badge('充足', 'green') : EP.badge('不足', 'gray'); } },
+    { key: 'expert_id', label: '操作', html: function (v) {
+      var watched = !!S.wl[v];
+      return '<button class="btn sm ' + (watched ? '' : 'primary') + '" data-watch="' + EP.fmt.esc(v) + '">' +
+        (watched ? '✓ 已关注' : '＋ 关注') + '</button> ' +
+        '<button class="btn sm" data-detail="' + EP.fmt.esc(v) + '">明细</button>'; } }
   ];
 
-  function renderSub(root, sub, d) {
-    var el = root.querySelector('#ed-table');
-    if (sub === 0) {
-      var rows = flattenBuys(d.expert_buys);
-      var srcs = {}, srcList = [];
-      rows.forEach(function (r) { if (!srcs[r.source_label]) { srcs[r.source_label] = 1; srcList.push(r.source_label); } });
-      var chips = srcList.map(function (s) { return '<span class="chip on" data-fs="' + EP.fmt.esc(s) + '">' + EP.fmt.esc(s) + '</span>'; }).join('');
-      el.innerHTML = '<div class="table-bar"><div>' + chips +
-        '<span class="chip" data-fs="__live">只看实盘</span></div><span class="count" id="ed-count"></span></div><div id="ed-buys"></div>';
-      var t = EP.table(el.querySelector('#ed-buys'), rows, BUY_COLS, { height: 460, pageSize: PAGE });
-      var off = {}, liveOnly = false;
-      el.querySelectorAll('.chip[data-fs]').forEach(function (c) {
-        c.onclick = function () {
-          var f = c.dataset.fs;
-          if (f === '__live') { liveOnly = !liveOnly; c.classList.toggle('on', liveOnly); }
-          else { off[f] = !off[f]; c.classList.toggle('on', !off[f]); }
-          t.setRows(rows.filter(function (r) {
-            return (!liveOnly || r.is_live) && !off[r.source_label];
-          }));
-        };
-      });
-    } else if (sub === 1) {
-      EP.table(el, d.experts || [], [
-        { key: 'name', label: '高手', fmt: function (v, r) { return EP.fmt.esc(v || r.expert_id); } },
-        { key: 'expert_id', label: '高手ID' },
-        { key: 'source', label: '来源', fmt: function (v) { return EP.fmt.esc(SRC_LABELS[v] || v || '—'); } },
-        { key: 'market_type', label: '类型', fmt: function (v) { return v === 'live' ? EP.badge('实盘', 'red') : EP.badge('模拟', 'gray'); } },
-        { key: 'rank_label', label: '榜单' },
-        { key: 'owner', label: 'owner' },
-        { key: 'return_rate', label: '收益率%', num: true, fmt: function (v) { return EP.fmt.signedPct(v); } },
-        { key: 'total_return', label: '总收益%', num: true, fmt: function (v) { return EP.fmt.signedPct(v); } },
-        { key: 'followers', label: '粉丝', num: true, fmt: function (v) { return EP.fmt.num(v, 0); } }
-      ], { height: 460, pageSize: PAGE });
-    } else if (sub === 2) {
-      EP.table(el, d.trades || [], [
-        { key: 'expert_name', label: '高手', fmt: function (v, r) { return EP.fmt.esc(v || r.expert_id); } },
-        { key: 'source', label: '来源', fmt: function (v) { return EP.fmt.esc(SRC_LABELS[v] || v || '—'); } },
-        { key: 'stock_code', label: '股票' },
-        { key: 'stock_name', label: '股票名' },
-        { key: 'action', label: '方向', fmt: function (v) {
-          return v === 'buy' ? '<span class="up">买入</span>' : (v === 'sell' ? '<span class="down">卖出</span>' : EP.fmt.esc(v)); } },
-        { key: 'price', label: '价格', num: true, fmt: function (v) { return EP.fmt.num(v); } },
-        { key: 'volume', label: '成交量', num: true, fmt: function (v) { return EP.fmt.num(v, 0); } },
-        { key: 'amount', label: '成交额', num: true, fmt: function (v) { return EP.fmt.num(v, 0); } },
-        { key: 'trade_time', label: '时间', fmt: function (v) { return EP.fmt.esc((v || '').slice(-8)); } }
-      ], { height: 460, pageSize: PAGE });
-    } else if (sub === 3) {
-      EP.table(el, d.buy_aggregated || [], [
-        { key: 'stock_code', label: '股票' },
-        { key: 'stock_name', label: '股票名' },
-        { key: 'buy_experts', label: '买入高手数', num: true, fmt: function (v) { return EP.fmt.num(v, 0); } },
-        { key: 'buy_records', label: '买入笔数', num: true, fmt: function (v) { return EP.fmt.num(v, 0); } },
-        { key: 'avg_price', label: '均价', num: true, fmt: function (v) { return EP.fmt.num(v); } },
-        { key: 'net_amount', label: '净买入额', num: true, fmt: function (v) { return EP.fmt.num(v, 0); } },
-        { key: 'note', label: '备注' }
-      ], { height: 460, pageSize: PAGE });
-    } else if (sub === 4) {
-      EP.table(el, d.stock_rank || [], [
-        { key: 'stock_code', label: '股票' },
-        { key: 'stock_name', label: '股票名' },
-        { key: 'buy_experts', label: '买入高手数', num: true, fmt: function (v) { return EP.fmt.num(v, 0); } },
-        { key: 'buy_records', label: '买入笔数', num: true, fmt: function (v) { return EP.fmt.num(v, 0); } },
-        { key: 'avg_price', label: '均价', num: true, fmt: function (v) { return EP.fmt.num(v); } },
-        { key: 'net_amount', label: '净买入额', num: true, fmt: function (v) { return EP.fmt.num(v, 0); } }
-      ], { height: 460, pageSize: PAGE });
-    } else {
-      EP.table(el, d.signals || [], [
-        { key: 'kind', label: '类型' },
-        { key: 'expert_name', label: '高手', fmt: function (v, r) { return EP.fmt.esc(v || r.expert_id || ''); } },
-        { key: 'action', label: '方向', fmt: function (v) {
-          return v === 'buy' ? '<span class="up">买入</span>' : (v === 'sell' ? '<span class="down">卖出</span>' : EP.fmt.esc(v)); } },
-        { key: 'stock_code', label: '股票' },
-        { key: 'stock_name', label: '股票名' },
-        { key: 'trade_time', label: '时间', fmt: function (v) { return EP.fmt.esc((v || '').slice(-8)); } },
-        { key: 'note', label: '备注' }
-      ], { height: 460, pageSize: PAGE });
-    }
+  function evalSummary(d) {
+    var m = d.meta || {};
+    var ok = d.rows.filter(function (r) { return r.sample_ok; });
+    var best = ok.slice(0, 3).map(function (r) { return r.name; }).join(' / ') || '—';
+    var pct = m.n_codes ? Math.round((m.n_codes_with_price || 0) / m.n_codes * 100) : 0;
+    return EP.kvCards([
+      ['入榜高手', m.n_experts, function () { return num0(m.n_experts); }],
+      ['样本充足', m.n_sample_ok, function () { return num0(m.n_sample_ok); }],
+      ['数据范围', (m.data_range || []).join(' ~ ') || '—'],
+      ['交易日', m.trading_days, function () { return num0(m.trading_days); }],
+      ['标的行情覆盖', m.n_codes_with_price + '/' + m.n_codes + '（' + pct + '%）'],
+      ['基准', m.bench_code + (m.bench_available ? '' : '（缺失）')],
+      ['Top3', best],
+      ['评估时间', EP.fmt.ts(d.generated_at)]
+    ]);
   }
 
-  function loadDay(root, date, force) {
-    if (!force && S.cache[date]) { renderDay(root, S.cache[date]); return; }
-    EP.api('/api/expert-crawl/data' + (date ? '?date=' + date : '')).then(function (d) {
-      if (date) S.cache[date] = d;   // 当日数据缓存：切子 tab 不再重复拉全量
-      renderDay(root, d);
+  function applyFilters() {
+    var t = EP._tables['ee-table'];
+    if (!t || !S.eval) return;
+    var min = parseInt(S.minSells, 10) || 1;
+    t.setRows(S.eval.rows.filter(function (r) {
+      return (!S.sampleOnly || r.sample_ok) && (r.n_sell || 0) >= min;
+    }));
+  }
+
+  function renderEval(root, d) {
+    S.eval = d;
+    var sum = root.querySelector('#ee-summary'), box = root.querySelector('#ee-table');
+    if (!d.ok || !d.rows.length) {
+      sum.innerHTML = '';
+      box.innerHTML = '<div class="empty">' + EP.fmt.esc(d.msg || '暂无评估结果') + '</div>';
+      return;
+    }
+    var envNote = (d.params && d.params.env !== S.env)
+      ? '<div class="hint" style="margin-bottom:6px">当前展示的是 <b>' + EP.fmt.esc(d.params.env) +
+        '</b> 环境的结果（门槛：卖出≥' + d.params.min_sells + '、覆盖≥' + d.params.min_days + ' 天）</div>' : '';
+    sum.innerHTML = envNote + evalSummary(d);
+    EP.table(box, d.rows, EVAL_COLS, { height: 520, pageSize: 50, sortKey: 'rank', sortDir: 1 });
+    applyFilters();
+    renderWatchlist(root);
+  }
+
+  function loadEval(root) {
+    EP.api('/api/expert-crawl/evaluation').then(function (d) { renderEval(root, d); })
+      .catch(function (e) { EP.toast(e.message, 'error'); });
+  }
+
+  function loadWatch(root) {
+    return EP.api('/api/expert-crawl/watchlist').then(function (d) {
+      S.wl = {};
+      (d.rows || []).forEach(function (r) { S.wl[r.expert_id] = r.name || ''; });
+      renderWatchlist(root);
+    }).catch(function () {});
+  }
+
+  function renderWatchlist(root) {
+    var el = root.querySelector('#ee-wl');
+    if (!el) return;
+    var ids = Object.keys(S.wl);
+    if (!ids.length) { el.innerHTML = '<div class="hint">关注列表为空——在评估表里点「＋ 关注」</div>'; return; }
+    el.innerHTML = ids.map(function (id) {
+      return '<span class="chip on" style="margin:0 6px 6px 0">' + EP.fmt.esc(S.wl[id] || id) +
+        ' <b style="margin-left:4px">' + EP.fmt.esc(id) + '</b>' +
+        ' <a href="javascript:void(0)" data-unwatch="' + EP.fmt.esc(id) + '" style="margin-left:6px;color:var(--c-danger);text-decoration:none">✕</a></span>';
+    }).join('');
+    el.querySelectorAll('[data-unwatch]').forEach(function (a) {
+      a.onclick = function () { toggleWatch(a.dataset.unwatch, root); };
+    });
+  }
+
+  function toggleWatch(expertId, root) {
+    var watched = !!S.wl[expertId];
+    var row = (S.eval && S.eval.rows || []).filter(function (r) { return r.expert_id === expertId; })[0];
+    var req = watched
+      ? EP.api('/api/expert-crawl/watchlist/' + encodeURIComponent(expertId), { method: 'DELETE' })
+      : EP.api('/api/expert-crawl/watchlist', { method: 'POST',
+          body: { expert_id: expertId, name: (row || {}).name || '' } });
+    req.then(function () {
+      if (watched) delete S.wl[expertId]; else S.wl[expertId] = (row || {}).name || '';
+      EP.toast(watched ? '已取消关注' : '已关注');
+      loadWatch(root);
+      // 表格里的按钮文案同步
+      var btn = root.querySelector('[data-watch="' + expertId + '"]');
+      if (btn) {
+        var now = !!S.wl[expertId];
+        btn.textContent = now ? '✓ 已关注' : '＋ 关注';
+        btn.classList.toggle('primary', !now);
+      }
+      var dbtn = document.querySelector('#ed-watch');
+      if (dbtn && document.getElementById('ee-drawer')) {
+        dbtn.textContent = now ? '✓ 已关注' : '＋ 关注';
+      }
     }).catch(function (e) { EP.toast(e.message, 'error'); });
   }
 
-  function renderDay(root, d) {
-      if (!d.date) {
-        root.querySelector('#ed-summary').innerHTML = '<div class="empty">' + EP.fmt.esc(d.msg || '暂无数据') + '</div>';
-        root.querySelector('#ed-table').innerHTML = '';
-        return;
-      }
-      S.date = d.date;
-      var s = d.summary;
-      root.querySelector('#ed-info').textContent = '共 ' + d.dates_total + ' 个交易日有数据；最新 ' + d.date;
-      root.querySelector('#ed-summary').innerHTML = EP.kvCards([
-        ['高手买入', s.expert_buys], ['成交明细', s.trades], ['实盘高手', s.live_experts],
-        ['个股聚合', s.stocks], ['覆盖度', s.coverage + ' 项'], ['日期模式', s.date_mode],
-        ['爬取时间', s.crawled_at]
+  /* ── 明细抽屉：净值曲线 + 指标 + 成交 ── */
+
+  function showDetail(root, expertId) {
+    var drawer = document.getElementById('ee-drawer');
+    if (!drawer) {
+      drawer = document.createElement('div');
+      drawer.id = 'ee-drawer';
+      drawer.style.cssText = 'position:fixed;top:0;right:0;height:100%;width:560px;max-width:92vw;' +
+        'background:var(--c-card);box-shadow:var(--sh-lg);z-index:998;overflow-y:auto;padding:20px';
+      document.body.appendChild(drawer);
+    }
+    drawer.innerHTML = '<div class="hint">加载中…</div>';
+    drawer.scrollTop = 0;
+    EP.api('/api/expert-crawl/evaluation/detail?expert_id=' + encodeURIComponent(expertId) +
+           '&env=' + encodeURIComponent(S.env)).then(function (d) {
+      var m = d.metrics;
+      drawer.innerHTML =
+        '<div style="display:flex;justify-content:space-between;align-items:flex-start">' +
+        '<div><h3 style="font-size:16px">' + EP.fmt.esc(d.name || d.expert_id) + '</h3>' +
+        '<div class="hint">' + EP.fmt.esc(d.expert_id) + ' · ' + EP.fmt.esc(SRC_LABELS[d.source] || d.source || '—') +
+        ' · ' + (d.env === 'live' ? '实盘' : '模拟盘') + '</div></div>' +
+        '<div><button class="btn sm primary" id="ed-watch">' + (S.wl[d.expert_id] ? '✓ 已关注' : '＋ 关注') + '</button> ' +
+        '<button class="btn sm" id="ed-close">关闭</button></div></div>' +
+        '<div id="ed-kv" style="margin-top:10px"></div>' +
+        '<div id="ed-chart" style="width:100%;height:280px;margin-top:10px"></div>' +
+        '<h3 style="font-size:14px;margin:14px 0 6px">成交明细（最近 ' + d.trades.length + ' 笔）</h3>' +
+        '<div id="ed-trades"></div>';
+      drawer.querySelector('#ed-close').onclick = function () { drawer.remove(); };
+      drawer.querySelector('#ed-watch').onclick = function () { toggleWatch(d.expert_id, root); };
+      drawer.querySelector('#ed-kv').innerHTML = EP.kvCards([
+        ['总收益', EP.fmt.signedPct(m.total_return_pct)],
+        ['年化', EP.fmt.signedPct(m.annualized_pct)],
+        ['夏普', f2(m.sharpe)],
+        ['索提诺', f2(m.sortino)],
+        ['最大回撤', m.max_drawdown_pct == null ? '—' : '<span class="down">' + f2(m.max_drawdown_pct) + '%</span>'],
+        ['Calmar', f2(m.calmar)],
+        ['胜率', m.win_rate_pct == null ? '—' : m.win_rate_pct.toFixed(1) + '%'],
+        ['盈亏比', f2(m.profit_factor)],
+        ['超额(vs沪深300)', m.excess_pct == null ? '—' : EP.fmt.signedPct(m.excess_pct)],
+        ['Alpha(vs中证500)', m.alpha_pct == null ? '—' : EP.fmt.signedPct(m.alpha_pct) + '（β=' + f2(m.beta) + '）'],
+        ['买卖笔数', m.n_buy + ' / ' + m.n_sell],
+        ['覆盖', m.first_date + ' ~ ' + m.last_date + '（' + m.trading_days + ' 天）']
       ]);
-      var cov = d.coverage || [];
-      root.querySelector('#ed-coverage').innerHTML = cov.length
-        ? '<details><summary class="hint" style="cursor:pointer">覆盖度明细（' + cov.length + ' 项）</summary><div id="ed-cov-table"></div></details>' : '';
-      if (cov.length) {
-        EP.table(root.querySelector('#ed-cov-table'), cov,
-          Object.keys(cov[0]).slice(0, 8).map(function (k) {
-            return { key: k, label: k, num: typeof cov[0][k] === 'number' };
-          }), { height: 200, pageSize: 100 });
-      }
-      var active = root.querySelector('.subtabs a.active');
-      renderSub(root, active ? parseInt(active.dataset.sub, 10) : 0, d);
-  }
-
-  function bindData(root) {
-    EP.api('/api/expert-crawl/dates').then(function (d) {
-      var sel = root.querySelector('#ed-date');
-      if (!d.dates.length) {
-        sel.innerHTML = '<option>（无数据）</option>';
-        root.querySelector('#ed-summary').innerHTML = '<div class="empty">还没有数据 —— 先在上面触发一次爬取</div>';
-        return;
-      }
-      sel.innerHTML = d.dates.map(function (x) { return '<option>' + x + '</option>'; }).join('');
-      sel.onchange = function () { loadDay(root, sel.value); };
-      loadDay(root, d.dates[0]);
-    });
-    root.querySelectorAll('.subtabs a').forEach(function (a) {
-      a.onclick = function () {
-        root.querySelectorAll('.subtabs a').forEach(function (x) { x.classList.remove('active'); });
-        a.classList.add('active');
-        var d = S.cache[S.date];   // 用当日缓存渲染，不重复请求
-        if (d && d.date) renderSub(root, parseInt(a.dataset.sub, 10), d);
-      };
+      EP.table(drawer.querySelector('#ed-trades'), d.trades.slice().reverse(), [
+        { key: 'date', label: '日期' },
+        { key: 'code', label: '代码' },
+        { key: 'name', label: '名称' },
+        { key: 'side', label: '方向', fmt: function (v) {
+          return v === 'buy' ? '<span class="up">买入</span>' : (v === 'sell' ? '<span class="down">卖出</span>' : EP.fmt.esc(v)); } },
+        { key: 'price', label: '价格', num: true, fmt: function (v) { return EP.fmt.num(v); } },
+        { key: 'return_pct', label: '单笔%', num: true, fmt: EP.fmt.signedPct },
+        { key: 'signal_time', label: '信号时间', fmt: function (v) { return EP.fmt.esc((v || '').slice(-8)); } }
+      ], { height: 300, pageSize: 50, search: false });
+      drawCurve(drawer.querySelector('#ed-chart'), d.nav_daily, d.bench);
+    }).catch(function (e) {
+      drawer.innerHTML = '<div class="empty">' + EP.fmt.esc(e.message) + '</div>';
     });
   }
 
-  function refreshData(root) {
-    S.cache = {};   // 爬取产出新数据，清缓存强制重拉
-    EP.api('/api/expert-crawl/dates').then(function (d) {
-      if (!d.dates.length) return;
-      var sel = root.querySelector('#ed-date');
-      sel.innerHTML = d.dates.map(function (x) { return '<option>' + x + '</option>'; }).join('');
-      loadDay(root, d.dates[0], true);
+  function drawCurve(el, navDaily, bench) {
+    if (!navDaily || navDaily.length < 2) { el.innerHTML = '<div class="empty">交易日太少，画不出曲线</div>'; return; }
+    if (S.chart) { S.chart.dispose(); S.chart = null; }
+    var chart = echarts.init(el);
+    S.chart = chart;
+    var dates = navDaily.map(function (x) { return x.date; });
+    var base = navDaily[0].nav;
+    var navIdx = navDaily.map(function (x) { return +(x.nav / base * 100).toFixed(2); });
+    var bBase = bench && bench[dates[0]];
+    var benchIdx = bBase ? dates.map(function (d) { return bench[d] ? +(bench[d] / bBase * 100).toFixed(2) : null; }) : [];
+    chart.setOption({
+      tooltip: { trigger: 'axis' },
+      legend: { data: bBase ? ['跟随净值', '沪深300'] : ['跟随净值'], top: 0 },
+      grid: { left: 48, right: 12, top: 28, bottom: 24 },
+      xAxis: { type: 'category', data: dates, axisLabel: { fontSize: 10 } },
+      yAxis: { type: 'value', scale: true, axisLabel: { fontSize: 10 } },
+      series: [
+        { name: '跟随净值', type: 'line', data: navIdx, showSymbol: false, smooth: true,
+          lineStyle: { width: 2, color: '#f5222d' }, itemStyle: { color: '#f5222d' }, connectNulls: true },
+        { name: '沪深300', type: 'line', data: benchIdx, showSymbol: false, smooth: true,
+          lineStyle: { width: 1.5, type: 'dashed', color: '#999' }, itemStyle: { color: '#999' }, connectNulls: true }
+      ]
     });
-    EP.api('/api/system/info').then(function (d) {
-      root.querySelector('#eh-bulk-count').textContent = '当前已有 ' + d.bulk_files + ' 个组合文件';
+    window.addEventListener('resize', function () { chart.resize(); });
+  }
+
+  function bindEval(root) {
+    // 行内按钮用事件委托（表格筛选/排序会重渲染，逐元素绑定会丢）
+    root.querySelector('#ee-table').addEventListener('click', function (e) {
+      var w = e.target.closest('[data-watch]'), d = e.target.closest('[data-detail]');
+      if (w) { toggleWatch(w.dataset.watch, root); }
+      else if (d) { showDetail(root, d.dataset.detail); }
     });
+    root.querySelector('#ee-run').onclick = function () {
+      var btn = this; btn.disabled = true;
+      S.env = root.querySelector('#ee-env').value;
+      S.minSells = root.querySelector('#ee-min-sells').value;
+      S.sampleOnly = root.querySelector('#ee-sample-only').checked;
+      EP.api('/api/expert-crawl/evaluation/run', {
+        method: 'POST',
+        body: { env: S.env, min_sells: parseInt(S.minSells, 10) || 3, min_days: 20 }
+      }).then(function () {
+        EP.toast('评估已启动（后台运行，完成后自动刷新）');
+        bindJobs(root);
+        var timer = setInterval(function () {
+          EP.api('/api/expert-crawl/status').then(function (d) {
+            if (d.expert_eval && d.expert_eval.state !== 'running') {
+              clearInterval(timer);
+              btn.disabled = false;
+              if (d.expert_eval.state === 'error') { EP.toast('评估失败，看任务日志', 'error'); return; }
+              loadEval(root);
+              EP.toast('评估完成');
+            }
+          });
+        }, 3000);
+      }).catch(function (e) { EP.toast(e.message, 'error'); btn.disabled = false; });
+    };
+    root.querySelector('#ee-refresh').onclick = function () { loadEval(root); };
+    root.querySelector('#ee-min-sells').onchange = function () { S.minSells = this.value; applyFilters(); };
+    root.querySelector('#ee-sample-only').onchange = function () { S.sampleOnly = this.checked; applyFilters(); };
+    root.querySelector('#ee-env').onchange = function () { S.env = this.value; };
   }
 
   EP.loadExperts = function (root) {
-    root.innerHTML = crawlPanel() + historyPanel() + watchPanel() + dataPanel();
-    bindCrawl(root); bindJobs(root);
-    EP.logPanel(root.querySelector('#ec-log'), '/api/expert-crawl/log', 'crawl');
-    bindHistory(root); bindWatch(root); bindData(root);
+    root.innerHTML = crawlPanel() + backfillPanel() + evalPanel();
+    loadChannels(root);
+    bindCrawl(root); bindJobs(root); bindBackfill(root);
+    bindEval(root);
+    loadWatch(root);
+    loadEval(root);
   };
 })();

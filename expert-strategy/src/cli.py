@@ -226,6 +226,24 @@ def strategy_health() -> None:
         click.echo(f"  [{env}] ok={x.get('ok')} {x.get('reason') or x.get('source') or ''}")
 
 
+@cli.command("expert-eval")
+@click.option("--env", default="sim", show_default=True, help="sim=模拟盘流水+批量回补；live=实盘 rtV3 流水")
+@click.option("--start", default="", help="评估起点 YYYY-MM-DD，空=数据最早日")
+@click.option("--end", default="", help="评估截止 YYYY-MM-DD，空=数据最晚日")
+@click.option("--min-sells", type=int, default=3, show_default=True, help="样本充足的卖出笔数门槛")
+@click.option("--min-days", type=int, default=20, show_default=True, help="样本充足的覆盖交易日门槛")
+def expert_eval(env: str, start: str, end: str, min_sells: int, min_days: int) -> None:
+    """高手能力评估：逐高手镜像回测（夏普/索提诺/最大回撤/年化/胜率…），结果写 data/eval/。"""
+    from strategy import expert_eval as EE
+
+    out = EE.evaluate(env=env, start=start, end=end, min_sells=min_sells, min_days=min_days)
+    meta = out["meta"]
+    click.echo(f"run_id={out['run_id']} 入榜 {meta.get('n_experts')} 位，样本充足 {meta.get('n_sample_ok')} 位")
+    for r in out["rows"][:10]:
+        click.echo(f"  #{r['rank']:>3} {r['name']:<16} sharpe={r['sharpe']} "
+                   f"总收益={r['total_return_pct']}% 回撤={r['max_drawdown_pct']}% 卖出={r['n_sell']}")
+
+
 @cli.command("ui")
 @click.option("--port", default=8601, show_default=True, help="服务端口")
 @click.option("--host", default="127.0.0.1", show_default=True, help="监听地址")
