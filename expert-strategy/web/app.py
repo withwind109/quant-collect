@@ -44,6 +44,12 @@ async def _lifespan(app: FastAPI):
         account_manager.start_heartbeat()
     except Exception:  # noqa: BLE001  心跳失败不阻塞服务启动
         pass
+    # rtV3 关注调仓自动拉取：启动拉一次 + 每 8 小时滚动累积评估样本
+    try:
+        from web import scheduler
+        scheduler.start()
+    except Exception:  # noqa: BLE001  定时器失败不阻塞服务启动
+        pass
     yield
 
 

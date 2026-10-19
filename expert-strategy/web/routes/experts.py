@@ -19,6 +19,7 @@ GET  /api/expert-crawl/evaluation/detail   单高手明细（净值曲线+成交
 from __future__ import annotations
 
 import json
+from datetime import datetime
 from typing import Any, Dict, List
 
 from fastapi import APIRouter, HTTPException, Query
@@ -146,11 +147,19 @@ def _watch_rows(market_type: str = "live") -> List[Dict[str, Any]]:
     return rows
 
 
-def _persist_live_trades(records) -> int:
-    """rtV3 明细落库 crawl_trade（market_type=live，按 row_sig 幂等去重）。"""
+def _persist_live_trades(records, fetched_at: str = "", trigger: str = "manual") -> int:
+    """rtV3 明细落库 crawl_trade（market_type=live，按 row_sig 幂等去重）。
+
+    同时写一行 xcq_fetch_log（每次拉取动作一条，用于数据新鲜度展示——
+    去重导致 0 新增时 crawl_trade 里看不出"上次拉取时间"）。
+    """
     from core import db as DB
+    import uuid
+    fetched_at = fetched_at or datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     n = 0
+    eids: set = set()
     for r in records:
+        eids.add(r.expert_id)
         td = r.trade_date or ""
         if not td:
             continue
@@ -160,12 +169,42 @@ def _persist_live_trades(records) -> int:
             "INSERT OR IGNORE INTO crawl_trade (trade_date, source, asset_type, channel, expert_id, "
             "expert_name, owner, stock_code, stock_name, market, action, price, volume, amount, "
             "weight_before, weight_after, weight_label, return_rate, day_return_rate, trade_time, "
-            "raw_json, market_type, row_sig) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
+            "raw_json, market_type, row_sig, fetched_at) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
             (td, r.source, r.asset_type, r.channel, r.expert_id, r.expert_name, r.owner,
              r.stock_code, r.stock_name, r.market, r.action, r.price, r.volume, r.amount,
              r.weight_before, r.weight_after, r.weight_label, r.return_rate, r.day_return_rate,
-             r.trade_time, DB._j(r.raw), "live", sig))
+             r.trade_time, DB._j(r.raw), "live", sig, fetched_at))
+    for eid in eids:
+        DB.qexec("INSERT OR REPLACE INTO xcq_fetch_log (id, expert_id, market_type, fetched_at, "
+                 "n_total, n_new, trigger) VALUES (?,?,?,?,?,?,?)",
+                 (uuid.uuid4().hex, eid, "live", fetched_at, len(records), n, trigger))
     return n
+
+
+def fetch_live_trades(expert_ids: List[str] | None = None, trigger: str = "manual") -> Dict[str, Any]:
+    """拉取关注组合的 rtV3 调仓明细并累计入库（fetch-detail 路由 / 定时调度器共用）。
+
+    expert_ids 为空 = 拉全部 live 关注；返回 {ok, n, total, rows, msg}。
+    未登录或关注列表为空时 ok=False 且给出原因（调度器静默跳过，手动触发时提示用户）。
+    """
+    wl = _watch_rows("live")
+    eids = [e.strip() for e in (expert_ids or []) if e.strip()] or [r["expert_id"] for r in wl]
+    if not eids:
+        return {"ok": False, "msg": "关注列表为空", "n": 0, "total": 0, "rows": []}
+    src = _em_source()
+    from core.models import Expert
+    experts = [Expert(source="eastmoney", expert_id=eid,
+                      name=next((r["name"] for r in wl if r["expert_id"] == eid), eid))
+               for eid in eids]
+    records = src._spzh_trades(experts, target_date="")  # 不按日过滤 = 最近 40 条全量
+    n = _persist_live_trades(records, trigger=trigger)
+    rows = [{"expert_id": r.expert_id, "expert_name": r.expert_name,
+             "trade_date": r.trade_date, "trade_time": r.trade_time,
+             "stock_code": r.stock_code, "stock_name": r.stock_name,
+             "action": r.action, "price": r.price,
+             "weight_after": r.weight_after, "weight_label": r.weight_label or ""}
+            for r in records]
+    return {"ok": True, "n": n, "total": len(rows), "rows": rows}
 
 
 @router.get("/watchlist")
@@ -249,27 +288,52 @@ class FetchDetailBody(BaseModel):
 @router.post("/watchlist/fetch-detail")
 async def watch_fetch_detail(body: FetchDetailBody) -> Dict[str, Any]:
     """拉取关注组合的最近调仓明细（rtV3，最近 40 条/组合），入库 crawl_trade(live)。"""
-    wl = _watch_rows("live")
-    if body.expert_id.strip():
-        eids = [body.expert_id.strip()]
-    else:
-        eids = [r["expert_id"] for r in wl]
-    if not eids:
-        return {"ok": True, "msg": "关注列表为空", "n": 0, "rows": []}
-    src = _em_source()
-    from core.models import Expert
-    experts = [Expert(source="eastmoney", expert_id=eid,
-                      name=next((r["name"] for r in wl if r["expert_id"] == eid), eid))
-               for eid in eids]
-    records = src._spzh_trades(experts, target_date="")  # 不按日过滤 = 最近 40 条全量
-    n = _persist_live_trades(records)
-    rows = [{"expert_id": r.expert_id, "expert_name": r.expert_name,
-             "trade_date": r.trade_date, "trade_time": r.trade_time,
-             "stock_code": r.stock_code, "stock_name": r.stock_name,
-             "action": r.action, "price": r.price,
-             "weight_after": r.weight_after, "weight_label": r.weight_label or ""}
-            for r in records]
-    return {"ok": True, "n": n, "total": len(rows), "rows": rows}
+    eids = [body.expert_id.strip()] if body.expert_id.strip() else None
+    try:
+        d = fetch_live_trades(eids, trigger="manual")
+    except HTTPException:
+        raise
+    except Exception as exc:  # noqa: BLE001
+        raise HTTPException(502, f"rtV3 拉取失败: {exc}") from exc
+    return d
+
+@router.get("/watchlist/freshness")
+async def watch_freshness() -> Dict[str, Any]:
+    """关注组合的调仓数据新鲜度（评估列表展示 + 过旧提醒）。
+
+    数据口径：crawl_trade 的最近调仓日期/条数 + xcq_fetch_log 的最近拉取时间。
+    stale 规则：从未拉取，或最近拉取距今 >7 天（评估样本可能已断更）。
+    """
+    from core.db import q, qone
+    _db()
+    out: List[Dict[str, Any]] = []
+    for r in _watch_rows("live"):
+        eid = r["expert_id"]
+        st = qone("SELECT MAX(trade_date) AS last_date, COUNT(*) AS n FROM crawl_trade "
+                  "WHERE market_type='live' AND expert_id=?", (eid,)) or {}
+        fl = qone("SELECT fetched_at FROM xcq_fetch_log WHERE market_type='live' AND expert_id=? "
+                  "ORDER BY fetched_at DESC LIMIT 1", (eid,))
+        fetched_at = (fl or {}).get("fetched_at")
+        last_date = st.get("last_date")
+        hours_ago = days_since_trade = None
+        now = datetime.now()
+        if fetched_at:
+            try:
+                hours_ago = round((now - datetime.strptime(fetched_at, "%Y-%m-%d %H:%M:%S")).total_seconds() / 3600, 1)
+            except ValueError:
+                pass
+        if last_date:
+            try:
+                from datetime import date as _d
+                days_since_trade = (_d.today() - _d.fromisoformat(last_date)).days
+            except ValueError:
+                pass
+        stale = fetched_at is None or (hours_ago is not None and hours_ago > 24 * 7)
+        out.append({"expert_id": eid, "name": r.get("name") or "",
+                    "n_trades": st.get("n") or 0, "last_trade_date": last_date,
+                    "days_since_trade": days_since_trade,
+                    "fetched_at": fetched_at, "hours_since_fetch": hours_ago, "stale": stale})
+    return {"ok": True, "rows": out}
 
 
 @router.get("/sources")
@@ -292,7 +356,9 @@ async def live_experts(board: str = Query("total"), limit: int = Query(50, le=20
     latest = qone("SELECT MAX(trade_date) AS d FROM crawl_expert WHERE market_type='live'")
     latest = (latest or {}).get("d")
     if not latest:
-        return {"ok": True, "latest_date": None, "rows": []}
+        return {"ok": True, "latest_date": None, "fetched_at": None, "rows": []}
+    fetched_at = (qone("SELECT MAX(fetched_at) AS t FROM crawl_expert "
+                       "WHERE trade_date=? AND market_type='live'", (latest,)) or {}).get("t")
     raw = q("SELECT expert_id, name, owner, followers, return_rate, extra_json "
             "FROM crawl_expert WHERE trade_date=? AND market_type='live'", (latest,))
     out = []
@@ -361,7 +427,7 @@ async def live_experts(board: str = Query("total"), limit: int = Query(50, le=20
                         "action": t.get("action"), "price": t.get("price")}
                        for t in (recent.get(x["expert_id"]) or [])]
         x["watched"] = x["expert_id"] in watched
-    return {"ok": True, "latest_date": latest, "rows": rows}
+    return {"ok": True, "latest_date": latest, "fetched_at": fetched_at, "rows": rows}
 
 
 class BoardRefreshBody(BaseModel):
@@ -391,6 +457,7 @@ async def live_experts_refresh(body: BoardRefreshBody) -> Dict[str, Any]:
     from core.db import qone, qexec
     _db()
     today = _d.today().isoformat()
+    now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     updated = inserted = 0
     for e in experts:
         extra_new = dict(e.extra or {})
@@ -404,9 +471,9 @@ async def live_experts_refresh(body: BoardRefreshBody) -> Dict[str, Any]:
                 extra = {}
             extra.update(extra_new)
             # 总榜才覆盖累计收益；日榜只补当日收益，不动已有累计口径
-            sets = ["name=?", "owner=?", "followers=?", "extra_json=?"]
+            sets = ["name=?", "owner=?", "followers=?", "extra_json=?", "fetched_at=?"]
             args: list = [e.name, e.owner, e.followers or 0,
-                          json.dumps(extra, ensure_ascii=False)]
+                          json.dumps(extra, ensure_ascii=False), now]
             if e.return_rate is not None:
                 sets.append("return_rate=?")
                 args.append(e.return_rate)
@@ -417,14 +484,14 @@ async def live_experts_refresh(body: BoardRefreshBody) -> Dict[str, Any]:
         else:
             qexec("""INSERT INTO crawl_expert
                  (trade_date, source, asset_type, channel, expert_id, name, owner, rank_label,
-                  followers, return_rate, total_return, extra_json, market_type)
-                 VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)""",
+                  followers, return_rate, total_return, extra_json, market_type, fetched_at)
+                 VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)""",
               (today, e.source, e.asset_type, e.channel, e.expert_id, e.name, e.owner,
                e.rank_label, e.followers or 0, e.return_rate, None,
-               json.dumps(extra_new, ensure_ascii=False), e.market_type))
+               json.dumps(extra_new, ensure_ascii=False), e.market_type, now))
             inserted += 1
     return {"ok": True, "board": body.board, "fetched": len(experts),
-            "updated": updated, "inserted": inserted}
+            "updated": updated, "inserted": inserted, "fetched_at": now}
 
 
 # ── 高手能力评估 ─────────────────────────────────────────────────────────────

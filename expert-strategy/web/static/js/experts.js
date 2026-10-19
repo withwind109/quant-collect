@@ -10,6 +10,8 @@
     env: 'live',           // 评估数据环境：仅实盘（模拟盘通道已删除）
     minSells: 3,
     sampleOnly: true,
+    watchOnly: true,       // 评估列表默认只看关注的高手
+    fresh: {},             // expert_id -> 新鲜度 {last_trade_date,fetched_at,stale,...}
     eval: null,        // 最新一次评估结果（/evaluation）
     wl: {},            // expert_id -> {name,note,created_at,__mt}
     chart: null        // 明细抽屉的 ECharts 实例
@@ -58,7 +60,7 @@
       '<div style="background:var(--c-border);border-radius:6px;height:8px;overflow:hidden">' +
       '<div id="eb-bar" style="height:100%;width:0;background:var(--c-primary);transition:width .3s"></div></div>' +
       '<div class="hint" id="eb-progress-text" style="margin-top:4px"></div></div>' +
-      '<div id="eb-table" style="margin-top:10px"><div class="empty">点击「⬇ 加载最新」从东财实时拉取榜单，或「↻ 从本地刷新」查看已爬取数据</div></div></div>';
+      '<div id="eb-table" style="margin-top:10px"><div class="empty">正在从本地加载数据…</div></div></div>';
   }
 
   function opSummary(r) {
@@ -83,7 +85,8 @@
         box.innerHTML = '<div class="empty">本地暂无实盘榜数据——点「⬇ 加载最新」从东财拉取</div>';
         return;
       }
-      root.querySelector('#eb-meta').textContent = '数据日期 ' + d.latest_date;
+      root.querySelector('#eb-meta').textContent = '数据日期 ' + d.latest_date +
+        (d.fetched_at ? ' · 榜单拉取于 ' + d.fetched_at : '');
       var rows = d.rows.map(function (r, i) { r.rank = i + 1; return r; });
       EP.table(box, rows, [
         { key: 'rank', label: '#', num: true, fmt: num0 },
@@ -288,6 +291,8 @@
       [1, 3, 5, 10, 20].map(function (n) { return '<option value="' + n + '"' + (n === 3 ? ' selected' : '') + '>' + n + '</option>'; }).join('') +
       '</select></div>' +
       '<div class="field"><label>&nbsp;</label><label style="display:flex;align-items:center;gap:6px;cursor:pointer">' +
+      '<input type="checkbox" id="ee-watch-only" checked> 只看关注</label></div>' +
+      '<div class="field"><label>&nbsp;</label><label style="display:flex;align-items:center;gap:6px;cursor:pointer">' +
       '<input type="checkbox" id="ee-sample-only" checked> 只看样本充足</label></div>' +
       '<div class="field"><label>&nbsp;</label><button class="btn primary" id="ee-run">▶ 开始评估</button>' +
       '<button class="btn" id="ee-refresh" style="margin-left:6px">刷新结果</button></div>' +
@@ -296,6 +301,24 @@
 
   function num0(v) { return EP.fmt.num(v, 0); }
   function f2(v) { return v == null ? '—' : Number(v).toFixed(2); }
+
+  /* 数据新鲜度单元格：最近调仓日期 + 最近一次 rtV3 拉取时间，过旧标红 */
+  function freshCell(v) {
+    var f = S.fresh[v];
+    if (!f) return '<span class="hint">—</span>';
+    if (!f.fetched_at) return EP.badge('未拉取', 'red');
+    var ago = '';
+    if (f.hours_since_fetch != null) {
+      ago = f.hours_since_fetch < 1 ? Math.max(1, Math.round(f.hours_since_fetch * 60)) + '分钟前'
+          : (f.hours_since_fetch < 24 ? f.hours_since_fetch.toFixed(1) + '小时前'
+          : Math.round(f.hours_since_fetch / 24) + '天前');
+    }
+    var html = EP.badge(f.stale ? '过旧' : '已更新', f.stale ? 'red' : 'green') +
+      '<div style="font-size:12px;margin-top:2px">最近调仓 ' + EP.fmt.esc(f.last_trade_date || '—') +
+      (f.days_since_trade != null ? '（' + f.days_since_trade + ' 天前）' : '') + '</div>' +
+      '<div class="hint" style="font-size:11px">拉取于 ' + EP.fmt.esc(f.fetched_at) + (ago ? '（' + ago + '）' : '') + '</div>';
+    return html;
+  }
 
   var EVAL_COLS = [
     { key: 'rank', label: '#', num: true, fmt: num0 },
@@ -313,11 +336,13 @@
     { key: 'n_sell', label: '卖出', num: true, fmt: num0 },
     { key: 'trading_days', label: '覆盖天数', num: true, fmt: num0 },
     { key: 'sample_ok', label: '样本', fmt: function (v) { return v ? EP.badge('充足', 'green') : EP.badge('不足', 'gray'); } },
+    { key: 'expert_id', label: '数据新鲜度', fmt: freshCell },
     { key: 'expert_id', label: '操作', html: function (v) {
       var watched = !!S.wl[v];
       return '<button class="btn sm ' + (watched ? '' : 'primary') + '" data-watch="' + EP.fmt.esc(v) + '">' +
         (watched ? '✓ 已关注' : '＋ 关注') + '</button> ' +
-        '<button class="btn sm" data-detail="' + EP.fmt.esc(v) + '">明细</button>'; } }
+        '<button class="btn sm" data-detail="' + EP.fmt.esc(v) + '">明细</button>' +
+        (watched ? ' <button class="btn sm" data-efetch="' + EP.fmt.esc(v) + '" title="重新拉取该高手的 rtV3 调仓明细">⟳ 更新</button>' : ''); } }
   ];
 
   function evalSummary(d) {
@@ -341,8 +366,10 @@
     var t = EP._tables['ee-table'];
     if (!t || !S.eval) return;
     var min = parseInt(S.minSells, 10) || 1;
+    var hasWatch = Object.keys(S.wl).some(function (id) { return S.wl[id] && S.wl[id].__mt === 'live'; });
     t.setRows(S.eval.rows.filter(function (r) {
-      return (!S.sampleOnly || r.sample_ok) && (r.n_sell || 0) >= min;
+      var watchOk = !S.watchOnly || !hasWatch || (S.wl[r.expert_id] && S.wl[r.expert_id].__mt === 'live');
+      return watchOk && (!S.sampleOnly || r.sample_ok) && (r.n_sell || 0) >= min;
     }));
   }
 
@@ -377,7 +404,30 @@
       });
       renderWatchlist(root);
       renderWatchTable(root);
+      loadFresh(root);
     }).catch(function () {});
+  }
+
+  /* 关注组合调仓数据新鲜度（评估表「数据新鲜度」列 + 过旧提醒） */
+  function loadFresh(root) {
+    return EP.api('/api/expert-crawl/watchlist/freshness').then(function (d) {
+      S.fresh = {};
+      (d.rows || []).forEach(function (r) { S.fresh[r.expert_id] = r; });
+      applyFilters();   // setRows 会整表重渲染，新鲜度列随之刷新
+      renderWatchTable(root);
+    }).catch(function () {});
+  }
+
+  /* 单个关注高手手动更新 rtV3 调仓明细（评估表行内「⟳ 更新」） */
+  function updateExpertTrades(root, expertId) {
+    var nm = (S.wl[expertId] && S.wl[expertId].name) || expertId;
+    EP.toast('正在拉取「' + nm + '」的 rtV3 调仓…');
+    EP.api('/api/expert-crawl/watchlist/fetch-detail',
+           { method: 'POST', body: { expert_id: expertId } })
+      .then(function (d) {
+        EP.toast('更新完成：拉到 ' + d.total + ' 条，新入库 ' + d.n + ' 条');
+        loadFresh(root);
+      }).catch(function (e) { EP.toast(e.message, 'error'); });
   }
 
   function renderWatchlist(root) {
@@ -514,9 +564,11 @@
   function bindEval(root) {
     // 行内按钮用事件委托（表格筛选/排序会重渲染，逐元素绑定会丢）
     root.querySelector('#ee-table').addEventListener('click', function (e) {
-      var w = e.target.closest('[data-watch]'), d = e.target.closest('[data-detail]');
+      var w = e.target.closest('[data-watch]'), d = e.target.closest('[data-detail]'),
+          ef = e.target.closest('[data-efetch]');
       if (w) { toggleWatch(w.dataset.watch, root); }
       else if (d) { showDetail(root, d.dataset.detail); }
+      else if (ef) { updateExpertTrades(root, ef.dataset.efetch); }
     });
     root.querySelector('#ee-run').onclick = function () {
       var btn = this; btn.disabled = true;
@@ -542,17 +594,20 @@
       }).catch(function (e) { EP.toast(e.message, 'error'); btn.disabled = false; });
     };
     root.querySelector('#ee-refresh').onclick = function () { loadEval(root); };
+    root.querySelector('#ee-watch-only').onchange = function () { S.watchOnly = this.checked; applyFilters(); };
     root.querySelector('#ee-min-sells').onchange = function () { S.minSells = this.value; applyFilters(); };
     root.querySelector('#ee-sample-only').onchange = function () { S.sampleOnly = this.checked; applyFilters(); };
   }
 
   EP.loadExperts = function (root) {
     /* 2026-10-19 二次重构：渠道tab → ①实盘高手榜(手动加载) → ②关注列表 → ③能力评估；
-       「分渠道数据爬取」卡及其后端 /run /channels 接口已随页面重构删除——爬取入口
-       统一收口为榜单「加载最新」+ 关注列表「拉取调仓明细」；模拟盘通道（含历史回补）已删除。 */
+       榜单数据持久化在 crawl_expert（带 fetched_at），页面加载即从本地渲染——
+       刷新不丢；「加载最新」只用于从东财拉新。rtV3 调仓由调度器自动累积（启动+每8h），
+       评估列表默认只看关注 + 数据新鲜度 + 行内手动更新。 */
     root.innerHTML = channelTabs() + boardPanel() + watchPanel() + evalPanel();
     bindChannelTabs(root);
-    bindLiveExperts(root);           // 榜单不自动加载，等用户点「⬇ 加载最新」
+    bindLiveExperts(root);
+    loadLiveExperts(root);           // 榜单持久化在本地，进页面直接渲染
     bindWatchCard(root);
     bindEval(root);
     bindJobs(root);

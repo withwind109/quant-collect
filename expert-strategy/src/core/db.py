@@ -30,11 +30,12 @@ from loguru import logger
 # ── 表定义（列名与 MySQL 版一致，JSON 列用 TEXT 存 json 字符串） ────────────
 TABLES: Dict[str, List[str]] = {
     "expert": ["trade_date", "source", "asset_type", "channel", "expert_id", "name", "owner",
-               "rank_label", "followers", "return_rate", "total_return", "extra_json", "market_type"],
+               "rank_label", "followers", "return_rate", "total_return", "extra_json", "market_type",
+               "fetched_at"],
     "trade": ["trade_date", "source", "asset_type", "channel", "expert_id", "expert_name", "owner",
               "stock_code", "stock_name", "market", "action", "price", "volume", "amount",
               "weight_before", "weight_after", "weight_label", "return_rate", "day_return_rate",
-              "trade_time", "raw_json", "market_type", "row_sig"],
+              "trade_time", "raw_json", "market_type", "row_sig", "fetched_at"],
     "aggregate": ["trade_date", "stock_code", "asset_type", "stock_name", "buy_experts", "buy_records",
                   "sources_json", "avg_price", "amount", "latest_time", "net_amount", "note"],
     "expert_buy": ["trade_date", "source", "asset_type", "channel", "expert_id", "expert_name", "owner",
@@ -104,12 +105,31 @@ def ensure_schema(db_path: Path | str) -> bool:
             with conn:
                 for ddl in _build_ddl():
                     conn.execute(ddl)
+                _migrate_add_columns(conn)
+                conn.execute(
+                    'CREATE TABLE IF NOT EXISTS "xcq_fetch_log" ('
+                    '"id" TEXT PRIMARY KEY, "expert_id" TEXT NOT NULL, "market_type" TEXT NOT NULL, '
+                    '"fetched_at" TEXT NOT NULL, "n_total" INTEGER DEFAULT 0, "n_new" INTEGER DEFAULT 0, '
+                    '"trigger" TEXT DEFAULT \'manual\')')
         finally:
             conn.close()
         return True
     except Exception as exc:  # noqa: BLE001
         logger.error(f"[db] SQLite 建表失败 {db_path}: {exc}")
         return False
+
+
+def _migrate_add_columns(conn: sqlite3.Connection) -> None:
+    """旧库补列：TABLES 增列后对已有表 ALTER TABLE ADD COLUMN（幂等）。"""
+    for suffix, cols in TABLES.items():
+        tname = _table_name(suffix)
+        have = {r[1] for r in conn.execute(f'PRAGMA table_info("{tname}")').fetchall()}
+        if not have:
+            continue
+        for c in cols:
+            if c not in have:
+                conn.execute(f'ALTER TABLE "{tname}" ADD COLUMN "{c}" TEXT')
+                logger.info(f"[db] 迁移：{tname} 补列 {c}")
 
 
 @contextmanager
