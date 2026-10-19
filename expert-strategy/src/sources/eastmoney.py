@@ -104,6 +104,8 @@ class EastmoneySource(BaseSource):
         self.device_id = spzh_device_id
         self.app_version = spzh_app_version
         self.rn_version = spzh_rn_version
+        #: 最近一次关注/取消关注/取数失败的原因（路由直接透出给页面，不再是只写日志）
+        self.last_error = ""
         # 用户关注的实盘组合常驻列表: [{"expert_id": "900457430", "name": "狐狸大王呀"}, ...]
         # rtV3 明细仅对关注者开放, 这些组合可能不在任何榜单上, 必须显式带上 [2026-09-25]
         self.spzh_follow = [
@@ -258,6 +260,7 @@ class EastmoneySource(BaseSource):
     def _srtv1(self, action: str, cid: str) -> bool:
         if not self.has_spzh_token:
             raise RuntimeError("东财未登录（缺 APP 令牌），无法操作关注——请先到账户中心扫码")
+        self.last_error = ""
         # srtV1 是 GET 接口，不能走 rtV3 的 POST 信封；与 rtV3 同样用独立 curl 后端
         if getattr(self, "_srtv1_http", None) is None:
             from core.http import HttpClient
@@ -269,11 +272,20 @@ class EastmoneySource(BaseSource):
         ) or {}
         ok = str(data.get("result")) == "0"
         if not ok:
+            # 实测 -10312 = 「组合加自选失败」：组合被主人隐藏/关闭关注时连关注都做不了
+            self.last_error = f"{(data.get('result') or '').strip()} {(data.get('message') or '').strip()}".strip()
             logger.warning(f"[东财] srtV1 {action} {cid} 失败: {data}")
         return ok
 
     # ── 5. 实盘组合调仓（可选，需 APP 令牌）──────────────────
-    def _spzh_trades(self, experts: list[Expert], target_date: str) -> list[TradeRecord]:
+    def _spzh_trades(self, experts: list[Expert], target_date: str,
+                     status: dict | None = None) -> list[TradeRecord]:
+        """拉取组合最近 40 条调仓。
+
+        status（可选）会被填成 {expert_id: {"code", "message", "n"}}——成功 code=0，
+        失败带平台原始 code（30001 未授权公开 / 9061 组合不存在 / 9035 关注关系不存在…）。
+        调用方据此落库 xcq_combo_status，页面才能区分「没拉」和「平台不给」。
+        """
         out: list[TradeRecord] = []
         n_fail = 0
         for exp in experts:
@@ -287,13 +299,22 @@ class EastmoneySource(BaseSource):
             except Exception as exc:
                 logger.warning(f"[东财] rtV3 调仓请求失败 {exp.expert_id}：{exc}")
                 n_fail += 1
+                if status is not None:
+                    status[exp.expert_id] = {"code": -1, "message": f"请求异常: {exc}", "n": 0}
                 continue
             if (resp or {}).get("code") != 0:
                 # 单个组合失败 (未关注/临时错误) 跳过继续, 不再中断整轮扫描 [2026-09-28]
-                logger.warning(f"[东财] rtV3 {exp.expert_id} 返回 {(resp or {}).get('code')}: {(resp or {}).get('message')}")
+                code = (resp or {}).get("code")
+                msg = (resp or {}).get("message") or ""
+                logger.warning(f"[东财] rtV3 {exp.expert_id} 返回 {code}: {msg}")
                 n_fail += 1
+                if status is not None:
+                    status[exp.expert_id] = {"code": code, "message": msg, "n": 0}
                 continue
-            for it in _as_list(resp.get("data")):
+            items = _as_list(resp.get("data"))
+            if status is not None:
+                status[exp.expert_id] = {"code": 0, "message": resp.get("message") or "", "n": len(items)}
+            for it in items:
                 # rtV3 实际字段 [2026-09-25 实测]: bizDate/relocateTime/stkCode/stkName/
                 # relocateQty/bsMark(B|S)/relocatePrice/positionRatio("3成"/"9成以上")
                 norm = _normalize_date(it.get("bizDate") or it.get("date") or it.get("tradeDate"))

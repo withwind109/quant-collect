@@ -11,6 +11,7 @@
     minSells: 3,
     watchOnly: true,       // 评估列表默认只看关注的高手
     fresh: {},             // expert_id -> 新鲜度 {last_trade_date,fetched_at,stale,...}
+    boardRows: null,   // ① 榜当前渲染的榜单行（用于提示「已关注但不在榜」）
     eval: null,        // 最新一次评估结果（/evaluation）
     wl: {},            // expert_id -> {name,note,created_at,__mt}
     chart: null        // 明细抽屉的 ECharts 实例
@@ -57,7 +58,8 @@
       '<div style="background:var(--c-border);border-radius:6px;height:8px;overflow:hidden">' +
       '<div id="eb-bar" style="height:100%;width:0;background:var(--c-primary);transition:width .3s"></div></div>' +
       '<div class="hint" id="eb-progress-text" style="margin-top:4px"></div></div>' +
-      '<div id="eb-table" style="margin-top:10px"><div class="empty">正在从本地加载数据…</div></div></div>';
+      '<div id="eb-table" style="margin-top:10px"><div class="empty">正在从本地加载数据…</div></div>' +
+      '<div id="eb-offboard"></div></div>';
   }
 
   function opSummary(r) {
@@ -107,7 +109,26 @@
             (watched ? '✓ 已关注' : '＋ 关注') + '</button>' +
             (watched ? ' <button class="btn sm" data-eb-fetch="' + EP.fmt.esc(v) + '">拉明细</button>' : ''); } }
       ], { height: 560, pageSize: 50 });
+      S.boardRows = rows;
+      renderOffboard(root);
     }).catch(function (e) { box.innerHTML = '<div class="hint">' + EP.fmt.esc(e.message) + '</div>'; });
+  }
+
+  /* 已关注但不在榜：榜单只覆盖东财排行前几百，不在榜 ≠ 不存在（用户常在这里迷路） */
+  function renderOffboard(root) {
+    var offEl = root.querySelector('#eb-offboard');
+    if (!offEl) return;
+    var onBoard = {};
+    (S.boardRows || []).forEach(function (r) { onBoard[r.expert_id] = 1; });
+    var off = Object.keys(S.wl).filter(function (id) {
+      return S.wl[id] && S.wl[id].__mt === 'live' && !onBoard[id];
+    });
+    offEl.innerHTML = off.length
+      ? '<div class="hint" style="margin-top:6px">另有 <b>' + off.length + '</b> 个已关注组合不在本榜（榜单只含东财排行前几百）：' +
+        off.map(function (id) {
+          return EP.fmt.esc((S.wl[id] && S.wl[id].name) || id) + '（' + EP.fmt.esc(id) + '）';
+        }).join('、') + '——它们仍会参与评估，取数情况见 ② 关注列表。</div>'
+      : '';
   }
 
   function setProgress(root, pct, text) {
@@ -179,12 +200,30 @@
     return '<div class="card"><h3>② 关注列表 <span class="hint" style="font-weight:400">（东财实盘 · rtV3 调仓明细仅对关注者开放）</span></h3>' +
       '<div class="card-sub">流程：爬榜单 → 在获取的高手里点「关注」→ 这里「拉取调仓明细」入库 → 实盘环境评估即可用。' +
       'live 关注会在<b>东财账号上代为关注</b>该组合（取消时同步取消）；也可以「同步东财关注」把 APP 里已关注的组合拉回来。</div>' +
+      '<div class="card-sub" style="margin-top:6px">组合不在榜上（或 APP 里能看到、这里搜不到）时，直接填<b>组合号</b>手动关注——' +
+      '榜单最多只覆盖东财排行前几百个组合，不在榜 ≠ 不存在。</div>' +
       '<div class="row" style="margin-top:10px">' +
-      '<button class="btn" id="ew-sync">↻ 同步东财关注</button>' +
-      '<button class="btn primary" id="ew-fetch" style="margin-left:6px">▶ 拉取全部关注调仓</button>' +
-      '<span class="hint" id="ew-meta" style="margin-left:8px"></span></div>' +
+      '<div class="field"><label>组合号</label><input class="input" id="ew-new-id" placeholder="如 900407488" style="width:150px"></div>' +
+      '<div class="field"><label>备注名（可选）</label><input class="input" id="ew-new-name" placeholder="如 凡人炒股" style="width:150px"></div>' +
+      '<div class="field"><label>&nbsp;</label><button class="btn primary" id="ew-add">＋ 手动关注</button></div>' +
+      '<div class="field"><label>&nbsp;</label><button class="btn" id="ew-sync">↻ 同步东财关注</button></div>' +
+      '<div class="field"><label>&nbsp;</label><button class="btn" id="ew-fetch">▶ 拉取全部关注调仓</button></div>' +
+      '<span class="hint" id="ew-meta" style="margin-left:8px;align-self:flex-end"></span></div>' +
+      '<div id="ew-probe" style="margin-top:6px"></div>' +
       '<div id="ew-table" style="margin-top:10px"></div>' +
       '<div id="ew-result" style="margin-top:10px"></div></div>';
+  }
+
+  /* 组合取数状态 → 一格人话（平台侧拒绝时给出原始 code，便于对账） */
+  function comboStatusCell(v, r) {
+    var code = r.status_code;
+    if (code == null) return '<span class="hint">未探测</span>';
+    if (code === 0) return EP.badge('正常', 'green');
+    var tip = EP.fmt.esc((r.status_msg || '') + (r.status_at ? '（' + r.status_at + ' 探测）' : ''));
+    var short = { 30001: '未授权公开', 9061: '组合不存在', 9062: '组合已隐藏',
+                  9035: '未关注', '-1': '请求异常' }[String(code)] || (r.status_msg || '失败');
+    return '<span title="' + tip + '">' + EP.badge('⛔ ' + short, 'red') + '</span>' +
+      '<div class="hint" style="font-size:11px">code ' + EP.fmt.esc(String(code)) + '</div>';
   }
 
   function renderWatchTable(root) {
@@ -192,17 +231,25 @@
     if (!el) return;
     var live = Object.keys(S.wl).filter(function (id) { return S.wl[id] && S.wl[id].__mt === 'live'; });
     if (!live.length) {
-      el.innerHTML = '<div class="hint">关注列表为空——在下方评估表/明细抽屉里点「＋ 关注」（实盘环境），或「同步东财关注」</div>';
+      el.innerHTML = '<div class="hint">关注列表为空——在上面填组合号手动关注，或在评估表里点「＋ 关注」，或「同步东财关注」</div>';
       return;
     }
     var rows = live.map(function (id) {
       var w = S.wl[id];
-      return { expert_id: id, name: w.name || id, note: w.note || '', created_at: w.created_at || '' };
+      return { expert_id: id, name: w.name || id, note: w.note || '', created_at: w.created_at || '',
+               status_code: w.status_code, status_msg: w.status_msg, status_at: w.status_at };
     });
     EP.table(el, rows, [
-      { key: 'name', label: '组合', fmt: function (v, r) { return '<b>' + EP.fmt.esc(v) + '</b>'; } },
+      { key: 'name', label: '组合', fmt: function (v, r) {
+        return '<b>' + EP.fmt.esc(v) + '</b>' +
+          (!v || v === r.expert_id ? ' <span class="hint" style="font-size:11px">（平台未提供名称）</span>' : ''); } },
       { key: 'expert_id', label: '组合号' },
-      { key: 'note', label: '来源', fmt: function (v) { return EP.fmt.esc(v || '—'); } },
+      { key: 'status_code', label: '取数状态', fmt: function (v, r) { return comboStatusCell(v, r); } },
+      { key: 'note', label: '来源', fmt: function (v) {
+        var t = String(v || ''); 
+        return t.indexOf('东财拒绝') === 0
+          ? '<span class="down" title="' + EP.fmt.esc(t) + '">关注被拒</span>'
+          : EP.fmt.esc(v || '—'); } },
       { key: 'created_at', label: '关注时间', fmt: function (v) { return EP.fmt.ts(v); } },
       { key: 'expert_id', label: '操作', html: function (v) {
         return '<button class="btn sm" data-ew-fetch="' + EP.fmt.esc(v) + '">拉取调仓明细</button> ' +
@@ -215,8 +262,22 @@
     box.innerHTML = '<div class="hint">拉取 rtV3 调仓明细中…（每个组合最近 40 条）</div>';
     EP.api('/api/expert-crawl/watchlist/fetch-detail', { method: 'POST',
       body: { expert_id: expertId || '' } }).then(function (d) {
-      if (!d.rows || !d.rows.length) { box.innerHTML = '<div class="hint">没有拉到调仓记录（今日无调仓或组合异常）</div>'; return; }
-      box.innerHTML = '<div class="hint">本次拉取 <b>' + d.total + '</b> 条（新入库 ' + d.n + ' 条，重复自动去重）</div><div id="ew-dtable"></div>';
+      var blocked = d.blocked || [];
+      var bHtml = '';
+      if (blocked.length) {
+        bHtml = '<div class="hint" style="color:var(--c-danger);margin-bottom:6px">⚠️ ' + blocked.length +
+          ' 个组合被平台拒绝取数：' + blocked.map(function (b) {
+            return '<b>' + EP.fmt.esc(b.name || b.expert_id) + '</b>（' + EP.fmt.esc(String(b.code)) +
+              ' ' + EP.fmt.esc(b.message || '') + '）';
+          }).join('；') + '</div>';
+      }
+      if (!d.rows || !d.rows.length) {
+        box.innerHTML = bHtml + '<div class="hint">没有拉到调仓记录' +
+          (bHtml ? '——原因见上（组合被主人隐藏/未授权公开时，rtV3 永远不会返回数据）。' : '（今日无调仓或组合异常）。') + '</div>';
+        loadWatch(root);
+        return;
+      }
+      box.innerHTML = bHtml + '<div class="hint">本次拉取 <b>' + d.total + '</b> 条（新入库 ' + d.n + ' 条，重复自动去重）</div><div id="ew-dtable"></div>';
       EP.table(box.querySelector('#ew-dtable'), d.rows, [
         { key: 'expert_name', label: '组合' },
         { key: 'trade_date', label: '日期' },
@@ -231,7 +292,39 @@
     }).catch(function (e) { box.innerHTML = '<div class="hint">' + EP.fmt.esc(e.message) + '</div>'; });
   }
 
+  /* 手动按组合号关注：先探测（组合是否存在/可取数），再落到关注列表。
+     解决「APP 里能看到这个人、榜上却没有 → 页面根本没法关注」的问题。 */
+  function manualAddWatch(root) {
+    var idEl = root.querySelector('#ew-new-id'), nmEl = root.querySelector('#ew-new-name');
+    var box = root.querySelector('#ew-probe');
+    var eid = (idEl.value || '').trim();
+    if (!/^\d{4,}$/.test(eid)) { EP.toast('请填纯数字组合号，如 900407488', 'error'); return; }
+    box.innerHTML = '<div class="hint">探测组合 ' + EP.fmt.esc(eid) + ' …</div>';
+    EP.api('/api/expert-crawl/watchlist/probe?expert_id=' + encodeURIComponent(eid)).then(function (p) {
+      var verdict = (p.code === 0)
+        ? '<span class="up">可取数（' + p.n_rows + ' 条）</span>'
+        : '<span class="down">⛔ ' + EP.fmt.esc(p.message || '取数被拒') + '（code ' + EP.fmt.esc(String(p.code)) + '）</span>';
+      box.innerHTML = '<div class="hint">组合：<b>' + EP.fmt.esc(p.name || eid) + '</b>' +
+        (p.owner ? ' · 主人 ' + EP.fmt.esc(p.owner) : '') +
+        (p.followers ? ' · 关注 ' + EP.fmt.esc(String(p.followers)) : '') + ' · ' + verdict +
+        (p.code === 0 ? '' : '<br>仍可加入关注列表（本地保留，平台放开隐私后会自动恢复取数）。') + '</div>';
+      return EP.api('/api/expert-crawl/watchlist', { method: 'POST',
+        body: { expert_id: eid, name: (nmEl.value || '').trim() || p.name || '', market_type: 'live' } });
+    }).then(function (d) {
+      if (!d) return;
+      if (d.em && !d.em.ok) EP.toast('已加入关注列表，但' + d.em.msg, 'error');
+      else EP.toast('已关注并在东财账号同步');
+      idEl.value = ''; nmEl.value = '';
+      loadWatch(root);
+    }).catch(function (e) { box.innerHTML = '<div class="hint">' + EP.fmt.esc(e.message) + '</div>'; });
+  }
+
   function bindWatchCard(root) {
+    root.querySelector('#ew-add').onclick = function () { manualAddWatch(root); };
+    ['#ew-new-id', '#ew-new-name'].forEach(function (sel) {
+      var el = root.querySelector(sel);
+      if (el) el.onkeydown = function (e) { if (e.key === 'Enter') manualAddWatch(root); };
+    });
     root.querySelector('#ew-sync').onclick = function () {
       var btn = this; btn.disabled = true;
       EP.api('/api/expert-crawl/watchlist/sync', { method: 'POST' }).then(function (d) {
@@ -278,6 +371,16 @@
 
   /* 数据新鲜度单元格：最近调仓日期 + 最近一次 rtV3 拉取时间，过旧标红 */
   function freshCell(v) {
+    var w = S.wl[v];
+    /* 平台侧拒绝取数（未授权公开/已隐藏/不存在）优先提示——否则「未拉取」会把
+       「平台不给」误导成「我们没拉」 */
+    if (w && w.status_code != null && w.status_code !== 0) {
+      var short = { 30001: '未授权公开持仓', 9061: '组合不存在', 9062: '组合已隐藏',
+                    9035: '未关注', '-1': '请求异常' }[String(w.status_code)] || (w.status_msg || '取数失败');
+      return EP.badge('⛔ 取数受阻', 'red') +
+        '<div class="hint" style="font-size:11px">' + EP.fmt.esc(short) +
+        '（code ' + EP.fmt.esc(String(w.status_code)) + '）</div>';
+    }
     var f = S.fresh[v];
     if (!f) return '<span class="hint">—</span>';
     if (!f.fetched_at) return EP.badge('未拉取', 'red');
@@ -297,8 +400,10 @@
   var EVAL_COLS = [
     { key: 'rank', label: '#', num: true, fmt: num0 },
     { key: 'name', label: '高手', fmt: function (v, r) {
+      var w = S.wl[r.expert_id];
+      var blocked = !!(r.no_data && w && w.status_code != null && w.status_code !== 0);
       return '<b>' + EP.fmt.esc(v || r.expert_id) + '</b>' +
-        (r.no_data ? ' ' + EP.badge('未拉取数据', 'gray') : ''); } },
+        (r.no_data ? ' ' + EP.badge(blocked ? '平台拒绝取数' : '未拉取数据', blocked ? 'red' : 'gray') : ''); } },
     { key: 'expert_id', label: 'ID' },
     { key: 'source', label: '来源', fmt: function (v) { return EP.fmt.esc(SRC_LABELS[v] || v || '—'); } },
     { key: 'total_return_pct', label: '总收益%', num: true, fmt: EP.fmt.signedPct },
@@ -440,10 +545,13 @@
       S.wl = {};
       (d.rows || []).forEach(function (r) {
         S.wl[r.expert_id] = { name: r.name || '', note: r.note || '',
-                              created_at: r.created_at || '', __mt: r.market_type === 'live' ? 'live' : 'sim' };
+                              created_at: r.created_at || '', __mt: r.market_type === 'live' ? 'live' : 'sim',
+                              status_code: r.status_code, status_msg: r.status_msg || '',
+                              status_at: r.status_at || '' };
       });
       renderWatchlist(root);
       renderWatchTable(root);
+      renderOffboard(root);   // 关注变化后同步「不在榜」提示
       loadFresh(root);
     }).catch(function () {});
   }

@@ -6,10 +6,12 @@ GET  /api/expert-crawl/log                 任务日志尾部
 GET  /api/expert-crawl/live-experts        实盘高手榜（本地 crawl_expert live 前50）
 POST /api/expert-crawl/live-experts/refresh 手动刷新榜单（直拉东财 rtV1 单榜落库）
 GET  /api/expert-crawl/watchlist           关注列表（本地，market_type=live 与东财同步）
-POST /api/expert-crawl/watchlist           加关注（live=代你在东财账号关注）
+POST /api/expert-crawl/watchlist           加关注（live=代你在东财账号关注；失败也本地保留并记原因）
 DELETE /api/expert-crawl/watchlist/{id}    取消关注（live=同步取消东财关注）
 POST /api/expert-crawl/watchlist/sync      同步东财账号已关注名单到本地
 POST /api/expert-crawl/watchlist/fetch-detail  拉取关注组合最近调仓明细（rtV3→crawl_trade）
+GET  /api/expert-crawl/watchlist/freshness  关注组合的数据新鲜度 + 取数状态
+GET  /api/expert-crawl/watchlist/probe      探测任意组合号（是否存在/能否关注/能否取数）
 GET  /api/expert-crawl/sources             数据源选项
 GET  /api/expert-crawl/evaluation          最新一次能力评估结果（rows+meta+bench）
 POST /api/expert-crawl/evaluation/run      触发能力评估（后台子进程，仅实盘）
@@ -132,7 +134,12 @@ def _combo_names(eids: List[str]) -> Dict[str, str]:
 
 
 def _watch_rows(market_type: str = "live") -> List[Dict[str, Any]]:
-    """关注列表行（本地 DB 为准，名称用 config/东财组合信息补全）。"""
+    """关注列表行（本地 DB 为准，名称用 config/东财组合信息补全）。
+
+    附最近一次 rtV3 取数状态（xcq_combo_status）：code!=0 表示平台侧不给数据
+    （30001 未授权公开 / 9061 组合不存在 / 9035 未关注 / -10312 无法加自选），
+    页面直接展示原因，而不是笼统显示「未拉取」。
+    """
     from strategy import watchlist as W
     rows = [{"expert_id": r["expert_id"], "name": r.get("name") or "",
              "note": r.get("note") or "", "created_at": r.get("created_at") or "",
@@ -144,7 +151,33 @@ def _watch_rows(market_type: str = "live") -> List[Dict[str, Any]]:
         for r in rows:
             if not r["name"] and names.get(r["expert_id"]):
                 r["name"] = names[r["expert_id"]]
+    if rows:
+        try:
+            from core.db import q
+            ph = ",".join("?" for _ in rows)
+            st = {r["expert_id"]: r for r in q(
+                f"SELECT expert_id, code, message, n_rows, checked_at FROM xcq_combo_status "
+                f"WHERE market_type=? AND expert_id IN ({ph})", (market_type, *[r["expert_id"] for r in rows]))}
+        except Exception:  # noqa: BLE001  老库没这张表时不影响列表
+            st = {}
+        for r in rows:
+            s = st.get(r["expert_id"]) or {}
+            r["status_code"] = s.get("code")
+            r["status_msg"] = s.get("message") or ""
+            r["status_at"] = s.get("checked_at") or ""
     return rows
+
+
+def _save_combo_status(status: Dict[str, dict]) -> None:
+    """把一轮 rtV3 探测结果落库（每个组合一行，覆盖式）。"""
+    if not status:
+        return
+    from core.db import qexec
+    now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    for eid, v in status.items():
+        qexec("INSERT OR REPLACE INTO xcq_combo_status "
+              "(expert_id, market_type, code, message, n_rows, checked_at) VALUES (?,?,?,?,?,?)",
+              (eid, "live", v.get("code"), v.get("message") or "", v.get("n") or 0, now))
 
 
 def _persist_live_trades(records, fetched_at: str = "", trigger: str = "manual") -> int:
@@ -199,7 +232,9 @@ def fetch_live_trades(expert_ids: List[str] | None = None, trigger: str = "manua
     experts = [Expert(source="eastmoney", expert_id=eid,
                       name=next((r["name"] for r in wl if r["expert_id"] == eid), eid))
                for eid in eids]
-    records = src._spzh_trades(experts, target_date="")  # 不按日过滤 = 最近 40 条全量
+    status: Dict[str, dict] = {}
+    records = src._spzh_trades(experts, target_date="", status=status)  # 不按日过滤 = 最近 40 条全量
+    _save_combo_status(status)
     n = _persist_live_trades(records, trigger=trigger)
     rows = [{"expert_id": r.expert_id, "expert_name": r.expert_name,
              "trade_date": r.trade_date, "trade_time": r.trade_time,
@@ -207,7 +242,13 @@ def fetch_live_trades(expert_ids: List[str] | None = None, trigger: str = "manua
              "action": r.action, "price": r.price,
              "weight_after": r.weight_after, "weight_label": r.weight_label or ""}
             for r in records]
-    return {"ok": True, "n": n, "total": len(rows), "rows": rows}
+    # 被平台拒绝的组合：页面需要立刻看到原因，而不是「0 条」
+    names = {r["expert_id"]: r.get("name") or r["expert_id"] for r in wl}
+    blocked = [{"expert_id": eid, "name": names.get(eid, eid),
+                "code": v.get("code"), "message": v.get("message") or ""}
+               for eid, v in status.items() if v.get("code") != 0]
+    return {"ok": True, "n": n, "total": len(rows), "rows": rows, "blocked": blocked,
+            "status": [{"expert_id": eid, **v} for eid, v in status.items()]}
 
 
 @router.get("/watchlist")
@@ -223,6 +264,11 @@ class WatchBody(BaseModel):
 
 @router.post("/watchlist")
 async def watch_add(body: WatchBody) -> Dict[str, Any]:
+    """加关注。live = 同时在东财账号代为关注（rtV3 只对关注者开放）。
+
+    即使东财拒绝（组合已隐藏/关闭关注），本地仍保留该条，便于持续重试与
+    在页面上看到「为什么拿不到数据」——note 里记下失败原因。
+    """
     from strategy import watchlist as W
     eid = body.expert_id.strip()
     if not eid:
@@ -231,14 +277,19 @@ async def watch_add(body: WatchBody) -> Dict[str, Any]:
     em = {"ok": True, "msg": ""}
     if mt == "live":
         try:
-            ok = _em_source().follow(eid)
-            em = {"ok": ok, "msg": "已同步关注东财组合" if ok else "东财关注失败（可能达关注上限或登录态失效）"}
+            src = _em_source()
+            ok = src.follow(eid)
+            if ok:
+                em = {"ok": True, "msg": "已同步关注东财组合"}
+            else:
+                em = {"ok": False, "msg": f"东财拒绝关注（{src.last_error or '原因未知'}）——"
+                                          "组合可能已隐藏或主人关闭了关注"}
         except HTTPException:
             em = {"ok": False, "msg": "东财未登录，仅记录本地关注"}
         except Exception as exc:  # noqa: BLE001
             em = {"ok": False, "msg": f"东财关注失败: {exc}"}
-    W.add(eid, body.name.strip(), market_type=mt,
-          note="东财同步" if mt == "live" else "")
+    note = "东财同步" if (mt == "live" and em["ok"]) else ("东财拒绝：" + em["msg"] if mt == "live" else "")
+    W.add(eid, body.name.strip(), market_type=mt, note=note)
     return {"ok": True, "expert_id": eid, "market_type": mt, "em": em}
 
 
@@ -335,8 +386,37 @@ async def watch_freshness() -> Dict[str, Any]:
         out.append({"expert_id": eid, "name": r.get("name") or "",
                     "n_trades": st.get("n") or 0, "last_trade_date": last_date,
                     "days_since_trade": days_since_trade,
-                    "fetched_at": fetched_at, "hours_since_fetch": hours_ago, "stale": stale})
+                    "fetched_at": fetched_at, "hours_since_fetch": hours_ago, "stale": stale,
+                    "status_code": r.get("status_code"), "status_msg": r.get("status_msg") or ""})
     return {"ok": True, "rows": out}
+
+
+@router.get("/watchlist/probe")
+async def watch_probe(expert_id: str = Query("")) -> Dict[str, Any]:
+    """探测任意组合号的可取数性（不必先关注、不必在榜）。
+
+    返回组合信息 + rtV3 一次性探测结果。页面「手动关注」用它先给出结论：
+    组合不存在(9061) / 已隐藏(9062) / 未授权公开(30001) / 未关注(9035) / 正常(0)。
+    """
+    eid = expert_id.strip()
+    if not eid:
+        raise HTTPException(400, "请填组合号")
+    src = _em_source(require_token=False)
+    info = src.combination_info(eid)
+    status: Dict[str, dict] = {}
+    try:
+        from core.models import Expert
+        src._spzh_trades([Expert(source="eastmoney", expert_id=eid, name=info.get("zuheName") or eid)],
+                         target_date="", status=status)
+    except Exception as exc:  # noqa: BLE001
+        status[eid] = {"code": -1, "message": str(exc), "n": 0}
+    st = status.get(eid) or {}
+    return {"ok": True, "expert_id": eid,
+            "name": info.get("zuheName") or "",
+            "owner": info.get("uidNick") or "",
+            "followers": info.get("concernCnt") or "",
+            "code": st.get("code"), "message": st.get("message") or "",
+            "n_rows": st.get("n") or 0}
 
 
 @router.get("/sources")

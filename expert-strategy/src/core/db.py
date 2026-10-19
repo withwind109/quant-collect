@@ -111,6 +111,14 @@ def ensure_schema(db_path: Path | str) -> bool:
                     '"id" TEXT PRIMARY KEY, "expert_id" TEXT NOT NULL, "market_type" TEXT NOT NULL, '
                     '"fetched_at" TEXT NOT NULL, "n_total" INTEGER DEFAULT 0, "n_new" INTEGER DEFAULT 0, '
                     '"trigger" TEXT DEFAULT \'manual\')')
+                # 组合取数状态（2026-10-19）：rtV3 对每个组合的最近一次探测结果。
+                # 隐私/隐藏/已删除的组合不会返回任何流水，若不落库，页面只能显示
+                # 「未拉取」——用户无法区分「没拉」和「平台不给」。
+                conn.execute(
+                    'CREATE TABLE IF NOT EXISTS "xcq_combo_status" ('
+                    '"expert_id" TEXT NOT NULL, "market_type" TEXT NOT NULL, '
+                    '"code" INTEGER, "message" TEXT, "n_rows" INTEGER DEFAULT 0, '
+                    '"checked_at" TEXT, PRIMARY KEY ("expert_id", "market_type"))')
         finally:
             conn.close()
         return True
