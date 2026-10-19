@@ -16,7 +16,92 @@
   var SRC_LABELS = { eastmoney: '东财', tonghuashun: '同花顺', xueqiu: '雪球', alipay: '支付宝' };
   var LOG_JOBS = [['crawl', '爬取'], ['bulk_history', '批量回补'], ['expert_eval', '能力评估'], ['history', '单组合回补']];
 
-  /* ═══════════ ① 分渠道数据爬取 ═══════════ */
+  /* ═══════════ ① 实盘高手榜（爬取结果：累计收益 + 最近操作 + 活跃度）═══════════ */
+
+  function boardPanel() {
+    return '<div class="card"><h3>① 实盘高手榜 <span class="hint" style="font-weight:400">（最新爬取 · 前50 · 来源：东财 rtV1 日榜+总榜合并）</span></h3>' +
+      '<div class="card-sub">累计收益来自<b>总榜</b>口径。最近操作来自本地实盘流水（rtV3）——只有<b>已关注</b>的组合才有明细，' +
+      '未关注组合显示「无明细」不代表不活跃；判断活跃度请以关注后拉到的调仓为准。</div>' +
+      '<div class="row" style="margin-top:10px">' +
+      '<div class="field"><label>榜单</label><div id="eb-chips">' +
+      '<span class="chip on" data-board="total">总榜（累计收益）</span>' +
+      '<span class="chip" data-board="day">日榜（当日收益）</span></div></div>' +
+      '<div class="field"><label>&nbsp;</label><button class="btn" id="eb-refresh">↻ 刷新</button></div>' +
+      '<span class="hint" id="eb-meta" style="margin-left:8px;align-self:flex-end"></span></div>' +
+      '<div id="eb-table" style="margin-top:10px"></div></div>';
+  }
+
+  function opSummary(r) {
+    if (!r.last_trade_date) return '<span class="hint">无明细</span>';
+    var gap = r.trade_days_ago;
+    var ops = (r.recent || []).map(function (t) {
+      var side = t.action === '买入' ? '<span class="up">买</span>' : (t.action === '卖出' ? '<span class="down">卖</span>' : EP.fmt.esc(t.action));
+      return side + ' ' + EP.fmt.esc(t.stock_name || t.stock_code);
+    }).join('、');
+    var ago = gap === 0 ? '今天' : (gap + ' 天前');
+    return '<div style="font-size:12px">' + ops + '</div>' +
+      '<div class="hint" style="font-size:11px">最近操作 ' + ago + '（' + EP.fmt.esc(r.last_trade_date) + '，共 ' + r.n_trades + ' 条流水）</div>';
+  }
+
+  function loadLiveExperts(root) {
+    var box = root.querySelector('#eb-table');
+    if (!box) return;
+    var board = S.board || 'total';
+    EP.api('/api/expert-crawl/live-experts?board=' + board + '&limit=50').then(function (d) {
+      if (!d.rows || !d.rows.length) {
+        root.querySelector('#eb-meta').textContent = '';
+        box.innerHTML = '<div class="hint">暂无实盘榜数据——先在②里点「开始爬取」（含东财渠道）</div>';
+        return;
+      }
+      root.querySelector('#eb-meta').textContent = '数据日期 ' + d.latest_date;
+      var rows = d.rows.map(function (r, i) { r.rank = i + 1; return r; });
+      EP.table(box, rows, [
+        { key: 'rank', label: '#', num: true, fmt: num0 },
+        { key: 'name', label: '组合', fmt: function (v, r) {
+          return '<b>' + EP.fmt.esc(v || r.expert_id) + '</b>' +
+            (S.wl[r.expert_id] && S.wl[r.expert_id].__mt === 'live' ? ' <span style="color:var(--c-danger)">★</span>' : '') +
+            '<div class="hint" style="font-size:11px">' + EP.fmt.esc(r.expert_id) + (r.owner ? ' · ' + EP.fmt.esc(r.owner) : '') + '</div>'; } },
+        { key: 'followers', label: '关注数', num: true, fmt: num0 },
+        { key: 'return_rate', label: '累计收益%', num: true, fmt: function (v) {
+          return v == null ? '<span class="hint">—</span>' : '<b class="' + (v >= 0 ? 'up' : 'down') + '">' + EP.fmt.signedPct(v) + '</b>'; } },
+        { key: 'daily_gain', label: '当日%', num: true, fmt: EP.fmt.signedPct },
+        { key: 'recent', label: '最近操作', fmt: opSummary },
+        { key: 'trade_days_ago', label: '活跃度', fmt: function (v, r) {
+          if (v == null) return EP.badge('无明细', 'gray');
+          if (v <= 7) return EP.badge('活跃', 'green');
+          if (v <= 20) return EP.badge('一般', 'orange');
+          return EP.badge('沉寂', 'red'); } },
+        { key: 'expert_id', label: '操作', html: function (v, r) {
+          var watched = !!(S.wl[v] && S.wl[v].__mt === 'live');
+          return '<button class="btn sm ' + (watched ? '' : 'primary') + '" data-eb-watch="' + EP.fmt.esc(v) + '" data-name="' + EP.fmt.esc(r.name || '') + '">' +
+            (watched ? '✓ 已关注' : '＋ 关注') + '</button>' +
+            (watched ? ' <button class="btn sm" data-eb-fetch="' + EP.fmt.esc(v) + '">拉明细</button>' : ''); } }
+      ], { height: 560, pageSize: 50 });
+    }).catch(function (e) { box.innerHTML = '<div class="hint">' + EP.fmt.esc(e.message) + '</div>'; });
+  }
+
+  function bindLiveExperts(root) {
+    root.querySelectorAll('#eb-chips .chip').forEach(function (c) {
+      c.onclick = function () {
+        root.querySelectorAll('#eb-chips .chip').forEach(function (x) { x.classList.remove('on'); });
+        c.classList.add('on');
+        S.board = c.dataset.board;
+        loadLiveExperts(root);
+      };
+    });
+    root.querySelector('#eb-refresh').onclick = function () { loadLiveExperts(root); };
+    root.querySelector('#eb-table').addEventListener('click', function (e) {
+      var w = e.target.closest('[data-eb-watch]'), f = e.target.closest('[data-eb-fetch]');
+      if (w) {
+        toggleWatch(w.dataset.ebWatch, root, 'live', w.dataset.name || '');
+        setTimeout(function () { loadWatch(root); loadLiveExperts(root); }, 900);
+      } else if (f) {
+        fetchLiveDetail(root, f.dataset.ebFetch);
+      }
+    });
+  }
+
+  /* ═══════════ ② 分渠道数据爬取 ═══════════ */
 
   function channelCards(ch) {
     var cred = ch.credential === 'none' ? EP.badge('未配置凭证', 'gray')
@@ -33,7 +118,7 @@
   }
 
   function crawlPanel() {
-    return '<div class="card"><h3>① 分渠道数据爬取</h3>' +
+    return '<div class="card"><h3>② 分渠道数据爬取</h3>' +
       '<div class="card-sub">按渠道抓取高手操作流水（请求经无头浏览器通道发出）。各渠道独立统计、独立开关，数据落本地 SQLite（data/experts.db）。' +
       '东财<b>实盘</b>明细需要登录态——请先到右上角<a href="#/accounts" onclick="EP.go(\'accounts\');return false" style="font-weight:600">🏦 账户中心</a>扫码登录。</div>' +
       '<div class="card-grid" id="ec-channels"></div>' +
@@ -66,7 +151,7 @@
   /* ── ② 关注列表（东财实盘，与东财账号关注关系双向同步）── */
 
   function watchPanel() {
-    return '<div class="card"><h3>①½ 关注列表 <span class="hint" style="font-weight:400">（东财实盘 · rtV3 调仓明细仅对关注者开放）</span></h3>' +
+    return '<div class="card"><h3>③ 关注列表 <span class="hint" style="font-weight:400">（东财实盘 · rtV3 调仓明细仅对关注者开放）</span></h3>' +
       '<div class="card-sub">流程：爬榜单 → 在获取的高手里点「关注」→ 这里「拉取调仓明细」入库 → 实盘环境评估即可用。' +
       'live 关注会在<b>东财账号上代为关注</b>该组合（取消时同步取消）；也可以「同步东财关注」把 APP 里已关注的组合拉回来。</div>' +
       '<div class="row" style="margin-top:10px">' +
@@ -255,7 +340,7 @@
   /* ═══════════ ② 高手能力评估 ═══════════ */
 
   function evalPanel() {
-    return '<div class="card"><h3>② 高手能力评估</h3>' +
+    return '<div class="card"><h3>④ 高手能力评估</h3>' +
       '<div class="card-sub">逐高手镜像回测（= 无脑跟他的单）：T+1 开盘 ±0.2% 滑点、佣金万 0.8（最低 5 元）、卖出印花税 0.05%、涨停拦截、噪音过滤。窗口从该高手首笔信号日起。按综合评分（夏普/索提诺/Calmar/胜率 分位秩平均）排序——分高且样本充足的，就是值得跟的人。</div>' +
       '<div class="row">' +
       '<div class="field"><label>数据环境</label><select class="select" id="ee-env">' +
@@ -374,18 +459,19 @@
     });
   }
 
-  function toggleWatch(expertId, root) {
+  function toggleWatch(expertId, root, mtOverride, nameOverride) {
     var watched = !!S.wl[expertId];
-    var mt = S.env === 'live' ? 'live' : 'sim';
-    var row = (S.eval && S.eval.rows || []).filter(function (r) { return r.expert_id === expertId; })[0];
+    var mt = mtOverride || (S.env === 'live' ? 'live' : 'sim');
+    var row = (S.eval && S.eval.rows || []).filter(function (r) { return r.expert_id === expertId; })[0] || {};
+    var nm = nameOverride || row.name || '';
     var req = watched
       ? EP.api('/api/expert-crawl/watchlist/' + encodeURIComponent(expertId) + '?market_type=' + mt, { method: 'DELETE' })
       : EP.api('/api/expert-crawl/watchlist', { method: 'POST',
-          body: { expert_id: expertId, name: (row || {}).name || '', market_type: mt } });
+          body: { expert_id: expertId, name: nm, market_type: mt } });
     req.then(function (d) {
       if (d && d.em && d.em.msg) { EP.toast(d.em.msg, d.em.ok ? 'ok' : 'error'); }
       if (watched) delete S.wl[expertId];
-      else S.wl[expertId] = { name: (row || {}).name || '', note: '', created_at: '', __mt: mt };
+      else S.wl[expertId] = { name: nm, note: '', created_at: '', __mt: mt };
       EP.toast(watched ? '已取消关注' : '已关注');
       loadWatch(root);
       // 表格里的按钮文案同步
@@ -525,8 +611,10 @@
   }
 
   EP.loadExperts = function (root) {
-    root.innerHTML = crawlPanel() + watchPanel() + backfillPanel() + evalPanel();
+    root.innerHTML = boardPanel() + crawlPanel() + watchPanel() + backfillPanel() + evalPanel();
+    loadLiveExperts(root);
     loadChannels(root);
+    bindLiveExperts(root);
     bindCrawl(root); bindJobs(root); bindBackfill(root);
     bindWatchCard(root);
     bindEval(root);

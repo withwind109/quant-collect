@@ -401,6 +401,93 @@ async def sources() -> Dict[str, Any]:
     return {"choices": SOURCE_CHOICES, "labels": SOURCE_LABELS}
 
 
+# ── 实盘高手榜（爬取结果展示：累计收益 + 最近操作 + 活跃度） ────────────────
+
+@router.get("/live-experts")
+async def live_experts(board: str = Query("total"), limit: int = Query(50, le=200)) -> Dict[str, Any]:
+    """最新交易日的实盘高手榜（crawl_expert, market_type=live）。
+
+    board=total 按累计收益排序（总榜条目），board=day 按当日收益排序（日榜条目）；
+    每行带最近操作摘要（来自 crawl_trade 实盘流水——只有已关注组合才有 rtV3 明细，
+    未关注组合「无明细」不代表不活跃，只是拿不到）。
+    """
+    from core.db import q, qone
+    _db()
+    latest = qone("SELECT MAX(trade_date) AS d FROM crawl_expert WHERE market_type='live'")
+    latest = (latest or {}).get("d")
+    if not latest:
+        return {"ok": True, "latest_date": None, "rows": []}
+    raw = q("SELECT expert_id, name, owner, followers, return_rate, extra_json "
+            "FROM crawl_expert WHERE trade_date=? AND market_type='live'", (latest,))
+    out = []
+    for r in raw:
+        extra = {}
+        try:
+            extra = json.loads(r.get("extra_json") or "{}")
+        except (TypeError, ValueError):
+            pass
+        # ⚠️ 列里可能存的是 TEXT 形态数字（旧数据/手工回填），统一转 float 再排序
+        def _num(v):
+            try:
+                return float(v) if v not in (None, "") else None
+            except (TypeError, ValueError):
+                return None
+        try:
+            fol = int(float(r.get("followers"))) if r.get("followers") not in (None, "") else 0
+        except (TypeError, ValueError):
+            fol = 0
+        out.append({
+            "expert_id": r["expert_id"], "name": r.get("name") or "",
+            "owner": r.get("owner") or "", "followers": fol,
+            "return_rate": _num(r.get("return_rate")),
+            "daily_gain": _num(extra.get("daily_gain")),
+            "rank_label": extra.get("rate_title") or "",
+        })
+    if board == "day":
+        rows = sorted([x for x in out if x["daily_gain"] is not None],
+                      key=lambda x: x["daily_gain"], reverse=True)
+    else:
+        rows = sorted([x for x in out if x["return_rate"] is not None],
+                      key=lambda x: x["return_rate"], reverse=True)
+    rows = rows[:max(1, limit)]
+    # 最近操作（crawl_trade 实盘流水）
+    ids = [x["expert_id"] for x in rows]
+    ph = ",".join("?" for _ in ids)
+    stats: Dict[str, dict] = {}
+    if ids:
+        stats = {r["expert_id"]: r for r in q(
+            f"SELECT expert_id, MAX(trade_date) AS last_date, COUNT(*) AS n FROM crawl_trade "
+            f"WHERE market_type='live' AND expert_id IN ({ph}) GROUP BY expert_id", tuple(ids))}
+    recent: Dict[str, list] = {}
+    if ids:
+        for r in q(f"SELECT expert_id, trade_date, trade_time, stock_code, stock_name, action, price "
+                   f"FROM crawl_trade WHERE market_type='live' AND expert_id IN ({ph}) "
+                   f"ORDER BY trade_date DESC, trade_time DESC", tuple(ids)):
+            lst = recent.setdefault(r["expert_id"], [])
+            if len(lst) < 3:
+                lst.append(r)
+    from datetime import date as _d
+    today = _d.today().isoformat()
+    from strategy import watchlist as W
+    watched = {r["expert_id"] for r in W.list_watch("live")}
+    for x in rows:
+        st = stats.get(x["expert_id"])
+        last = st.get("last_date") if st else None
+        try:
+            gap = ( _d.fromisoformat(today) - _d.fromisoformat(last)).days if last else None
+        except ValueError:
+            gap = None
+        x["last_trade_date"] = last
+        x["trade_days_ago"] = gap
+        x["n_trades"] = (st.get("n") if st else 0) or 0
+        x["recent"] = [{"trade_date": t["trade_date"], "trade_time": (t.get("trade_time") or "")[-8:-3],
+                        "stock_code": t["stock_code"], "stock_name": t.get("stock_name") or "",
+                        "action": t.get("action"), "price": t.get("price")}
+                       for t in (recent.get(x["expert_id"]) or [])]
+        x["watched"] = x["expert_id"] in watched
+    return {"ok": True, "latest_date": latest, "rows": rows}
+
+
 # ── 高手能力评估 ─────────────────────────────────────────────────────────────
 
 class EvalBody(BaseModel):
