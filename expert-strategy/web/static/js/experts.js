@@ -1,5 +1,5 @@
 /* 高手评估页（#/experts）—— 2026-10-19 重构：渠道tab + 实盘高手榜(手动加载) +
-   关注列表 + 高手能力评估 + 分渠道爬取。仅实盘链路（模拟盘爬取通道已整体删除，
+   关注列表 + 高手能力评估。仅实盘链路（模拟盘爬取通道已整体删除，
    评估数据环境固定 live）。能力评估口径见 src/strategy/expert_eval.py。 */
 (function () {
   'use strict';
@@ -173,34 +173,6 @@
     });
   }
 
-  /* ═══════════ ② 分渠道数据爬取 ═══════════ */
-
-  function channelCards(ch) {
-    var cred = ch.credential === 'none' ? EP.badge('未配置凭证', 'gray')
-      : EP.badge(ch.credential === 'cookie' ? 'Cookie 已配置' : '端点已配置', 'green');
-    return '<div class="card"><h3>' + EP.fmt.esc(ch.label) +
-      ' <span class="hint" style="font-weight:400">' + EP.fmt.esc(ch.source) + '</span></h3>' +
-      EP.kvCards([
-        ['凭证', '', function () { return cred; }],
-        ['最新交易日', ch.last_date || '—'],
-        ['有数据天数', ch.days, function () { return EP.fmt.num(ch.days, 0); }],
-        ['高手数', ch.experts, function () { return EP.fmt.num(ch.experts, 0); }],
-        ['成交条数', ch.trades, function () { return EP.fmt.num(ch.trades, 0); }]
-      ]) + '</div>';
-  }
-
-  function crawlPanel() {
-    return '<div class="card"><h3>④ 分渠道数据爬取 <span class="hint" style="font-weight:400">（当前渠道：' + SRC_LABELS[S.channel] + ' · 仅实盘）</span></h3>' +
-      '<div class="card-sub">按渠道抓取高手榜单与调仓流水（请求经无头浏览器通道发出），数据落本地 SQLite（data/experts.db）。' +
-      '<b>实盘</b>调仓明细需要登录态——请先到右上角<a href="#/accounts" onclick="EP.go(\'accounts\');return false" style="font-weight:600">🏦 账户中心</a>扫码登录（rtV3 仅对关注者开放）。</div>' +
-      '<div class="card-grid" id="ec-channels"></div>' +
-      '<div class="row" style="margin-top:12px">' +
-      '<div class="field"><label>交易日（空=自动推断）</label><input class="input" id="ec-date" placeholder="YYYY-MM-DD" style="min-width:130px"></div>' +
-      '<div class="field"><label>每榜数量</label><input class="input num" id="ec-top" value="50" style="min-width:90px"></div>' +
-      '<div class="field"><label>&nbsp;</label><button class="btn primary" id="ec-run">▶ 开始爬取</button></div>' +
-      '</div><div id="ec-jobs"></div><div id="ec-log"></div></div>';
-  }
-
   /* ── ② 关注列表（东财实盘，与东财账号关注关系双向同步）── */
 
   function watchPanel() {
@@ -284,60 +256,25 @@
 
   /* 东财账户中心已独立为 accounts.js（右上角「🏦 账户中心」入口） */
 
-  function loadChannels(root) {
-    EP.api('/api/expert-crawl/channels').then(function (d) {
-      root.querySelector('#ec-channels').innerHTML =
-        (d.channels || []).filter(function (ch) { return ch.source === S.channel; })
-          .map(channelCards).join('');
-    }).catch(function (e) { EP.toast(e.message, 'error'); });
-  }
-
-  function bindCrawl(root) {
-    function doRun(btn, root2) {
-      EP.api('/api/expert-crawl/run', {
-        method: 'POST',
-        body: { sources: [S.channel], top: parseInt(root2.querySelector('#ec-top').value, 10) || 50,
-                date: root2.querySelector('#ec-date').value.trim() }
-      }).then(function () {
-        EP.toast('爬取已启动');
-        bindJobs(root2);
-        var logLoad = EP.logPanel(root2.querySelector('#ec-log'), '/api/expert-crawl/log', 'crawl');
-        var timer = setInterval(function () {
-          EP.api('/api/expert-crawl/status').then(function (d) {
-            if (d.crawl && d.crawl.state !== 'running') {
-              clearInterval(timer); logLoad(); loadChannels(root2);
-            }
-          });
-        }, 3000);
-      }).catch(function (e) { EP.toast(e.message, 'error'); })
-        .finally(function () { btn.disabled = false; });
-    }
-
-    root.querySelector('#ec-run').onclick = function () {
-      var btn = this; btn.disabled = true;
-      /* 登录态不再拦截：模拟盘爬取不依赖登录；实盘明细请先在「账户中心」扫码 */
-      doRun(btn, root);
-    };
-  }
-
+  /* 任务状态 + 日志（能力评估用；爬取日志保留可选，便于查看历史后台任务） */
   function bindJobs(root) {
-    EP.jobPanel(root.querySelector('#ec-jobs'), '/api/expert-crawl/status',
-      ['crawl', 'expert_eval'], ['爬取', '能力评估']);
+    EP.jobPanel(root.querySelector('#ee-jobs'), '/api/expert-crawl/status',
+      ['expert_eval'], ['能力评估']);
     // 日志：可按任务切换
-    var sel = '<div class="row" style="margin-top:8px"><div class="field"><label>任务日志</label><select class="select" id="ec-log-job">' +
+    var sel = '<div class="row" style="margin-top:8px"><div class="field"><label>任务日志</label><select class="select" id="ee-log-job">' +
       LOG_JOBS.map(function (j) { return '<option value="' + j[0] + '">' + j[1] + '</option>'; }).join('') +
       '</select></div></div>';
-    root.querySelector('#ec-jobs').insertAdjacentHTML('afterend', sel);
-    var logBox = root.querySelector('#ec-log');
+    root.querySelector('#ee-jobs').insertAdjacentHTML('afterend', sel);
+    var logBox = root.querySelector('#ee-log');
     function loadLog() {
-      var job = root.querySelector('#ec-log-job').value;
+      var job = root.querySelector('#ee-log-job').value;
       EP.api('/api/expert-crawl/log?job=' + job).then(function (d) {
         logBox.innerHTML = d.log_tail
           ? '<div class="job done"><div class="log">' + EP.fmt.esc(d.log_tail) + '</div></div>'
           : '<div class="job idle">暂无日志</div>';
       });
     }
-    root.querySelector('#ec-log-job').onchange = loadLog;
+    root.querySelector('#ee-log-job').onchange = loadLog;
     loadLog();
   }
 
@@ -354,7 +291,7 @@
       '<input type="checkbox" id="ee-sample-only" checked> 只看样本充足</label></div>' +
       '<div class="field"><label>&nbsp;</label><button class="btn primary" id="ee-run">▶ 开始评估</button>' +
       '<button class="btn" id="ee-refresh" style="margin-left:6px">刷新结果</button></div>' +
-      '</div><div id="ee-summary"></div><div id="ee-table"></div></div>';
+      '</div><div id="ee-summary"></div><div id="ee-table"></div><div id="ee-jobs"></div><div id="ee-log"></div></div>';
   }
 
   function num0(v) { return EP.fmt.num(v, 0); }
@@ -610,15 +547,15 @@
   }
 
   EP.loadExperts = function (root) {
-    /* 2026-10-19 二次重构：渠道tab → ①实盘高手榜(手动加载) → ②关注列表 → ③能力评估 → ④爬取；
-       模拟盘通道（含历史回补）已删除，页面仅剩实盘链路。 */
-    root.innerHTML = channelTabs() + boardPanel() + watchPanel() + evalPanel() + crawlPanel();
+    /* 2026-10-19 二次重构：渠道tab → ①实盘高手榜(手动加载) → ②关注列表 → ③能力评估；
+       「分渠道数据爬取」卡及其后端 /run /channels 接口已随页面重构删除——爬取入口
+       统一收口为榜单「加载最新」+ 关注列表「拉取调仓明细」；模拟盘通道（含历史回补）已删除。 */
+    root.innerHTML = channelTabs() + boardPanel() + watchPanel() + evalPanel();
     bindChannelTabs(root);
     bindLiveExperts(root);           // 榜单不自动加载，等用户点「⬇ 加载最新」
     bindWatchCard(root);
     bindEval(root);
-    bindCrawl(root); bindJobs(root);
-    loadChannels(root);
+    bindJobs(root);
     loadWatch(root);
     loadEval(root);
   };

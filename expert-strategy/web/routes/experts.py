@@ -1,10 +1,8 @@
 """高手评估页 API（仅东财实盘链路——模拟盘爬取通道已于 2026-10-19 整体删除）。
 
 GET  /api/expert-crawl/dates               可用交易日
-GET  /api/expert-crawl/channels            渠道数据状态（凭证/最新日/条数）
 GET  /api/expert-crawl/status              任务状态（crawl/expert_eval/backtest/…）
 GET  /api/expert-crawl/log                 任务日志尾部
-POST /api/expert-crawl/run                 触发爬取（子进程，东财实盘 rtV1+rtV3）
 GET  /api/expert-crawl/live-experts        实盘高手榜（本地 crawl_expert live 前50）
 POST /api/expert-crawl/live-experts/refresh 手动刷新榜单（直拉东财 rtV1 单榜落库）
 GET  /api/expert-crawl/watchlist           关注列表（本地，market_type=live 与东财同步）
@@ -65,45 +63,6 @@ async def dates() -> Dict[str, Any]:
     return {"dates": ds, "latest": ds[0] if ds else None}
 
 
-@router.get("/channels")
-async def channels() -> Dict[str, Any]:
-    """分渠道数据状态：凭证 / 最新交易日 / 高手数 / 成交数 / 有数据天数。"""
-    db = _db()
-
-    def _group(sql: str) -> Dict[str, dict]:
-        return {(r.get("source") or ""): r for r in db.q(sql)}
-
-    trade_st = _group("""SELECT source, COUNT(*) AS n, COUNT(DISTINCT trade_date) AS days,
-                                MAX(trade_date) AS last_date FROM crawl_trade GROUP BY source""")
-    expert_st = _group("SELECT source, COUNT(*) AS n FROM crawl_expert GROUP BY source")
-    buy_st = _group("SELECT source, COUNT(*) AS n FROM crawl_expert_buy GROUP BY source")
-
-    cred: Dict[str, str] = {}
-    try:
-        from settings import DEFAULT_CONFIG, load_settings
-        s = load_settings(DEFAULT_CONFIG)
-        cred = {"eastmoney": "cookie" if s["eastmoney"].get("cookie") else "none"}
-    except Exception:  # noqa: BLE001  设置读取失败不阻塞页面
-        pass
-
-    out = []
-    for src in SOURCE_CHOICES:
-        t = trade_st.get(src) or {}
-        out.append({
-            "source": src, "label": SOURCE_LABELS[src],
-            "credential": cred.get(src, "none"),
-            "last_date": t.get("last_date"),
-            "days": t.get("days") or 0,
-            "trades": t.get("n") or 0,
-            "experts": (expert_st.get(src) or {}).get("n") or 0,
-            "buys": (buy_st.get(src) or {}).get("n") or 0,
-            "has_data": bool(t),
-        })
-    ds = _dates()
-    return {"channels": out, "choices": SOURCE_CHOICES, "labels": SOURCE_LABELS,
-            "latest_date": ds[0] if ds else None, "dates_total": len(ds)}
-
-
 @router.get("/status")
 async def status() -> Dict[str, Any]:
     """全部后台任务状态（crawl/expert_eval/backtest/paper_update/health）。"""
@@ -113,27 +72,6 @@ async def status() -> Dict[str, Any]:
 @router.get("/log")
 async def log(job: str = Query("crawl", pattern="^(crawl|expert_eval|backtest|paper_update|health)$")) -> Dict[str, Any]:
     return {"job": job, "log_tail": jobs.read_log_tail(job)}
-
-
-class RunBody(BaseModel):
-    sources: List[str] = ["eastmoney", "tonghuashun"]
-    top: int = 50
-    date: str = ""
-
-
-@router.post("/run")
-async def run(body: RunBody) -> Dict[str, Any]:
-    names = [s for s in body.sources if s in SOURCE_CHOICES]
-    if not names:
-        raise HTTPException(400, f"至少选一个有效数据源（{SOURCE_CHOICES}）")
-    argv = ["-m", "cli", "crawl", "--sources", ",".join(names), "--top", str(body.top)]
-    if body.date:
-        argv += ["--date", body.date]
-    try:
-        jobs.start_job("crawl", argv)
-    except jobs.JobBusy as exc:
-        raise HTTPException(409, str(exc)) from exc
-    return {"ok": True, "msg": "爬取已启动", "args": names}
 
 
 # ── 关注管理（与东财账号关注关系双向同步） ───────────────────────────────────
