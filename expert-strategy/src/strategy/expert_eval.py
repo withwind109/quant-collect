@@ -505,6 +505,15 @@ def evaluate(env: str = "live", start: str = "", end: str = "",
             seeds=(h.get("health") or {}).get("seed_map"))
         m = compute_metrics(nav_daily, trades, bench)
         if m is None:
+            skip_list.append({"expert_id": eid, "name": h["name"], "reason": "信号太少，算不出指标"})
+            continue
+        if not m.get("n_buy") and not m.get("n_sell"):
+            # [2026-10-19 修] 零成交的"僵尸行"（有流水但行情缺失/全部无法执行）不再输出
+            # 收益 0、夏普 None 的假结果，改为进 skipped 给出原因
+            no_px = sorted({r["stock_code"] for r in h["records"]} - set(kidx))
+            reason = ("标的行情缺失，无法回测（本地无历史K线）: " + ", ".join(no_px[:6])) if no_px \
+                else "调仓信号全部无法执行（停牌/涨停/无行情）"
+            skip_list.append({"expert_id": eid, "name": h["name"], "reason": reason})
             continue
         rows.append({
             "expert_id": eid, "name": h["name"], "source": h["source"],

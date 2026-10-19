@@ -165,11 +165,21 @@ def download_stock(code: str, start: str = "20150101", end: Optional[str] = None
 
     akshare 走 push2his.eastmoney.com，被代理/网络阻断时自动切腾讯行情兜底
     （web.ifzq.gtimg.cn fqkline，字段序 [日期,开,收,高,低,量(手)]）。
+    腾讯对北交所（4/8/92 开头）历史 K 线基本不覆盖（只返当日快照），
+    再切新浪兜底（CN_MarketDataService.getKLineData，bj 前缀可拉全历史）。
     """
     n = _download_via_akshare(code, start, end)
     if n:
         return n
-    return _download_via_tencent(code, start, end)
+    bare0 = _norm_code(code)
+    is_bse = bare0[:1] in ("4", "8") or bare0[:2] == "92"
+    if not is_bse:                       # 腾讯对北交所只返当日快照，跳过防止假成功
+        n = _download_via_tencent(code, start, end)
+        if n:
+            return n
+    if is_bse:
+        return _download_via_sina(code, start, end)
+    return n
 
 
 def _download_via_akshare(code: str, start: str = "20150101", end: Optional[str] = None) -> int:
@@ -264,6 +274,64 @@ def _download_via_tencent(code: str, start: str = "20150101", end: Optional[str]
         return n
     except Exception as exc:  # noqa: BLE001
         logger.warning(f"[prices] 腾讯兜底下载 {bare} 失败: {exc}")
+        return 0
+    finally:
+        http.close()
+
+
+#: 新浪日线端点（北交所兜底专用——腾讯对 4/8/92 开头代码只返当日快照，2026-10-19 实测）
+SINA_KLINE_URL = ("https://vip.stock.finance.sina.com.cn/quotes_service/api/json_v2.php/"
+                  "CN_MarketData.getKLineData")
+
+
+def _download_via_sina(code: str, start: str = "20150101", end: Optional[str] = None) -> int:
+    """新浪行情兜底（北交所）：getKLineData 拉原始日线。失败返回 0（不抛异常）。
+
+    ⚠️ 新浪该接口只给不复权原始价，无后复权口径——这里 hfq_close=close（复权因子=1）。
+    北交所分红送转频率低，对数月内的评估窗口影响有限；如需精确复权请后续接入专业数据源。
+    """
+    from datetime import datetime
+
+    from core.http import HttpClient
+
+    bare = _norm_code(code)
+    end = end or datetime.now().strftime("%Y%m%d")
+    # datalen 上限 1970×246... 接口按条数返回（最多约 1023），从最新往回取：
+    # 用起始日估算需要的条数（≈ 自然日/1.45），再留余量
+    try:
+        from datetime import date as _d
+        days = (_d.fromisoformat(f"{end[:4]}-{end[4:6]}-{end[6:]}")
+                - _d.fromisoformat(f"{start[:4]}-{start[4:6]}-{start[6:]}")).days
+    except (TypeError, ValueError):
+        days = 400
+    datalen = min(1023, max(10, int(days / 1.45) + 10))
+    http = HttpClient(min_interval=0.3)
+    try:
+        resp = http.get_json(SINA_KLINE_URL, params={
+            "symbol": f"bj{bare}", "scale": 240, "ma": "no", "datalen": datalen})
+        rows_in = resp if isinstance(resp, list) else []
+        out: List[dict] = []
+        s_iso, e_iso = f"{start[:4]}-{start[4:6]}-{start[6:]}", f"{end[:4]}-{end[4:6]}-{end[6:]}"
+        for r in rows_in:
+            d = str(r.get("day") or "")[:10]
+            if not (s_iso <= d <= e_iso):
+                continue
+            out.append({
+                "date": d,
+                "open": float(r["open"]) if r.get("open") not in (None, "") else None,
+                "high": float(r["high"]) if r.get("high") not in (None, "") else None,
+                "low": float(r["low"]) if r.get("low") not in (None, "") else None,
+                "close": float(r["close"]) if r.get("close") not in (None, "") else None,
+                "hfq_close": float(r["close"]) if r.get("close") not in (None, "") else None,
+                "volume": float(r["volume"]) if r.get("volume") not in (None, "") else None,
+                "amount": None,
+            })
+        n = upsert_daily(bare, out)
+        if n:
+            logger.info(f"[prices] {bare} 下载 {n} 天 (新浪兜底)")
+        return n
+    except Exception as exc:  # noqa: BLE001
+        logger.warning(f"[prices] 新浪兜底下载 {bare} 失败: {exc}")
         return 0
     finally:
         http.close()

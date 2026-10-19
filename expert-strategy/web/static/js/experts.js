@@ -9,7 +9,6 @@
     sources: ['eastmoney'],
     env: 'live',           // 评估数据环境：仅实盘（模拟盘通道已删除）
     minSells: 3,
-    sampleOnly: true,
     watchOnly: true,       // 评估列表默认只看关注的高手
     fresh: {},             // expert_id -> 新鲜度 {last_trade_date,fetched_at,stale,...}
     eval: null,        // 最新一次评估结果（/evaluation）
@@ -268,8 +267,6 @@
       '</select></div>' +
       '<div class="field"><label>&nbsp;</label><label style="display:flex;align-items:center;gap:6px;cursor:pointer">' +
       '<input type="checkbox" id="ee-watch-only" checked> 只看关注</label></div>' +
-      '<div class="field"><label>&nbsp;</label><label style="display:flex;align-items:center;gap:6px;cursor:pointer">' +
-      '<input type="checkbox" id="ee-sample-only" checked> 只看样本充足</label></div>' +
       '<div class="field"><label>&nbsp;</label><button class="btn primary" id="ee-run">▶ 开始评估</button>' +
       '<button class="btn" id="ee-refresh" style="margin-left:6px">刷新结果</button></div>' +
       '</div><div id="ee-stale"></div><div id="ee-progress"></div><div id="ee-summary"></div>' +
@@ -299,7 +296,9 @@
 
   var EVAL_COLS = [
     { key: 'rank', label: '#', num: true, fmt: num0 },
-    { key: 'name', label: '高手', fmt: function (v, r) { return '<b>' + EP.fmt.esc(v || r.expert_id) + '</b>'; } },
+    { key: 'name', label: '高手', fmt: function (v, r) {
+      return '<b>' + EP.fmt.esc(v || r.expert_id) + '</b>' +
+        (r.no_data ? ' ' + EP.badge('未拉取数据', 'gray') : ''); } },
     { key: 'expert_id', label: 'ID' },
     { key: 'source', label: '来源', fmt: function (v) { return EP.fmt.esc(SRC_LABELS[v] || v || '—'); } },
     { key: 'total_return_pct', label: '总收益%', num: true, fmt: EP.fmt.signedPct },
@@ -361,31 +360,52 @@
     if (!t || !S.eval) return;
     var min = parseInt(S.minSells, 10) || 1;
     var hasWatch = Object.keys(S.wl).some(function (id) { return S.wl[id] && S.wl[id].__mt === 'live'; });
-    var filtered = S.eval.rows.filter(function (r) {
+    var all = evalRows(S.eval);
+    var filtered = all.filter(function (r) {
       var watchOk = !S.watchOnly || !hasWatch || (S.wl[r.expert_id] && S.wl[r.expert_id] && S.wl[r.expert_id].__mt === 'live');
-      return watchOk && (!S.sampleOnly || r.sample_ok) && (r.n_sell || 0) >= min;
+      if (r.no_data) return watchOk;          // 占位行只受「只看关注」影响
+      return watchOk && (r.n_sell || 0) >= min;
     });
     t.setRows(filtered);
     /* 过滤把结果全藏起来时给出原因提示，避免"完成后表格无内容"的困惑 */
     var hint = document.querySelector('#ee-filter-hint');
     if (hint) {
-      if (!filtered.length && S.eval.rows.length) {
+      if (!filtered.length && all.length) {
         var why = [];
         if (S.watchOnly) why.push('只看关注');
-        if (S.sampleOnly) why.push('只看样本充足（覆盖天数/卖出笔数达门槛）');
         why.push('卖出 ≥ ' + min + ' 笔');
-        hint.innerHTML = '<div class="hint" style="margin-top:6px">⚠️ 共 ' + S.eval.rows.length +
-          ' 条评估结果，但被当前筛选（' + why.join(' + ') + '）全部隐藏——取消上方勾选或降低卖出笔数门槛即可看到。</div>';
+        hint.innerHTML = '<div class="hint" style="margin-top:6px">⚠️ 共 ' + all.length +
+          ' 条结果，但被当前筛选（' + why.join(' + ') + '）全部隐藏——取消上方勾选或降低卖出笔数门槛即可看到。</div>';
       } else {
         hint.innerHTML = '';
       }
     }
   }
 
+  /* 关注但未出现在评估结果里的高手 → 占位行（未拉取调仓数据）。
+     保证"关注了就一定能在评估列表看到"，而不是悄悄消失 */
+  function evalRows(d) {
+    var have = {};
+    (d.rows || []).forEach(function (r) { have[r.expert_id] = 1; });
+    ((d.meta || {}).skipped || []).forEach(function (x) { have[x.expert_id] = 1; });
+    var extra = [];
+    Object.keys(S.wl).forEach(function (id) {
+      if (S.wl[id] && S.wl[id].__mt === 'live' && !have[id]) {
+        extra.push({ expert_id: id, name: S.wl[id].name || id, source: 'eastmoney',
+                     market_type: 'live', no_data: true, rank: null,
+                     total_return_pct: null, annualized_pct: null, sharpe: null,
+                     sortino: null, max_drawdown_pct: null, calmar: null,
+                     win_rate_pct: null, profit_factor: null, n_sell: null,
+                     trading_days: null, sample_ok: false });
+      }
+    });
+    return (d.rows || []).concat(extra);
+  }
+
   function renderEval(root, d) {
     S.eval = d;
     var sum = root.querySelector('#ee-summary'), box = root.querySelector('#ee-table');
-    if (!d.ok || !d.rows.length) {
+    if (!d.ok || (!d.rows.length && !evalRows(d).length)) {
       sum.innerHTML = '';
       box.innerHTML = '<div class="empty">' + EP.fmt.esc(d.msg || '暂无评估结果') + '</div>';
       return;
@@ -404,7 +424,7 @@
         sk + '。常见原因：rtV3 只有最近 40 条（卖出早于数据起点 → 起点持仓不明），或平台隐私隐藏。</div>';
     }
     sum.innerHTML = envNote + evalSummary(d) + skipNote;
-    EP.table(box, d.rows, EVAL_COLS, { height: 520, pageSize: 50, sortKey: 'rank', sortDir: 1 });
+    EP.table(box, evalRows(d), EVAL_COLS, { height: 520, pageSize: 50, sortKey: 'rank', sortDir: 1 });
     applyFilters();
     updateStaleHint(root);
     renderWatchlist(root);
@@ -599,7 +619,6 @@
     root.querySelector('#ee-run').onclick = function () {
       var btn = this; btn.disabled = true;
       S.minSells = root.querySelector('#ee-min-sells').value;
-      S.sampleOnly = root.querySelector('#ee-sample-only').checked;
       EP.api('/api/expert-crawl/evaluation/run', {
         method: 'POST',
         body: { min_sells: parseInt(S.minSells, 10) || 3, min_days: 20 }
@@ -634,7 +653,6 @@
     root.querySelector('#ee-refresh').onclick = function () { loadEval(root); };
     root.querySelector('#ee-watch-only').onchange = function () { S.watchOnly = this.checked; applyFilters(); };
     root.querySelector('#ee-min-sells').onchange = function () { S.minSells = this.value; applyFilters(); };
-    root.querySelector('#ee-sample-only').onchange = function () { S.sampleOnly = this.checked; applyFilters(); };
   }
 
   EP.loadExperts = function (root) {
